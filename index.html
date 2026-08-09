@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agrotech - Menghubungkan Pertanian ke Masa Depan</title>
+  <meta name="description" content="Agrotech adalah penyedia solusi teknologi pertanian berbasis Cloud SaaS di Indonesia, membantu petani dan agribisnis bertani lebih cerdas, meningkatkan profitabilitas, dan bertransisi menuju pertanian modern.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Mulish:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Remixicon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== HEADER / NAVIGATION ===== -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#home" class="logo" id="brand-logo">
+        <div class="logo-icon">
+          <i class="ri-leaf-line"></i>
+        </div>
+        <span class="logo-text">Agro<span class="logo-accent">tech</span></span>
+      </a>
+
+      <nav class="main-nav" id="main-nav">
+        <ul class="nav-list" id="nav-list">
+          <li><a href="#home" class="nav-link">Beranda</a></li>
+          <li><a href="#products" class="nav-link">Produk</a></li>
+          <li><a href="#usp" class="nav-link">Keunggulan</a></li>
+          <li><a href="#sustainability" class="nav-link">Sustainability</a></li>
+          <li><a href="#contact" class="nav-link">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#contact" class="btn btn-primary btn-sm" id="nav-cta">Request Demo</a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+          <i class="ri-menu-line"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero" id="home">
+    <!-- Decorative plant graphic (left) -->
+    <div class="hero-decor-left">
+      <svg viewBox="0 0 300 600" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-plant-svg">
+        <path d="M150 600 C150 400 50 350 80 200 C100 100 150 50 150 0" stroke="rgba(19,170,124,0.15)" stroke-width="3" fill="none"/>
+        <ellipse cx="80" cy="200" rx="60" ry="35" fill="rgba(19,170,124,0.06)" transform="rotate(-30 80 200)"/>
+        <ellipse cx="120" cy="300" rx="55" ry="30" fill="rgba(19,170,124,0.04)" transform="rotate(20 120 300)"/>
+        <ellipse cx="60" cy="130" rx="45" ry="25" fill="rgba(19,170,124,0.05)" transform="rotate(-45 60 130)"/>
+        <circle cx="150" cy="50" r="8" fill="rgba(19,170,124,0.1)"/>
+        <circle cx="80" cy="200" r="5" fill="rgba(19,170,124,0.12)"/>
+        <circle cx="120" cy="300" r="4" fill="rgba(19,170,124,0.08)"/>
+      </svg>
+    </div>
+
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <span class="hero-subtitle" id="hero-badge">#1 AgriTech Solution di Indonesia</span>
+        <h1 class="hero-title">Menghubungkan Pertanian ke <span class="text-accent">Masa Depan</span></h1>
+        <p class="hero-desc">Kami adalah Agrotech, penyedia solusi teknologi pertanian berbasis Cloud SaaS di Indonesia, membantu petani dan agribisnis bertani lebih cerdas, meningkatkan profitabilitas, dan bertransisi menuju pertanian modern.</p>
+        <div class="hero-btns">
+          <a href="#products" class="btn btn-primary" id="hero-btn-products">
+            <i class="ri-apps-line"></i> Produk Agrotech
+          </a>
+          <a href="#contact" class="btn btn-outline" id="hero-btn-demo">
+            <i class="ri-play-circle-line"></i> Request Demo
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-image-frame">
+          <img src="assets/hero_banner.png" alt="Agrotech Smart Farming Dashboard" id="hero-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUSTED BY / STATS ===== -->
+  <section class="trusted-section" id="trusted">
+    <div class="container">
+      <h2 class="trusted-title">Dipercaya Oleh</h2>
+      <div class="trusted-stats">
+        <div class="stat-item">
+          <span class="stat-number" data-target="50">0</span>
+          <span class="stat-suffix">+</span>
+          <p class="stat-label">Perusahaan Pengguna</p>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="10000">0</span>
+          <span class="stat-suffix">+</span>
+          <p class="stat-label">Hektar Lahan Terkelola</p>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="1000">0</span>
+          <span class="stat-suffix">+</span>
+          <p class="stat-label">Pengguna Aktif</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCTS SECTION ===== -->
+  <section class="products-section" id="products">
+    <!-- Product 1: FarmBiz ERP -->
+    <div class="product-row" id="product-erp">
+      <div class="container product-inner">
+        <div class="product-text">
+          <h2 class="product-title">Smart Farming ERP untuk Agribisnis Korporat</h2>
+          <p class="product-desc">Sederhanakan operasi pertanian dengan sistem ERP komprehensif kami. Kelola sumber daya, tugas, inventaris, dan keuangan secara efisien untuk produktivitas pertanian yang optimal.</p>
+          <ul class="product-features">
+            <li>
+              <span class="check-icon"><i class="ri-checkbox-circle-fill"></i></span>
+              Streamline operasi kebun & alokasi sumber daya
+            </li>
+            <li>
+              <span class="check-icon"><i class="ri-checkbox-circle-fill"></i></span>
+              Analisis data historis & real-time untuk forecasting
+            </li>
+            <li>
+              <span class="check-icon"><i class="ri-checkbox-circle-fill"></i></span>
+              Koordinasi dengan supplier untuk pengiriman tepat waktu
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-primary-outline" id="btn-erp">
+            Pelajari Selengkapnya <i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+        <div class="product-visual fade-in-right">
+          <img src="assets/product_erp.png" alt="Smart Farming ERP Dashboard" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2: Marketplace -->
+    <div class="product-row product-row-alt" id="product-marketplace">
+      <div class="container product-inner product-inner-reverse">
+        <div class="product-visual fade-in-left">
+          <img src="assets/product_marketplace.png" alt="Marketplace Agribisnis Platform" loading="lazy">
+        </div>
+        <div class="product-text">
+          <h2 class="product-title">Marketplace E-Commerce untuk Perdagangan Agri</h2>
+          <p class="product-desc">Tingkatkan perdagangan hasil tani dengan platform marketplace. Kelola pengadaan, penjualan, inventaris, dan distribusi secara efisien untuk transaksi agro-komoditas yang sukses.</p>
+          <ul class="product-features">
+            <li>
+              <span class="check-icon"><i class="ri-checkbox-circle-fill"></i></span>
+              Kolaborasi dengan supplier, buyer, & service provider
+            </li>
+            <li>
+              <span class="check-icon"><i class="ri-checkbox-circle-fill"></i></span>
+              Integrasi data keuangan untuk akuntansi akurat
+            </li>
+            <li>
+              <span class="check-icon"><i class="ri-checkbox-circle-fill"></i></span>
+              Kelola penjualan & pengeluaran secara efisien
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-primary-outline" id="btn-marketplace">
+            Pelajari Selengkapnya <i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 3: Smart Farm IoT -->
+    <div class="product-row" id="product-iot">
+      <div class="container product-inner">
+        <div class="product-text">
+          <h2 class="product-title">SmartFarm IoT — Bertani Cerdas dengan Pertanian 4.0</h2>
+          <p class="product-desc">Revolusikan pertanian dengan smart farming. Manfaatkan IoT, analisis data, dan otomasi untuk budidaya presisi, efisiensi sumber daya, dan hasil panen lebih tinggi.</p>
+          <ul class="product-features">
+            <li>
+              <span class="check-icon"><i class="ri-checkbox-circle-fill"></i></span>
+              Hitung hasil transaksi input-output dengan mudah
+            </li>
+            <li>
+              <span class="check-icon"><i class="ri-checkbox-circle-fill"></i></span>
+              Cegah pemborosan & tingkatkan pendapatan
+            </li>
+            <li>
+              <span class="check-icon"><i class="ri-checkbox-circle-fill"></i></span>
+              Hitung stok dengan mudah & rencanakan target masa depan
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-primary-outline" id="btn-iot">
+            Pelajari Selengkapnya <i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+        <div class="product-visual fade-in-right">
+          <img src="assets/product_smartfarm.png" alt="SmartFarm IoT Dashboard" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== USP (Our Unique Selling Points) ===== -->
+  <section class="usp-section" id="usp">
+    <div class="container">
+      <h2 class="section-title section-title-light">Keunggulan Kami</h2>
+
+      <div class="usp-grid">
+        <div class="usp-card">
+          <div class="usp-icon">
+            <i class="ri-rocket-2-line"></i>
+          </div>
+          <h4>Mudah Digunakan</h4>
+          <p>Dengan antarmuka yang user-friendly dan dukungan berkelanjutan, kami memastikan transisi yang mulus ke solusi ERP kami tanpa kompleksitas.</p>
+        </div>
+        <div class="usp-card">
+          <div class="usp-icon">
+            <i class="ri-wifi-off-line"></i>
+          </div>
+          <h4>Support Offline</h4>
+          <p>Kami membuat aplikasi offline untuk memastikan akses tanpa gangguan ke data dan fungsionalitas kritis, bahkan tanpa koneksi internet.</p>
+        </div>
+        <div class="usp-card">
+          <div class="usp-icon">
+            <i class="ri-shield-check-line"></i>
+          </div>
+          <h4>Disaster Recovery</h4>
+          <p>Data Anda aman bersama kami! Kami melakukan backup data secara rutin untuk memitigasi dampak bencana dan meminimalisir risiko kehilangan data.</p>
+        </div>
+        <div class="usp-card">
+          <div class="usp-icon">
+            <i class="ri-lock-2-line"></i>
+          </div>
+          <h4>Keamanan Data</h4>
+          <p>Kami mengenkripsi data Anda untuk melindungi informasi sensitif dari akses yang tidak sah dan ancaman keamanan siber.</p>
+        </div>
+        <div class="usp-card">
+          <div class="usp-icon">
+            <i class="ri-bar-chart-grouped-line"></i>
+          </div>
+          <h4>Scalable</h4>
+          <p>Sistem kami dengan mulus melakukan scaling untuk memenuhi kebutuhan bisnis yang berkembang sambil mempertahankan performa puncak.</p>
+        </div>
+      </div>
+
+      <div class="usp-cta">
+        <a href="#contact" class="btn btn-white" id="usp-cta-btn">
+          <i class="ri-chat-3-line"></i> Request Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARTNERS ===== -->
+  <section class="partners-section" id="partners">
+    <div class="container">
+      <div class="partners-inner">
+        <h2 class="section-title">Mitra Terpercaya Kami</h2>
+        <div class="partners-logos">
+          <div class="partner-logo">
+            <i class="ri-cloud-line"></i>
+            <span>CloudTech</span>
+          </div>
+          <div class="partner-logo">
+            <i class="ri-bank-card-line"></i>
+            <span>AgriPay</span>
+          </div>
+          <div class="partner-logo">
+            <i class="ri-government-line"></i>
+            <span>Kementan RI</span>
+          </div>
+          <div class="partner-logo">
+            <i class="ri-earth-line"></i>
+            <span>GreenEarth</span>
+          </div>
+          <div class="partner-logo">
+            <i class="ri-database-2-line"></i>
+            <span>DataFarm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SUSTAINABILITY / ESG ===== -->
+  <section class="sustainability-section" id="sustainability">
+    <div class="container">
+      <div class="sustainability-inner">
+        <div class="sustainability-visual fade-in-left">
+          <img src="assets/hero_smart_farming.png" alt="ESG Compliance Agrotech" loading="lazy">
+        </div>
+        <div class="sustainability-content">
+          <h2 class="section-title">Komitmen ESG</h2>
+          <p class="sustainability-desc">Di Agrotech, kami berdedikasi pada prinsip Environmental, Social, dan Governance (ESG), didorong oleh komitmen kami terhadap keberlanjutan dan praktik bisnis yang bertanggung jawab.</p>
+          <div class="esg-items">
+            <div class="esg-item">
+              <div class="esg-icon"><i class="ri-plant-line"></i></div>
+              <div>
+                <h5>Environmental</h5>
+                <p>Solusi teknologi kami mempromosikan pertanian yang efisien sumber daya, mengurangi dampak lingkungan dan mendukung netralitas karbon.</p>
+              </div>
+            </div>
+            <div class="esg-item">
+              <div class="esg-icon"><i class="ri-group-line"></i></div>
+              <div>
+                <h5>Social</h5>
+                <p>Kami memberdayakan petani lokal melalui teknologi dan perdagangan yang adil, mendorong pertumbuhan ekonomi inklusif.</p>
+              </div>
+            </div>
+            <div class="esg-item">
+              <div class="esg-icon"><i class="ri-government-line"></i></div>
+              <div>
+                <h5>Governance</h5>
+                <p>Kami menjalankan tata kelola perusahaan yang transparan, beretika, dan bertanggung jawab dalam setiap operasi bisnis.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-inner">
+        <h2>Siap Transformasi Digital Agribisnis Anda?</h2>
+        <p>Hubungi tim konsultan kami untuk menjadwalkan demo dan konsultasi gratis tentang bagaimana Agrotech dapat membantu bisnis pertanian Anda.</p>
+        <div class="cta-form-wrapper">
+          <form class="cta-form" id="contact-form">
+            <div class="form-row">
+              <input type="text" placeholder="Nama Lengkap / Instansi" id="form-name" required>
+              <input type="email" placeholder="Alamat Email" id="form-email" required>
+            </div>
+            <div class="form-row">
+              <input type="tel" placeholder="Nomor WhatsApp" id="form-phone">
+              <select id="form-topic">
+                <option value="">Pilih Topik Diskusi</option>
+                <option>Smart Farming ERP</option>
+                <option>Marketplace E-Commerce Agri</option>
+                <option>SmartFarm IoT & Sensor</option>
+                <option>Paket Solusi Terpadu</option>
+              </select>
+            </div>
+            <textarea placeholder="Pesan / Kebutuhan Anda..." id="form-message" rows="4"></textarea>
+            <button type="submit" class="btn btn-primary btn-lg" id="form-submit-btn">
+              <i class="ri-send-plane-line"></i> Kirim Permohonan Demo
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#home" class="logo">
+            <div class="logo-icon"><i class="ri-leaf-line"></i></div>
+            <span class="logo-text" style="color:#fff;">Agro<span class="logo-accent">tech</span></span>
+          </a>
+          <p>Penyedia solusi teknologi pertanian berbasis Cloud SaaS untuk efisiensi dan modernisasi agribisnis Indonesia.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Produk</h4>
+            <ul>
+              <li><a href="#product-erp">Smart Farming ERP</a></li>
+              <li><a href="#product-marketplace">Marketplace Agri</a></li>
+              <li><a href="#product-iot">SmartFarm IoT</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Perusahaan</h4>
+            <ul>
+              <li><a href="#usp">Keunggulan</a></li>
+              <li><a href="#sustainability">Sustainability</a></li>
+              <li><a href="#partners">Mitra</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Kontak</h4>
+            <ul>
+              <li><a href="#contact">Request Demo</a></li>
+              <li><a href="mailto:info@agrotech.id">info@agrotech.id</a></li>
+              <li><a href="https://wa.me/6281234567890">+62 812-3456-7890</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Agrotech. Menghubungkan Pertanian ke Masa Depan. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/6281234567890?text=Halo%20Tim%20Agrotech,%20saya%20ingin%20request%20demo%20produk." class="floating-wa" target="_blank" aria-label="WhatsApp Us" id="floating-wa-btn">
+    <i class="ri-whatsapp-line"></i>
+  </a>
+
+  <script src="app.js"></script>
+</body>
+</html>
