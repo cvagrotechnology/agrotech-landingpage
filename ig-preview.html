@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agrotech - Instagram Content Studio & Master Hub</title>
+  <meta name="description" content="Koleksi master konten Instagram untuk Agrotech: Logo Profil IG, Video Promosi 9:16, Carousel Edukasi 1:1 & 4:5, Product Showcase, dan Script Teleprompter.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --ig-primary: #13AA7C;
+      --ig-primary-dark: #006B38;
+      --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      --accent-glow: rgba(19, 170, 124, 0.25);
+      --dark-bg: #0A0E17;
+      --dark-surface: #111827;
+      --card-bg: #162032;
+      --card-border: #24344D;
+      --card-border-hover: #13AA7C;
+      --text-white: #FFFFFF;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --ig-blue: #0095F6;
+      --badge-promo: #EC4899;
+      --badge-edu: #3B82F6;
+      --badge-showcase: #10B981;
+      --badge-esg: #8B5CF6;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text-white);
+      padding: 1.5rem 1rem 4rem 1rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* TOP BAR & STUDIO HEADER */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0 2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 2.5rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      transition: var(--transition);
+    }
+    .back-btn:hover {
+      background: var(--ig-primary);
+      border-color: var(--ig-primary);
+      transform: translateX(-3px);
+    }
+
+    .brand-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+    }
+    .brand-tag i { color: var(--ig-primary); font-size: 1.4rem; }
+
+    .studio-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .ig-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--ig-gradient);
+      padding: 0.4rem 1.25rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 6px 20px rgba(220, 39, 67, 0.35);
+      letter-spacing: 0.5px;
+    }
+
+    .studio-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+    .studio-title span { color: var(--ig-primary); }
+
+    .studio-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0.75rem auto 0 auto;
+    }
+
+    /* RESOLUTION SPECS BAR */
+    .specs-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin: 1.75rem 0 2rem 0;
+    }
+    .spec-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.4rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .spec-badge strong { color: var(--text-white); }
+
+    /* =========================================================================
+       IG PROFILE & BRAND IDENTITY SHOWCASE SECTION
+       ========================================================================= */
+    .profile-section {
+      background: var(--dark-surface);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2.2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+    }
+
+    .profile-section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 950px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* IG PROFILE MOCKUP CARD */
+    .profile-card-mockup {
+      background: #0D131F;
+      border: 1px solid #2B374A;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    }
+
+    .profile-header-row {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .profile-avatar-wrapper {
+      position: relative;
+      width: 86px;
+      height: 86px;
+      padding: 3px;
+      background: var(--ig-gradient);
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(220, 39, 67, 0.4);
+    }
+
+    .profile-avatar-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #0D131F;
+      background: #000;
+    }
+
+    .profile-stats-grid {
+      display: flex;
+      gap: 1.25rem;
+      text-align: center;
+    }
+    .stat-col span {
+      display: block;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--text-white);
+    }
+    .stat-col label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .profile-info {
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    .profile-name {
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .profile-category {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+    .profile-bio-text {
+      color: #E2E8F0;
+      font-size: 0.83rem;
+      white-space: pre-line;
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+    .profile-link {
+      color: #38BDF8;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.82rem;
+    }
+
+    /* STORY HIGHLIGHTS MOCKUP */
+    .highlights-row {
+      display: flex;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+    }
+    .highlight-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      flex-shrink: 0;
+    }
+    .highlight-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid #334155;
+      background: #162032;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--ig-primary);
+    }
+    .highlight-item span {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    /* LOGO VARIATIONS GRID */
+    .logo-options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .logo-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .logo-option-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      position: relative;
+      transition: var(--transition);
+    }
+    .logo-option-card:hover {
+      border-color: var(--ig-primary);
+      transform: translateY(-2px);
+    }
+    .logo-option-card.selected {
+      border-color: var(--ig-primary);
+      box-shadow: 0 0 20px rgba(19, 170, 124, 0.25);
+    }
+
+    .logo-badge-rec {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--ig-primary);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-preview-frame {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-preview-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .logo-desc h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      color: var(--text-white);
+      margin-bottom: 0.2rem;
+    }
+    .logo-desc p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* FILTER TABS */
+    .filter-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      background: var(--dark-surface);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--ig-primary);
+      color: var(--text-white);
+    }
+
+    .filter-btn.active {
+      background: var(--ig-primary);
+      border-color: var(--ig-primary);
+      color: var(--text-white);
+      box-shadow: 0 4px 15px rgba(19, 170, 124, 0.35);
+    }
+
+    /* GRID LAYOUT */
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2.5rem;
+    }
+
+    /* CARD STRUCTURE */
+    .ig-post-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .ig-post-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-border-hover);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.6), 0 0 20px rgba(19, 170, 124, 0.15);
+    }
+
+    /* PILLAR HEADER BADGE */
+    .card-top-tag {
+      padding: 0.6rem 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      background: rgba(0,0,0,0.25);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .pill-promo { color: var(--badge-promo); }
+    .pill-edu { color: var(--badge-edu); }
+    .pill-showcase { color: var(--badge-showcase); }
+    .pill-esg { color: var(--badge-esg); }
+
+    .ratio-pill {
+      background: rgba(255,255,255,0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      color: #E2E8F0;
+      font-size: 0.7rem;
+    }
+
+    /* IG USER BAR */
+    .ig-header {
+      padding: 0.8rem 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .ig-user {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .ig-avatar-ring {
+      width: 40px;
+      height: 40px;
+      padding: 2px;
+      background: var(--ig-gradient);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .ig-avatar-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 2px solid var(--card-bg);
+      background: #000;
+    }
+
+    .ig-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ig-username-row {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .ig-username {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .verified-badge {
+      color: #38BDF8;
+      font-size: 0.85rem;
+    }
+
+    .ig-location {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .ig-follow-btn {
+      color: var(--ig-blue);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    /* MEDIA CONTAINER */
+    .ig-media-frame {
+      position: relative;
+      background: #000;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .ig-media-frame.ratio-9-16 {
+      aspect-ratio: 9 / 16;
+      max-height: 520px;
+    }
+
+    .ig-media-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .ig-post-card:hover .ig-media-frame img {
+      transform: scale(1.02);
+    }
+
+    .carousel-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      z-index: 2;
+    }
+
+    .reels-indicator {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--badge-promo);
+      z-index: 2;
+    }
+
+    /* ACTION BAR */
+    .ig-actions {
+      padding: 0.8rem 1.1rem 0.4rem 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ig-left-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .action-icon {
+      font-size: 1.45rem;
+      cursor: pointer;
+      color: var(--text-white);
+      transition: var(--transition);
+    }
+
+    .action-icon:hover {
+      transform: scale(1.15);
+      color: var(--ig-primary);
+    }
+
+    .action-icon.liked {
+      color: #EF4444;
+      animation: heartPop 0.3s ease;
+    }
+
+    @keyframes heartPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    .ig-likes {
+      padding: 0 1.1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .ig-inline-caption {
+      padding: 0 1.1rem;
+      font-size: 0.85rem;
+      color: #CBD5E1;
+      line-height: 1.45;
+      margin-bottom: 0.8rem;
+    }
+
+    /* COPYABLE CAPTION / SCRIPT ACCORDION */
+    .ig-caption-container {
+      background: rgba(10, 14, 23, 0.8);
+      border-top: 1px solid var(--card-border);
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+
+    .post-badge-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--ig-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ig-caption-text {
+      font-size: 0.82rem;
+      color: #94A3B8;
+      background: rgba(0,0,0,0.3);
+      padding: 0.85rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+      max-height: 140px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+
+    .ig-caption-text::-webkit-scrollbar {
+      width: 5px;
+    }
+    .ig-caption-text::-webkit-scrollbar-thumb {
+      background: var(--card-border);
+      border-radius: 4px;
+    }
+
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .copy-btn {
+      background: var(--ig-primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .copy-btn:hover {
+      background: var(--ig-primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .copy-btn-outline {
+      background: rgba(255,255,255,0.06);
+      color: #E2E8F0;
+      border: 1px solid var(--card-border);
+    }
+    .copy-btn-outline:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: #94A3B8;
+      color: #FFFFFF;
+    }
+
+    /* REELS / PHONE OVERLAY SECTION */
+    .reels-studio {
+      background: var(--dark-surface);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2rem;
+      margin-top: 4rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .reels-flex {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 2.5rem;
+      margin-top: 1.75rem;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .reels-flex {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .reels-phone-mockup {
+      position: relative;
+      border: 8px solid #2B374A;
+      border-radius: 36px;
+      overflow: hidden;
+      aspect-ratio: 9 / 16;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+      background: #000;
+    }
+
+    .reels-phone-mockup img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .reels-ui-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 20%, transparent 60%, rgba(0,0,0,0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.25rem 0.9rem;
+      color: #fff;
+    }
+
+    .reels-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .reels-right-icons {
+      align-self: flex-end;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .reels-icon-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+    .reels-icon-btn span { font-size: 0.75rem; font-weight: 600; }
+
+    .reels-bottom-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .reels-audio-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(0,0,0,0.4);
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      width: fit-content;
+    }
+
+    .reels-content-detail {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.75rem;
+    }
+
+    /* TELEPROMPTER MODAL */
+    .teleprompter-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .teleprompter-modal.active { display: flex; }
+
+    .teleprompter-box {
+      background: #0F172A;
+      border: 2px solid var(--ig-primary);
+      border-radius: 20px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px rgba(19, 170, 124, 0.3);
+      overflow: hidden;
+    }
+
+    .teleprompter-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .teleprompter-body {
+      padding: 2rem 1.75rem;
+      overflow-y: auto;
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: #F8FAFC;
+    }
+
+    .teleprompter-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.3);
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast-popup {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #10B981;
+      color: #FFFFFF;
+      padding: 0.85rem 1.4rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 10000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .toast-popup.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- TOP NAVIGATION -->
+    <div class="top-nav">
+      <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <a href="index.html" class="back-btn">
+          <i class="ri-arrow-left-line"></i> Landing Page
+        </a>
+        <a href="ig-manager.html" class="back-btn" style="background:var(--ig-primary); border-color:var(--ig-primary); color:#000; font-weight:700;">
+          <i class="ri-dashboard-3-line"></i> Buka Aplikasi IG Manager
+        </a>
+      </div>
+      <div class="brand-tag">
+        <i class="ri-leaf-line"></i> Agro<span>tech</span>
+      </div>
+      <a href="https://wa.me/6281234567890?text=Halo%20Tim%20Agrotech,%20saya%20tertarik%20dengan%20solusi%20Smart%20Farming." target="_blank" class="back-btn" style="border-color: #10B981; color:#10B981;">
+        <i class="ri-whatsapp-line"></i> Hubungi Tim Marketing
+      </a>
+    </div>
+
+    <!-- STUDIO HEADER -->
+    <header class="studio-header">
+      <div class="ig-pill">
+        <i class="ri-instagram-line"></i> Instagram Master Content & Identity Hub
+      </div>
+      <h1 class="studio-title">Koleksi Konten & Logo Instagram <span>Agrotech</span></h1>
+      <p class="studio-subtitle">
+        Pusat master identitas profil, 3 opsi logo Instagram feed-ready, video promosi Reels (9:16), infografis edukasi (Carousel 1:1 / 4:5), showcase teknologi pertanian 4.0, dan script teleprompter.
+      </p>
+
+      <!-- RESOLUTION SPECIFICATIONS STRIP -->
+      <div class="specs-strip">
+        <div class="spec-badge"><i class="ri-user-smile-line"></i> <strong>Foto Profil (Avatar):</strong> 1080 x 1080 px (1:1 Circle Crop)</div>
+        <div class="spec-badge"><i class="ri-video-line"></i> <strong>Reels / TikTok / Video:</strong> 1080 x 1920 px (9:16)</div>
+        <div class="spec-badge"><i class="ri-layout-grid-line"></i> <strong>Carousel Edukasi:</strong> 1080 x 1350 px (4:5) / 1080 x 1080 px (1:1)</div>
+        <div class="spec-badge"><i class="ri-image-line"></i> <strong>Feed Post / Showcase:</strong> 1080 x 1080 px (1:1)</div>
+      </div>
+    </header>
+
+    <!-- =========================================================================
+         SECTION: INSTAGRAM PROFILE & 3 LOGO VARIATIONS
+         ========================================================================= -->
+    <section class="profile-section">
+      <div class="profile-section-title">
+        <div>
+          <h2 style="font-family:'Outfit',sans-serif; font-size:1.5rem; display:flex; align-items:center; gap:0.5rem;">
+            <i class="ri-palette-line" style="color:var(--ig-primary);"></i> Identitas Profil Instagram & Koleksi Logo Resmi
+          </h2>
+          <p style="color:var(--text-muted); font-size:0.88rem; margin-top:0.25rem;">
+            Pilih variasi logo terbaik untuk foto profil Instagram @agrotech.id (Format 1:1 Square, Optimized for Circle Crop)
+          </p>
+        </div>
+        <button class="copy-btn copy-btn-outline" onclick="copyBioText()">
+          <i class="ri-file-copy-line"></i> Salin Teks Bio Instagram
+        </button>
+      </div>
+
+      <div class="profile-layout">
+        
+        <!-- LEFT: INSTAGRAM PROFILE MOCKUP -->
+        <div class="profile-card-mockup">
+          <div class="profile-header-row">
+            <div class="profile-avatar-wrapper" id="liveAvatarRing">
+              <img src="assets/ig_profile_logo_1.jpg" alt="Agrotech IG Avatar" id="liveAvatarImg">
+            </div>
+            <div class="profile-stats-grid">
+              <div class="stat-col">
+                <span>128</span>
+                <label>Postingan</label>
+              </div>
+              <div class="stat-col">
+                <span>10.4k</span>
+                <label>Pengikut</label>
+              </div>
+              <div class="stat-col">
+                <span>152</span>
+                <label>Mengikuti</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-info">
+            <div class="profile-name">
+              Agrotech | Solusi Pertanian 4.0
+              <i class="ri-checkbox-circle-fill verified-badge"></i>
+            </div>
+            <div class="profile-category">Teknologi & Agribisnis • SaaS & IoT</div>
+            <div class="profile-bio-text" id="igBioContent">🌱 Solusi Teknologi Pertanian Berbasis Cloud SaaS #1 di Indonesia
+🚀 Tingkatkan profit kebun, hemat pupuk 35% & Support Offline
+📊 Dipercaya 50+ Perusahaan & 10.000+ Ha Lahan
+👇 Request Live Demo & Konsultasi Gratis</div>
+            <a href="index.html" class="profile-link" target="_blank">
+              <i class="ri-link"></i> agrotech.id/demo
+            </a>
+          </div>
+
+          <!-- STORY HIGHLIGHTS -->
+          <div class="highlights-row">
+            <div class="highlight-item">
+              <div class="highlight-circle"><i class="ri-leaf-line"></i></div>
+              <span>Tentang</span>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-circle"><i class="ri-dashboard-3-line"></i></div>
+              <span>Smart ERP</span>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-circle"><i class="ri-wifi-line"></i></div>
+              <span>IoT Sensor</span>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-circle"><i class="ri-medal-line"></i></div>
+              <span>Testimoni</span>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-circle"><i class="ri-earth-line"></i></div>
+              <span>Komitmen ESG</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: 3 LOGO OPTIONS & SWITCHER -->
+        <div class="logo-options-container">
+          <div class="logo-cards-grid">
+            
+            <!-- OPTION 1 -->
+            <div class="logo-option-card selected" id="logoCard1">
+              <span class="logo-badge-rec"><i class="ri-star-fill"></i> Pilihan Utama</span>
+              <div class="logo-preview-frame">
+                <img src="assets/ig_profile_logo_1.jpg" alt="Logo Circuit Bio-Leaf">
+              </div>
+              <div class="logo-desc">
+                <h4>Opsi 1: Circuit Bio-Leaf</h4>
+                <p>Urat daun bercahaya neon berpadu jalur sirkuit digital high-tech pada latar matte gelap. Melambangkan perpaduan alam & teknologi pintar.</p>
+              </div>
+              <div class="btn-group">
+                <button class="copy-btn" onclick="switchProfileAvatar('assets/ig_profile_logo_1.jpg', 1)">
+                  <i class="ri-check-line"></i> Terapkan
+                </button>
+                <a href="assets/ig_profile_logo_1.jpg" download="Agrotech_IG_Logo_CircuitLeaf.jpg" class="copy-btn copy-btn-outline" style="text-decoration:none;">
+                  <i class="ri-download-2-line"></i> Unduh
+                </a>
+              </div>
+            </div>
+
+            <!-- OPTION 2 -->
+            <div class="logo-option-card" id="logoCard2">
+              <div class="logo-preview-frame">
+                <img src="assets/ig_profile_logo_2.jpg" alt="Logo Geometric A Growth">
+              </div>
+              <div class="logo-desc">
+                <h4>Opsi 2: Geometric A & Growth</h4>
+                <p>Lettermark 'A' modern yang terintegrasi dengan tunas daun dan grafik bar profit yang menanjak. Tampilan korporat, bersih, dan berwibawa.</p>
+              </div>
+              <div class="btn-group">
+                <button class="copy-btn" onclick="switchProfileAvatar('assets/ig_profile_logo_2.jpg', 2)">
+                  <i class="ri-check-line"></i> Terapkan
+                </button>
+                <a href="assets/ig_profile_logo_2.jpg" download="Agrotech_IG_Logo_LetterA.jpg" class="copy-btn copy-btn-outline" style="text-decoration:none;">
+                  <i class="ri-download-2-line"></i> Unduh
+                </a>
+              </div>
+            </div>
+
+            <!-- OPTION 3 -->
+            <div class="logo-option-card" id="logoCard3">
+              <div class="logo-preview-frame">
+                <img src="assets/ig_profile_logo_3.jpg" alt="Logo 3D Holographic Sprout">
+              </div>
+              <div class="logo-desc">
+                <h4>Opsi 3: 3D Holographic Sprout</h4>
+                <p>Tunas bio-tek 3D mengkilap dengan partikel data tanah bercahaya dalam emblem lingkaran hitam pekat. Sangat mencolok dan futuristik.</p>
+              </div>
+              <div class="btn-group">
+                <button class="copy-btn" onclick="switchProfileAvatar('assets/ig_profile_logo_3.jpg', 3)">
+                  <i class="ri-check-line"></i> Terapkan
+                </button>
+                <a href="assets/ig_profile_logo_3.jpg" download="Agrotech_IG_Logo_3DSprout.jpg" class="copy-btn copy-btn-outline" style="text-decoration:none;">
+                  <i class="ri-download-2-line"></i> Unduh
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FILTER BUTTONS -->
+    <div class="filter-wrapper">
+      <button class="filter-btn active" onclick="filterPosts('all', this)">
+        <i class="ri-apps-2-line"></i> Semua Konten (7)
+      </button>
+      <button class="filter-btn" onclick="filterPosts('promo', this)">
+        <i class="ri-clapperboard-line"></i> Video Promosi & Reels (2)
+      </button>
+      <button class="filter-btn" onclick="filterPosts('edu', this)">
+        <i class="ri-book-open-line"></i> Edukasi & Carousel (2)
+      </button>
+      <button class="filter-btn" onclick="filterPosts('showcase', this)">
+        <i class="ri-cpu-line"></i> Product Showcase (2)
+      </button>
+      <button class="filter-btn" onclick="filterPosts('esg', this)">
+        <i class="ri-plant-line"></i> ESG & Social Proof (1)
+      </button>
+    </div>
+
+    <!-- POSTS GRID -->
+    <div class="ig-grid" id="posts-grid">
+
+      <!-- =========================================================================
+           POST 1: [PROMO] REELS VIDEO 9:16 - HERO TEASER PERTANIAN 4.0
+           ========================================================================= -->
+      <div class="ig-post-card" data-category="promo">
+        <div class="card-top-tag">
+          <span class="pill-promo"><i class="ri-video-fill"></i> Video Promosi (Reels / TikTok)</span>
+          <span class="ratio-pill">9:16 (1080x1920)</span>
+        </div>
+
+        <div class="ig-header">
+          <div class="ig-user">
+            <div class="ig-avatar-ring">
+              <img src="assets/ig_profile_logo_1.jpg" alt="Avatar Agrotech" class="feed-avatar-img">
+            </div>
+            <div class="ig-meta">
+              <div class="ig-username-row">
+                <span class="ig-username">agrotech.id</span>
+                <i class="ri-checkbox-circle-fill verified-badge"></i>
+              </div>
+              <span class="ig-location">Indonesia 🇮🇩</span>
+            </div>
+          </div>
+          <span class="ig-follow-btn">Ikuti</span>
+        </div>
+
+        <div class="ig-media-frame ratio-9-16">
+          <img src="assets/ig_reels_promo_1.jpg" alt="Revolusi Pertanian 4.0 Agrotech">
+          <div class="reels-indicator"><i class="ri-film-line"></i> Reels 9:16 Video</div>
+        </div>
+
+        <div class="ig-actions">
+          <div class="ig-left-actions">
+            <i class="ri-heart-line action-icon" onclick="toggleLike(this)"></i>
+            <i class="ri-chat-3-line action-icon"></i>
+            <i class="ri-send-plane-line action-icon"></i>
+          </div>
+          <i class="ri-bookmark-line action-icon"></i>
+        </div>
+
+        <div class="ig-likes">4.820 tayangan • 1.590 menyukai</div>
+        <div class="ig-inline-caption">
+          <strong>agrotech.id</strong> Stop bertani pakai tebak-tebakan! 🚜⚡ Saatnya beralih ke Pertanian 4.0 dengan dashboard IoT & Cloud SaaS Agrotech!
+        </div>
+
+        <div class="ig-caption-container">
+          <div class="post-badge-title">
+            <span>🎬 Script Video & Caption Lengkap</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Durasi: 30-40 Detik</span>
+          </div>
+
+          <div class="ig-caption-text" id="cap-promo-1">Stop bertani pakai cara tebak-tebakan! 🚜⚡
+
+Tahukah kamu? Biaya operasional kebun bisa bengkak hingga 40% hanya gara-gara pupuk berlebih, penyiraman yang salah, atau data kebun yang tercecer di buku catatan manual. 📉
+
+Kenalin **Agrotech** — Platform Cloud SaaS & IoT Pertanian #1 di Indonesia! 🌾🇮🇩
+
+✨ **Fitur Unggulan Agrotech:**
+1️⃣ **Smart Soil & Weather Sensor**: Pantau kelembaban, pH, & NPK tanah otomatis dari smartphone.
+2️⃣ **Support Offline Mode**: Sinyal hilang di pedalaman kebun? Aplikasi tetap bekerja tanpa gangguan!
+3️⃣ **Smart Farming ERP**: Catat hasil panen, jadwal pekerja, dan pengeluaran kebun dalam 1 layar.
+4️⃣ **Analisis NDVI Satelit**: Deteksi kesehatan tanaman dari pantauan citra satelit & drone.
+
+Terbukti dipercaya oleh **50+ Perusahaan Agribisnis** & mengelola **10.000+ Hektar Lahan** di seluruh nusantara!
+
+👉 Siap bawa kebun Anda ke era modern?
+Kunjungi link di BIO @agrotech.id atau DM kami untuk **Request Live Demo GRATIS**! 🚀
+
+---
+#Agrotech #SmartFarming #PertanianModern #Pertanian40 #IoTPertanian #AgriTechIndonesia #PetaniMaju #SaaSPertanian #InovasiTani</div>
+
+          <div class="btn-group">
+            <button class="copy-btn" onclick="copyCaption('cap-promo-1', this)">
+              <i class="ri-file-copy-line"></i> Salin Caption
+            </button>
+            <button class="copy-btn copy-btn-outline" onclick="openTeleprompter('cap-promo-1', 'Script Video Promosi 9:16')">
+              <i class="ri-play-circle-line"></i> Teleprompter
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           POST 2: [EDUKASI] CAROUSEL 1:1 - 5 TANDA KEBUN BUTUH SMART FARMING
+           ========================================================================= -->
+      <div class="ig-post-card" data-category="edu">
+        <div class="card-top-tag">
+          <span class="pill-edu"><i class="ri-book-open-fill"></i> Edukasi Carousel (Slide 1-5)</span>
+          <span class="ratio-pill">1:1 / 4:5 Carousel</span>
+        </div>
+
+        <div class="ig-header">
+          <div class="ig-user">
+            <div class="ig-avatar-ring">
+              <img src="assets/ig_profile_logo_1.jpg" alt="Avatar Agrotech" class="feed-avatar-img">
+            </div>
+            <div class="ig-meta">
+              <div class="ig-username-row">
+                <span class="ig-username">agrotech.id</span>
+                <i class="ri-checkbox-circle-fill verified-badge"></i>
+              </div>
+              <span class="ig-location">Edukasi Pertanian Presisi</span>
+            </div>
+          </div>
+          <span class="ig-follow-btn">Ikuti</span>
+        </div>
+
+        <div class="ig-media-frame">
+          <img src="assets/ig_edu_carousel_1.jpg" alt="5 Tanda Kebunmu Butuh Smart Farming">
+          <div class="carousel-badge"><i class="ri-pages-line"></i> Slide 1/5 (Swipe ➡️)</div>
+        </div>
+
+        <div class="ig-actions">
+          <div class="ig-left-actions">
+            <i class="ri-heart-line action-icon" onclick="toggleLike(this)"></i>
+            <i class="ri-chat-3-line action-icon"></i>
+            <i class="ri-send-plane-line action-icon"></i>
+          </div>
+          <i class="ri-bookmark-line action-icon"></i>
+        </div>
+
+        <div class="ig-likes">3.120 menyukai • 480 dibagikan</div>
+        <div class="ig-inline-caption">
+          <strong>agrotech.id</strong> Apakah kebunmu mengalami salah satu dari 5 tanda ini? Swipe sampai slide terakhir buat tahu solusinya! 👉
+        </div>
+
+        <div class="ig-caption-container">
+          <div class="post-badge-title">
+            <span>📚 Carousel Copy & Slide Outline</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">5 Slide Guide</span>
+          </div>
+
+          <div class="ig-caption-text" id="cap-edu-1">Masih mengira Smart Farming cuma buat kebun skala raksasa? Eits, tunggu dulu! 🛑
+
+Kalau kebun kamu mengalami 5 tanda ini, artinya kamu butuh sistem Smart Farming sekarang juga:
+
+📌 **Slide 1:** 5 Tanda Kebunmu Butuh Smart Farming
+📌 **Slide 2:** 1. Boros Pupuk & Air (Tanpa tahu dosis pasti kebutuhan tanaman di tiap blok lahan)
+📌 **Slide 3:** 2. Sinyal Hilang = Data Hilang (Pencatatan manual di kertas sering terselip & telat di-rekap)
+📌 **Slide 4:** 3. Hama & Penyakit Telat Terdeteksi (Baru sadar saat daun kuning merata & panen anjlok)
+📌 **Slide 5:** 4. Laporan Keuangan Sulit Dihitung Akurat & 5. Hasil Panen Fluktuatif Tanpa Tahu Penyebabnya!
+
+💡 **Solusinya?**
+Gunakan **Agrotech IoT & Cloud ERP**:
+✅ Sensor otomatis pantau tanah 24/7
+✅ Fitur Offline Sync saat kerja di kebun terpencil
+✅ Rekap biaya input-output otomatis
+
+Save postingan ini biar gak lupa, dan share ke pengelola kebun atau rekan petani lainnya! 🌾
+
+👉 Mau konsultasi kebutuhan kebunmu? Hubungi link di bio @agrotech.id
+
+---
+#Agrotech #TipsPertanian #SmartFarming #EdukasiPertanian #PetaniIndonesia #Agritechnology #PertanianPresisi #ManajemenKebun #Agribisnis</div>
+
+          <div class="btn-group">
+            <button class="copy-btn" onclick="copyCaption('cap-edu-1', this)">
+              <i class="ri-file-copy-line"></i> Salin Caption
+            </button>
+            <button class="copy-btn copy-btn-outline" onclick="copyHashtags('cap-edu-1', this)">
+              <i class="ri-hashtag"></i> Salin Hashtag
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           POST 3: [EDUKASI TEKNOLOGI] CAROUSEL 1:1 - HEMAT PUPUK & AIR DENGAN IOT
+           ========================================================================= -->
+      <div class="ig-post-card" data-category="edu">
+        <div class="card-top-tag">
+          <span class="pill-edu"><i class="ri-flask-line"></i> Edukasi Presisi & IoT</span>
+          <span class="ratio-pill">1:1 Square (1080x1080)</span>
+        </div>
+
+        <div class="ig-header">
+          <div class="ig-user">
+            <div class="ig-avatar-ring">
+              <img src="assets/ig_profile_logo_1.jpg" alt="Avatar Agrotech" class="feed-avatar-img">
+            </div>
+            <div class="ig-meta">
+              <div class="ig-username-row">
+                <span class="ig-username">agrotech.id</span>
+                <i class="ri-checkbox-circle-fill verified-badge"></i>
+              </div>
+              <span class="ig-location">IoT & Smart Nursery</span>
+            </div>
+          </div>
+          <span class="ig-follow-btn">Ikuti</span>
+        </div>
+
+        <div class="ig-media-frame">
+          <img src="assets/ig_edu_precision_fertigation.jpg" alt="Teknologi Presisi Hemat Pupuk dan Air">
+          <div class="carousel-badge"><i class="ri-lightbulb-flash-line"></i> Tech Tips</div>
+        </div>
+
+        <div class="ig-actions">
+          <div class="ig-left-actions">
+            <i class="ri-heart-line action-icon" onclick="toggleLike(this)"></i>
+            <i class="ri-chat-3-line action-icon"></i>
+            <i class="ri-send-plane-line action-icon"></i>
+          </div>
+          <i class="ri-bookmark-line action-icon"></i>
+        </div>
+
+        <div class="ig-likes">2.410 menyukai</div>
+        <div class="ig-inline-caption">
+          <strong>agrotech.id</strong> Pupuk makin mahal? Ini rahasia pangkas pengeluaran pupuk & air hingga 35% dengan IoT Sensor! 💧🌱
+        </div>
+
+        <div class="ig-caption-container">
+          <div class="post-badge-title">
+            <span>💧 Tips Fertigasi & Sensor Presisi</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Engagement Post</span>
+          </div>
+
+          <div class="ig-caption-text" id="cap-edu-2">Pupuk kimia makin mahal, tapi hasil panen kok belum maksimal? 💸📉
+
+Jawabannya: **Presisi.**
+Memberi pupuk terlalu banyak justru merusak akar dan mencemari tanah. Memberi terlalu sedikit, tanaman kekurangan nutrisi.
+
+Bagaimana **Sensor Agrotech IoT** membantu Anda?
+🧪 **1. Real-Time Soil NPK**: Tahu persis kapan tanah butuh Nitrogen, Fosfor, atau Kalium.
+💧 **2. Soil Moisture & EC Meter**: Irigasi tetes (drip fertigation) hanya menyala saat kadar air tanah di bawah ambang batas optimal.
+📊 **3. Prediksi Cuaca Mikro**: Cegah pemupukan tepat sebelum hujan lebat agar pupuk tidak terhanyut sia-sia!
+
+Hasilnya?
+✅ Penghematan biaya pupuk & air hingga **35%**
+✅ Kualitas panen lebih seragam (Grade A)
+✅ Menjaga kesuburan tanah jangka panjang (ESG Compliant)
+
+Komen "INFO SENSOR" di bawah untuk mendapatkan panduan implementasi Smart IoT di kebun Anda! 👇
+
+---
+#Agrotech #PrecisionAgriculture #FertigasiPresisi #SensorTanah #SmartFarmingIndonesia #HematPupuk #IoTTani #TeknologiPertanian</div>
+
+          <div class="btn-group">
+            <button class="copy-btn" onclick="copyCaption('cap-edu-2', this)">
+              <i class="ri-file-copy-line"></i> Salin Caption
+            </button>
+            <button class="copy-btn copy-btn-outline" onclick="copyHashtags('cap-edu-2', this)">
+              <i class="ri-hashtag"></i> Salin Hashtag
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           POST 4: [SHOWCASE PRODUK] CITRA SATELIT & DRONE NDVI (1:1)
+           ========================================================================= -->
+      <div class="ig-post-card" data-category="showcase">
+        <div class="card-top-tag">
+          <span class="pill-showcase"><i class="ri-radar-line"></i> Fitur Produk & Analytics</span>
+          <span class="ratio-pill">1:1 Square (1080x1080)</span>
+        </div>
+
+        <div class="ig-header">
+          <div class="ig-user">
+            <div class="ig-avatar-ring">
+              <img src="assets/ig_profile_logo_1.jpg" alt="Avatar Agrotech" class="feed-avatar-img">
+            </div>
+            <div class="ig-meta">
+              <div class="ig-username-row">
+                <span class="ig-username">agrotech.id</span>
+                <i class="ri-checkbox-circle-fill verified-badge"></i>
+              </div>
+              <span class="ig-location">Monitoring Satelit & Drone</span>
+            </div>
+          </div>
+          <span class="ig-follow-btn">Ikuti</span>
+        </div>
+
+        <div class="ig-media-frame">
+          <img src="assets/ig_promo_satellite_ndvi.jpg" alt="NDVI Satellite Analysis Agrotech">
+          <div class="carousel-badge"><i class="ri-earth-line"></i> NDVI Heatmap</div>
+        </div>
+
+        <div class="ig-actions">
+          <div class="ig-left-actions">
+            <i class="ri-heart-line action-icon" onclick="toggleLike(this)"></i>
+            <i class="ri-chat-3-line action-icon"></i>
+            <i class="ri-send-plane-line action-icon"></i>
+          </div>
+          <i class="ri-bookmark-line action-icon"></i>
+        </div>
+
+        <div class="ig-likes">1.890 menyukai</div>
+        <div class="ig-inline-caption">
+          <strong>agrotech.id</strong> Pantau kesehatan ribuan hektar tanaman dari luar angkasa! 🛰️ Cek bagaimana NDVI Heatmap Agrotech bekerja:
+        </div>
+
+        <div class="ig-caption-container">
+          <div class="post-badge-title">
+            <span>🛰️ Showcase Analisis Citra Satelit</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">B2B & Enterprise</span>
+          </div>
+
+          <div class="ig-caption-text" id="cap-showcase-1">Keliling lahan ratusan hektar setiap hari buat cek tanaman satu per satu? Sudah bukan zamannya! 🛰️👀
+
+Dengan modul **Satellite & Drone NDVI Analysis dari Agrotech**, Anda bisa memetakan kesehatan vegetasi kebun secara instan:
+
+🟢 **Zona Hijau**: Tanaman sehat dengan klorofil tinggi & pertumbuhan optimal.
+🟡 **Zona Kuning**: Butuh perhatian — indikasi awal kekurangan air atau nutrisi.
+🔴 **Zona Merah**: Deteksi dini stres tanaman atau serangan hama sebelum menyebar luas!
+
+Keuntungan bagi pemilik kebun & korporasi:
+🎯 Tindakan kuratif terfokus hanya pada titik yang bermasalah.
+⏱️ Menghemat waktu survei lapangan hingga 70%.
+💰 Melindungi potensi kerugian gagal panen sejak dini.
+
+Tertarik melihat hasil scan satelit untuk lahan kebun Anda?
+Jadwalkan konsultasi gratis di **agrotech.id** atau klik link di bio kami! 🌿
+
+---
+#Agrotech #NDVI #SatelitPertanian #DronePertanian #RemoteSensing #PrecisionFarming #AgribisnisIndonesia #SmartFarming</div>
+
+          <div class="btn-group">
+            <button class="copy-btn" onclick="copyCaption('cap-showcase-1', this)">
+              <i class="ri-file-copy-line"></i> Salin Caption
+            </button>
+            <button class="copy-btn copy-btn-outline" onclick="copyHashtags('cap-showcase-1', this)">
+              <i class="ri-hashtag"></i> Salin Hashtag
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           POST 5: [SHOWCASE PRODUK] SMART FARMING ERP (1:1)
+           ========================================================================= -->
+      <div class="ig-post-card" data-category="showcase">
+        <div class="card-top-tag">
+          <span class="pill-showcase"><i class="ri-dashboard-3-line"></i> ERP Agribisnis</span>
+          <span class="ratio-pill">1:1 Square (1080x1080)</span>
+        </div>
+
+        <div class="ig-header">
+          <div class="ig-user">
+            <div class="ig-avatar-ring">
+              <img src="assets/ig_profile_logo_1.jpg" alt="Avatar Agrotech" class="feed-avatar-img">
+            </div>
+            <div class="ig-meta">
+              <div class="ig-username-row">
+                <span class="ig-username">agrotech.id</span>
+                <i class="ri-checkbox-circle-fill verified-badge"></i>
+              </div>
+              <span class="ig-location">SaaS Cloud Agrotech</span>
+            </div>
+          </div>
+          <span class="ig-follow-btn">Ikuti</span>
+        </div>
+
+        <div class="ig-media-frame">
+          <img src="assets/ig_post_2.png" alt="Smart Farming ERP Dashboard">
+        </div>
+
+        <div class="ig-actions">
+          <div class="ig-left-actions">
+            <i class="ri-heart-line action-icon" onclick="toggleLike(this)"></i>
+            <i class="ri-chat-3-line action-icon"></i>
+            <i class="ri-send-plane-line action-icon"></i>
+          </div>
+          <i class="ri-bookmark-line action-icon"></i>
+        </div>
+
+        <div class="ig-likes">2.190 menyukai</div>
+        <div class="ig-inline-caption">
+          <strong>agrotech.id</strong> Masih zaman nyatet laporan kebun ratusan hektar di buku atau spreadsheet yang rawan hilang? 🚜☕
+        </div>
+
+        <div class="ig-caption-container">
+          <div class="post-badge-title">
+            <span>💼 ERP Showcase & Operational ROI</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">B2B SaaS</span>
+          </div>
+
+          <div class="ig-caption-text" id="cap-showcase-2">Masih zaman nyatet laporan kebun ratusan hektar di buku atau spreadsheet manual yang rawan hilang? 🚜☕
+
+Sekarang kamu bisa pantau seluruh operasional lahan cuma dari 1 layar HP sambil ngopi santai!
+
+Kenalin **Smart Farming ERP Agrotech**:
+🔹 Atur jadwal kerja tim lapangan tanpa ribet
+🔹 Cek stok pupuk & pengiriman supplier real-time
+🔹 Forecasting pendapatan & hasil panen akurat
+🔹 Backup data otomatis (Disaster Recovery Ready)
+
+Terbukti membantu **50+ Perusahaan** dan **10.000+ Hektar Lahan** bertani lebih hemat & efisien! 📈
+
+Punya keluhan manajemen kebun? Coba diskusikan di kolom komentar! 👇
+
+📩 Request Live Demo Gratis via link di bio @agrotech.id
+
+---
+#Agrotech #SmartFarmingERP #KelolaKebun #Agribisnis #TeknologiPertanian #CloudSaaS #ERPIndonesia #SolusiKebun</div>
+
+          <div class="btn-group">
+            <button class="copy-btn" onclick="copyCaption('cap-showcase-2', this)">
+              <i class="ri-file-copy-line"></i> Salin Caption
+            </button>
+            <button class="copy-btn copy-btn-outline" onclick="copyHashtags('cap-showcase-2', this)">
+              <i class="ri-hashtag"></i> Salin Hashtag
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           POST 6: [PROMO] PROBLEM-SOLVING MATI SINYAL / OFFLINE SUPPORT (1:1)
+           ========================================================================= -->
+      <div class="ig-post-card" data-category="promo">
+        <div class="card-top-tag">
+          <span class="pill-promo"><i class="ri-wifi-off-line"></i> Problem-Solving Feature</span>
+          <span class="ratio-pill">1:1 Square (1080x1080)</span>
+        </div>
+
+        <div class="ig-header">
+          <div class="ig-user">
+            <div class="ig-avatar-ring">
+              <img src="assets/ig_profile_logo_1.jpg" alt="Avatar Agrotech" class="feed-avatar-img">
+            </div>
+            <div class="ig-meta">
+              <div class="ig-username-row">
+                <span class="ig-username">agrotech.id</span>
+                <i class="ri-checkbox-circle-fill verified-badge"></i>
+              </div>
+              <span class="ig-location">Solusi Lahan Remote</span>
+            </div>
+          </div>
+          <span class="ig-follow-btn">Ikuti</span>
+        </div>
+
+        <div class="ig-media-frame">
+          <img src="assets/ig_post_1.png" alt="SmartFarm IoT & Offline Support">
+        </div>
+
+        <div class="ig-actions">
+          <div class="ig-left-actions">
+            <i class="ri-heart-line action-icon" onclick="toggleLike(this)"></i>
+            <i class="ri-chat-3-line action-icon"></i>
+            <i class="ri-send-plane-line action-icon"></i>
+          </div>
+          <i class="ri-bookmark-line action-icon"></i>
+        </div>
+
+        <div class="ig-likes">1.248 menyukai</div>
+        <div class="ig-inline-caption">
+          <strong>agrotech.id</strong> Jujur, siapa di sini yang suka emosi pas lagi nyatet data kebun di lapangan eh sinyal HP malah hilang? 📶😭✋
+        </div>
+
+        <div class="ig-caption-container">
+          <div class="post-badge-title">
+            <span>💡 Relatable Offline-First Post</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Pain Point Solution</span>
+          </div>
+
+          <div class="ig-caption-text" id="cap-promo-2">Jujur, siapa di sini yang suka emosi pas lagi nyatet data kebun di lapangan eh sinyal HP malah hilang? 📶😭✋
+
+Stop pusing! Ini rahasia kebun kamu tetap cuan dan kepantau rapi walau di lokasi remote tanpa internet:
+
+🌿 **1. Pakai Sensor SmartFarm IoT**
+Ukur kelembaban tanah & kebutuhan pupuk secara otomatis. Gak ada lagi cerita pupuk kebuang sia-sia!
+
+📶 **2. Mode Support Offline Agrotech**
+Sinyal hilang? No problem! Data tetap tercatat di HP dan otomatis tersinkron saat dapet sinyal lagi.
+
+📊 **3. Real-Time Analytics**
+Perkirakan hasil panen dengan presisi tinggi buat patok harga terbaik ke pembeli.
+
+Yuk, bertransisi ke Pertanian 4.0 bersama Agrotech! 🚀
+
+💬 Save postingan ini biar gak lupa, & share ke temen pengelola kebun lainnya ya!
+👉 Request Demo Gratis link di BIO @agrotech.id
+
+---
+#Agrotech #SmartFarming #PertanianModern #PetaniMaju #AgriTech #Pertanian40 #IoTPertanian #AgribisnisIndonesia #TipsPertanian</div>
+
+          <div class="btn-group">
+            <button class="copy-btn" onclick="copyCaption('cap-promo-2', this)">
+              <i class="ri-file-copy-line"></i> Salin Caption
+            </button>
+            <button class="copy-btn copy-btn-outline" onclick="copyHashtags('cap-promo-2', this)">
+              <i class="ri-hashtag"></i> Salin Hashtag
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           POST 7: [ESG & SOCIAL PROOF] BRAND TRUST & SUSTAINABILITY (1:1)
+           ========================================================================= -->
+      <div class="ig-post-card" data-category="esg">
+        <div class="card-top-tag">
+          <span class="pill-esg"><i class="ri-seedling-line"></i> ESG & Keberlanjutan</span>
+          <span class="ratio-pill">1:1 Square (1080x1080)</span>
+        </div>
+
+        <div class="ig-header">
+          <div class="ig-user">
+            <div class="ig-avatar-ring">
+              <img src="assets/ig_profile_logo_1.jpg" alt="Avatar Agrotech" class="feed-avatar-img">
+            </div>
+            <div class="ig-meta">
+              <div class="ig-username-row">
+                <span class="ig-username">agrotech.id</span>
+                <i class="ri-checkbox-circle-fill verified-badge"></i>
+              </div>
+              <span class="ig-location">Komitmen Berkelanjutan 🍃</span>
+            </div>
+          </div>
+          <span class="ig-follow-btn">Ikuti</span>
+        </div>
+
+        <div class="ig-media-frame">
+          <img src="assets/ig_post_3.png" alt="ESG Sustainability Agrotech">
+        </div>
+
+        <div class="ig-actions">
+          <div class="ig-left-actions">
+            <i class="ri-heart-line action-icon" onclick="toggleLike(this)"></i>
+            <i class="ri-chat-3-line action-icon"></i>
+            <i class="ri-send-plane-line action-icon"></i>
+          </div>
+          <i class="ri-bookmark-line action-icon"></i>
+        </div>
+
+        <div class="ig-likes">3.410 menyukai</div>
+        <div class="ig-inline-caption">
+          <strong>agrotech.id</strong> Kok bisa bertani dengan teknologi canggih TAPI tetep ramah lingkungan & bikin petani lokal makin sejahtera? 🌾✨
+        </div>
+
+        <div class="ig-caption-container">
+          <div class="post-badge-title">
+            <span>🌱 ESG Trust & Eco Storytelling</span>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Brand Values</span>
+          </div>
+
+          <div class="ig-caption-text" id="cap-esg-1">Kok bisa bertani dengan teknologi canggih TAPI tetep ramah lingkungan & bikin petani lokal makin sejahtera? 🌾✨
+
+Ini dia 3 Komitmen ESG dari Agrotech:
+
+🍃 **Environmental**: Hemat air & pupuk presisi untuk kurangi jejak karbon tanah.
+👥 **Social**: Buka akses pasar adil lewat Marketplace Agri untuk tingkatkan ekonomi petani lokal.
+🏛️ **Governance**: Data terenkripsi aman & transparansi bisnis tanpa tersembunyi.
+
+Bersama 1.000+ pengguna aktif di seluruh Indonesia, mari buat pertanian kita makin hijau & berkelanjutan! 💚
+
+Like & Share kalau kamu setuju pertanian Indonesia harus makin maju! 🇮🇩🌱
+
+🌐 agrotech.id
+
+---
+#Agrotech #PertanianBerkelanjutan #ESGIndonesia #GreenTechnology #PetaniSejahtera #AgriMarketplace #FutureFarming #InovasiPertanian</div>
+
+          <div class="btn-group">
+            <button class="copy-btn" onclick="copyCaption('cap-esg-1', this)">
+              <i class="ri-file-copy-line"></i> Salin Caption
+            </button>
+            <button class="copy-btn copy-btn-outline" onclick="copyHashtags('cap-esg-1', this)">
+              <i class="ri-hashtag"></i> Salin Hashtag
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =========================================================================
+         REELS & TIKTOK VIDEO PRODUCTION STUDIO (9:16 FORMAT)
+         ========================================================================= -->
+    <div class="reels-studio">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <h2 style="font-family:'Outfit',sans-serif; font-size:1.8rem;">
+            <i class="ri-clapperboard-fill" style="color:var(--badge-promo);"></i> Studio Produksi Video Reels / TikTok (9:16)
+          </h2>
+          <p style="color:var(--text-muted); margin-top:0.3rem;">
+            Mockup visual HP & Script Voiceover 35 Detik siap dibaca dengan Teleprompter Mode
+          </p>
+        </div>
+        <button class="copy-btn" style="padding:0.7rem 1.4rem; font-size:0.9rem;" onclick="openTeleprompter('cap-reels-full', 'Teleprompter: Script Reels Promosi 35 Detik')">
+          <i class="ri-tv-line"></i> Buka Mode Teleprompter Layar Penuh
+        </button>
+      </div>
+
+      <div class="reels-flex">
+        <!-- PHONE MOCKUP -->
+        <div class="reels-phone-mockup">
+          <img src="assets/ig_reels_promo_1.jpg" alt="Reels Cover 9:16">
+          <div class="reels-ui-overlay">
+            <div class="reels-top-bar">
+              <i class="ri-arrow-left-line"></i>
+              <span style="font-weight:700; font-size:0.9rem;">Reels</span>
+              <i class="ri-camera-line"></i>
+            </div>
+            
+            <div class="reels-right-icons">
+              <div class="reels-icon-btn"><i class="ri-heart-fill" style="color:#EF4444;"></i><span>2.8k</span></div>
+              <div class="reels-icon-btn"><i class="ri-chat-3-fill"></i><span>246</span></div>
+              <div class="reels-icon-btn"><i class="ri-send-plane-fill"></i><span>890</span></div>
+              <div class="reels-icon-btn"><i class="ri-bookmark-fill"></i><span>512</span></div>
+              <div class="reels-icon-btn"><i class="ri-more-2-fill"></i></div>
+            </div>
+
+            <div class="reels-bottom-info">
+              <div style="font-weight:700; font-size:0.95rem;">@agrotech.id • <span style="font-weight:400; color:var(--ig-blue);">Ikuti</span></div>
+              <div style="font-size:0.8rem; line-height:1.4; color:#E2E8F0;">
+                Revolusi Pertanian 4.0 Tanpa Takut Sinyal Hilang! 🚀🌾 Rekam data kebun otomatis & hemat pupuk hingga 35%!
+              </div>
+              <div class="reels-audio-track">
+                <i class="ri-music-2-fill"></i>
+                <span>Agrotech Original Audio - Suara Pertanian Modern</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCRIPT VOICEOVER & PRODUCTION BREAKDOWN -->
+        <div class="reels-content-detail">
+          <h3 style="font-family:'Outfit',sans-serif; color:var(--ig-primary); margin-bottom:1rem; font-size:1.3rem;">
+            <i class="ri-mic-line"></i> Script Voiceover & Panduan Adegan Video (35 Detik)
+          </h3>
+          
+          <div class="ig-caption-text" id="cap-reels-full" style="max-height: 280px; font-size:0.88rem; line-height:1.7;">🎙️ [00:00 - 00:05] HOOK ADEGAN 1:
+(Visual: Talent memegang smartphone di tengah lahan kebun, ekspresi bingung & frustrated menatap sinyal HP bertuliskan 'No Service')
+VO: "Jujur, siapa di sini yang suka emosi pas lagi nyatet data kebun, eh sinyal HP malah hilang total? 😭📶"
+
+⚡ [00:05 - 00:15] SOLUSI ADEGAN 2:
+(Visual: Transisi cepat sound swoosh. Tampilan UI Agrotech di layar smartphone dengan indikator 'Offline Sync Active' dan drone pertanian terbang di atas kebun)
+VO: "Tenang! Sekarang ada Agrotech! Platform Smart Farming IoT dengan mode Offline Support. Jadi walau di pelosok tanpa internet, semua pencatatan pupuk, air, dan panen tetap tersimpan otomatis!"
+
+📈 [00:15 - 00:25] PROOF & VALUE ADEGAN 3:
+(Visual: B-roll sensor tanah bercahaya neon mengalirkan data, grafik profit naik, dan hamparan kebun hijau subur)
+VO: "Sensor presisi kami bantu hemat pupuk & air hingga 35%. Sudah terbukti membantu lebih dari 50 perusahaan dan 10.000 hektar lahan di Indonesia!"
+
+👉 [00:25 - 00:35] CALL TO ACTION ADEGAN 4:
+(Visual: Talent tersenyum percaya diri mengacungkan jempol ke arah kamera, layar menampilkan URL agrotech.id dan tombol Request Demo)
+VO: "Saatnya bawa agribisnis kamu ke era modern! Cek link di bio @agrotech.id sekarang untuk Request Demo Gratis!"</div>
+
+          <div class="btn-group" style="margin-top:1.25rem;">
+            <button class="copy-btn" onclick="copyCaption('cap-reels-full', this)">
+              <i class="ri-file-copy-line"></i> Salin Script Voiceover
+            </button>
+            <button class="copy-btn copy-btn-outline" onclick="openTeleprompter('cap-reels-full', 'Script Reels 35 Detik')">
+              <i class="ri-broadcast-line"></i> Buka Teleprompter
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TELEPROMPTER MODAL -->
+  <div class="teleprompter-modal" id="teleprompterModal">
+    <div class="teleprompter-box">
+      <div class="teleprompter-header">
+        <h3 id="modalTitle" style="font-family:'Outfit',sans-serif; color:var(--ig-primary); font-size:1.2rem;">
+          <i class="ri-tv-line"></i> Teleprompter Mode
+        </h3>
+        <button onclick="closeTeleprompter()" style="background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer;">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+      <div class="teleprompter-body" id="modalText">
+        <!-- Content injected via JS -->
+      </div>
+      <div class="teleprompter-footer">
+        <span style="font-size:0.85rem; color:var(--text-muted);">
+          <i class="ri-keyboard-line"></i> Gunakan scroll atau tombol spasi saat merekam video
+        </span>
+        <button class="copy-btn" onclick="closeTeleprompter()">Tutup Teleprompter</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-popup" id="toastPopup">
+    <i class="ri-checkbox-circle-fill"></i>
+    <span id="toastMsg">Teks berhasil disalin ke Clipboard!</span>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // 1. SWITCH PROFILE AVATAR & ACTIVE STATE
+    function switchProfileAvatar(imgSrc, index) {
+      document.getElementById('liveAvatarImg').src = imgSrc;
+      document.querySelectorAll('.feed-avatar-img').forEach(img => {
+        img.src = imgSrc;
+      });
+
+      // Update card selected state
+      for (let i = 1; i <= 3; i++) {
+        const card = document.getElementById('logoCard' + i);
+        if (card) {
+          if (i === index) card.classList.add('selected');
+          else card.classList.remove('selected');
+        }
+      }
+
+      showToast(`Logo Opsi ${index} diterapkan ke mockup profil!`);
+    }
+
+    // 2. COPY BIO TEXT
+    function copyBioText() {
+      const bio = document.getElementById('igBioContent').innerText;
+      const fullBio = `Agrotech | Solusi Pertanian 4.0\n${bio}\n🔗 agrotech.id`;
+      navigator.clipboard.writeText(fullBio).then(() => {
+        showToast('Bio Instagram berhasil disalin ke Clipboard!');
+      });
+    }
+
+    // 3. FILTER FUNCTION
+    function filterPosts(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.ig-post-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 4. TOGGLE LIKE ANIMATION
+    function toggleLike(icon) {
+      icon.classList.toggle('liked');
+      if (icon.classList.contains('liked')) {
+        icon.className = 'ri-heart-fill action-icon liked';
+      } else {
+        icon.className = 'ri-heart-line action-icon';
+      }
+    }
+
+    // 5. SHOW TOAST NOTIFICATION
+    function showToast(msg) {
+      const toast = document.getElementById('toastPopup');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.innerText = msg || 'Teks berhasil disalin ke Clipboard!';
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // 6. COPY CAPTION
+    function copyCaption(elementId, btn) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Caption Instagram berhasil disalin!');
+        if (btn) {
+          const orig = btn.innerHTML;
+          btn.innerHTML = '<i class="ri-check-line"></i> Tersalin!';
+          btn.style.background = '#10B981';
+          setTimeout(() => {
+            btn.innerHTML = orig;
+            btn.style.background = '';
+          }, 2000);
+        }
+      });
+    }
+
+    // 7. COPY ONLY HASHTAGS
+    function copyHashtags(elementId, btn) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText;
+      const hashIndex = text.indexOf('#');
+      if (hashIndex !== -1) {
+        const hashtags = text.substring(hashIndex);
+        navigator.clipboard.writeText(hashtags).then(() => {
+          showToast('Kumpulan Hashtag berhasil disalin!');
+        });
+      } else {
+        copyCaption(elementId, btn);
+      }
+    }
+
+    // 8. TELEPROMPTER MODAL
+    function openTeleprompter(elementId, title) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      document.getElementById('modalTitle').innerHTML = `<i class="ri-tv-line"></i> ${title || 'Teleprompter Video'}`;
+      document.getElementById('modalText').innerText = el.innerText;
+      document.getElementById('teleprompterModal').classList.add('active');
+    }
+
+    function closeTeleprompter() {
+      document.getElementById('teleprompterModal').classList.remove('active');
+    }
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeTeleprompter();
+    });
+  </script>
+</body>
+</html>

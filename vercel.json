@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/api/publish", "destination": "/api/publish.py" },
+    { "source": "/api/test-token", "destination": "/api/test_token.py" },
+    { "source": "/ig-manager", "destination": "/ig-manager.html" },
+    { "source": "/preview", "destination": "/ig-preview.html" }
+  ]
+}

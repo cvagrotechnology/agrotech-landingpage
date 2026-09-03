@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroPost - Instagram Content & Publishing Management</title>
+  <meta name="description" content="Aplikasi manajemen postingan, penjadwalan konten, kalender editorial, dan integrasi Meta Graph API untuk akun Instagram Agrotech.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #10B981;
+      --primary-hover: #059669;
+      --primary-glow: rgba(16, 185, 129, 0.2);
+      --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      
+      --dark-bg: #090D16;
+      --dark-sidebar: #0E1422;
+      --dark-card: #141C2E;
+      --dark-surface: #1B253C;
+      --dark-border: #24344D;
+      --dark-border-subtle: rgba(255, 255, 255, 0.07);
+
+      --text-main: #FFFFFF;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      
+      --status-published: #10B981;
+      --status-scheduled: #3B82F6;
+      --status-draft: #F59E0B;
+      --status-reels: #EC4899;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* =========================================================================
+       SIDEBAR NAVIGATION
+       ========================================================================= */
+    .sidebar {
+      width: 260px;
+      background-color: var(--dark-sidebar);
+      border-right: 1px solid var(--dark-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 50;
+      transition: var(--transition);
+    }
+
+    .sidebar-header {
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--dark-border-subtle);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    .brand-logo i {
+      color: var(--primary);
+      font-size: 1.4rem;
+    }
+    .brand-logo span { color: var(--primary); }
+
+    .sidebar-account {
+      padding: 1rem 1.25rem;
+      margin: 1rem 1rem 0.5rem 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--dark-border-subtle);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .acc-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      padding: 2px;
+      background: var(--ig-gradient);
+    }
+    .acc-avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .acc-meta {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .acc-name {
+      font-weight: 700;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .acc-name i { color: #38BDF8; font-size: 0.8rem; }
+    .acc-type {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .sidebar-menu {
+      padding: 1rem;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .menu-heading {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      letter-spacing: 0.8px;
+      padding: 0.75rem 0.75rem 0.25rem 0.75rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+    }
+
+    .nav-item.active {
+      background: var(--primary-glow);
+      color: var(--primary);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .nav-item i {
+      font-size: 1.15rem;
+    }
+
+    .nav-item .badge {
+      margin-left: auto;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.15rem 0.5rem;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .nav-item.active .badge {
+      background: var(--primary);
+      color: #000;
+      font-weight: 700;
+    }
+
+    .sidebar-footer {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--dark-border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .footer-link:hover { color: var(--primary); }
+
+    /* =========================================================================
+       MAIN CONTENT WRAPPER & TOPBAR
+       ========================================================================= */
+    .main-wrapper {
+      margin-left: 260px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .topbar {
+      height: 70px;
+      background: rgba(14, 20, 34, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--dark-border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .topbar-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+      color: #000;
+    }
+
+    .btn-secondary {
+      background: var(--dark-surface);
+      color: var(--text-main);
+      border-color: var(--dark-border);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--text-muted);
+    }
+
+    .btn-outline-danger {
+      background: transparent;
+      color: #EF4444;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .btn-outline-danger:hover {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: #EF4444;
+    }
+
+    /* =========================================================================
+       CONTENT VIEWS (TABS)
+       ========================================================================= */
+    .view-container {
+      padding: 2rem;
+      flex: 1;
+    }
+
+    .tab-view {
+      display: none;
+    }
+    .tab-view.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================================================
+       DASHBOARD METRICS
+       ========================================================================= */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+    .metric-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .metric-info h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      margin-bottom: 0.2rem;
+    }
+    .metric-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .metric-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    /* DASHBOARD RECENT & QUICK ACTION GRID */
+    .dash-columns {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 1050px) {
+      .dash-columns { grid-template-columns: 1fr; }
+    }
+
+    .content-panel {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--dark-border-subtle);
+    }
+    .panel-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* =========================================================================
+       POST CREATOR STUDIO (TWO-COLUMN SPLIT)
+       ========================================================================= */
+    .studio-split {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1100px) {
+      .studio-split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-section {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .form-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #E2E8F0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-control, .form-select {
+      background: var(--dark-surface);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    }
+
+    .format-pills {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .format-pill {
+      padding: 0.5rem 1rem;
+      background: var(--dark-surface);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .format-pill:hover {
+      border-color: var(--primary);
+      color: var(--text-main);
+    }
+    .format-pill.active {
+      background: var(--primary);
+      color: #000;
+      border-color: var(--primary);
+    }
+
+    /* ASSET PICKER CAROUSEL */
+    .asset-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: 0.6rem;
+      max-height: 180px;
+      overflow-y: auto;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--dark-border-subtle);
+    }
+    .asset-thumb {
+      aspect-ratio: 1 / 1;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+    }
+    .asset-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .asset-thumb:hover {
+      border-color: var(--primary);
+      transform: scale(1.05);
+    }
+    .asset-thumb.selected {
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }
+
+    /* AI HOOK TEMPLATES & HASHTAG BANK */
+    .preset-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .preset-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--dark-border-subtle);
+      border-radius: 20px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .preset-chip:hover {
+      background: var(--primary-glow);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* =========================================================================
+       LIVE INSTAGRAM SMARTPHONE PREVIEW
+       ========================================================================= */
+    .preview-sticky-wrap {
+      position: sticky;
+      top: 90px;
+    }
+
+    .ig-phone-frame {
+      background: #000000;
+      border: 10px solid #243046;
+      border-radius: 36px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-top-bar {
+      padding: 0.75rem 1rem;
+      background: #0D131F;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .phone-ig-header {
+      padding: 0.6rem 0.9rem;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .phone-ig-user {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .phone-ig-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--ig-gradient);
+      padding: 2px;
+    }
+    .phone-ig-avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .phone-media-container {
+      width: 100%;
+      background: #111;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .phone-media-container.ratio-4-5 { aspect-ratio: 4 / 5; }
+    .phone-media-container.ratio-9-16 { aspect-ratio: 9 / 16; max-height: 380px; }
+
+    .phone-media-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .phone-actions-row {
+      padding: 0.6rem 0.9rem 0.2rem 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.25rem;
+      color: #fff;
+    }
+    .phone-actions-left {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .phone-caption-area {
+      padding: 0.5rem 0.9rem 1.25rem 0.9rem;
+      font-size: 0.78rem;
+      line-height: 1.4;
+      color: #CBD5E1;
+      max-height: 130px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    .phone-caption-area strong { color: #fff; }
+
+    /* =========================================================================
+       POST QUEUE & CALENDAR TABLE
+       ========================================================================= */
+    .post-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .post-table th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      border-bottom: 1px solid var(--dark-border);
+    }
+    .post-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--dark-border-subtle);
+      font-size: 0.85rem;
+      vertical-align: middle;
+    }
+    .post-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .table-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .table-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .badge-published { background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-scheduled { background: rgba(59, 130, 246, 0.15); color: #3B82F6; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .badge-draft { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    /* CALENDAR GRID */
+    .calendar-wrapper {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+    }
+    .cal-day-header {
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      padding-bottom: 0.5rem;
+    }
+    .cal-day-cell {
+      min-height: 95px;
+      background: var(--dark-surface);
+      border: 1px solid var(--dark-border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      transition: var(--transition);
+    }
+    .cal-day-cell:hover {
+      border-color: var(--primary);
+    }
+    .cal-day-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-dim);
+    }
+    .cal-event-pill {
+      font-size: 0.65rem;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* META GRAPH API INTEGRATION TAB */
+    .api-box {
+      background: #080D18;
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #38BDF8;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+
+    /* TOAST POPUP */
+    .toast-popup {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: #000;
+      padding: 0.85rem 1.4rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 10000;
+      transform: translateY(100px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .toast-popup.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* AI GENERATOR & PRE-FLIGHT MODAL STYLES */
+    .generator-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.3fr;
+      gap: 1.75rem;
+    }
+    @media (max-width: 1024px) {
+      .generator-grid { grid-template-columns: 1fr; }
+    }
+    .generator-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .variation-card {
+      background: var(--dark-surface);
+      border: 1px solid var(--dark-border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: var(--transition);
+      position: relative;
+    }
+    .variation-card:hover {
+      border-color: rgba(245, 158, 11, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+    .variation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .variation-hook {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .variation-snippet {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0.6rem 0.8rem;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid #F59E0B;
+    }
+    .variation-media-preview {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .variation-media-preview img {
+      width: 54px;
+      height: 54px;
+      border-radius: 6px;
+      object-fit: cover;
+      border: 1px solid var(--dark-border);
+    }
+
+    /* PRE-FLIGHT REVIEW MODAL */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 8, 16, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-backdrop.open {
+      display: flex;
+      animation: modalFadeIn 0.25s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-window {
+      background: #0B111E;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: var(--radius-xl);
+      max-width: 1050px;
+      width: 100%;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-header {
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid var(--dark-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(13, 19, 31, 0.7);
+    }
+    .modal-body {
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 900px) {
+      .modal-body { grid-template-columns: 1fr; }
+    }
+    .preflight-checklist {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--dark-border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .preflight-check-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .preflight-check-item.ok {
+      color: #E2E8F0;
+    }
+    .preflight-check-item.ok i {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       SIDEBAR
+       ========================================================================= -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <a href="index.html" class="brand-logo">
+        <i class="ri-leaf-line"></i> Agro<span>Post</span>
+      </a>
+    </div>
+
+    <!-- ACTIVE IG ACCOUNT -->
+    <div class="sidebar-account">
+      <div class="acc-avatar">
+        <img src="assets/ig_profile_logo_1.jpg" alt="Agrotech Logo">
+      </div>
+      <div class="acc-meta">
+        <span class="acc-name">cvagrotechnology <i class="ri-checkbox-circle-fill"></i></span>
+        <span class="acc-type">Instagram Business</span>
+      </div>
+    </div>
+
+    <!-- NAVIGATION MENU -->
+    <ul class="sidebar-menu">
+      <li class="menu-heading">Menu Utama</li>
+      <li class="nav-item active" onclick="switchTab('dashboard', this)">
+        <i class="ri-dashboard-2-line"></i> Dashboard
+      </li>
+      <li class="nav-item" onclick="switchTab('creator', this)">
+        <i class="ri-edit-circle-line"></i> Buat Postingan <span class="badge">+ Baru</span>
+      </li>
+      <li class="nav-item" onclick="switchTab('ai-generator', this)">
+        <i class="ri-sparkling-fill" style="color:#F59E0B;"></i> AI Generator <span class="badge" style="background:#F59E0B; color:#0F172A; font-weight:700;">Baru</span>
+      </li>
+      <li class="nav-item" onclick="switchTab('queue', this)">
+        <i class="ri-time-line"></i> Antrean & Jadwal <span class="badge" id="queueCountBadge">5</span>
+      </li>
+      <li class="nav-item" onclick="switchTab('calendar', this)">
+        <i class="ri-calendar-event-line"></i> Kalender Konten
+      </li>
+
+      <li class="menu-heading">Alat & Integrasi</li>
+      <li class="nav-item" onclick="switchTab('hashtags', this)">
+        <i class="ri-hashtag"></i> Bank Hashtag
+      </li>
+      <li class="nav-item" onclick="switchTab('api-settings', this)">
+        <i class="ri-code-s-slash-line"></i> Meta Graph API
+      </li>
+
+      <li class="menu-heading">Navigasi Website</li>
+      <a href="ig-preview.html" class="nav-item" style="text-decoration:none;">
+        <i class="ri-instagram-line"></i> Instagram Hub
+      </a>
+      <a href="index.html" class="nav-item" style="text-decoration:none;">
+        <i class="ri-home-4-line"></i> Landing Page
+      </a>
+    </ul>
+
+    <div class="sidebar-footer">
+      <a href="https://wa.me/6281234567890" target="_blank" class="footer-link">
+        <i class="ri-customer-service-2-line"></i> Bantuan Teknis
+      </a>
+      <span style="font-size:0.7rem; color:var(--text-dim);">&copy; 2026 Agrotech Publisher</span>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       MAIN WRAPPER & TOPBAR
+       ========================================================================= -->
+  <div class="main-wrapper">
+    
+    <header class="topbar">
+      <div class="topbar-title">
+        <span id="currentViewTitle">Dashboard Overview</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-secondary" onclick="switchTab('api-settings')">
+          <i class="ri-shield-keyhole-line"></i> Status API: <strong style="color:var(--primary);">Tersedia</strong>
+        </button>
+        <button class="btn btn-secondary" style="border-color:rgba(245, 158, 11, 0.5); color:#F59E0B;" onclick="switchTab('ai-generator')">
+          <i class="ri-sparkling-fill"></i> AI Generator
+        </button>
+        <button class="btn btn-primary" onclick="switchTab('creator')">
+          <i class="ri-add-circle-fill"></i> Buat Konten
+        </button>
+      </div>
+    </header>
+
+    <!-- =========================================================================
+         VIEW 1: DASHBOARD
+         ========================================================================= -->
+    <main class="view-container">
+      
+      <div id="tab-dashboard" class="tab-view active">
+        <!-- METRICS -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-info">
+              <h3 id="statTotalPosts">7</h3>
+              <p>Total Postingan Terkelola</p>
+            </div>
+            <div class="metric-icon" style="background:rgba(16, 185, 129, 0.15); color:var(--primary);">
+              <i class="ri-instagram-fill"></i>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-info">
+              <h3 id="statScheduled">4</h3>
+              <p>Konten Terjadwal</p>
+            </div>
+            <div class="metric-icon" style="background:rgba(59, 130, 246, 0.15); color:#3B82F6;">
+              <i class="ri-time-line"></i>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-info">
+              <h3>10.4k</h3>
+              <p>Pengikut Aktif (@agrotech.id)</p>
+            </div>
+            <div class="metric-icon" style="background:rgba(236, 72, 153, 0.15); color:#EC4899;">
+              <i class="ri-user-heart-line"></i>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-info">
+              <h3>6.8%</h3>
+              <p>Rata-rata Engagement Rate</p>
+            </div>
+            <div class="metric-icon" style="background:rgba(245, 158, 11, 0.15); color:#F59E0B;">
+              <i class="ri-line-chart-line"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- DASHBOARD SPLIT CONTENT -->
+        <div class="dash-columns">
+          
+          <!-- RECENT POSTS LIST -->
+          <div class="content-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="ri-list-check-2" style="color:var(--primary);"></i> Postingan Terkini & Antrean
+              </div>
+              <button class="btn btn-secondary" style="padding:0.4rem 0.8rem; font-size:0.75rem;" onclick="switchTab('queue')">
+                Lihat Semua Antrean
+              </button>
+            </div>
+
+            <div style="overflow-x:auto;">
+              <table class="post-table" id="dashboardRecentTable">
+                <thead>
+                  <tr>
+                    <th>Media</th>
+                    <th>Judul & Cuplikan</th>
+                    <th>Format</th>
+                    <th>Jadwal / Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboardRecentBody">
+                  <!-- Injected by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- QUICK ACTIONS & NICHE SUMMARY -->
+          <div class="content-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="ri-flashlight-line" style="color:#F59E0B;"></i> Aksi Cepat
+              </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <button class="btn btn-secondary" style="justify-content:flex-start; width:100%;" onclick="quickNewPost('promo')">
+                <i class="ri-video-add-line" style="color:#EC4899;"></i> Buat Reels Video Promosi
+              </button>
+              <button class="btn btn-secondary" style="justify-content:flex-start; width:100%;" onclick="quickNewPost('edu')">
+                <i class="ri-book-open-line" style="color:#3B82F6;"></i> Buat Carousel Edukasi 5-Slide
+              </button>
+              <button class="btn btn-secondary" style="justify-content:flex-start; width:100%;" onclick="quickNewPost('showcase')">
+                <i class="ri-cpu-line" style="color:#10B981;"></i> Buat Showcase Fitur Satelit/IoT
+              </button>
+              <button class="btn btn-secondary" style="justify-content:flex-start; width:100%;" onclick="switchTab('api-settings')">
+                <i class="ri-terminal-box-line" style="color:#38BDF8;"></i> Generate Python Poster Script
+              </button>
+            </div>
+
+            <div style="margin-top:1.5rem; padding:1rem; background:rgba(0,0,0,0.25); border-radius:var(--radius-sm); border:1px solid var(--dark-border-subtle);">
+              <h4 style="font-size:0.85rem; margin-bottom:0.4rem; color:var(--primary);"><i class="ri-lightbulb-line"></i> Rekomendasi Jam Tayang:</h4>
+              <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.5;">
+                Audience agribisnis & petani paling aktif pada jam <strong>06:30 - 08:00 WIB</strong> (Pagi sebelum kebun) & <strong>19:00 - 21:00 WIB</strong> (Malam santai).
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           VIEW 2: POST CREATOR STUDIO
+           ========================================================================= -->
+      <div id="tab-creator" class="tab-view">
+        <div class="studio-split">
+          
+          <!-- LEFT: FORM CONTROLS -->
+          <div class="form-section">
+            <h2 style="font-family:'Outfit',sans-serif; font-size:1.3rem; display:flex; align-items:center; gap:0.5rem;">
+              <i class="ri-edit-2-fill" style="color:var(--primary);"></i> Editor & Publisher Instagram
+            </h2>
+
+            <!-- POST FORMAT SELECTOR -->
+            <div class="form-group">
+              <label class="form-label">Format Konten Instagram</label>
+              <div class="format-pills">
+                <div class="format-pill active" onclick="setPostFormat('feed', this)">
+                  <i class="ri-image-line"></i> Feed Square (1:1)
+                </div>
+                <div class="format-pill" onclick="setPostFormat('carousel', this)">
+                  <i class="ri-pages-line"></i> Carousel (4:5 / 1:1)
+                </div>
+                <div class="format-pill" onclick="setPostFormat('reels', this)">
+                  <i class="ri-film-line"></i> Reels Video (9:16)
+                </div>
+              </div>
+            </div>
+
+            <!-- MEDIA ASSET SELECTOR -->
+            <div class="form-group">
+              <label class="form-label">
+                Pilih Gambar / Video Aset
+                <span style="font-size:0.75rem; color:var(--text-muted);">Pilih dari library atau upload</span>
+              </label>
+              
+              <div class="asset-picker-grid" id="assetPickerGrid">
+                <!-- Assets injected via JS -->
+              </div>
+
+              <!-- Custom File Upload -->
+              <div style="margin-top:0.5rem; display:flex; flex-direction:column; gap:0.5rem;">
+                <input type="file" id="customMediaInput" accept="image/*" style="display:none;" onchange="handleCustomFileUpload(this)">
+                <button type="button" class="btn btn-secondary" style="width:100%; font-size:0.8rem; padding:0.4rem;" onclick="document.getElementById('customMediaInput').click()">
+                  <i class="ri-upload-2-line"></i> Upload Gambar Kustom dari Komputer
+                </button>
+                
+                <!-- Online Public URL for Meta API -->
+                <div style="margin-top:0.25rem;">
+                  <label class="form-label" style="font-size:0.78rem;">
+                    <span><i class="ri-global-line" style="color:#38BDF8;"></i> URL Media Online (Wajib untuk Meta Graph API)</span>
+                  </label>
+                  <input type="url" id="publicMediaUrlInput" class="form-control" style="font-size:0.8rem; padding:0.5rem 0.75rem;" placeholder="Otomatis terisi sesuai gambar terpilih atau URL publik HTTPS...">
+                  <span style="font-size:0.7rem; color:var(--text-dim); margin-top:0.2rem; display:block;">
+                    *Server Meta Instagram hanya dapat mengunduh gambar dari URL internet publik (HTTPS).
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- POST TITLE & CATEGORY -->
+            <div style="display:grid; grid-template-columns: 2fr 1fr; gap:1rem;">
+              <div class="form-group">
+                <label class="form-label">Judul Internal / Topik</label>
+                <input type="text" id="postTopicInput" class="form-control" placeholder="Contoh: 5 Tanda Kebun Butuh IoT" value="Revolusi Pertanian 4.0 bersama Agrotech">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Kategori Pilar</label>
+                <select id="postCategorySelect" class="form-select">
+                  <option value="promo">🎬 Video Promosi</option>
+                  <option value="edu">📚 Edukasi & Tips</option>
+                  <option value="showcase">⚙️ Product Showcase</option>
+                  <option value="esg">🌱 ESG & Nilai Brand</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- CAPTION TEMPLATE PRESETS -->
+            <div class="form-group">
+              <label class="form-label">
+                <span><i class="ri-magic-line" style="color:#F59E0B;"></i> Template Caption Cepat</span>
+              </label>
+              <div class="preset-chips">
+                <span class="preset-chip" onclick="applyCaptionTemplate('promo')">⚡ Hook Promo Problem-Solving</span>
+                <span class="preset-chip" onclick="applyCaptionTemplate('edu')">📚 5-Slide Edukasi Step-by-Step</span>
+                <span class="preset-chip" onclick="applyCaptionTemplate('ndvi')">🛰️ Showcase Analisis Citra Satelit</span>
+                <span class="preset-chip" onclick="applyCaptionTemplate('fertigation')">💧 Tips Fertigasi & Sensor Presisi</span>
+              </div>
+            </div>
+
+            <!-- CAPTION TEXTAREA -->
+            <div class="form-group">
+              <div class="form-label">
+                <span>Caption Instagram Lengkap</span>
+                <span id="charCounter" style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-muted);">0 / 2.200 Karakter</span>
+              </div>
+              <textarea id="postCaptionInput" class="form-control" rows="8" placeholder="Tulis caption Instagram menarik di sini..." oninput="updateLivePreview()"></textarea>
+            </div>
+
+            <!-- QUICK HASHTAG INSERTER -->
+            <div class="form-group">
+              <div class="form-label">
+                <span><i class="ri-hashtag"></i> Tambah Kumpulan Hashtag Niche</span>
+              </div>
+              <div class="preset-chips">
+                <span class="preset-chip" onclick="appendHashtags('agritech')">+ Tag AgriTech #1</span>
+                <span class="preset-chip" onclick="appendHashtags('smartfarm')">+ Tag Smart Farming</span>
+                <span class="preset-chip" onclick="appendHashtags('b2b')">+ Tag Bisnis Kebun & ERP</span>
+              </div>
+            </div>
+
+            <!-- SCHEDULE TIME -->
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+              <div class="form-group">
+                <label class="form-label">Tanggal Tayang</label>
+                <input type="date" id="postScheduleDate" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Waktu Tayang (WIB)</label>
+                <input type="time" id="postScheduleTime" class="form-control" value="08:00">
+              </div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap; padding-top:0.5rem;">
+              <button class="btn btn-primary" style="flex:1;" onclick="savePost('published')">
+                <i class="ri-send-plane-fill"></i> Terbitkan Sekarang
+              </button>
+              <button class="btn btn-secondary" style="flex:1;" onclick="savePost('scheduled')">
+                <i class="ri-calendar-check-line"></i> Jadwalkan Postingan
+              </button>
+              <button class="btn btn-secondary" onclick="savePost('draft')">
+                <i class="ri-save-line"></i> Simpan Draf
+              </button>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: LIVE PHONE MOCKUP -->
+          <div class="preview-sticky-wrap">
+            <h3 style="font-size:0.9rem; font-weight:700; margin-bottom:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:0.4rem;">
+              <i class="ri-smartphone-line"></i> Live Feed & Reels Preview
+            </h3>
+
+            <div class="ig-phone-frame">
+              <div class="phone-top-bar">
+                <span>09:41</span>
+                <div style="display:flex; gap:0.3rem;">
+                  <i class="ri-signal-tower-fill"></i>
+                  <i class="ri-wifi-fill"></i>
+                  <i class="ri-battery-fill"></i>
+                </div>
+              </div>
+
+              <!-- IG HEADER -->
+              <div class="phone-ig-header">
+                <div class="phone-ig-user">
+                  <div class="phone-ig-avatar">
+                    <img src="assets/ig_profile_logo_1.jpg" alt="Avatar">
+                  </div>
+                  <div>
+                    <div style="font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.2rem;">
+                      cvagrotechnology <i class="ri-checkbox-circle-fill" style="color:#38BDF8; font-size:0.75rem;"></i>
+                    </div>
+                    <div style="font-size:0.65rem; color:var(--text-dim);">Indonesia • Disponsori</div>
+                  </div>
+                </div>
+                <i class="ri-more-fill" style="color:#fff;"></i>
+              </div>
+
+              <!-- MEDIA FRAME -->
+              <div class="phone-media-container" id="phoneMediaContainer">
+                <img src="assets/ig_reels_promo_1.jpg" alt="Preview Media" id="phoneMediaImg">
+              </div>
+
+              <!-- ACTION BAR -->
+              <div class="phone-actions-row">
+                <div class="phone-actions-left">
+                  <i class="ri-heart-line"></i>
+                  <i class="ri-chat-3-line"></i>
+                  <i class="ri-send-plane-line"></i>
+                </div>
+                <i class="ri-bookmark-line"></i>
+              </div>
+
+              <!-- CAPTION AREA -->
+              <div class="phone-caption-area">
+                <strong>cvagrotechnology</strong> <span id="phoneCaptionText">Stop bertani pakai cara tebak-tebakan! 🚜⚡ Saatnya beralih ke Pertanian 4.0 bersama Agrotech!</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           VIEW 3: CONTENT QUEUE & SCHEDULED POSTS
+           ========================================================================= -->
+      <div id="tab-queue" class="tab-view">
+        <div class="content-panel">
+          <div class="panel-header">
+            <div>
+              <h2 style="font-family:'Outfit',sans-serif; font-size:1.3rem;">Antrean & Daftar Jadwal Konten</h2>
+              <p style="color:var(--text-muted); font-size:0.85rem; margin-top:0.2rem;">Kelola semua postingan draf, terjadwal, dan riwayat yang sudah diterbitkan.</p>
+            </div>
+            <button class="btn btn-primary" onclick="switchTab('creator')">
+              <i class="ri-add-line"></i> Tambah Postingan
+            </button>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="post-table">
+              <thead>
+                <tr>
+                  <th>Media</th>
+                  <th>Topik & Cuplikan Konten</th>
+                  <th>Format</th>
+                  <th>Status</th>
+                  <th>Jadwal Publikasi</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="fullQueueTableBody">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           VIEW 4: CALENDAR EDITORIAL
+           ========================================================================= -->
+      <div id="tab-calendar" class="tab-view">
+        <div class="calendar-wrapper">
+          <div class="calendar-header">
+            <div>
+              <h2 style="font-family:'Outfit',sans-serif; font-size:1.3rem;" id="calMonthTitle">Kalender Editorial — September 2026</h2>
+              <p style="color:var(--text-muted); font-size:0.85rem;">Distribusi jadwal konten harian untuk akun @agrotech.id</p>
+            </div>
+            <button class="btn btn-secondary" onclick="generateDefaultCalendar()">
+              <i class="ri-refresh-line"></i> Reset Jadwal Default
+            </button>
+          </div>
+
+          <div class="cal-grid">
+            <div class="cal-day-header">SENIN</div>
+            <div class="cal-day-header">SELASA</div>
+            <div class="cal-day-header">RABU</div>
+            <div class="cal-day-header">KAMIS</div>
+            <div class="cal-day-header">JUMAT</div>
+            <div class="cal-day-header">SABTU</div>
+            <div class="cal-day-header">MINGGU</div>
+
+            <!-- Calendar Cells Injected by JS -->
+            <div id="calendarCellsContainer" style="display:contents;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           VIEW 5: HASHTAG BANK
+           ========================================================================= -->
+      <div id="tab-hashtags" class="tab-view">
+        <div class="content-panel">
+          <div class="panel-header">
+            <div>
+              <h2 style="font-family:'Outfit',sans-serif; font-size:1.3rem;"><i class="ri-hashtag" style="color:var(--primary);"></i> Master Bank Hashtag Niche Agribisnis</h2>
+              <p style="color:var(--text-muted); font-size:0.85rem;">Koleksi hashtag teroptimasi algoritma untuk menjangkau petani, korporasi, dan agribisnis.</p>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem;">
+            
+            <div style="background:var(--dark-surface); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--dark-border);">
+              <h4 style="color:var(--primary); margin-bottom:0.75rem;"><i class="ri-cpu-line"></i> 1. Smart Farming & Pertanian 4.0</h4>
+              <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.6;" id="tag-group-1">
+                #Agrotech #SmartFarming #Pertanian40 #IoTPertanian #AgriTechIndonesia #PetaniMaju #SaaSPertanian #InovasiTani #PertanianPresisi #SmartNursery
+              </p>
+              <button class="btn btn-secondary" style="margin-top:1rem; width:100%; font-size:0.78rem;" onclick="copyDirectText('tag-group-1')">
+                <i class="ri-file-copy-line"></i> Salin Kumpulan Tag
+              </button>
+            </div>
+
+            <div style="background:var(--dark-surface); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--dark-border);">
+              <h4 style="color:#3B82F6; margin-bottom:0.75rem;"><i class="ri-briefcase-line"></i> 2. B2B & Manajemen Kebun ERP</h4>
+              <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.6;" id="tag-group-2">
+                #SmartFarmingERP #KelolaKebun #AgribisnisIndonesia #CloudSaaS #ERPIndonesia #ManajemenPerkebunan #AgriCommodity #SupplyChainAgri
+              </p>
+              <button class="btn btn-secondary" style="margin-top:1rem; width:100%; font-size:0.78rem;" onclick="copyDirectText('tag-group-2')">
+                <i class="ri-file-copy-line"></i> Salin Kumpulan Tag
+              </button>
+            </div>
+
+            <div style="background:var(--dark-surface); padding:1.25rem; border-radius:var(--radius-md); border:1px solid var(--dark-border);">
+              <h4 style="color:#EC4899; margin-bottom:0.75rem;"><i class="ri-plant-line"></i> 3. Tips Pupuk, Irigasi & Edukasi</h4>
+              <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.6;" id="tag-group-3">
+                #TipsPertanian #HematPupuk #FertigasiPresisi #SensorTanah #PetaniSejahtera #GreenhouseIndonesia #PertanianBerkelanjutan #EdukasiTani
+              </p>
+              <button class="btn btn-secondary" style="margin-top:1rem; width:100%; font-size:0.78rem;" onclick="copyDirectText('tag-group-3')">
+                <i class="ri-file-copy-line"></i> Salin Kumpulan Tag
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           VIEW 6: META GRAPH API INTEGRATOR & SCRIPT GENERATOR
+           ========================================================================= -->
+      <div id="tab-api-settings" class="tab-view">
+        <div class="content-panel">
+          <div class="panel-header">
+            <div>
+              <h2 style="font-family:'Outfit',sans-serif; font-size:1.3rem;"><i class="ri-terminal-box-line" style="color:#38BDF8;"></i> Integrasi Meta Graph API & Script Auto-Publisher</h2>
+              <p style="color:var(--text-muted); font-size:0.85rem;">Pengaturan token Instagram Graph API dan generator script eksekusi terminal otomatis.</p>
+            </div>
+            <button class="btn btn-primary" onclick="generatePythonScript()">
+              <i class="ri-code-s-slash-line"></i> Generate Python Script
+            </button>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+            
+            <!-- API CREDENTIALS FORM -->
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              <h3 style="font-size:1rem; font-family:'Outfit',sans-serif;">Konfigurasi Kredensial Meta Developer</h3>
+
+              <div class="form-group">
+                <label class="form-label">Instagram Business Account / App ID</label>
+                <input type="text" id="apiIgUserId" class="form-control" placeholder="Contoh: 1387829872774340" value="1387829872774340">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Meta Graph API Access Token (Page Token)</label>
+                <input type="password" id="apiAccessToken" class="form-control" placeholder="EAAG..." value="EAAG_SAMPLE_TOKEN_AGROTECH_SECURE_KEY">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Graph API Version</label>
+                <input type="text" class="form-control" value="v19.0" readonly style="color:var(--text-dim);">
+              </div>
+
+              <div style="display:flex; gap:0.75rem;">
+                <button class="btn btn-secondary" onclick="saveApiCredentials()">
+                  <i class="ri-save-line"></i> Simpan Kredensial
+                </button>
+                <button class="btn btn-primary" onclick="testApiConnection()">
+                  <i class="ri-link"></i> Test Koneksi API
+                </button>
+              </div>
+
+              <div style="padding:1rem; background:rgba(0,0,0,0.3); border-radius:var(--radius-sm); font-size:0.78rem; color:var(--text-muted); line-height:1.5;">
+                <strong style="color:var(--primary);">💡 Panduan Memperoleh Token:</strong>
+                <ol style="margin-left:1.2rem; margin-top:0.3rem;">
+                  <li>Buka <a href="https://developers.facebook.com" target="_blank" style="color:#38BDF8;">developers.facebook.com</a> > Buat App (Tipe Business).</li>
+                  <li>Tambahkan produk <strong>Instagram Graph API</strong>.</li>
+                  <li>Dapatkan User Token dengan izin <code>instagram_content_publish</code>.</li>
+                </ol>
+              </div>
+            </div>
+
+            <!-- GENERATED PYTHON SCRIPT / CURL -->
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <h3 style="font-size:1rem; font-family:'Outfit',sans-serif; display:flex; justify-content:space-between; align-items:center;">
+                <span>Script Python Siap Eksekusi</span>
+                <button class="btn btn-secondary" style="padding:0.3rem 0.6rem; font-size:0.75rem;" onclick="copyDirectText('pythonScriptBox')">
+                  <i class="ri-file-copy-line"></i> Salin Script
+                </button>
+              </h3>
+
+              <div class="api-box" id="pythonScriptBox" style="max-height:360px;">
+# Script Otomatisasi Upload Instagram Agrotech
+# Menghubungkan ke Meta Graph API v19.0
+import requests
+
+IG_USER_ID = "17841405829103841"
+ACCESS_TOKEN = "EAAG_SAMPLE_TOKEN_AGROTECH_SECURE_KEY"
+IMAGE_URL = "https://agrotech.id/assets/ig_reels_promo_1.jpg"
+CAPTION = "Stop bertani pakai cara tebak-tebakan! 🚜⚡ Saatnya ke Pertanian 4.0 bersama Agrotech! #SmartFarming #Agrotech"
+
+# Langkah 1: Buat Media Container
+url_container = f"https://graph.facebook.com/v19.0/{IG_USER_ID}/media"
+payload_container = {
+    'image_url': IMAGE_URL,
+    'caption': CAPTION,
+    'access_token': ACCESS_TOKEN
+}
+res_container = requests.post(url_container, data=payload_container).json()
+container_id = res_container.get('id')
+print("Container ID:", container_id)
+
+# Langkah 2: Publikasikan Container
+url_publish = f"https://graph.facebook.com/v19.0/{IG_USER_ID}/media_publish"
+payload_publish = {
+    'creation_id': container_id,
+    'access_token': ACCESS_TOKEN
+}
+res_publish = requests.post(url_publish, data=payload_publish).json()
+print("Hasil Publikasi:", res_publish)
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================================
+           VIEW 7: AI CONTENT GENERATOR & PRE-FLIGHT REVIEW
+           ========================================================================= -->
+      <div id="tab-ai-generator" class="tab-view">
+        <div class="content-panel">
+          <div class="panel-header">
+            <div>
+              <h2 style="font-family:'Outfit',sans-serif; font-size:1.3rem; display:flex; align-items:center; gap:0.5rem;">
+                <i class="ri-sparkling-fill" style="color:#F59E0B;"></i> AI Content Generator & Pre-Flight Review
+              </h2>
+              <p style="color:var(--text-muted); font-size:0.85rem;">Pilih pilar topik atau masukkan kata kunci, lalu AI akan menyusun 3 variasi konten Instagram lengkap dengan visual, caption, dan hashtag untuk dicek pratinjaunya sebelum diposting.</p>
+            </div>
+            <div style="display:flex; gap:0.75rem;">
+              <span class="badge" style="background:rgba(245, 158, 11, 0.15); color:#F59E0B; border:1px solid rgba(245, 158, 11, 0.3); padding:0.4rem 0.8rem; font-size:0.8rem;">
+                <i class="ri-shield-check-fill"></i> Multi-Variant Engine
+              </span>
+            </div>
+          </div>
+
+          <div class="generator-grid">
+            
+            <!-- PANEL KONTROL GENERATOR -->
+            <div class="generator-card">
+              <h3 style="font-size:1rem; font-family:'Outfit',sans-serif; display:flex; align-items:center; gap:0.5rem; color:#fff;">
+                <i class="ri-sound-module-line" style="color:#38BDF8;"></i> 1. Parameter & Topik Konten
+              </h3>
+
+              <div class="form-group">
+                <label class="form-label">Pilar Topik Agrotech</label>
+                <select id="genPillar" class="form-control" onchange="onPillarSelectChange()">
+                  <option value="iot_sensor">🌾 Smart Farming IoT & Sensor Tanah Presisi</option>
+                  <option value="ndvi_satellite">🛰️ Citra Satelit NDVI & Pemetaan Drone</option>
+                  <option value="fertigation">💧 Fertigasi Presisi & Efisiensi Pupuk NPK</option>
+                  <option value="erp_cloud">📊 Cloud SaaS & ERP Pembukuan Kebun</option>
+                  <option value="offline_sync">📶 Solusi Kebun Pedalaman (Offline-First Sync)</option>
+                  <option value="case_study">🏆 Bukti Hasil Panen & Studi Kasus Nyata</option>
+                  <option value="edu_5signs">💡 5 Tanda Kebun Butuh Sentuhan Teknologi</option>
+                  <option value="custom">✏️ Topik Kustom / Bebas</option>
+                </select>
+              </div>
+
+              <div class="form-group" id="customTopicGroup" style="display:none;">
+                <label class="form-label">Tuliskan Topik / Ide Kustom Anda</label>
+                <input type="text" id="genCustomTopic" class="form-control" placeholder="Contoh: Promo diskon langganan IoT, tips atasi busuk akar cabai...">
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div class="form-group">
+                  <label class="form-label">Gaya Bahasa (Tone)</label>
+                  <select id="genTone" class="form-control">
+                    <option value="educational">🎯 Edukatif & Ramah Petani</option>
+                    <option value="professional">💼 Profesional & B2B Agribisnis</option>
+                    <option value="innovative">🚀 Inovatif & Teknologi Tinggi</option>
+                    <option value="storytelling">📖 Storytelling & Curhat Kebun</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Target Format Postingan</label>
+                  <select id="genFormat" class="form-control">
+                    <option value="feed">🖼️ Feed Single Image (1:1)</option>
+                    <option value="carousel">📚 Carousel Edukasi (4:5 / 1:1)</option>
+                    <option value="reels">🎬 Reels Script (9:16)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Ajakan Bertindak (Call to Action)</label>
+                <select id="genCta" class="form-control">
+                  <option value="wa">📲 Hubungi WhatsApp Konsultasi Gratis</option>
+                  <option value="bio">🔗 Kunjungi Link di Bio Website Agrotech</option>
+                  <option value="demo">🚜 Ajukan Jadwal Demo Lapangan Gratis</option>
+                  <option value="comment">💬 Diskusi & Tinggalkan Komentar di Bawah</option>
+                </select>
+              </div>
+
+              <!-- PILIHAN TIPE VISUAL GAMBAR -->
+              <div class="form-group">
+                <label class="form-label" style="display:flex; justify-content:space-between; align-items:center;">
+                  <span><i class="ri-camera-lens-fill" style="color:#10B981;"></i> Tipe Gambar Visual yang Dibuat</span>
+                  <span class="badge" style="background:#10B981; color:#0F172A; font-weight:700;">Foto Visual 8K Aktif</span>
+                </label>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem;">
+                  <div id="btnVisualModeAuto" class="btn btn-secondary" style="border:2px solid #10B981; background:rgba(16,185,129,0.15); color:#fff; text-align:left; padding:0.65rem 0.8rem; cursor:pointer;" onclick="setVisualGenMode('auto')">
+                    <div style="font-weight:700; color:#10B981; font-size:0.82rem;"><i class="ri-camera-3-fill"></i> Foto Visual Lapangan 8K</div>
+                    <div style="font-size:0.68rem; color:var(--text-muted); margin-top:0.2rem;">Foto pemandangan nyata: Traktor, Sensor Tanah, Drone, Agronomis Lab, Panen</div>
+                  </div>
+                  <div id="btnVisualModeBanner" class="btn btn-secondary" style="border:1px solid var(--dark-border); background:var(--dark-surface); color:var(--text-muted); text-align:left; padding:0.65rem 0.8rem; cursor:pointer;" onclick="setVisualGenMode('banner')">
+                    <div style="font-weight:700; font-size:0.82rem;"><i class="ri-palette-line"></i> Banner Teks Tipografi</div>
+                    <div style="font-size:0.68rem; color:var(--text-muted); margin-top:0.2rem;">Poster grafis dengan headline besar & poin teks</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" id="genAssetPickerGroup">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                  <label class="form-label" style="margin-bottom:0;">Pilihan Koleksi Visual Foto Lapangan (12 Aset 8K)</label>
+                  <span style="font-size:0.7rem; color:var(--text-dim);">Pilih manual atau biarkan AI memilih otomatis</span>
+                </div>
+                <div class="asset-picker-grid" style="max-height:105px;" id="genAssetPicker">
+                  <div class="asset-thumb selected" data-asset="a10" onclick="selectGenAsset('a10', this)">
+                    <img src="assets/ig_soil_probe_iot.jpg" alt="Sensor Tanah IoT" title="Sensor Tanah IoT Makro">
+                  </div>
+                  <div class="asset-thumb" data-asset="a9" onclick="selectGenAsset('a9', this)">
+                    <img src="assets/ig_smart_tractor.jpg" alt="Traktor Otonom" title="Traktor Otonom Sawah">
+                  </div>
+                  <div class="asset-thumb" data-asset="a11" onclick="selectGenAsset('a11', this)">
+                    <img src="assets/ig_agronomist_lab.jpg" alt="Agronomis Lab" title="Agronomis Lab Vertikal">
+                  </div>
+                  <div class="asset-thumb" data-asset="a12" onclick="selectGenAsset('a12', this)">
+                    <img src="assets/ig_aerial_ndvi_farm.jpg" alt="Peta NDVI Udara" title="Peta Spasial NDVI Udara">
+                  </div>
+                  <div class="asset-thumb" data-asset="a6" onclick="selectGenAsset('a6', this)">
+                    <img src="assets/ig_greenhouse_iot.jpg" alt="Greenhouse" title="Smart Greenhouse IoT">
+                  </div>
+                  <div class="asset-thumb" data-asset="a7" onclick="selectGenAsset('a7', this)">
+                    <img src="assets/ig_drone_multispectral.jpg" alt="Drone" title="Drone Multispektral">
+                  </div>
+                  <div class="asset-thumb" data-asset="a8" onclick="selectGenAsset('a8', this)">
+                    <img src="assets/ig_harvest_success.jpg" alt="Panen" title="Hasil Panen Melimpah">
+                  </div>
+                  <div class="asset-thumb" data-asset="a3" onclick="selectGenAsset('a3', this)">
+                    <img src="assets/ig_edu_precision_fertigation.jpg" alt="Fertigasi" title="Sensor Fertigasi Presisi">
+                  </div>
+                  <div class="asset-thumb" data-asset="a4" onclick="selectGenAsset('a4', this)">
+                    <img src="assets/ig_promo_satellite_ndvi.jpg" alt="NDVI" title="Satelit NDVI Lahan">
+                  </div>
+                  <div class="asset-thumb" data-asset="a2" onclick="selectGenAsset('a2', this)">
+                    <img src="assets/ig_edu_carousel_1.jpg" alt="Carousel" title="Carousel Edukasi">
+                  </div>
+                  <div class="asset-thumb" data-asset="a1" onclick="selectGenAsset('a1', this)">
+                    <img src="assets/ig_reels_promo_1.jpg" alt="Reels" title="Reels Promo">
+                  </div>
+                  <div class="asset-thumb" data-asset="a5" onclick="selectGenAsset('a5', this)">
+                    <img src="assets/ig_profile_logo_1.jpg" alt="Logo" title="Logo Agrotech">
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" style="background:linear-gradient(135deg, #F59E0B, #D97706); color:#0F172A; font-weight:800; padding:0.9rem; font-size:0.95rem; border:none;" onclick="triggerAiGeneration()">
+                <i class="ri-sparkling-fill"></i> Generate 3 Variasi Konten Sekarang
+              </button>
+            </div>
+
+            <!-- HASIL GENERATE KONTEN -->
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3 style="font-size:1rem; font-family:'Outfit',sans-serif; color:#fff; display:flex; align-items:center; gap:0.5rem;">
+                  <i class="ri-file-list-3-line" style="color:#10B981;"></i> 2. Pilihan Variasi Hasil Generate
+                </h3>
+                <span style="font-size:0.75rem; color:var(--text-dim);" id="genStatusText">Klik tombol generate untuk mulai</span>
+              </div>
+
+              <div id="genResultsContainer" style="display:flex; flex-direction:column; gap:1rem;">
+                <!-- Placeholder / Empty State -->
+                <div style="background:var(--dark-card); border:1px dashed var(--dark-border); border-radius:var(--radius-lg); padding:3rem 2rem; text-align:center;">
+                  <div style="width:60px; height:60px; border-radius:50%; background:rgba(245, 158, 11, 0.1); color:#F59E0B; font-size:1.8rem; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem auto;">
+                    <i class="ri-magic-line"></i>
+                  </div>
+                  <h4 style="color:#fff; margin-bottom:0.4rem;">Belum Ada Konten yang Dibuat</h4>
+                  <p style="color:var(--text-muted); font-size:0.85rem; max-width:380px; margin:0 auto 1.5rem auto;">
+                    Pilih pilar topik di samping kiri lalu klik <strong>"Generate 3 Variasi Konten Sekarang"</strong> untuk melihat racikan hook, caption, dan visual siap posting.
+                  </p>
+                  <button class="btn btn-secondary" onclick="triggerAiGeneration()">
+                    <i class="ri-sparkling-fill"></i> Coba Generate Konten Pertama
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- =========================================================================
+       MODAL: PRATINJAU & PENGECEKAN SEBELUM POSTING (PRE-FLIGHT CHECK)
+       ========================================================================= -->
+  <div class="modal-backdrop" id="previewCheckModal">
+    <div class="modal-window">
+      
+      <!-- MODAL HEADER -->
+      <div class="modal-header">
+        <div>
+          <h2 style="font-family:'Outfit',sans-serif; font-size:1.2rem; color:#fff; display:flex; align-items:center; gap:0.5rem;">
+            <i class="ri-eye-line" style="color:#38BDF8;"></i> Pratinjau & Pengecekan Sebelum Posting
+          </h2>
+          <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">
+            Pastikan visual, kalimat pembuka, teks caption, dan hashtag sudah sesuai sebelum diterbitkan ke Instagram.
+          </p>
+        </div>
+        <button style="background:none; border:none; color:var(--text-dim); font-size:1.5rem; cursor:pointer; padding:0.2rem;" onclick="closePreFlightModal()">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+
+      <!-- MODAL BODY -->
+      <div class="modal-body">
+        
+        <!-- KOLOM KIRI: LIVE PHONE FEED PREVIEW -->
+        <div>
+          <div style="font-size:0.78rem; font-weight:700; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem;">
+            <i class="ri-smartphone-line" style="color:var(--primary);"></i> Simulasi Tampilan HP Feed Realistis
+          </div>
+
+          <div class="ig-phone-frame" style="max-width:340px; margin:0 auto;">
+            <!-- STATUS BAR -->
+            <div class="phone-top-bar">
+              <span style="font-weight:700; font-size:0.75rem;" id="modalPhoneClock">09:41</span>
+              <div style="display:flex; gap:0.3rem; font-size:0.75rem;">
+                <i class="ri-signal-tower-fill"></i>
+                <i class="ri-wifi-fill"></i>
+                <i class="ri-battery-fill"></i>
+              </div>
+            </div>
+
+            <!-- IG HEADER -->
+            <div class="phone-ig-header">
+              <div class="phone-ig-user">
+                <div class="phone-ig-avatar">
+                  <img src="assets/ig_profile_logo_1.jpg" alt="Avatar">
+                </div>
+                <div>
+                  <div style="font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.2rem; color:#fff;">
+                    cvagrotechnology <i class="ri-checkbox-circle-fill" style="color:#38BDF8; font-size:0.75rem;"></i>
+                  </div>
+                  <div style="font-size:0.65rem; color:var(--text-dim);">Indonesia • Baru saja</div>
+                </div>
+              </div>
+              <i class="ri-more-fill" style="color:#fff;"></i>
+            </div>
+
+            <!-- MEDIA FRAME -->
+            <div class="phone-media-container" id="modalMediaContainer">
+              <img src="assets/ig_edu_precision_fertigation.jpg" alt="Preview Media" id="modalMediaImg">
+            </div>
+
+            <!-- ACTION BAR -->
+            <div class="phone-actions-row">
+              <div class="phone-actions-left">
+                <i class="ri-heart-line"></i>
+                <i class="ri-chat-3-line"></i>
+                <i class="ri-send-plane-line"></i>
+              </div>
+              <i class="ri-bookmark-line"></i>
+            </div>
+
+            <!-- CAPTION AREA -->
+            <div class="phone-caption-area" style="max-height:160px;">
+              <strong>cvagrotechnology</strong> <span id="modalCaptionText">Memuat caption...</span>
+            </div>
+          </div>
+
+          <div style="margin-top:0.75rem; display:flex; flex-direction:column; gap:0.4rem; max-width:340px; margin-left:auto; margin-right:auto;">
+            <button class="btn btn-secondary" style="width:100%; font-size:0.78rem; border-color:rgba(16,185,129,0.5); color:#10B981; background:rgba(16,185,129,0.08); font-weight:700;" onclick="rotateModalPhotoVisual()">
+              <i class="ri-camera-3-line"></i> Ganti Foto Visual Lain (Acak dari 12 Foto 8K)
+            </button>
+            <button class="btn btn-secondary" style="width:100%; font-size:0.75rem; border-color:rgba(245,158,11,0.4); color:#F59E0B; background:rgba(245,158,11,0.05);" onclick="regenerateCurrentModalImage()">
+              <i class="ri-palette-line"></i> Buat Versi Banner Teks Grafis
+            </button>
+          </div>
+        </div>
+
+        <!-- KOLOM KANAN: QUALITY GATE CHECKLIST & INLINE EDITOR -->
+        <div style="display:flex; flex-direction:column; gap:1.25rem;">
+          
+          <!-- CHECKLIST PENGECEKAN KUALITAS -->
+          <div class="preflight-checklist">
+            <div style="font-weight:700; font-size:0.85rem; color:#fff; display:flex; align-items:center; gap:0.4rem; margin-bottom:0.25rem;">
+              <i class="ri-checkbox-circle-line" style="color:var(--primary);"></i> Pre-Flight Quality Gate
+            </div>
+
+            <div class="preflight-check-item ok">
+              <span><i class="ri-check-line"></i> Kesiapan Visual Media</span>
+              <strong style="color:var(--primary); font-size:0.75rem;" id="checkVisualStatus">HTTPS Publik Aktif</strong>
+            </div>
+            <div class="preflight-check-item ok">
+              <span><i class="ri-check-line"></i> Batas Karakter Caption</span>
+              <span id="checkCharCount" style="font-weight:700; color:#38BDF8;">320 / 2.200</span>
+            </div>
+            <div class="preflight-check-item ok">
+              <span><i class="ri-check-line"></i> Kelengkapan Hashtag Target</span>
+              <span id="checkTagCount" style="font-weight:700; color:#F59E0B;">8 Hashtag</span>
+            </div>
+            <div class="preflight-check-item ok">
+              <span><i class="ri-check-line"></i> Target Akun Publikasi</span>
+              <strong style="color:#fff;">@cvagrotechnology</strong>
+            </div>
+          </div>
+
+          <!-- FAST INLINE EDITOR -->
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <label class="form-label" style="margin:0;">Edit Caption Langsung (Live Update ke Layar HP)</label>
+              <span style="font-size:0.75rem; color:var(--text-dim);">Dapat disesuaikan sebelum posting</span>
+            </div>
+            <textarea id="modalCaptionEdit" class="form-control" rows="6" style="font-size:0.85rem; line-height:1.5;" oninput="onModalCaptionInput(this.value)"></textarea>
+          </div>
+
+          <!-- GANTI GAMBAR DENGAN 1-KLIK -->
+          <div>
+            <label class="form-label" style="margin-bottom:0.4rem;">Ganti Visual Gambar Rekomendasi</label>
+            <div class="asset-picker-grid" style="max-height:80px;" id="modalAssetPicker">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- ACTION BUTTONS -->
+          <div style="display:flex; gap:0.75rem; padding-top:0.5rem; border-top:1px solid var(--dark-border);">
+            <button class="btn btn-primary" style="flex:1.4; background:linear-gradient(135deg, #10B981, #059669); font-weight:800; padding:0.85rem; font-size:0.95rem;" onclick="publishDirectFromModal()">
+              <i class="ri-send-plane-fill"></i> Terbitkan Sekarang ke Instagram
+            </button>
+            <button class="btn btn-secondary" style="flex:1;" onclick="scheduleFromModal()">
+              <i class="ri-calendar-check-line"></i> Jadwalkan ke Antrean
+            </button>
+            <button class="btn btn-secondary" style="color:var(--text-dim);" onclick="closePreFlightModal()">
+              Batal
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-popup" id="toastPopup">
+    <i class="ri-checkbox-circle-fill"></i>
+    <span id="toastMsg">Aksi berhasil dilakukan!</span>
+  </div>
+
+  <script src="ig-manager.js"></script>
+</body>
+</html>
