@@ -36,6 +36,8 @@ PUBLIC_ASSET_MAP = {
     "assets/ig_soil_probe_iot.jpg": "https://files.catbox.moe/hvrcfg.jpg",
     "assets/ig_agronomist_lab.jpg": "https://files.catbox.moe/ggv10t.jpg",
     "assets/ig_aerial_ndvi_farm.jpg": "https://files.catbox.moe/no8k21.jpg",
+    "assets/ig_edukasi_iot_laptop.jpg": "https://files.catbox.moe/wznkp3.jpg",
+    "assets/ig_edukasi_digitalisasi_kebun.jpg": "https://files.catbox.moe/blkicc.jpg",
 }
 
 class AgroPostHandler(http.server.SimpleHTTPRequestHandler):
@@ -226,10 +228,29 @@ def run():
     # Change dir to script directory
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     socketserver.TCPServer.allow_reuse_address = True
-    with socketserver.TCPServer(("", PORT), AgroPostHandler) as httpd:
+    
+    ports_to_try = [int(os.environ.get("PORT", 8080)), 8000, 8088]
+    # Remove duplicates while preserving order
+    ports_to_try = list(dict.fromkeys(ports_to_try))
+    
+    httpd = None
+    active_port = None
+    for p in ports_to_try:
+        try:
+            httpd = socketserver.TCPServer(("", p), AgroPostHandler)
+            active_port = p
+            break
+        except OSError:
+            continue
+            
+    if not httpd:
+        print("[!] Gagal menjalankan server: Semua port percobaan sedang digunakan.")
+        return
+
+    with httpd:
         print("=" * 60)
-        print(f" AgroPost Bridge Server Aktif di: http://localhost:{PORT}")
-        print(f" Buka URL: http://localhost:{PORT}/ig-manager.html")
+        print(f" AgroPost Bridge Server Aktif di: http://localhost:{active_port}")
+        print(f" Buka URL: http://localhost:{active_port}/ig-manager.html")
         print("=" * 60)
         httpd.serve_forever()
 

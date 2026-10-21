@@ -19,7 +19,9 @@ PUBLIC_ASSET_MAP = {
     "assets/ig_aerial_ndvi_farm.jpg": "https://files.catbox.moe/no8k21.jpg",
     "assets/cv_agrotech_corp_logo1.jpg": "https://files.catbox.moe/l6km1s.jpg",
     "assets/cv_agrotech_corp_logo2.jpg": "https://files.catbox.moe/blkicc.jpg",
-    "assets/cv_agrotech_corp_logo3.jpg": "https://files.catbox.moe/8fahla.jpg"
+    "assets/cv_agrotech_corp_logo3.jpg": "https://files.catbox.moe/8fahla.jpg",
+    "assets/ig_edukasi_iot_laptop.jpg": "https://files.catbox.moe/wznkp3.jpg",
+    "assets/ig_edukasi_digitalisasi_kebun.jpg": "https://files.catbox.moe/blkicc.jpg"
 }
 
 class handler(BaseHTTPRequestHandler):

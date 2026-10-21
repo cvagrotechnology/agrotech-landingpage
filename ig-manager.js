@@ -16,10 +16,73 @@ const DEFAULT_ASSETS = [
   { id: 'a2', name: 'Carousel 5 Tanda 1:1', path: 'assets/ig_edu_carousel_1.jpg', onlineUrl: 'https://files.catbox.moe/j84sma.jpg', format: 'feed' },
   { id: 'a1', name: 'Reels Promo 9:16', path: 'assets/ig_reels_promo_1.jpg', onlineUrl: 'https://files.catbox.moe/wznkp3.jpg', format: 'reels' },
   { id: 'a5', name: 'Logo Circuit Leaf', path: 'assets/ig_profile_logo_1.jpg', onlineUrl: 'https://files.catbox.moe/l6km1s.jpg', format: 'feed' },
+  { id: 'a13', name: 'Poster Edukasi IoT & Smart Farm', path: 'assets/ig_edukasi_iot_laptop.jpg', onlineUrl: 'https://files.catbox.moe/wznkp3.jpg', format: 'feed' },
+  { id: 'a14', name: 'Poster Digitalisasi Kebun ERP', path: 'assets/ig_edukasi_digitalisasi_kebun.jpg', onlineUrl: 'https://files.catbox.moe/blkicc.jpg', format: 'feed' },
 ];
 
 // DEFAULT SEED POSTS
 const INITIAL_POSTS = [
+  {
+    id: 'post-edu-1',
+    topic: '5 Cara Cerdas Kelola Kebun dengan Teknologi IoT',
+    category: 'edu',
+    format: 'feed',
+    mediaUrl: 'assets/ig_edukasi_iot_laptop.jpg',
+    caption: `🌱 Bertani Lebih Efisien dengan Teknologi IoT!
+
+Pertanian terus berkembang, dan teknologi hadir untuk membantu pekerjaan jadi lebih mudah, cepat, dan terukur. Mulai dari pemantauan kondisi lahan secara real-time, pengelolaan data nutrisi tanah, hingga otomatisasi irigasi yang mendukung produktivitas kebun secara maksimal. 💻🌾
+
+Kenapa kebun modern beralih ke Agrotech?
+✅ 1. Sensor Tanah Real-Time: Pantau kelembaban, pH, & NPK tanah otomatis dari smartphone.
+✅ 2. Kontrol Irigasi Otomatis: Siram tanaman tepat dosis saat dibutuhkan, hemat air & pupuk hingga 35%.
+✅ 3. Deteksi Dini Hama & Cuaca: Mitigasi risiko penyakit tanaman sebelum terlambat.
+✅ 4. Laporan Panen Terintegrasi: Catatan tonase dan riwayat blok kebun tersimpan rapi di cloud.
+
+Saatnya bawa bisnis dan pertanianmu ke level berikutnya bersama CV Agrotech! 🚜✨
+
+📲 WhatsApp Konsultasi:
+• Amanda: +62 857-1385-0615
+• Hardadi: +62 813-1307-8216
+✉️ Email: cvagrotechnology1026@gmail.com
+🌐 Website: agrotech.id
+
+Yuk, wujudkan pertanian yang lebih efisien dan modern bersama Agrotech! 🌿
+
+---
+#CVAgrotech #Agrotech #SmartFarming #IoTPertanian #PertanianModern #TeknologiPertanian #PetaniMaju #DigitalisasiPertanian #SensorTanah #FertigasiPresisi`,
+    date: '2026-10-22',
+    time: '08:00',
+    status: 'scheduled'
+  },
+  {
+    id: 'post-edu-2',
+    topic: 'Digitalisasi Kebun: Dari Manual ke Otomatis',
+    category: 'edu',
+    format: 'feed',
+    mediaUrl: 'assets/ig_edukasi_digitalisasi_kebun.jpg',
+    caption: `Saatnya bisnis perkebunan Anda bertransformasi ke era digital! 🚜💻
+
+Masih mencatat tonase panen, jadwal mandor, dan stok pupuk di kertas manual yang rawan terselip? Kini saatnya beralih ke ekosistem digital terintegrasi bersama CV Agrotech! 🌾
+
+✨ Solusi Unggulan Agrotech:
+📊 Sistem ERP Agribisnis: Monitoring puluhan blok lahan dan kalkulasi COGS panen otomatis.
+📡 Monitoring IoT Presisi: Sensor cerdas 24/7 tetap aktif walau di pedalaman tanpa sinyal (Offline-First).
+📱 Aplikasi Web & Mobile: Pantau seluruh aktivitas perkebunan langsung dari layar HP.
+
+Tingkatkan efisiensi kerja tim lapangan dan maksimalkan profitabilitas kebun Anda! 🚀
+
+📲 Konsultasikan kebutuhan sistem kebun Anda:
+• Amanda: +62 857-1385-0615
+• Hardadi: +62 813-1307-8216
+✉️ Email: cvagrotechnology1026@gmail.com
+🌐 Website: agrotech.id
+
+---
+#CVAgrotech #SmartFarmingERP #KelolaKebun #DigitalisasiBisnis #ERPAgribisnis #PertanianIndonesia #SolusiDigital #SmartFarming`,
+    date: '2026-10-24',
+    time: '19:00',
+    status: 'scheduled'
+  },
   {
     id: 'post-1',
     topic: 'Revolusi Pertanian 4.0 bersama Agrotech',
@@ -41,7 +104,7 @@ Kenalin **Agrotech** — Platform Cloud SaaS & IoT Pertanian #1 di Indonesia! �
 Terbukti dipercaya oleh **50+ Perusahaan Agribisnis** & mengelola **10.000+ Hektar Lahan** di seluruh nusantara!
 
 👉 Siap bawa kebun Anda ke era modern?
-Kunjungi link di BIO @agrotech.id atau DM kami untuk **Request Live Demo GRATIS**! 🚀
+Hubungi WhatsApp konsultan kami: Amanda (0857-1385-0615) / Hardadi (0813-1307-8216) atau kunjungi link di bio @cvagrotechnology! 🚀
 
 ---
 #Agrotech #SmartFarming #PertanianModern #Pertanian40 #IoTPertanian #AgriTechIndonesia #PetaniMaju #SaaSPertanian #InovasiTani`,
@@ -73,7 +136,7 @@ Gunakan **Agrotech IoT & Cloud ERP**:
 
 Save postingan ini biar gak lupa, dan share ke pengelola kebun atau rekan petani lainnya! 🌾
 
-👉 Mau konsultasi kebutuhan kebunmu? Hubungi link di bio @agrotech.id
+👉 Mau konsultasi kebutuhan kebunmu? Hubungi WhatsApp Amanda (0857-1385-0615) / Hardadi (0813-1307-8216) atau klik link di bio @cvagrotechnology!
 
 ---
 #Agrotech #TipsPertanian #SmartFarming #EdukasiPertanian #PetaniIndonesia #Agritechnology #PertanianPresisi #ManajemenKebun #Agribisnis`,
@@ -130,7 +193,7 @@ Keuntungan bagi pemilik kebun & korporasi:
 💰 Melindungi potensi kerugian gagal panen sejak dini.
 
 Tertarik melihat hasil scan satelit untuk lahan kebun Anda?
-Jadwalkan konsultasi gratis di **agrotech.id** atau klik link di bio kami! 🌿
+Jadwalkan konsultasi gratis via WhatsApp Amanda (0857-1385-0615) / Hardadi (0813-1307-8216) atau klik link di bio kami! 🌿
 
 ---
 #Agrotech #NDVI #SatelitPertanian #DronePertanian #RemoteSensing #PrecisionFarming #AgribisnisIndonesia #SmartFarming`,
@@ -158,7 +221,7 @@ Terbukti membantu **50+ Perusahaan** dan **10.000+ Hektar Lahan** bertani lebih 
 
 Punya keluhan manajemen kebun? Coba diskusikan di kolom komentar! 👇
 
-📩 Request Live Demo Gratis via link di bio @agrotech.id
+📩 Request Live Demo Gratis via WhatsApp Amanda (0857-1385-0615) / Hardadi (0813-1307-8216)!
 
 ---
 #Agrotech #SmartFarmingERP #KelolaKebun #Agribisnis #TeknologiPertanian #CloudSaaS #ERPIndonesia #SolusiKebun`,
@@ -188,7 +251,7 @@ Perkirakan hasil panen dengan presisi tinggi buat patok harga terbaik ke pembeli
 Yuk, bertransisi ke Pertanian 4.0 bersama Agrotech! 🚀
 
 💬 Save postingan ini biar gak lupa, & share ke temen pengelola kebun lainnya ya!
-👉 Request Demo Gratis link di BIO @agrotech.id
+👉 Hubungi WhatsApp Amanda (0857-1385-0615) / Hardadi (0813-1307-8216) untuk Request Demo Gratis!
 
 ---
 #Agrotech #SmartFarming #PertanianModern #PetaniMaju #AgriTech #Pertanian40 #IoTPertanian #AgribisnisIndonesia #TipsPertanian`,
@@ -238,6 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAllTables();
   renderCalendar();
   updateLivePreview();
+  startAutoSchedulerWatcher();
 });
 
 // 1. STORAGE MANAGEMENT
@@ -246,6 +310,23 @@ function loadPostsFromStorage() {
   if (stored) {
     try {
       postsData = JSON.parse(stored);
+      // Migrasi update contact person pada seed posts jika masih format lama
+      postsData.forEach(p => {
+        if (p.caption && (p.caption.includes('@agrotech.id') || p.caption.includes('6281234567890'))) {
+          p.caption = p.caption
+            .replace(/link di BIO @agrotech\.id/gi, 'WhatsApp Amanda (0857-1385-0615) / Hardadi (0813-1307-8216)')
+            .replace(/link di bio @agrotech\.id/gi, 'WhatsApp Amanda (0857-1385-0615) / Hardadi (0813-1307-8216)')
+            .replace(/agrotech\.id/gi, 'cvagrotechnology');
+        }
+      });
+
+      // Pastikan postingan edukasi baru ada di daftar
+      INITIAL_POSTS.forEach(initPost => {
+        if (!postsData.some(p => p.id === initPost.id)) {
+          postsData.unshift(initPost);
+        }
+      });
+      savePostsToStorage();
     } catch (e) {
       postsData = [...INITIAL_POSTS];
     }
@@ -758,7 +839,7 @@ function saveApiCredentials() {
 
 function getBridgeApiUrl(endpoint) {
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    return `http://localhost:8000${endpoint}`;
+    return `${window.location.origin}${endpoint}`;
   }
   return endpoint;
 }
@@ -891,6 +972,11 @@ async function attemptMetaGraphPublish(post) {
     const bridgeData = await bridgeRes.json();
     if (bridgeData.success) {
       const postId = bridgeData.data.id || 'LIVE';
+      post.status = 'published';
+      post.metaPostId = postId;
+      savePostsToStorage();
+      renderAllTables();
+      renderCalendar();
       alert(`🎉 SELAMAT! POSTINGAN BERHASIL TAYANG DI INSTAGRAM!\n\nPost ID Meta: ${postId}\nAkun: @cvagrotechnology\n\nSilakan refresh profil Instagram Anda untuk melihat hasilnya.`);
       showToast(`🚀 SUKSES! Postingan telah terbit di @cvagrotechnology!`);
       return;
@@ -961,13 +1047,58 @@ async function attemptMetaGraphPublish(post) {
       console.error('[Meta API Publish Error]', data2.error);
       alert(`[Meta API Error saat Publish]\n${data2.error.message} (Kode: ${data2.error.code})`);
     } else {
+      post.status = 'published';
+      post.metaPostId = data2.id;
+      savePostsToStorage();
+      renderAllTables();
+      renderCalendar();
       alert(`🎉 SELAMAT! POSTINGAN BERHASIL TAYANG DI INSTAGRAM!\n\nPost ID Meta: ${data2.id}\nAkun: @cvagrotechnology\n\nSilakan refresh profil Instagram Anda.`);
       showToast(`🚀 SUKSES! Postingan telah terbit di @cvagrotechnology! (ID: ${data2.id})`);
     }
   } catch (err) {
     console.error('Fetch error:', err);
-    alert(`[Info Keamanan Browser (CORS)]\nBrowser membatasi panggilan HTTP langsung ke server pihak ketiga (Meta).\n\n✅ SOLUSI:\nBuka aplikasi melalui server lokal yang sudah aktif:\n👉 http://localhost:8000/ig-manager.html`);
+    alert(`[Info Keamanan Browser (CORS)]\nBrowser membatasi panggilan HTTP langsung ke server pihak ketiga (Meta).\n\n✅ SOLUSI:\nBuka aplikasi melalui server lokal yang sudah aktif:\n👉 http://localhost:8080/ig-manager.html`);
   }
+}
+
+// 13. BACKGROUND AUTO-SCHEDULER ENGINE
+let autoSchedulerInterval = null;
+let isPublishingQueue = false;
+
+function startAutoSchedulerWatcher() {
+  if (autoSchedulerInterval) clearInterval(autoSchedulerInterval);
+  
+  // Periksa jadwal setiap 30 detik
+  autoSchedulerInterval = setInterval(async () => {
+    if (isPublishingQueue) return;
+    
+    const token = localStorage.getItem('agropost_access_token');
+    if (!token || token.length < 20 || token.includes('SAMPLE_TOKEN')) return;
+    
+    const now = new Date();
+    
+    // Cari postingan dengan status 'scheduled' yang waktunya telah tiba
+    const duePosts = postsData.filter(p => {
+      if (p.status !== 'scheduled' || !p.date) return false;
+      const scheduledDateTime = new Date(`${p.date}T${p.time || '08:00'}:00`);
+      return scheduledDateTime <= now;
+    });
+
+    if (duePosts.length > 0) {
+      isPublishingQueue = true;
+      const target = duePosts[0];
+      console.log(`[Auto-Publisher] Waktu tayang tiba untuk: "${target.topic}". Mempublikasikan otomatis...`);
+      showToast(`⏰ [Auto-Publish] Mempublikasikan jadwal: "${target.topic}"...`);
+      
+      try {
+        await attemptMetaGraphPublish(target);
+      } catch (e) {
+        console.error('[Auto-Publish Error]', e);
+      } finally {
+        isPublishingQueue = false;
+      }
+    }
+  }, 30000);
 }
 
 // 12. UTILITY TOAST & COPY
@@ -1142,9 +1273,9 @@ const AI_CONTENT_DATABASE = {
 };
 
 const CTA_OPTIONS = {
-  wa: '👉 Hubungi tim ahli kami via WhatsApp untuk konsultasi gratis sistem kebunmu: klik link di bio @cvagrotechnology!',
+  wa: '👉 Hubungi WhatsApp konsultan kami: Amanda (0857-1385-0615) / Hardadi (0813-1307-8216) atau klik link di bio @cvagrotechnology!',
   bio: '🔗 Pelajari fitur lengkap & dapatkan promo spesial di website resmi kami: klik link di bio @cvagrotechnology!',
-  demo: '🚜 Mau coba demo langsung di kebunmu? Hubungi WhatsApp kami sekarang untuk penjadwalan demo gratis!',
+  demo: '🚜 Mau coba demo langsung di kebunmu? Hubungi WhatsApp Amanda (0857-1385-0615) atau Hardadi (0813-1307-8216) untuk penjadwalan demo gratis!',
   comment: '💬 Tuliskan tantangan terbesar di kebunmu saat ini di kolom komentar, mari berdiskusi bersama!'
 };
 
@@ -1345,12 +1476,12 @@ function createSynthesizedBanner(hookTitle, subtitle, themeIndex, pillarKey) {
   ctx.fillRect(0, 970, 1080, 110);
 
   ctx.fillStyle = t.accent;
-  ctx.font = 'bold 30px sans-serif';
+  ctx.font = 'bold 28px sans-serif';
   ctx.fillText('@cvagrotechnology', 80, 1038);
 
   ctx.fillStyle = '#94A3B8';
-  ctx.font = '22px sans-serif';
-  ctx.fillText('Platform Cloud SaaS & IoT Pertanian Indonesia', 520, 1038);
+  ctx.font = '20px sans-serif';
+  ctx.fillText('WA: Amanda 0857-1385-0615 | Hardadi 0813-1307-8216', 420, 1038);
 
   return canvas.toDataURL('image/jpeg', 0.94);
 }
@@ -1680,8 +1811,8 @@ function generateCanvasGraphic(idx) {
   ctx.fillText('@cvagrotechnology', 90, 1035);
 
   ctx.fillStyle = '#94A3B8';
-  ctx.font = '22px sans-serif';
-  ctx.fillText('Sistem Cloud & IoT Pertanian Indonesia', 560, 1035);
+  ctx.font = '20px sans-serif';
+  ctx.fillText('WA: Amanda 0857-1385-0615 | Hardadi 0813-1307-8216', 430, 1035);
 
   // Convert to Data URL and set to variation
   const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
