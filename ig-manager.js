@@ -1295,13 +1295,27 @@ function onPillarSelectChange() {
 function selectGenAsset(assetId, element) {
   selectedGenAssetId = assetId;
   const picker = document.getElementById('genAssetPicker');
-  if (!picker) return;
-  picker.querySelectorAll('.asset-thumb').forEach(el => {
-    el.classList.remove('selected');
-    if (el.getAttribute('data-asset') === assetId) {
-      el.classList.add('selected');
+  if (picker) {
+    picker.querySelectorAll('.asset-thumb').forEach(el => {
+      el.classList.remove('selected');
+      if (el.getAttribute('data-asset') === assetId) {
+        el.classList.add('selected');
+      }
+    });
+  }
+
+  const asset = DEFAULT_ASSETS.find(a => a.id === assetId);
+  if (asset) {
+    if (generatedVariations && generatedVariations.length > 0) {
+      generatedVariations[0].localMedia = asset.path;
+      generatedVariations[0].mediaUrl = asset.onlineUrl || asset.path;
+      generatedVariations[0].assetName = `📸 ${asset.name}`;
+      renderGenResults();
+      showToast(`📸 Gambar Rekomendasi #1 langsung diganti ke: ${asset.name}!`);
+    } else {
+      showToast(`📸 Foto terpilih: ${asset.name}. Klik "Generate" untuk memuat.`);
     }
-  });
+  }
 }
 
 let currentVisualGenMode = 'auto'; // 'auto' (foto visual 8k) or 'banner' (grafis tipografi)
@@ -1324,7 +1338,7 @@ function setVisualGenMode(mode) {
       const d = btnBanner.querySelector('div');
       if (d) d.style.color = 'var(--text-muted)';
     }
-    showToast('📸 Mode Visual: Foto Visual Nyata 8K (Beda-beda otomatis)!');
+    showToast('📸 Mode Visual: Foto Visual Nyata 8K aktif!');
   } else {
     if (btnBanner) {
       btnBanner.style.border = '2px solid #F59E0B';
@@ -1338,8 +1352,11 @@ function setVisualGenMode(mode) {
       const d = btnAuto.querySelector('div');
       if (d) d.style.color = 'var(--text-muted)';
     }
-    showToast('🎨 Mode Visual: Banner Teks Tipografi.');
+    showToast('🎨 Mode Visual: Banner Teks Tipografi aktif!');
   }
+
+  // Langsung terapkan perubahan gambar seketika
+  triggerAiGeneration();
 }
 
 // CANVAS BANNER SYNTHESIZER (Menghasilkan gambar beresolusi 1080x1080 unik)
@@ -1525,7 +1542,13 @@ function triggerAiGeneration() {
     [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
   }
 
-  const selectedAssetIds = candidates.slice(0, 3);
+  let selectedAssetIds;
+  if (selectedGenAssetId) {
+    const remaining = candidates.filter(id => id !== selectedGenAssetId);
+    selectedAssetIds = [selectedGenAssetId, ...remaining.slice(0, 2)];
+  } else {
+    selectedAssetIds = candidates.slice(0, 3);
+  }
   lastUsedAssetIds = selectedAssetIds; // simpan riwayat agar tidak sama di klik berikutnya
 
   const asset1 = DEFAULT_ASSETS.find(a => a.id === selectedAssetIds[0]) || DEFAULT_ASSETS[0];
@@ -1677,8 +1700,10 @@ function renderGenResults() {
         <img src="${v.localMedia}" alt="Media" style="box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
         <div style="flex:1;">
           <div class="variation-hook">${v.caption.split('\n')[0]}</div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.35rem;">
-            <span style="font-size:0.7rem; color:var(--primary); font-weight:600;">Gambar Berbeda #${idx + 1}</span>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.35rem; gap:0.4rem;">
+            <button class="btn btn-secondary" style="padding:0.2rem 0.5rem; font-size:0.7rem; border-color:rgba(56, 189, 248, 0.4); color:#38BDF8;" onclick="rotateVariationPhoto(${idx})" title="Ganti ke foto lain">
+              <i class="ri-refresh-line"></i> Ganti Foto
+            </button>
             <button class="btn btn-secondary" style="padding:0.2rem 0.5rem; font-size:0.7rem; border-color:rgba(245, 158, 11, 0.4); color:#F59E0B;" onclick="generateCanvasGraphic(${idx})" title="Buat banner teks grafis otomatis">
               <i class="ri-palette-line"></i> Buat Banner Teks
             </button>
@@ -1701,6 +1726,20 @@ function renderGenResults() {
     `;
     container.appendChild(card);
   });
+}
+
+function rotateVariationPhoto(idx) {
+  if (!generatedVariations[idx]) return;
+  const currentPath = generatedVariations[idx].localMedia;
+  const currentIdx = DEFAULT_ASSETS.findIndex(a => a.path === currentPath);
+  const nextIdx = (currentIdx + 1) % DEFAULT_ASSETS.length;
+  const nextAsset = DEFAULT_ASSETS[nextIdx];
+
+  generatedVariations[idx].localMedia = nextAsset.path;
+  generatedVariations[idx].mediaUrl = nextAsset.onlineUrl || nextAsset.path;
+  generatedVariations[idx].assetName = `📸 ${nextAsset.name}`;
+  renderGenResults();
+  showToast(`📸 Gambar variasi #${idx + 1} langsung diganti ke: ${nextAsset.name}!`);
 }
 
 // AUTOMATED CANVAS BANNER SYNTHESIZER
