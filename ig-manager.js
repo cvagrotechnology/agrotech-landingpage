@@ -1376,8 +1376,59 @@ function selectThemeStyle(idx) {
       }
     }
   }
-  showToast(`🎨 Gaya Visual: ${idx === 0 ? 'Emerald IoT' : idx === 1 ? 'Sky Satellite' : 'Golden Yield'} dipilih!`);
-  triggerAiGeneration();
+  const themeNames = ['🌿 Cyber Emerald', '🛰️ Sky Satellite', '🏆 Golden Harvest'];
+  showToast(`🎨 Gaya Visual: ${themeNames[idx] || 'Custom'} dipilih!`);
+  generateNewAiImageOnly();
+}
+
+// FUNGSI KHUSUS GENERATE GAMBAR POSTER BARU (100% SINTESIS AI, BUKAN DARI STOK)
+function generateNewAiImageOnly() {
+  const pillarKey = document.getElementById('genPillar')?.value || 'iot_sensor';
+  const customTopic = document.getElementById('genCustomTopic')?.value?.trim();
+  const baseContent = CONTENT_PILLARS[pillarKey] || CONTENT_PILLARS['iot_sensor'];
+
+  let activeHook = '';
+  if (customTopic) {
+    activeHook = customTopic.toUpperCase();
+  } else if (baseContent && baseContent.hooks && baseContent.hooks.length > 0) {
+    const randomHookIdx = Math.floor(Math.random() * baseContent.hooks.length);
+    activeHook = baseContent.hooks[randomHookIdx];
+  } else {
+    activeHook = 'SMART FARMING & AGRO-TEKNOLOGI 4.0';
+  }
+
+  // Buat poster banner baru 1080x1080 beresolusi tinggi secara visual
+  const newBannerDataUrl = createSynthesizedBanner(activeHook, '', selectedThemeStyleIdx, pillarKey);
+  window.lastGeneratedCustomImage = newBannerDataUrl;
+
+  // Tampilkan langsung di wadah pratinjau studio
+  const previewImg = document.getElementById('liveGeneratedImagePreview');
+  const placeholder = document.getElementById('liveImagePlaceholder');
+  if (previewImg) {
+    previewImg.src = newBannerDataUrl;
+    previewImg.style.display = 'block';
+  }
+  if (placeholder) {
+    placeholder.style.display = 'none';
+  }
+
+  // Update badge status
+  const badge = document.getElementById('activePosterStyleBadge');
+  if (badge) {
+    badge.innerText = '✨ Gambar Poster Baru Aktif';
+    badge.style.background = '#10B981';
+    badge.style.color = '#041008';
+  }
+
+  // Jika kartu hasil variasi sudah pernah di-generate, perbarui kartu pertama seketika
+  if (typeof generatedVariations !== 'undefined' && generatedVariations && generatedVariations.length > 0) {
+    generatedVariations[0].localMedia = newBannerDataUrl;
+    generatedVariations[0].mediaUrl = newBannerDataUrl;
+    generatedVariations[0].assetName = `✨ Poster AI Baru (Gaya #${selectedThemeStyleIdx + 1})`;
+    renderGenResults();
+  }
+
+  showToast('✨ Gambar poster baru (1080x1080) berhasil diracik khusus!');
 }
 
 // CANVAS BANNER SYNTHESIZER (Menghasilkan gambar beresolusi 1080x1080 unik)
@@ -1387,7 +1438,7 @@ function createSynthesizedBanner(hookTitle, subtitle, themeIndex, pillarKey) {
   canvas.height = 1080;
   const ctx = canvas.getContext('2d');
 
-  // 3 Palet Tema Visual Berbeda:
+  // 6 Palet Tema Visual Berbeda (Kaya Nuansa Cyber-Agro & Modern Precision)
   const themes = [
     {
       bg1: '#041510', bg2: '#062B20', bg3: '#0A4333',
@@ -1406,6 +1457,24 @@ function createSynthesizedBanner(hookTitle, subtitle, themeIndex, pillarKey) {
       accent: '#F59E0B', secondary: '#10B981', badgeBg: '#F59E0B', badgeText: '#140D04',
       badgeLabel: '🏆 HASIL PANEN MAKSIMAL', stat: 'PRODUKTIVITAS YIELD +28%',
       p1: '✔ Dosis Nutrisi NPK Terukur Presisi', p2: '✔ Rekap Panen Cloud Otomatis', p3: '✔ Standar Agribisnis Modern'
+    },
+    {
+      bg1: '#110726', bg2: '#1D0E3F', bg3: '#2D165E',
+      accent: '#C084FC', secondary: '#38BDF8', badgeBg: '#C084FC', badgeText: '#110726',
+      badgeLabel: '🧪 BIO-TECH & NUTRISI', stat: 'AKURASI FORMULA 99.8%',
+      p1: '✔ Analisis Lab Tanah Otomatis', p2: '✔ Rekomendasi Takaran Pupuk Spesifik', p3: '✔ Tanah Sehat & Ramah Lingkungan'
+    },
+    {
+      bg1: '#041C24', bg2: '#083344', bg3: '#0E4E63',
+      accent: '#2DD4BF', secondary: '#F59E0B', badgeBg: '#2DD4BF', badgeText: '#041C24',
+      badgeLabel: '💧 IRIGASI TETES PRESISI', stat: 'HEMAT AIR HINGGA 50%',
+      p1: '✔ Katup Solenoid Otomatisasi Jadwal', p2: '✔ Sensor Kelembaban Akurat Per Blok', p3: '✔ Air Mengalir Tepat Saat Dibutuhkan'
+    },
+    {
+      bg1: '#0B1120', bg2: '#1E293B', bg3: '#334155',
+      accent: '#60A5FA', secondary: '#34D399', badgeBg: '#60A5FA', badgeText: '#0B1120',
+      badgeLabel: '📊 AGRO ERP & PEMBUKUAN', stat: 'TRANSPARANSI KEUANGAN 100%',
+      p1: '✔ Catatan HPP & Biaya Pekerja Digital', p2: '✔ Akses Multi-Kebun Lintas Daerah', p3: '✔ Laporan Laba Rugi Sekali Klik'
     }
   ];
 
@@ -1620,33 +1689,43 @@ function triggerAiGeneration() {
   const variation2Body = baseContent.bodies['storytelling'] || chosenBody;
   const variation3Body = baseContent.bodies['innovative'] || baseContent.bodies['professional'] || chosenBody;
 
-  // Tentukan visual untuk setiap variasi: Foto Visual Lapangan 8K vs Banner Tipografi
+  // Tentukan visual untuk setiap variasi: 100% POSTER GRAFIS SINTESIS FRESH (BUKAN DARI STOK)
   let media1, media2, media3;
   let mediaUrl1, mediaUrl2, mediaUrl3;
   let assetName1, assetName2, assetName3;
 
-  if (currentVisualGenMode === 'auto') {
-    // 100% FOTO VISUAL LAPANGAN 8K REALISTIS (Beda-beda otomatis tiap variasi & tiap klik generate)
-    media1 = asset1.path;
-    media2 = asset2.path;
-    media3 = asset3.path;
-    mediaUrl1 = asset1.onlineUrl;
-    mediaUrl2 = asset2.onlineUrl;
-    mediaUrl3 = asset3.onlineUrl;
-    assetName1 = `📸 ${asset1.name}`;
-    assetName2 = `📸 ${asset2.name}`;
-    assetName3 = `📸 ${asset3.name}`;
-  } else {
-    // Banner Grafis Tipografi
-    media1 = createSynthesizedBanner(hook1, '', 0, pillarKey);
-    media2 = createSynthesizedBanner(hook2, '', 1, pillarKey);
-    media3 = createSynthesizedBanner(hook3, '', 2, pillarKey);
-    mediaUrl1 = asset1.onlineUrl;
-    mediaUrl2 = asset2.onlineUrl;
-    mediaUrl3 = asset3.onlineUrl;
-    assetName1 = '🎨 Banner Teks Cyber Emerald';
-    assetName2 = '🎨 Banner Teks Midnight Drone';
-    assetName3 = '🎨 Banner Teks Golden Harvest';
+  const themeA = selectedThemeStyleIdx;
+  const themeB = (selectedThemeStyleIdx + 1) % 6;
+  const themeC = (selectedThemeStyleIdx + 2) % 6;
+
+  // Jika pengguna sudah klik tombol khusus generate poster, pakai gambar tersebut untuk variasi #1
+  media1 = window.lastGeneratedCustomImage || createSynthesizedBanner(hook1, '', themeA, pillarKey);
+  media2 = createSynthesizedBanner(hook2, '', themeB, pillarKey);
+  media3 = createSynthesizedBanner(hook3, '', themeC, pillarKey);
+
+  mediaUrl1 = media1;
+  mediaUrl2 = media2;
+  mediaUrl3 = media3;
+
+  assetName1 = `✨ Poster AI Fresh (Tema #${themeA + 1})`;
+  assetName2 = `✨ Poster AI Fresh (Tema #${themeB + 1})`;
+  assetName3 = `✨ Poster AI Fresh (Tema #${themeC + 1})`;
+
+  // Update wadah live preview gambar di atas seketika
+  const livePreviewImg = document.getElementById('liveGeneratedImagePreview');
+  const livePlaceholder = document.getElementById('liveImagePlaceholder');
+  if (livePreviewImg) {
+    livePreviewImg.src = media1;
+    livePreviewImg.style.display = 'block';
+  }
+  if (livePlaceholder) {
+    livePlaceholder.style.display = 'none';
+  }
+  const badge = document.getElementById('activePosterStyleBadge');
+  if (badge) {
+    badge.innerText = '✨ 100% Fresh (Bukan Foto Stok)';
+    badge.style.background = '#10B981';
+    badge.style.color = '#041008';
   }
 
   generatedVariations = [
@@ -1721,12 +1800,9 @@ function renderGenResults() {
         <img src="${v.localMedia}" alt="Media" style="box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
         <div style="flex:1;">
           <div class="variation-hook">${v.caption.split('\n')[0]}</div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.35rem; gap:0.4rem;">
-            <button class="btn btn-secondary" style="padding:0.2rem 0.5rem; font-size:0.7rem; border-color:rgba(56, 189, 248, 0.4); color:#38BDF8;" onclick="rotateVariationPhoto(${idx})" title="Ganti ke foto lain">
-              <i class="ri-refresh-line"></i> Ganti Foto
-            </button>
-            <button class="btn btn-secondary" style="padding:0.2rem 0.5rem; font-size:0.7rem; border-color:rgba(245, 158, 11, 0.4); color:#F59E0B;" onclick="generateCanvasGraphic(${idx})" title="Buat banner teks grafis otomatis">
-              <i class="ri-palette-line"></i> Buat Banner Teks
+          <div style="margin-top:0.4rem;">
+            <button class="btn btn-secondary" style="padding:0.35rem 0.6rem; font-size:0.75rem; border:1px solid #F59E0B; color:#F59E0B; background:rgba(245,158,11,0.12); width:100%; display:flex; align-items:center; justify-content:center; gap:0.4rem; font-weight:700;" onclick="regenerateVariationAiImage(${idx})" title="Generate gambar poster baru khusus untuk variasi ini">
+              <i class="ri-sparkling-fill"></i> ✨ Generate Gambar Baru
             </button>
           </div>
         </div>
@@ -1749,18 +1825,19 @@ function renderGenResults() {
   });
 }
 
-function rotateVariationPhoto(idx) {
+function regenerateVariationAiImage(idx) {
   if (!generatedVariations[idx]) return;
-  const currentPath = generatedVariations[idx].localMedia;
-  const currentIdx = DEFAULT_ASSETS.findIndex(a => a.path === currentPath);
-  const nextIdx = (currentIdx + 1) % DEFAULT_ASSETS.length;
-  const nextAsset = DEFAULT_ASSETS[nextIdx];
+  const v = generatedVariations[idx];
+  const hook = v.caption.split('\n')[0] || v.topic;
+  const nextThemeIdx = Math.floor(Math.random() * 6);
+  const pillarKey = document.getElementById('genPillar')?.value || 'iot_sensor';
+  const newDataUrl = createSynthesizedBanner(hook, '', nextThemeIdx, pillarKey);
 
-  generatedVariations[idx].localMedia = nextAsset.path;
-  generatedVariations[idx].mediaUrl = nextAsset.onlineUrl || nextAsset.path;
-  generatedVariations[idx].assetName = `📸 ${nextAsset.name}`;
+  v.localMedia = newDataUrl;
+  v.mediaUrl = newDataUrl;
+  v.assetName = `✨ Poster AI Baru (Tema #${nextThemeIdx + 1})`;
   renderGenResults();
-  showToast(`📸 Gambar variasi #${idx + 1} langsung diganti ke: ${nextAsset.name}!`);
+  showToast(`✨ Gambar poster baru untuk Variasi #${idx + 1} berhasil dibuat!`);
 }
 
 // AUTOMATED CANVAS BANNER SYNTHESIZER
