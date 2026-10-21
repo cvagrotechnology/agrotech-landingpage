@@ -1835,22 +1835,19 @@ print("Hasil Publikasi:", res_publish)
             <textarea id="modalCaptionEdit" class="form-control" rows="6" style="font-size:0.85rem; line-height:1.5;" oninput="onModalCaptionInput(this.value)"></textarea>
           </div>
 
-          <!-- GANTI GAMBAR DENGAN 1-KLIK -->
+          <!-- GANTI GAMBAR DENGAN 1-KLIK (100% POSTER AI BARU) -->
           <div>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
-              <label class="form-label" style="margin-bottom:0;">Pilihan Visual / Desain Baru</label>
-              <span class="badge" style="background:rgba(245, 158, 11, 0.15); color:#F59E0B; font-size:0.7rem; border:1px solid rgba(245, 158, 11, 0.3);">Desain Grafis Dinamis</span>
+              <label class="form-label" style="margin-bottom:0;">Pilihan Poster AI Fresh (1080x1080)</label>
+              <span class="badge" style="background:#10B981; color:#041008; font-size:0.7rem; font-weight:800;">100% Desain Baru</span>
             </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-bottom:0.6rem;">
-              <button class="btn btn-secondary" style="border:1.5px solid #F59E0B; background:rgba(245,158,11,0.12); color:#F59E0B; font-size:0.75rem; font-weight:700; padding:0.55rem;" onclick="regenerateCurrentModalImage()">
-                <i class="ri-sparkling-fill"></i> ✨ Buat Desain Poster Baru
-              </button>
-              <button class="btn btn-secondary" style="border:1px solid var(--dark-border); font-size:0.75rem; color:#94A3B8; padding:0.55rem;" onclick="rotateModalPhotoVisual()">
-                <i class="ri-camera-3-line"></i> 📸 Pakai Foto Lapangan
+            <div style="margin-bottom:0.6rem;">
+              <button class="btn btn-secondary" style="width:100%; border:1.5px solid #F59E0B; background:rgba(245,158,11,0.15); color:#F59E0B; font-size:0.8rem; font-weight:800; padding:0.65rem; display:flex; align-items:center; justify-content:center; gap:0.4rem;" onclick="regenerateCurrentModalImage()">
+                <i class="ri-sparkling-fill"></i> ✨ Generate Gambar Poster Baru Lainnya
               </button>
             </div>
-            <div class="asset-picker-grid" style="max-height:80px;" id="modalAssetPicker">
-              <!-- Dynamically populated -->
+            <div class="asset-picker-grid" style="max-height:85px;" id="modalAssetPicker">
+              <!-- Dynamically populated with 6 fresh synthesized styles -->
             </div>
           </div>
 
@@ -1880,6 +1877,6 @@ print("Hasil Publikasi:", res_publish)
     <span id="toastMsg">Aksi berhasil dilakukan!</span>
   </div>
 
-  <script src="ig-manager.js?v=20261021_ai_studio_v7"></script>
+  <script src="ig-manager.js?v=20261021_ai_studio_v9"></script>
 </body>
 </html>

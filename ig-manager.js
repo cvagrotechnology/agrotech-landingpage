@@ -2034,13 +2034,16 @@ function renderModalAssetPicker() {
 
   const designOptions = [
     { label: '🌿 Emerald', themeIdx: 0, color: '#10B981' },
-    { label: '🛰️ Sky Blue', themeIdx: 1, color: '#38BDF8' },
-    { label: '🏆 Harvest', themeIdx: 2, color: '#F59E0B' }
+    { label: '🛰️ Satellite', themeIdx: 1, color: '#38BDF8' },
+    { label: '🏆 Harvest', themeIdx: 2, color: '#F59E0B' },
+    { label: '🧪 Bio-Tech', themeIdx: 3, color: '#C084FC' },
+    { label: '💧 Fertigasi', themeIdx: 4, color: '#2DD4BF' },
+    { label: '📊 Agro ERP', themeIdx: 5, color: '#60A5FA' }
   ];
 
   designOptions.forEach((opt, idx) => {
     const thumb = document.createElement('div');
-    const bannerUrl = createSynthesizedBanner(hook, '', opt.themeIdx, 'iot');
+    const bannerUrl = createSynthesizedBanner(hook, '', opt.themeIdx, 'iot_sensor');
     thumb.className = 'asset-thumb';
     thumb.style.height = '64px';
     thumb.style.minWidth = '92px';
@@ -2062,35 +2065,14 @@ function renderModalAssetPicker() {
       const modalMedia = document.getElementById('modalMediaImg');
       if (modalMedia) modalMedia.src = bannerUrl;
       updatePreFlightChecklist();
-      showToast(`🎨 Poster ${opt.label} diterapkan ke pratinjau!`);
+      showToast(`🎨 Poster ${opt.label} diterapkan ke postingan!`);
     };
     picker.appendChild(thumb);
   });
 }
 
-let currentModalPhotoIdx = 0;
 function rotateModalPhotoVisual() {
-  if (!currentPreFlightPost) return;
-  currentModalPhotoIdx = (currentModalPhotoIdx + 1) % DEFAULT_ASSETS.length;
-  const asset = DEFAULT_ASSETS[currentModalPhotoIdx];
-  currentPreFlightPost.localMedia = asset.path;
-  currentPreFlightPost.mediaUrl = asset.onlineUrl;
-  currentPreFlightPost.assetName = `📸 ${asset.name}`;
-
-  const modalMedia = document.getElementById('modalMediaImg');
-  if (modalMedia) modalMedia.src = asset.path;
-
-  const picker = document.getElementById('modalAssetPicker');
-  if (picker) {
-    const thumbs = picker.querySelectorAll('.asset-thumb');
-    thumbs.forEach((t, i) => {
-      if (i === currentModalPhotoIdx) t.classList.add('selected');
-      else t.classList.remove('selected');
-    });
-  }
-
-  updatePreFlightChecklist();
-  showToast(`📸 Foto visual berganti: ${asset.name}`);
+  regenerateCurrentModalImage();
 }
 
 function regenerateCurrentModalImage() {
