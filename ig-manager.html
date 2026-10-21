@@ -1633,17 +1633,17 @@ print("Hasil Publikasi:", res_publish)
               <!-- PILIHAN TIPE VISUAL GAMBAR -->
               <div class="form-group">
                 <label class="form-label" style="display:flex; justify-content:space-between; align-items:center;">
-                  <span><i class="ri-camera-lens-fill" style="color:#10B981;"></i> Tipe Gambar Visual yang Dibuat</span>
-                  <span class="badge" style="background:#10B981; color:#0F172A; font-weight:700;">Foto Visual 8K Aktif</span>
+                  <span><i class="ri-palette-line" style="color:#F59E0B;"></i> Tipe Gambar Visual yang Dibuat</span>
+                  <span class="badge" style="background:#F59E0B; color:#0F172A; font-weight:700;" id="visualModeBadge">✨ Desain Poster AI Aktif</span>
                 </label>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem;">
-                  <div id="btnVisualModeAuto" class="btn btn-secondary" style="border:2px solid #10B981; background:rgba(16,185,129,0.15); color:#fff; text-align:left; padding:0.65rem 0.8rem; cursor:pointer;" onclick="setVisualGenMode('auto')">
-                    <div style="font-weight:700; color:#10B981; font-size:0.82rem;"><i class="ri-camera-3-fill"></i> Foto Visual Lapangan 8K</div>
-                    <div style="font-size:0.68rem; color:var(--text-muted); margin-top:0.2rem;">Foto pemandangan nyata: Traktor, Sensor Tanah, Drone, Agronomis Lab, Panen</div>
+                  <div id="btnVisualModeBanner" class="btn btn-secondary" style="border:2px solid #F59E0B; background:rgba(245,158,11,0.15); color:#fff; text-align:left; padding:0.65rem 0.8rem; cursor:pointer;" onclick="setVisualGenMode('banner')">
+                    <div style="font-weight:700; color:#F59E0B; font-size:0.82rem;"><i class="ri-palette-line"></i> ✨ Desain Poster Grafis AI</div>
+                    <div style="font-size:0.68rem; color:var(--text-muted); margin-top:0.2rem;">Poster grafis baru dengan headline, stat badge & branding @cvagrotechnology</div>
                   </div>
-                  <div id="btnVisualModeBanner" class="btn btn-secondary" style="border:1px solid var(--dark-border); background:var(--dark-surface); color:var(--text-muted); text-align:left; padding:0.65rem 0.8rem; cursor:pointer;" onclick="setVisualGenMode('banner')">
-                    <div style="font-weight:700; font-size:0.82rem;"><i class="ri-palette-line"></i> Banner Teks Tipografi</div>
-                    <div style="font-size:0.68rem; color:var(--text-muted); margin-top:0.2rem;">Poster grafis dengan headline besar & poin teks</div>
+                  <div id="btnVisualModeAuto" class="btn btn-secondary" style="border:1px solid var(--dark-border); background:var(--dark-surface); color:var(--text-muted); text-align:left; padding:0.65rem 0.8rem; cursor:pointer;" onclick="setVisualGenMode('auto')">
+                    <div style="font-weight:700; font-size:0.82rem;"><i class="ri-camera-3-fill"></i> Foto Lapangan 8K</div>
+                    <div style="font-size:0.68rem; color:var(--text-muted); margin-top:0.2rem;">Foto pemandangan nyata: Traktor, Sensor Tanah, Drone, Greenhouse</div>
                   </div>
                 </div>
               </div>
@@ -1858,7 +1858,18 @@ print("Hasil Publikasi:", res_publish)
 
           <!-- GANTI GAMBAR DENGAN 1-KLIK -->
           <div>
-            <label class="form-label" style="margin-bottom:0.4rem;">Ganti Visual Gambar Rekomendasi</label>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <label class="form-label" style="margin-bottom:0;">Pilihan Visual / Desain Baru</label>
+              <span class="badge" style="background:rgba(245, 158, 11, 0.15); color:#F59E0B; font-size:0.7rem; border:1px solid rgba(245, 158, 11, 0.3);">Desain Grafis Dinamis</span>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-bottom:0.6rem;">
+              <button class="btn btn-secondary" style="border:1.5px solid #F59E0B; background:rgba(245,158,11,0.12); color:#F59E0B; font-size:0.75rem; font-weight:700; padding:0.55rem;" onclick="regenerateCurrentModalImage()">
+                <i class="ri-sparkling-fill"></i> ✨ Buat Desain Poster Baru
+              </button>
+              <button class="btn btn-secondary" style="border:1px solid var(--dark-border); font-size:0.75rem; color:#94A3B8; padding:0.55rem;" onclick="rotateModalPhotoVisual()">
+                <i class="ri-camera-3-line"></i> 📸 Pakai Foto Lapangan
+              </button>
+            </div>
             <div class="asset-picker-grid" style="max-height:80px;" id="modalAssetPicker">
               <!-- Dynamically populated -->
             </div>

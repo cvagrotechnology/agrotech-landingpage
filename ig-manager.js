@@ -1318,7 +1318,7 @@ function selectGenAsset(assetId, element) {
   }
 }
 
-let currentVisualGenMode = 'auto'; // 'auto' (foto visual 8k) or 'banner' (grafis tipografi)
+let currentVisualGenMode = 'banner'; // DEFAULT TO 'banner' (Canvas Synthesized Poster Graphic)
 
 function setVisualGenMode(mode) {
   currentVisualGenMode = mode;
