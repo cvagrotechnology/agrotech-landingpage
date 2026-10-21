@@ -1431,164 +1431,363 @@ function generateNewAiImageOnly() {
   showToast('✨ Gambar poster baru (1080x1080) berhasil diracik khusus!');
 }
 
-// CANVAS BANNER SYNTHESIZER (Menghasilkan gambar beresolusi 1080x1080 unik)
+// PRELOADED ASSETS FOR HIGH-IMPACT CONSULTING POSTER (TERANG BULAN CONSULTING STYLE)
+const CONSULTING_HERO_ASSETS = [
+  'assets/ig_soil_probe_iot.jpg',
+  'assets/ig_aerial_ndvi_farm.jpg',
+  'assets/ig_harvest_success.jpg',
+  'assets/ig_agronomist_lab.jpg',
+  'assets/ig_greenhouse_iot.jpg',
+  'assets/ig_smart_tractor.jpg',
+  'assets/ig_drone_multispectral.jpg',
+  'assets/ig_edu_precision_fertigation.jpg'
+];
+
+const PRELOADED_CONSULTING_IMGS = [];
+if (typeof Image !== 'undefined') {
+  CONSULTING_HERO_ASSETS.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    PRELOADED_CONSULTING_IMGS.push(img);
+  });
+}
+
+function drawRoundRectPath(ctx, x, y, width, height, radius) {
+  if (ctx.roundRect) {
+    ctx.beginPath();
+    ctx.roundRect(x, y, width, height, radius);
+  } else {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+  }
+}
+
+function drawHighlightedHeadline(ctx, text, x, y, accentColor) {
+  const words = text.split(' ');
+  let curX = x;
+  words.forEach((w, idx) => {
+    if (idx < 2 || /\d/.test(w) || /3x|35%|99%|100%|iot|erp|ndvi|smart/i.test(w)) {
+      ctx.fillStyle = accentColor;
+    } else {
+      ctx.fillStyle = '#FFFFFF';
+    }
+    ctx.fillText(w, curX, y);
+    curX += ctx.measureText(w + ' ').width;
+  });
+}
+
+function wrapTextLines(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(' ');
+  let line = '';
+  let curY = y;
+  for (let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + ' ';
+    const metrics = ctx.measureText(testLine);
+    if (metrics.width > maxWidth && n > 0) {
+      ctx.fillText(line.trim(), x, curY);
+      line = words[n] + ' ';
+      curY += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line.trim(), x, curY);
+}
+
+// CANVAS BANNER SYNTHESIZER: MODEL KONTEN KONSULTAN AGRIBISNIS TERANG BULAN CONSULTING
 function createSynthesizedBanner(hookTitle, subtitle, themeIndex, pillarKey) {
   const canvas = document.createElement('canvas');
   canvas.width = 1080;
   canvas.height = 1080;
   const ctx = canvas.getContext('2d');
 
-  // 6 Palet Tema Visual Berbeda (Kaya Nuansa Cyber-Agro & Modern Precision)
   const themes = [
     {
-      bg1: '#041510', bg2: '#062B20', bg3: '#0A4333',
-      accent: '#10B981', secondary: '#38BDF8', badgeBg: '#10B981', badgeText: '#041510',
-      badgeLabel: '🌾 SMART FARMING 4.0', stat: 'EFISIENSI BIAYA +35%',
-      p1: '✔ Sensor NPK & pH Tanah Real-Time', p2: '✔ Notifikasi Siram Otomatis di HP', p3: '✔ Bebas Risiko Gagal Panen'
+      bg: '#04120B',
+      accent: '#10B981',
+      secondary: '#38BDF8',
+      tag: 'TIPS SMART FARMING #01',
+      badge: '🌾 SMART AGRIBISNIS',
+      stat: '+35% EFISIENSI BIAYA',
+      heroIdx: 0,
+      bento1Title: '🌱 SENSOR IOT REAL-TIME',
+      bento1Desc: 'Deteksi NPK, pH & lengas tanah per detik langsung via HP.',
+      bento2Title: '💧 IRIGASI OTOMATIS',
+      bento2Desc: 'Nutrisi & air mengalir presisi sesuai kebutuhan tanaman.'
     },
     {
-      bg1: '#050D1A', bg2: '#0B1C33', bg3: '#0F2B4E',
-      accent: '#38BDF8', secondary: '#818CF8', badgeBg: '#38BDF8', badgeText: '#050D1A',
-      badgeLabel: '🛰️ CITRA SATELIT & DRONE', stat: 'DETEKSI HAMA 99% AKURAT',
-      p1: '✔ Pemetaan Spasial NDVI Resolusi Tinggi', p2: '✔ Pantau 20 Hektar Dalam 5 Menit', p3: '✔ Mitigasi Stres Tanaman Dini'
+      bg: '#051120',
+      accent: '#38BDF8',
+      secondary: '#818CF8',
+      tag: 'MONITORING SPASIAL #02',
+      badge: '🛰️ CITRA SATELIT & DRONE',
+      stat: '99% DETEKSI DINI HAMA',
+      heroIdx: 1,
+      bento1Title: '🛰️ PETA NDVI RESOLUSI HD',
+      bento1Desc: 'Pantau stres vegetasi puluhan hektar dalam 10 menit.',
+      bento2Title: '🎯 ZONA PEMUPUKAN MIKRO',
+      bento2Desc: 'Cegah pemborosan pupuk di blok yang tidak membutuhkan.'
     },
     {
-      bg1: '#140D04', bg2: '#2B1B06', bg3: '#3D280A',
-      accent: '#F59E0B', secondary: '#10B981', badgeBg: '#F59E0B', badgeText: '#140D04',
-      badgeLabel: '🏆 HASIL PANEN MAKSIMAL', stat: 'PRODUKTIVITAS YIELD +28%',
-      p1: '✔ Dosis Nutrisi NPK Terukur Presisi', p2: '✔ Rekap Panen Cloud Otomatis', p3: '✔ Standar Agribisnis Modern'
+      bg: '#140D04',
+      accent: '#F59E0B',
+      secondary: '#10B981',
+      tag: 'MANAJEMEN PANEN #03',
+      badge: '🏆 PRODUKTIVITAS YIELD',
+      stat: '+28% HASIL TONASE PANEN',
+      heroIdx: 2,
+      bento1Title: '🌽 FORMULA NUTRISI LENGKAP',
+      bento1Desc: 'Serapan hara maksimal di tiap fase generatif & vegetatif.',
+      bento2Title: '📈 REKAP PANEN DIGITAL',
+      bento2Desc: 'Laporan timbangan, sortir & grade panen tercatat instan.'
     },
     {
-      bg1: '#110726', bg2: '#1D0E3F', bg3: '#2D165E',
-      accent: '#C084FC', secondary: '#38BDF8', badgeBg: '#C084FC', badgeText: '#110726',
-      badgeLabel: '🧪 BIO-TECH & NUTRISI', stat: 'AKURASI FORMULA 99.8%',
-      p1: '✔ Analisis Lab Tanah Otomatis', p2: '✔ Rekomendasi Takaran Pupuk Spesifik', p3: '✔ Tanah Sehat & Ramah Lingkungan'
+      bg: '#100720',
+      accent: '#C084FC',
+      secondary: '#38BDF8',
+      tag: 'RISET & AGRONOMI #04',
+      badge: '🧪 UJI LABORATORIUM & TANAH',
+      stat: '99.8% AKURASI FORMULA',
+      heroIdx: 3,
+      bento1Title: '🔬 ANALISIS UNSUR HARA',
+      bento1Desc: 'Ketahui defisiensi hara mikro sebelum daun menguning.',
+      bento2Title: '👨‍🌾 PENDAMPINGAN AGRONOMIS',
+      bento2Desc: 'Konsultasi berkala bersama pakar pertanian terpercaya.'
     },
     {
-      bg1: '#041C24', bg2: '#083344', bg3: '#0E4E63',
-      accent: '#2DD4BF', secondary: '#F59E0B', badgeBg: '#2DD4BF', badgeText: '#041C24',
-      badgeLabel: '💧 IRIGASI TETES PRESISI', stat: 'HEMAT AIR HINGGA 50%',
-      p1: '✔ Katup Solenoid Otomatisasi Jadwal', p2: '✔ Sensor Kelembaban Akurat Per Blok', p3: '✔ Air Mengalir Tepat Saat Dibutuhkan'
+      bg: '#03161D',
+      accent: '#2DD4BF',
+      secondary: '#F59E0B',
+      tag: 'GREENHOUSE MODERN #05',
+      badge: '🌿 SMART GREENHOUSE IOT',
+      stat: 'HEMAT AIR HINGGA 50%',
+      heroIdx: 4,
+      bento1Title: '🌡️ KONTROL IKLIM MIKRO',
+      bento1Desc: 'Otomatisasi kipas, shading net & fogger saat cuaca panas.',
+      bento2Title: '🛡️ ZERO PEST DRIFT',
+      bento2Desc: 'Lingkungan steril minim pestisida kimia sintetis.'
     },
     {
-      bg1: '#0B1120', bg2: '#1E293B', bg3: '#334155',
-      accent: '#60A5FA', secondary: '#34D399', badgeBg: '#60A5FA', badgeText: '#0B1120',
-      badgeLabel: '📊 AGRO ERP & PEMBUKUAN', stat: 'TRANSPARANSI KEUANGAN 100%',
-      p1: '✔ Catatan HPP & Biaya Pekerja Digital', p2: '✔ Akses Multi-Kebun Lintas Daerah', p3: '✔ Laporan Laba Rugi Sekali Klik'
+      bg: '#0A101D',
+      accent: '#60A5FA',
+      secondary: '#34D399',
+      tag: 'AGRO ERP & BISNIS #06',
+      badge: '📊 MANAJEMEN KEUANGAN KEBUN',
+      stat: '100% TRANSPARAN & RAPI',
+      heroIdx: 5,
+      bento1Title: '🚜 MEKANISASI LAHAN',
+      bento1Desc: 'Kerja kebun 3x lebih cepat dengan alat modern terstandar.',
+      bento2Title: '📱 APLIKASI KAS MANDOR',
+      bento2Desc: 'Buku kas, upah harian & inventaris pupuk aman di cloud.'
     }
   ];
 
   const t = themes[themeIndex % themes.length];
 
-  // 1. Background Gradient
-  const grad = ctx.createLinearGradient(0, 0, 1080, 1080);
-  grad.addColorStop(0, t.bg1);
-  grad.addColorStop(0.5, t.bg2);
-  grad.addColorStop(1, t.bg3);
-  ctx.fillStyle = grad;
+  // 1. Dark Luxurious Agro Background Canvas
+  ctx.fillStyle = t.bg;
   ctx.fillRect(0, 0, 1080, 1080);
 
-  // 2. High-Tech Grid Lines
-  ctx.strokeStyle = `${t.accent}15`;
-  ctx.lineWidth = 2;
-  for (let i = 80; i < 1080; i += 120) {
-    ctx.beginPath();
-    ctx.moveTo(0, i);
-    ctx.lineTo(1080, i);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(i, 0);
-    ctx.lineTo(i, 1080);
-    ctx.stroke();
-  }
-
-  // 3. Ambient Center Glow
-  const orb = ctx.createRadialGradient(540, 500, 80, 540, 500, 520);
-  orb.addColorStop(0, `${t.accent}33`);
-  orb.addColorStop(0.6, `${t.secondary}10`);
-  orb.addColorStop(1, 'transparent');
-  ctx.fillStyle = orb;
+  // Subtle ambient backdrop glow
+  const bgGlow = ctx.createRadialGradient(540, 200, 50, 540, 200, 600);
+  bgGlow.addColorStop(0, `${t.accent}22`);
+  bgGlow.addColorStop(0.8, 'transparent');
+  ctx.fillStyle = bgGlow;
   ctx.fillRect(0, 0, 1080, 1080);
 
-  // 4. Header Badges
-  ctx.fillStyle = t.badgeBg;
-  if (ctx.roundRect) {
-    ctx.beginPath();
-    ctx.roundRect(80, 80, 380, 52, 26);
-    ctx.fill();
-  } else {
-    ctx.fillRect(80, 80, 380, 52);
-  }
-
-  ctx.fillStyle = t.badgeText;
-  ctx.font = 'bold 22px sans-serif';
-  ctx.fillText(t.badgeLabel, 115, 115);
-
-  // Stat Pill (Top Right)
-  ctx.strokeStyle = `${t.accent}88`;
-  ctx.fillStyle = 'rgba(0,0,0,0.4)';
-  ctx.lineWidth = 2;
-  if (ctx.roundRect) {
-    ctx.beginPath();
-    ctx.roundRect(660, 80, 340, 52, 26);
-    ctx.fill();
-    ctx.stroke();
-  }
+  // 2. Top Header Bar (Terang Bulan Consulting Style)
+  // Left: Brand Logo Tag
   ctx.fillStyle = t.accent;
-  ctx.font = 'bold 20px sans-serif';
-  ctx.fillText(t.stat, 690, 115);
+  ctx.beginPath();
+  ctx.arc(80, 68, 8, 0, Math.PI * 2);
+  ctx.fill();
 
-  // 5. Headline Typography
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 50px sans-serif';
-  const cleanHook = hookTitle.replace(/[*_#]/g, '');
+  ctx.font = 'bold 24px sans-serif';
+  ctx.fillText('CV AGROTECH CONSULTING', 98, 76);
+
+  // Right: Series Pill Tag
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.strokeStyle = `${t.accent}66`;
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 720, 48, 290, 42, 21);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = t.accent;
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText(t.tag, 742, 75);
+
+  // 3. Hero Visual Section (Real Photo Container like Terang Bulan Consulting)
+  const heroX = 70;
+  const heroY = 114;
+  const heroW = 940;
+  const heroH = 430;
+  const heroRadius = 24;
+
+  ctx.save();
+  drawRoundRectPath(ctx, heroX, heroY, heroW, heroH, heroRadius);
+  ctx.clip();
+
+  // Draw Real High-Res Photo if preloaded
+  const photo = PRELOADED_CONSULTING_IMGS[t.heroIdx % PRELOADED_CONSULTING_IMGS.length];
+  if (photo && photo.complete && photo.naturalWidth > 0) {
+    ctx.drawImage(photo, heroX, heroY, heroW, heroH);
+  } else {
+    // Elegant fallback high-tech gradient if photo still loading
+    const pGrad = ctx.createLinearGradient(heroX, heroY, heroX + heroW, heroY + heroH);
+    pGrad.addColorStop(0, '#062B20');
+    pGrad.addColorStop(1, '#0A4333');
+    ctx.fillStyle = pGrad;
+    ctx.fillRect(heroX, heroY, heroW, heroH);
+  }
+
+  // Smooth Bottom Cinematic Fade on the Photo
+  const scrimGrad = ctx.createLinearGradient(0, heroY + 160, 0, heroY + heroH);
+  scrimGrad.addColorStop(0, 'rgba(0,0,0,0)');
+  scrimGrad.addColorStop(0.75, 'rgba(2, 10, 6, 0.85)');
+  scrimGrad.addColorStop(1, 'rgba(2, 10, 6, 0.98)');
+  ctx.fillStyle = scrimGrad;
+  ctx.fillRect(heroX, heroY, heroW, heroH);
+
+  // Subtle grid overlay on photo
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1;
+  for (let gx = heroX + 60; gx < heroX + heroW; gx += 80) {
+    ctx.beginPath();
+    ctx.moveTo(gx, heroY);
+    ctx.lineTo(gx, heroY + heroH);
+    ctx.stroke();
+  }
+
+  // Floating Glassmorphism Badge: Top-Left of Photo
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.68)';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+  ctx.lineWidth = 1;
+  drawRoundRectPath(ctx, heroX + 24, heroY + 24, 320, 42, 21);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 17px sans-serif';
+  ctx.fillText('📸 DOKUMENTASI SISTEM LAPANGAN', heroX + 42, heroY + 51);
+
+  // Floating High-Impact Stat Pill: Bottom-Left of Photo
+  ctx.fillStyle = t.accent;
+  drawRoundRectPath(ctx, heroX + 24, heroY + heroH - 64, 360, 46, 23);
+  ctx.fill();
+
+  ctx.fillStyle = '#03140C';
+  ctx.font = 'bold 20px sans-serif';
+  ctx.fillText(`📈 ${t.stat}`, heroX + 46, heroY + heroH - 34);
+
+  ctx.restore();
+
+  // Photo Outer Frame Glow
+  ctx.strokeStyle = `${t.accent}44`;
+  ctx.lineWidth = 2;
+  drawRoundRectPath(ctx, heroX, heroY, heroW, heroH, heroRadius);
+  ctx.stroke();
+
+  // 4. Magazine Editorial Headline Typography
+  const cleanHook = hookTitle.replace(/[*_#]/g, '').trim();
   const words = cleanHook.split(' ');
+  ctx.font = 'bold 44px sans-serif';
+
   let line = '';
-  let y = 240;
+  let hy = 600;
+  const maxLineW = 940;
+
   for (let n = 0; n < words.length; n++) {
     const testLine = line + words[n] + ' ';
     const metrics = ctx.measureText(testLine);
-    if (metrics.width > 920 && n > 0) {
-      ctx.fillText(line, 80, y);
+    if (metrics.width > maxLineW && n > 0) {
+      drawHighlightedHeadline(ctx, line.trim(), 70, hy, t.accent);
       line = words[n] + ' ';
-      y += 70;
+      hy += 58;
     } else {
       line = testLine;
     }
   }
-  ctx.fillText(line, 80, y);
-
-  // 6. Highlights Container Card
-  y += 45;
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.45)';
-  ctx.strokeStyle = `${t.accent}55`;
-  ctx.lineWidth = 2;
-  if (ctx.roundRect) {
-    ctx.beginPath();
-    ctx.roundRect(80, y, 920, 330, 24);
-    ctx.fill();
-    ctx.stroke();
-  } else {
-    ctx.fillRect(80, y, 920, 330);
+  if (line.trim().length > 0) {
+    drawHighlightedHeadline(ctx, line.trim(), 70, hy, t.accent);
   }
 
-  ctx.fillStyle = t.accent;
-  ctx.font = 'bold 28px sans-serif';
-  ctx.fillText(t.p1, 130, y + 85);
-  ctx.fillText(t.p2, 130, y + 175);
-  ctx.fillText(t.p3, 130, y + 265);
+  // 5. Two Modern Bento Infographic Cards (Terang Bulan Consulting Style)
+  const bentoY = 740;
+  const bentoW = 455;
+  const bentoH = 175;
+  const bentoRadius = 18;
 
-  // 7. Footer Bar
-  ctx.fillStyle = 'rgba(4, 10, 16, 0.95)';
-  ctx.fillRect(0, 970, 1080, 110);
+  // Bento Card 1: Solusi Teknis
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+  ctx.strokeStyle = `${t.accent}44`;
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 70, bentoY, bentoW, bentoH, bentoRadius);
+  ctx.fill();
+  ctx.stroke();
 
   ctx.fillStyle = t.accent;
-  ctx.font = 'bold 28px sans-serif';
-  ctx.fillText('@cvagrotechnology', 80, 1038);
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText(t.bento1Title, 95, bentoY + 45);
+
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '19px sans-serif';
+  wrapTextLines(ctx, t.bento1Desc, 95, bentoY + 85, 405, 30);
+
+  // Bento Card 2: Dampak Bisnis / Finansial
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+  ctx.strokeStyle = `${t.secondary}44`;
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 555, bentoY, bentoW, bentoH, bentoRadius);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = t.secondary;
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText(t.bento2Title, 580, bentoY + 45);
+
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '19px sans-serif';
+  wrapTextLines(ctx, t.bento2Desc, 580, bentoY + 85, 405, 30);
+
+  // 6. Official Consulting Agency Footer (TBS / Consulting Style)
+  ctx.fillStyle = '#020704';
+  ctx.fillRect(0, 948, 1080, 132);
+
+  ctx.strokeStyle = `${t.accent}66`;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, 948);
+  ctx.lineTo(1080, 948);
+  ctx.stroke();
+
+  // Footer Left: Agency Identity
+  ctx.fillStyle = t.accent;
+  ctx.font = 'bold 26px sans-serif';
+  ctx.fillText('@cvagrotechnology', 70, 995);
 
   ctx.fillStyle = '#94A3B8';
-  ctx.font = '20px sans-serif';
-  ctx.fillText('WA: Amanda 0857-1385-0615 | Hardadi 0813-1307-8216', 420, 1038);
+  ctx.font = '19px sans-serif';
+  ctx.fillText('Konsultan Agribisnis & Smart Farming Indonesia', 70, 1032);
+
+  // Footer Right: CTA & Contacts
+  ctx.fillStyle = '#F59E0B';
+  ctx.font = 'bold 20px sans-serif';
+  ctx.fillText('Konsultasi & Kemitraan Kebun 👉', 630, 995);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText('WA: Amanda 0857-1385-0615 | Hardadi 0813-1307-8216', 500, 1032);
 
   return canvas.toDataURL('image/jpeg', 0.94);
 }
@@ -1840,125 +2039,9 @@ function regenerateVariationAiImage(idx) {
   showToast(`✨ Gambar poster baru untuk Variasi #${idx + 1} berhasil dibuat!`);
 }
 
-// AUTOMATED CANVAS BANNER SYNTHESIZER
+// AUTOMATED CANVAS BANNER SYNTHESIZER (DELEGATES TO TERANG BULAN EDITORIAL GENERATOR)
 function generateCanvasGraphic(idx) {
-  if (!generatedVariations[idx]) return;
-  const v = generatedVariations[idx];
-
-  const canvas = document.createElement('canvas');
-  canvas.width = 1080;
-  canvas.height = 1080;
-  const ctx = canvas.getContext('2d');
-
-  // 1. Sleek Agrotech Dark Gradient Background
-  const bgGrad = ctx.createLinearGradient(0, 0, 1080, 1080);
-  bgGrad.addColorStop(0, '#04130F');
-  bgGrad.addColorStop(0.5, '#07241C');
-  bgGrad.addColorStop(1, '#0C382C');
-  ctx.fillStyle = bgGrad;
-  ctx.fillRect(0, 0, 1080, 1080);
-
-  // 2. Cyber Circuit Graphic Lines
-  ctx.strokeStyle = 'rgba(16, 185, 129, 0.12)';
-  ctx.lineWidth = 2;
-  for (let i = 90; i < 1080; i += 130) {
-    ctx.beginPath();
-    ctx.moveTo(0, i);
-    ctx.lineTo(1080, i);
-    ctx.stroke();
-  }
-  for (let j = 90; j < 1080; j += 130) {
-    ctx.beginPath();
-    ctx.moveTo(j, 0);
-    ctx.lineTo(j, 1080);
-    ctx.stroke();
-  }
-
-  // Glowing Ambient Orb in Center
-  const glow = ctx.createRadialGradient(540, 540, 50, 540, 540, 520);
-  glow.addColorStop(0, 'rgba(16, 185, 129, 0.28)');
-  glow.addColorStop(0.6, 'rgba(56, 189, 248, 0.08)');
-  glow.addColorStop(1, 'transparent');
-  ctx.fillStyle = glow;
-  ctx.fillRect(0, 0, 1080, 1080);
-
-  // 3. Brand Pill Badge (Top)
-  ctx.fillStyle = '#10B981';
-  if (ctx.roundRect) {
-    ctx.beginPath();
-    ctx.roundRect(90, 90, 360, 54, 27);
-    ctx.fill();
-  } else {
-    ctx.fillRect(90, 90, 360, 54);
-  }
-
-  ctx.fillStyle = '#04130F';
-  ctx.font = 'bold 22px sans-serif';
-  ctx.fillText('🌾 SMART FARMING 4.0', 125, 126);
-
-  // 4. Hook Title Typography (Large & Bold)
-  const hookText = v.caption.split('\n')[0] || v.topic;
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 50px sans-serif';
-
-  // Multi-line wrap
-  const words = hookText.split(' ');
-  let line = '';
-  let y = 250;
-  for (let n = 0; n < words.length; n++) {
-    const testLine = line + words[n] + ' ';
-    const metrics = ctx.measureText(testLine);
-    if (metrics.width > 900 && n > 0) {
-      ctx.fillText(line, 90, y);
-      line = words[n] + ' ';
-      y += 68;
-    } else {
-      line = testLine;
-    }
-  }
-  ctx.fillText(line, 90, y);
-
-  // 5. Feature Highlight Card
-  y += 50;
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
-  ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)';
-  ctx.lineWidth = 2;
-  if (ctx.roundRect) {
-    ctx.beginPath();
-    ctx.roundRect(90, y, 900, 340, 24);
-    ctx.fill();
-    ctx.stroke();
-  } else {
-    ctx.fillRect(90, y, 900, 340);
-  }
-
-  // Bullet Highlights
-  ctx.fillStyle = '#10B981';
-  ctx.font = 'bold 28px sans-serif';
-  ctx.fillText('✔ Efisiensi Pupuk NPK & Air Hingga 35%', 140, y + 85);
-  ctx.fillText('✔ Sensor Tanah & Cuaca Mikro Real-Time', 140, y + 175);
-  ctx.fillText('✔ Dukungan Offline-Sync di Pedalaman Kebun', 140, y + 265);
-
-  // 6. Footer Brand Bar
-  ctx.fillStyle = 'rgba(4, 19, 15, 0.9)';
-  ctx.fillRect(0, 970, 1080, 110);
-
-  ctx.fillStyle = '#38BDF8';
-  ctx.font = 'bold 28px sans-serif';
-  ctx.fillText('@cvagrotechnology', 90, 1035);
-
-  ctx.fillStyle = '#94A3B8';
-  ctx.font = '20px sans-serif';
-  ctx.fillText('WA: Amanda 0857-1385-0615 | Hardadi 0813-1307-8216', 430, 1035);
-
-  // Convert to Data URL and set to variation
-  const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
-  v.localMedia = dataUrl;
-  v.mediaUrl = 'https://files.catbox.moe/blkicc.jpg'; // Verified public fallback URL for Meta publish
-  v.assetName = '🎨 Banner Grafis Otomatis';
-
-  renderGenResults();
-  showToast('🎨 Banner Grafis Berhasil Dibuat Otomatis!');
+  regenerateVariationAiImage(idx);
 }
 
 // 14. PRE-FLIGHT REVIEW MODAL LOGIC
