@@ -42,7 +42,7 @@ PUBLIC_ASSET_MAP = {
 
 class AgroPostHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
-        # Allow CORS for local dev
+        # Allow CORS
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
@@ -51,6 +51,15 @@ class AgroPostHandler(http.server.SimpleHTTPRequestHandler):
     def do_OPTIONS(self):
         self.send_response(200)
         self.end_headers()
+
+    def do_GET(self):
+        if self.path in ('/health', '/healthz', '/ping'):
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(b"OK")
+            return
+        super().do_GET()
 
     def do_POST(self):
         if self.path == '/api/publish':
@@ -227,32 +236,38 @@ class AgroPostHandler(http.server.SimpleHTTPRequestHandler):
 def run():
     # Change dir to script directory
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    socketserver.TCPServer.allow_reuse_address = True
     
-    ports_to_try = [int(os.environ.get("PORT", 8080)), 8000, 8088]
-    # Remove duplicates while preserving order
-    ports_to_try = list(dict.fromkeys(ports_to_try))
+    port_env = os.environ.get("PORT")
+    if port_env:
+        ports_to_try = [int(port_env)]
+    else:
+        ports_to_try = [8080, 8000, 8088]
     
     httpd = None
     active_port = None
     for p in ports_to_try:
         try:
-            httpd = socketserver.TCPServer(("", p), AgroPostHandler)
+            httpd = http.server.ThreadingHTTPServer(("0.0.0.0", p), AgroPostHandler)
             active_port = p
             break
-        except OSError:
+        except OSError as e:
+            print(f"[*] Port {p} tidak dapat digunakan: {e}", flush=True)
             continue
             
     if not httpd:
-        print("[!] Gagal menjalankan server: Semua port percobaan sedang digunakan.")
+        print("[!] Gagal menjalankan server: Semua port percobaan sedang digunakan.", flush=True)
         return
 
-    with httpd:
-        print("=" * 60)
-        print(f" AgroPost Bridge Server Aktif di: http://localhost:{active_port}")
-        print(f" Buka URL: http://localhost:{active_port}/ig-manager.html")
-        print("=" * 60)
+    print("=" * 60, flush=True)
+    print(f" AgroPost Bridge Server Aktif di: http://0.0.0.0:{active_port}", flush=True)
+    print(f" Buka Landing Page: http://localhost:{active_port}/index.html", flush=True)
+    print(f" Buka IG Manager:   http://localhost:{active_port}/ig-manager.html", flush=True)
+    print("=" * 60, flush=True)
+    try:
         httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\n[!] Server dimatikan.", flush=True)
+        httpd.server_close()
 
 if __name__ == "__main__":
     run()
