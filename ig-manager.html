@@ -1582,15 +1582,14 @@ print("Hasil Publikasi:", res_publish)
               </h3>
 
               <div class="form-group">
-                <label class="form-label">Pilar Topik Agrotech</label>
+                <label class="form-label">Pilar Topik Agrotech (Model Terang Bulan Consulting)</label>
                 <select id="genPillar" class="form-control" onchange="onPillarSelectChange()">
-                  <option value="iot_sensor">🌾 Smart Farming IoT & Sensor Tanah Presisi</option>
-                  <option value="ndvi_satellite">🛰️ Citra Satelit NDVI & Pemetaan Drone</option>
-                  <option value="fertigation">💧 Fertigasi Presisi & Efisiensi Pupuk NPK</option>
-                  <option value="erp_cloud">📊 Cloud SaaS & ERP Pembukuan Kebun</option>
-                  <option value="offline_sync">📶 Solusi Kebun Pedalaman (Offline-First Sync)</option>
-                  <option value="case_study">🏆 Bukti Hasil Panen & Studi Kasus Nyata</option>
-                  <option value="edu_5signs">💡 5 Tanda Kebun Butuh Sentuhan Teknologi</option>
+                  <option value="yield_optimization">🌾 01. Optimalisasi Lahan: "Lahan Sama, Hasil Harus Berbeda"</option>
+                  <option value="early_detection">⚙️ 02. Mitigasi Kendala: "5 Tanda Kebun Butuh Sentuhan Teknologi"</option>
+                  <option value="smart_fertigation">💧 03. Efisiensi Nutrisi: "Rahasia Fertigasi Presisi Tanpa Terbuang"</option>
+                  <option value="drone_spatial_audit">🛰️ 04. Audit Spasial: "Pantau 50 Ha Cukup 10 Menit Dari Udara"</option>
+                  <option value="cost_leakage_erp">📊 05. Kontrol Finansial: "Pangkas Kebocoran Biaya Dari Mandor ke Pemilik"</option>
+                  <option value="grade_a_formula">🏆 06. Standar Mutu: "Strategi Dongkrak Tonase & Grade A"</option>
                   <option value="custom">✏️ Topik Kustom / Bebas</option>
                 </select>
               </div>
@@ -1634,12 +1633,12 @@ print("Hasil Publikasi:", res_publish)
               <div class="form-group" style="background:rgba(245, 158, 11, 0.08); border:1.5px solid rgba(245, 158, 11, 0.35); border-radius:var(--radius-md); padding:1.1rem;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
                   <span style="font-weight:800; font-size:0.88rem; color:#F59E0B; display:flex; align-items:center; gap:0.4rem;">
-                    <i class="ri-sparkling-fill"></i> Studio Gambar Poster AI Baru
+                    <i class="ri-sparkling-fill"></i> Studio Gambar Poster AI (Gaya Terang Bulan Consulting)
                   </span>
                   <span class="badge" style="background:#10B981; color:#0F172A; font-weight:800; font-size:0.7rem;" id="activePosterStyleBadge">100% Fresh (Bukan Foto Stok)</span>
                 </div>
                 <p style="font-size:0.75rem; color:var(--text-muted); margin:0 0 0.8rem 0; line-height:1.45;">
-                  Klik tombol di bawah ini untuk <strong>membuat gambar poster grafis baru</strong> yang diracik khusus untuk Instagram tanpa mengambil dari foto stok:
+                  Klik tombol di bawah ini untuk <strong>meracik poster infografis editorial 1080x1080 baru</strong> lengkap dengan pita emas, bento 01-04, quote box, & bookmark save:
                 </p>
 
                 <!-- TOMBOL KHUSUS GENERATE GAMBAR BARU -->
@@ -1656,18 +1655,30 @@ print("Hasil Publikasi:", res_publish)
                   </div>
                 </div>
 
-                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem; margin-top:0.8rem;" id="styleSelectorGrid">
-                  <div class="style-pill active" id="stylePill0" style="border:1.5px solid #10B981; background:rgba(16,185,129,0.15); padding:0.5rem 0.3rem; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectThemeStyle(0)">
-                    <div style="font-size:0.75rem; font-weight:700; color:#10B981;">🌿 Emerald</div>
-                    <div style="font-size:0.62rem; color:var(--text-dim);">Cyber Smart Farm</div>
+                <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.5rem; margin-top:0.8rem;" id="styleSelectorGrid">
+                  <div class="style-pill active" id="stylePill0" style="border:1.5px solid #EAB308; background:rgba(234,179,8,0.15); padding:0.5rem 0.3rem; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectThemeStyle(0)">
+                    <div style="font-size:0.75rem; font-weight:700; color:#EAB308;">🌾 Produktivitas</div>
+                    <div style="font-size:0.62rem; color:var(--text-dim);">Lahan Sama Berbeda</div>
                   </div>
                   <div class="style-pill" id="stylePill1" style="border:1px solid var(--dark-border); background:var(--dark-surface); padding:0.5rem 0.3rem; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectThemeStyle(1)">
-                    <div style="font-size:0.75rem; font-weight:700; color:#38BDF8;">🛰️ Satellite</div>
-                    <div style="font-size:0.62rem; color:var(--text-dim);">Radar & Telemetri</div>
+                    <div style="font-size:0.75rem; font-weight:700; color:#10B981;">⚙️ 5 Tanda IoT</div>
+                    <div style="font-size:0.62rem; color:var(--text-dim);">Perkebunan Cerdas</div>
                   </div>
                   <div class="style-pill" id="stylePill2" style="border:1px solid var(--dark-border); background:var(--dark-surface); padding:0.5rem 0.3rem; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectThemeStyle(2)">
-                    <div style="font-size:0.75rem; font-weight:700; color:#F59E0B;">🏆 Harvest</div>
-                    <div style="font-size:0.62rem; color:var(--text-dim);">Yield ROI Pro</div>
+                    <div style="font-size:0.75rem; font-weight:700; color:#38BDF8;">💧 Fertigasi</div>
+                    <div style="font-size:0.62rem; color:var(--text-dim);">Nutrisi Presisi</div>
+                  </div>
+                  <div class="style-pill" id="stylePill3" style="border:1px solid var(--dark-border); background:var(--dark-surface); padding:0.5rem 0.3rem; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectThemeStyle(3)">
+                    <div style="font-size:0.75rem; font-weight:700; color:#0284C7;">🛰️ Drone NDVI</div>
+                    <div style="font-size:0.62rem; color:var(--text-dim);">Audit Spasial 50 Ha</div>
+                  </div>
+                  <div class="style-pill" id="stylePill4" style="border:1px solid var(--dark-border); background:var(--dark-surface); padding:0.5rem 0.3rem; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectThemeStyle(4)">
+                    <div style="font-size:0.75rem; font-weight:700; color:#F59E0B;">📊 Stop Bocor</div>
+                    <div style="font-size:0.62rem; color:var(--text-dim);">ERP Kas & Mandor</div>
+                  </div>
+                  <div class="style-pill" id="stylePill5" style="border:1px solid var(--dark-border); background:var(--dark-surface); padding:0.5rem 0.3rem; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectThemeStyle(5)">
+                    <div style="font-size:0.75rem; font-weight:700; color:#22C55E;">🏆 Panen Grade A</div>
+                    <div style="font-size:0.62rem; color:var(--text-dim);">Formula Maksimal</div>
                   </div>
                 </div>
               </div>

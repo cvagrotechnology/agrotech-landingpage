@@ -20,272 +20,8 @@ const DEFAULT_ASSETS = [
   { id: 'a14', name: 'Poster Digitalisasi Kebun ERP', path: 'assets/ig_edukasi_digitalisasi_kebun.jpg', onlineUrl: 'https://files.catbox.moe/blkicc.jpg', format: 'feed' },
 ];
 
-// DEFAULT SEED POSTS
-const INITIAL_POSTS = [
-  {
-    id: 'post-edu-1',
-    topic: '5 Cara Cerdas Kelola Kebun dengan Teknologi IoT',
-    category: 'edu',
-    format: 'feed',
-    mediaUrl: 'assets/ig_edukasi_iot_laptop.jpg',
-    caption: `🌱 Bertani Lebih Efisien dengan Teknologi IoT!
-
-Pertanian terus berkembang, dan teknologi hadir untuk membantu pekerjaan jadi lebih mudah, cepat, dan terukur. Mulai dari pemantauan kondisi lahan secara real-time, pengelolaan data nutrisi tanah, hingga otomatisasi irigasi yang mendukung produktivitas kebun secara maksimal. 💻🌾
-
-Kenapa kebun modern beralih ke Agrotech?
-✅ 1. Sensor Tanah Real-Time: Pantau kelembaban, pH, & NPK tanah otomatis dari smartphone.
-✅ 2. Kontrol Irigasi Otomatis: Siram tanaman tepat dosis saat dibutuhkan, hemat air & pupuk hingga 35%.
-✅ 3. Deteksi Dini Hama & Cuaca: Mitigasi risiko penyakit tanaman sebelum terlambat.
-✅ 4. Laporan Panen Terintegrasi: Catatan tonase dan riwayat blok kebun tersimpan rapi di cloud.
-
-Saatnya bawa bisnis dan pertanianmu ke level berikutnya bersama CV Agrotech! 🚜✨
-
-📲 WhatsApp Konsultasi:
-• Amanda: +62 857-1385-0615
-• Hardadi: +62 813-1307-8216
-✉️ Email: cvagrotechnology1026@gmail.com
-🌐 Website: agrotech.id
-
-Yuk, wujudkan pertanian yang lebih efisien dan modern bersama Agrotech! 🌿
-
----
-#CVAgrotech #Agrotech #SmartFarming #IoTPertanian #PertanianModern #TeknologiPertanian #PetaniMaju #DigitalisasiPertanian #SensorTanah #FertigasiPresisi`,
-    date: '2026-10-22',
-    time: '08:00',
-    status: 'scheduled'
-  },
-  {
-    id: 'post-edu-2',
-    topic: 'Digitalisasi Kebun: Dari Manual ke Otomatis',
-    category: 'edu',
-    format: 'feed',
-    mediaUrl: 'assets/ig_edukasi_digitalisasi_kebun.jpg',
-    caption: `Saatnya bisnis perkebunan Anda bertransformasi ke era digital! 🚜💻
-
-Masih mencatat tonase panen, jadwal mandor, dan stok pupuk di kertas manual yang rawan terselip? Kini saatnya beralih ke ekosistem digital terintegrasi bersama CV Agrotech! 🌾
-
-✨ Solusi Unggulan Agrotech:
-📊 Sistem ERP Agribisnis: Monitoring puluhan blok lahan dan kalkulasi COGS panen otomatis.
-📡 Monitoring IoT Presisi: Sensor cerdas 24/7 tetap aktif walau di pedalaman tanpa sinyal (Offline-First).
-📱 Aplikasi Web & Mobile: Pantau seluruh aktivitas perkebunan langsung dari layar HP.
-
-Tingkatkan efisiensi kerja tim lapangan dan maksimalkan profitabilitas kebun Anda! 🚀
-
-📲 Konsultasikan kebutuhan sistem kebun Anda:
-• Amanda: +62 857-1385-0615
-• Hardadi: +62 813-1307-8216
-✉️ Email: cvagrotechnology1026@gmail.com
-🌐 Website: agrotech.id
-
----
-#CVAgrotech #SmartFarmingERP #KelolaKebun #DigitalisasiBisnis #ERPAgribisnis #PertanianIndonesia #SolusiDigital #SmartFarming`,
-    date: '2026-10-24',
-    time: '19:00',
-    status: 'scheduled'
-  },
-  {
-    id: 'post-1',
-    topic: 'Revolusi Pertanian 4.0 bersama Agrotech',
-    category: 'promo',
-    format: 'reels',
-    mediaUrl: 'assets/ig_reels_promo_1.jpg',
-    caption: `Stop bertani pakai cara tebak-tebakan! 🚜⚡
-
-Tahukah kamu? Biaya operasional kebun bisa bengkak hingga 40% hanya gara-gara pupuk berlebih, penyiraman yang salah, atau data kebun yang tercecer di buku catatan manual. 📉
-
-Kenalin **Agrotech** — Platform Cloud SaaS & IoT Pertanian #1 di Indonesia! 🌾🇮🇩
-
-✨ **Fitur Unggulan Agrotech:**
-1️⃣ **Smart Soil & Weather Sensor**: Pantau kelembaban, pH, & NPK tanah otomatis dari smartphone.
-2️⃣ **Support Offline Mode**: Sinyal hilang di pedalaman kebun? Aplikasi tetap bekerja tanpa gangguan!
-3️⃣ **Smart Farming ERP**: Catat hasil panen, jadwal pekerja, dan pengeluaran kebun dalam 1 layar.
-4️⃣ **Analisis NDVI Satelit**: Deteksi kesehatan tanaman dari pantauan citra satelit & drone.
-
-Terbukti dipercaya oleh **50+ Perusahaan Agribisnis** & mengelola **10.000+ Hektar Lahan** di seluruh nusantara!
-
-👉 Siap bawa kebun Anda ke era modern?
-Hubungi WhatsApp konsultan kami: Amanda (0857-1385-0615) / Hardadi (0813-1307-8216) atau kunjungi link di bio @cvagrotechnology! 🚀
-
----
-#Agrotech #SmartFarming #PertanianModern #Pertanian40 #IoTPertanian #AgriTechIndonesia #PetaniMaju #SaaSPertanian #InovasiTani`,
-    date: '2026-09-02',
-    time: '08:00',
-    status: 'published'
-  },
-  {
-    id: 'post-2',
-    topic: '5 Tanda Kebun Butuh Smart Farming (Carousel)',
-    category: 'edu',
-    format: 'carousel',
-    mediaUrl: 'assets/ig_edu_carousel_1.jpg',
-    caption: `Masih mengira Smart Farming cuma buat kebun skala raksasa? Eits, tunggu dulu! 🛑
-
-Kalau kebun kamu mengalami 5 tanda ini, artinya kamu butuh sistem Smart Farming sekarang juga:
-
-📌 **Slide 1:** 5 Tanda Kebunmu Butuh Smart Farming
-📌 **Slide 2:** 1. Boros Pupuk & Air (Tanpa tahu dosis pasti kebutuhan tanaman di tiap blok lahan)
-📌 **Slide 3:** 2. Sinyal Hilang = Data Hilang (Pencatatan manual di kertas sering terselip & telat di-rekap)
-📌 **Slide 4:** 3. Hama & Penyakit Telat Terdeteksi (Baru sadar saat daun kuning merata & panen anjlok)
-📌 **Slide 5:** 4. Laporan Keuangan Sulit Dihitung Akurat & 5. Hasil Panen Fluktuatif Tanpa Tahu Penyebabnya!
-
-💡 **Solusinya?**
-Gunakan **Agrotech IoT & Cloud ERP**:
-✅ Sensor otomatis pantau tanah 24/7
-✅ Fitur Offline Sync saat kerja di kebun terpencil
-✅ Rekap biaya input-output otomatis
-
-Save postingan ini biar gak lupa, dan share ke pengelola kebun atau rekan petani lainnya! 🌾
-
-👉 Mau konsultasi kebutuhan kebunmu? Hubungi WhatsApp Amanda (0857-1385-0615) / Hardadi (0813-1307-8216) atau klik link di bio @cvagrotechnology!
-
----
-#Agrotech #TipsPertanian #SmartFarming #EdukasiPertanian #PetaniIndonesia #Agritechnology #PertanianPresisi #ManajemenKebun #Agribisnis`,
-    date: '2026-09-04',
-    time: '19:30',
-    status: 'scheduled'
-  },
-  {
-    id: 'post-3',
-    topic: 'Teknologi Presisi: Hemat Pupuk & Air 35%',
-    category: 'edu',
-    format: 'feed',
-    mediaUrl: 'assets/ig_edu_precision_fertigation.jpg',
-    caption: `Pupuk kimia makin mahal, tapi hasil panen kok belum maksimal? 💸📉
-
-Jawabannya: **Presisi.**
-Memberi pupuk terlalu banyak justru merusak akar dan mencemari tanah. Memberi terlalu sedikit, tanaman kekurangan nutrisi.
-
-Bagaimana **Sensor Agrotech IoT** membantu Anda?
-🧪 **1. Real-Time Soil NPK**: Tahu persis kapan tanah butuh Nitrogen, Fosfor, atau Kalium.
-💧 **2. Soil Moisture & EC Meter**: Irigasi tetes (drip fertigation) hanya menyala saat kadar air tanah di bawah ambang batas optimal.
-📊 **3. Prediksi Cuaca Mikro**: Cegah pemupukan tepat sebelum hujan lebat agar pupuk tidak terhanyut sia-sia!
-
-Hasilnya?
-✅ Penghematan biaya pupuk & air hingga **35%**
-✅ Kualitas panen lebih seragam (Grade A)
-✅ Menjaga kesuburan tanah jangka panjang (ESG Compliant)
-
-Komen "INFO SENSOR" di bawah untuk mendapatkan panduan implementasi Smart IoT di kebun Anda! 👇
-
----
-#Agrotech #PrecisionAgriculture #FertigasiPresisi #SensorTanah #SmartFarmingIndonesia #HematPupuk #IoTTani #TeknologiPertanian`,
-    date: '2026-09-07',
-    time: '07:00',
-    status: 'scheduled'
-  },
-  {
-    id: 'post-4',
-    topic: 'Monitoring Satelit & Drone NDVI Heatmap',
-    category: 'showcase',
-    format: 'feed',
-    mediaUrl: 'assets/ig_promo_satellite_ndvi.jpg',
-    caption: `Keliling lahan ratusan hektar setiap hari buat cek tanaman satu per satu? Sudah bukan zamannya! 🛰️👀
-
-Dengan modul **Satellite & Drone NDVI Analysis dari Agrotech**, Anda bisa memetakan kesehatan vegetasi kebun secara instan:
-
-🟢 **Zona Hijau**: Tanaman sehat dengan klorofil tinggi & pertumbuhan optimal.
-🟡 **Zona Kuning**: Butuh perhatian — indikasi awal kekurangan air atau nutrisi.
-🔴 **Zona Merah**: Deteksi dini stres tanaman atau serangan hama sebelum menyebar luas!
-
-Keuntungan bagi pemilik kebun & korporasi:
-🎯 Tindakan kuratif terfokus hanya pada titik yang bermasalah.
-⏱️ Menghemat waktu survei lapangan hingga 70%.
-💰 Melindungi potensi kerugian gagal panen sejak dini.
-
-Tertarik melihat hasil scan satelit untuk lahan kebun Anda?
-Jadwalkan konsultasi gratis via WhatsApp Amanda (0857-1385-0615) / Hardadi (0813-1307-8216) atau klik link di bio kami! 🌿
-
----
-#Agrotech #NDVI #SatelitPertanian #DronePertanian #RemoteSensing #PrecisionFarming #AgribisnisIndonesia #SmartFarming`,
-    date: '2026-09-09',
-    time: '12:00',
-    status: 'scheduled'
-  },
-  {
-    id: 'post-5',
-    topic: 'Smart Farming ERP: Pantau Kebun dari 1 Layar',
-    category: 'showcase',
-    format: 'feed',
-    mediaUrl: 'assets/ig_post_2.png',
-    caption: `Masih zaman nyatet laporan kebun ratusan hektar di buku atau spreadsheet manual yang rawan hilang? 🚜☕
-
-Sekarang kamu bisa pantau seluruh operasional lahan cuma dari 1 layar HP sambil ngopi santai!
-
-Kenalin **Smart Farming ERP Agrotech**:
-🔹 Atur jadwal kerja tim lapangan tanpa ribet
-🔹 Cek stok pupuk & pengiriman supplier real-time
-🔹 Forecasting pendapatan & hasil panen akurat
-🔹 Backup data otomatis (Disaster Recovery Ready)
-
-Terbukti membantu **50+ Perusahaan** dan **10.000+ Hektar Lahan** bertani lebih hemat & efisien! 📈
-
-Punya keluhan manajemen kebun? Coba diskusikan di kolom komentar! 👇
-
-📩 Request Live Demo Gratis via WhatsApp Amanda (0857-1385-0615) / Hardadi (0813-1307-8216)!
-
----
-#Agrotech #SmartFarmingERP #KelolaKebun #Agribisnis #TeknologiPertanian #CloudSaaS #ERPIndonesia #SolusiKebun`,
-    date: '2026-09-12',
-    time: '19:00',
-    status: 'scheduled'
-  },
-  {
-    id: 'post-6',
-    topic: 'Solusi Mati Sinyal: Support Offline Agrotech',
-    category: 'promo',
-    format: 'feed',
-    mediaUrl: 'assets/ig_post_1.png',
-    caption: `Jujur, siapa di sini yang suka emosi pas lagi nyatet data kebun di lapangan eh sinyal HP malah hilang? 📶😭✋
-
-Stop pusing! Ini rahasia kebun kamu tetap cuan dan kepantau rapi walau di lokasi remote tanpa internet:
-
-🌿 **1. Pakai Sensor SmartFarm IoT**
-Ukur kelembaban tanah & kebutuhan pupuk secara otomatis. Gak ada lagi cerita pupuk kebuang sia-sia!
-
-📶 **2. Mode Support Offline Agrotech**
-Sinyal hilang? No problem! Data tetap tercatat di HP dan otomatis tersinkron saat dapet sinyal lagi.
-
-📊 **3. Real-Time Analytics**
-Perkirakan hasil panen dengan presisi tinggi buat patok harga terbaik ke pembeli.
-
-Yuk, bertransisi ke Pertanian 4.0 bersama Agrotech! 🚀
-
-💬 Save postingan ini biar gak lupa, & share ke temen pengelola kebun lainnya ya!
-👉 Hubungi WhatsApp Amanda (0857-1385-0615) / Hardadi (0813-1307-8216) untuk Request Demo Gratis!
-
----
-#Agrotech #SmartFarming #PertanianModern #PetaniMaju #AgriTech #Pertanian40 #IoTPertanian #AgribisnisIndonesia #TipsPertanian`,
-    date: '2026-09-15',
-    time: '08:30',
-    status: 'draft'
-  },
-  {
-    id: 'post-7',
-    topic: 'Komitmen ESG: Pertanian Hijau & Sejahterakan Petani',
-    category: 'esg',
-    format: 'feed',
-    mediaUrl: 'assets/ig_post_3.png',
-    caption: `Kok bisa bertani dengan teknologi canggih TAPI tetep ramah lingkungan & bikin petani lokal makin sejahtera? 🌾✨
-
-Ini dia 3 Komitmen ESG dari Agrotech:
-
-🍃 **Environmental**: Hemat air & pupuk presisi untuk kurangi jejak karbon tanah.
-👥 **Social**: Buka akses pasar adil lewat Marketplace Agri untuk tingkatkan ekonomi petani lokal.
-🏛️ **Governance**: Data terenkripsi aman & transparansi bisnis tanpa tersembunyi.
-
-Bersama 1.000+ pengguna aktif di seluruh Indonesia, mari buat pertanian kita makin hijau & berkelanjutan! 💚
-
-Like & Share kalau kamu setuju pertanian Indonesia harus makin maju! 🇮🇩🌱
-
-🌐 agrotech.id
-
----
-#Agrotech #PertanianBerkelanjutan #ESGIndonesia #GreenTechnology #PetaniSejahtera #AgriMarketplace #FutureFarming #InovasiPertanian`,
-    date: '2026-09-18',
-    time: '18:30',
-    status: 'draft'
-  }
-];
+// DEFAULT SEED POSTS (DIISI OTOMATIS DARI TEMA KONSULTAN TERANG BULAN)
+const INITIAL_POSTS = [];
 
 // APP STATE
 let postsData = [];
@@ -320,12 +56,16 @@ function loadPostsFromStorage() {
         }
       });
 
-      // Pastikan postingan edukasi baru ada di daftar
-      INITIAL_POSTS.forEach(initPost => {
-        if (!postsData.some(p => p.id === initPost.id)) {
-          postsData.unshift(initPost);
-        }
-      });
+      // Migrasi konten baru Terang Bulan Consulting
+      if (!postsData.some(p => p.id === 'post-tb-1')) {
+        postsData = [...INITIAL_POSTS];
+      } else {
+        INITIAL_POSTS.forEach(initPost => {
+          if (!postsData.some(p => p.id === initPost.id)) {
+            postsData.unshift(initPost);
+          }
+        });
+      }
       savePostsToStorage();
     } catch (e) {
       postsData = [...INITIAL_POSTS];
@@ -1272,6 +1012,14 @@ const AI_CONTENT_DATABASE = {
   }
 };
 
+// ALIAS MAPPING PILAR SESUAI TEMA KONSULTAN TERANG BULAN
+AI_CONTENT_DATABASE.yield_optimization = AI_CONTENT_DATABASE.iot_sensor;
+AI_CONTENT_DATABASE.early_detection = AI_CONTENT_DATABASE.edu_5signs;
+AI_CONTENT_DATABASE.smart_fertigation = AI_CONTENT_DATABASE.fertigation;
+AI_CONTENT_DATABASE.drone_spatial_audit = AI_CONTENT_DATABASE.ndvi_satellite;
+AI_CONTENT_DATABASE.cost_leakage_erp = AI_CONTENT_DATABASE.erp_cloud;
+AI_CONTENT_DATABASE.grade_a_formula = AI_CONTENT_DATABASE.case_study;
+
 const CTA_OPTIONS = {
   wa: '👉 Hubungi WhatsApp konsultan kami: Amanda (0857-1385-0615) / Hardadi (0813-1307-8216) atau klik link di bio @cvagrotechnology!',
   bio: '🔗 Pelajari fitur lengkap & dapatkan promo spesial di website resmi kami: klik link di bio @cvagrotechnology!',
@@ -1286,9 +1034,24 @@ function onPillarSelectChange() {
     customGroup.style.display = (pillarVal === 'custom') ? 'block' : 'none';
   }
 
-  if (pillarVal && AI_CONTENT_DATABASE[pillarVal]) {
-    const defaultAssetId = AI_CONTENT_DATABASE[pillarVal].assetId;
-    selectGenAsset(defaultAssetId);
+  const PILLAR_TO_THEME = {
+    yield_optimization: 0,
+    early_detection: 1,
+    smart_fertigation: 2,
+    drone_spatial_audit: 3,
+    cost_leakage_erp: 4,
+    grade_a_formula: 5,
+    // legacy fallbacks
+    iot_sensor: 0,
+    edu_5signs: 1,
+    fertigation: 2,
+    ndvi_satellite: 3,
+    erp_cloud: 4,
+    case_study: 5
+  };
+
+  if (pillarVal in PILLAR_TO_THEME) {
+    selectThemeStyle(PILLAR_TO_THEME[pillarVal]);
   }
 }
 
@@ -1362,13 +1125,14 @@ function setVisualGenMode(mode) {
 let selectedThemeStyleIdx = 0;
 function selectThemeStyle(idx) {
   selectedThemeStyleIdx = idx;
-  for (let i = 0; i < 3; i++) {
+  const colors = ['#EAB308', '#10B981', '#38BDF8', '#0284C7', '#F59E0B', '#22C55E'];
+  for (let i = 0; i < 6; i++) {
     const pill = document.getElementById(`stylePill${i}`);
     if (pill) {
       if (i === idx) {
         pill.classList.add('active');
-        pill.style.border = i === 0 ? '1.5px solid #10B981' : i === 1 ? '1.5px solid #38BDF8' : '1.5px solid #F59E0B';
-        pill.style.background = i === 0 ? 'rgba(16,185,129,0.15)' : i === 1 ? 'rgba(56,189,248,0.15)' : 'rgba(245,158,11,0.15)';
+        pill.style.border = `1.5px solid ${colors[i]}`;
+        pill.style.background = `${colors[i]}25`;
       } else {
         pill.classList.remove('active');
         pill.style.border = '1px solid var(--dark-border)';
@@ -1376,26 +1140,18 @@ function selectThemeStyle(idx) {
       }
     }
   }
-  const themeNames = ['🌿 Cyber Emerald', '🛰️ Sky Satellite', '🏆 Golden Harvest'];
-  showToast(`🎨 Gaya Visual: ${themeNames[idx] || 'Custom'} dipilih!`);
+  const theme = CONSULTING_THEMES[idx % CONSULTING_THEMES.length];
+  showToast(`🎨 Gaya Infografis Terang Bulan: "${theme.ribbonText}" dipilih!`);
   generateNewAiImageOnly();
 }
 
 // FUNGSI KHUSUS GENERATE GAMBAR POSTER BARU (100% SINTESIS AI, BUKAN DARI STOK)
 function generateNewAiImageOnly() {
-  const pillarKey = document.getElementById('genPillar')?.value || 'iot_sensor';
+  const pillarKey = document.getElementById('genPillar')?.value || 'yield_optimization';
   const customTopic = document.getElementById('genCustomTopic')?.value?.trim();
-  const baseContent = CONTENT_PILLARS[pillarKey] || CONTENT_PILLARS['iot_sensor'];
+  const theme = CONSULTING_THEMES[selectedThemeStyleIdx % CONSULTING_THEMES.length];
 
-  let activeHook = '';
-  if (customTopic) {
-    activeHook = customTopic.toUpperCase();
-  } else if (baseContent && baseContent.hooks && baseContent.hooks.length > 0) {
-    const randomHookIdx = Math.floor(Math.random() * baseContent.hooks.length);
-    activeHook = baseContent.hooks[randomHookIdx];
-  } else {
-    activeHook = 'SMART FARMING & AGRO-TEKNOLOGI 4.0';
-  }
+  const activeHook = customTopic ? customTopic.toUpperCase() : theme.headline;
 
   // Buat poster banner baru 1080x1080 beresolusi tinggi secara visual
   const newBannerDataUrl = createSynthesizedBanner(activeHook, '', selectedThemeStyleIdx, pillarKey);
@@ -1415,7 +1171,7 @@ function generateNewAiImageOnly() {
   // Update badge status
   const badge = document.getElementById('activePosterStyleBadge');
   if (badge) {
-    badge.innerText = '✨ Gambar Poster Baru Aktif';
+    badge.innerText = `✨ ${theme.ribbonText}`;
     badge.style.background = '#10B981';
     badge.style.color = '#041008';
   }
@@ -1424,11 +1180,12 @@ function generateNewAiImageOnly() {
   if (typeof generatedVariations !== 'undefined' && generatedVariations && generatedVariations.length > 0) {
     generatedVariations[0].localMedia = newBannerDataUrl;
     generatedVariations[0].mediaUrl = newBannerDataUrl;
-    generatedVariations[0].assetName = `✨ Poster AI Baru (Gaya #${selectedThemeStyleIdx + 1})`;
+    generatedVariations[0].assetName = `✨ ${theme.ribbonText}`;
+    generatedVariations[0].caption = buildConsultingCaption(theme);
     renderGenResults();
   }
 
-  showToast('✨ Gambar poster baru (1080x1080) berhasil diracik khusus!');
+  showToast(`✨ Poster Infografis Terang Bulan: "${theme.ribbonText}" siap!`);
 }
 
 // PRELOADED ASSETS FOR HIGH-IMPACT CONSULTING POSTER (TERANG BULAN CONSULTING STYLE)
@@ -1629,6 +1386,76 @@ Konsultasikan kebutuhan teknologi sensor IoT, drone NDVI, dan modernisasi perkeb
 
 #SmartFarming #Agrotech #ManajemenKebun #AgribisnisIndonesia #PertanianModern #KonsultanPerkebunan #IoTPertanian #cvagrotechnology`;
 }
+
+// SEED 6 POSTINGAN DEFAULT DENGAN FORMAT TERANG BULAN CONSULTING
+INITIAL_POSTS.push(
+  {
+    id: 'post-tb-1',
+    topic: 'LAHAN SAMA, HASIL HARUS BERBEDA',
+    category: 'edu',
+    format: 'feed',
+    mediaUrl: 'assets/ig_aerial_ndvi_farm.jpg',
+    caption: buildConsultingCaption(CONSULTING_THEMES[0]),
+    date: '2026-10-23',
+    time: '08:00',
+    status: 'scheduled'
+  },
+  {
+    id: 'post-tb-2',
+    topic: 'ERA BARU PERKEBUNAN CERDAS',
+    category: 'edu',
+    format: 'feed',
+    mediaUrl: 'assets/ig_soil_probe_iot.jpg',
+    caption: buildConsultingCaption(CONSULTING_THEMES[1]),
+    date: '2026-10-25',
+    time: '10:00',
+    status: 'scheduled'
+  },
+  {
+    id: 'post-tb-3',
+    topic: 'NUTRISI TEPAT SASARAN',
+    category: 'edu',
+    format: 'feed',
+    mediaUrl: 'assets/ig_greenhouse_iot.jpg',
+    caption: buildConsultingCaption(CONSULTING_THEMES[2]),
+    date: '2026-10-27',
+    time: '14:00',
+    status: 'scheduled'
+  },
+  {
+    id: 'post-tb-4',
+    topic: 'AUDIT KEBUN BERBASIS DATA',
+    category: 'edu',
+    format: 'feed',
+    mediaUrl: 'assets/ig_drone_multispectral.jpg',
+    caption: buildConsultingCaption(CONSULTING_THEMES[3]),
+    date: '2026-10-29',
+    time: '09:00',
+    status: 'scheduled'
+  },
+  {
+    id: 'post-tb-5',
+    topic: 'MANAJEMEN KAS PROFESIONAL',
+    category: 'edu',
+    format: 'feed',
+    mediaUrl: 'assets/ig_smart_tractor.jpg',
+    caption: buildConsultingCaption(CONSULTING_THEMES[4]),
+    date: '2026-10-31',
+    time: '16:00',
+    status: 'scheduled'
+  },
+  {
+    id: 'post-tb-6',
+    topic: 'FORMULA HASIL MAKSIMAL',
+    category: 'edu',
+    format: 'feed',
+    mediaUrl: 'assets/ig_harvest_success.jpg',
+    caption: buildConsultingCaption(CONSULTING_THEMES[5]),
+    date: '2026-11-02',
+    time: '11:00',
+    status: 'scheduled'
+  }
+);
 
 // CANVAS BANNER SYNTHESIZER: PERSIS MODEL KONTEN KONSULTAN AGRIBISNIS TERANG BULAN CONSULTING (@terangbulan.consulting)
 function createSynthesizedBanner(hookTitle, subtitle, themeIndex, pillarKey) {
