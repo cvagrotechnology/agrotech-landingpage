@@ -2051,17 +2051,18 @@ function renderModalAssetPicker() {
     : 'Solusi Pertanian Cerdas Agrotech';
 
   const designOptions = [
-    { label: '🌿 Emerald', themeIdx: 0, color: '#10B981' },
-    { label: '🛰️ Satellite', themeIdx: 1, color: '#38BDF8' },
-    { label: '🏆 Harvest', themeIdx: 2, color: '#F59E0B' },
-    { label: '🧪 Bio-Tech', themeIdx: 3, color: '#C084FC' },
-    { label: '💧 Fertigasi', themeIdx: 4, color: '#2DD4BF' },
-    { label: '📊 Agro ERP', themeIdx: 5, color: '#60A5FA' }
+    { label: '🌾 Produktivitas', themeIdx: 0, color: '#EAB308' },
+    { label: '⚙️ 5 Tanda IoT', themeIdx: 1, color: '#10B981' },
+    { label: '💧 Fertigasi', themeIdx: 2, color: '#38BDF8' },
+    { label: '🛰️ Drone NDVI', themeIdx: 3, color: '#0284C7' },
+    { label: '📊 Stop Bocor', themeIdx: 4, color: '#F59E0B' },
+    { label: '🏆 Grade A', themeIdx: 5, color: '#22C55E' }
   ];
 
   designOptions.forEach((opt, idx) => {
     const thumb = document.createElement('div');
-    const bannerUrl = createSynthesizedBanner(hook, '', opt.themeIdx, 'iot_sensor');
+    const themeObj = CONSULTING_THEMES[opt.themeIdx];
+    const bannerUrl = createSynthesizedBanner(themeObj.headline, '', opt.themeIdx, 'yield_optimization');
     thumb.className = 'asset-thumb';
     thumb.style.height = '64px';
     thumb.style.minWidth = '92px';
@@ -2079,11 +2080,21 @@ function renderModalAssetPicker() {
       thumb.style.borderColor = opt.color;
       currentPreFlightPost.localMedia = bannerUrl;
       currentPreFlightPost.mediaUrl = bannerUrl;
-      currentPreFlightPost.assetName = `🎨 Desain Poster ${opt.label}`;
+      currentPreFlightPost.assetName = `✨ ${themeObj.ribbonText}`;
+      currentPreFlightPost.topic = themeObj.ribbonText;
+      currentPreFlightPost.caption = buildConsultingCaption(themeObj);
+
       const modalMedia = document.getElementById('modalMediaImg');
       if (modalMedia) modalMedia.src = bannerUrl;
+
+      const modalCaption = document.getElementById('modalCaptionText');
+      if (modalCaption) modalCaption.innerText = currentPreFlightPost.caption;
+
+      const modalEdit = document.getElementById('modalCaptionEdit');
+      if (modalEdit) modalEdit.value = currentPreFlightPost.caption;
+
       updatePreFlightChecklist();
-      showToast(`🎨 Poster ${opt.label} diterapkan ke postingan!`);
+      showToast(`🎨 Tema Infografis: "${themeObj.ribbonText}" diterapkan!`);
     };
     picker.appendChild(thumb);
   });
@@ -2095,19 +2106,28 @@ function rotateModalPhotoVisual() {
 
 function regenerateCurrentModalImage() {
   if (!currentPreFlightPost) return;
-  const randomThemeIdx = Math.floor(Math.random() * 3);
-  const hook = currentPreFlightPost.caption.split('\n')[0] || currentPreFlightPost.topic;
-  const newDataUrl = createSynthesizedBanner(hook, '', randomThemeIdx, 'iot');
+  const nextThemeIdx = Math.floor(Math.random() * CONSULTING_THEMES.length);
+  const theme = CONSULTING_THEMES[nextThemeIdx];
+  const pillarKey = document.getElementById('genPillar')?.value || 'yield_optimization';
+  const newDataUrl = createSynthesizedBanner(theme.headline, '', nextThemeIdx, pillarKey);
 
   currentPreFlightPost.localMedia = newDataUrl;
-  currentPreFlightPost.mediaUrl = newDataUrl; // automatically uploaded to Catbox by server.py if published!
-  currentPreFlightPost.assetName = `🎨 Desain Tema #${randomThemeIdx + 1} (Auto)`;
+  currentPreFlightPost.mediaUrl = newDataUrl;
+  currentPreFlightPost.assetName = `✨ ${theme.ribbonText}`;
+  currentPreFlightPost.topic = theme.ribbonText;
+  currentPreFlightPost.caption = buildConsultingCaption(theme);
 
   const modalMedia = document.getElementById('modalMediaImg');
   if (modalMedia) modalMedia.src = newDataUrl;
 
+  const modalCaption = document.getElementById('modalCaptionText');
+  if (modalCaption) modalCaption.innerText = currentPreFlightPost.caption;
+
+  const modalEdit = document.getElementById('modalCaptionEdit');
+  if (modalEdit) modalEdit.value = currentPreFlightPost.caption;
+
   updatePreFlightChecklist();
-  showToast('✨ Desain gambar baru berhasil di-generate secara unik!');
+  showToast(`✨ Poster & Caption Terang Bulan Style: "${theme.ribbonText}" siap!`);
 }
 
 function publishDirectFromModal() {
