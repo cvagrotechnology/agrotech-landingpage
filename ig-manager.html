@@ -1630,71 +1630,35 @@ print("Hasil Publikasi:", res_publish)
                 </select>
               </div>
 
-              <!-- PILIHAN TIPE VISUAL GAMBAR -->
-              <div class="form-group">
-                <label class="form-label" style="display:flex; justify-content:space-between; align-items:center;">
-                  <span><i class="ri-palette-line" style="color:#F59E0B;"></i> Tipe Gambar Visual yang Dibuat</span>
-                  <span class="badge" style="background:#F59E0B; color:#0F172A; font-weight:700;" id="visualModeBadge">✨ Desain Poster AI Aktif</span>
-                </label>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem;">
-                  <div id="btnVisualModeBanner" class="btn btn-secondary" style="border:2px solid #F59E0B; background:rgba(245,158,11,0.15); color:#fff; text-align:left; padding:0.65rem 0.8rem; cursor:pointer;" onclick="setVisualGenMode('banner')">
-                    <div style="font-weight:700; color:#F59E0B; font-size:0.82rem;"><i class="ri-palette-line"></i> ✨ Desain Poster Grafis AI</div>
-                    <div style="font-size:0.68rem; color:var(--text-muted); margin-top:0.2rem;">Poster grafis baru dengan headline, stat badge & branding @cvagrotechnology</div>
-                  </div>
-                  <div id="btnVisualModeAuto" class="btn btn-secondary" style="border:1px solid var(--dark-border); background:var(--dark-surface); color:var(--text-muted); text-align:left; padding:0.65rem 0.8rem; cursor:pointer;" onclick="setVisualGenMode('auto')">
-                    <div style="font-weight:700; font-size:0.82rem;"><i class="ri-camera-3-fill"></i> Foto Lapangan 8K</div>
-                    <div style="font-size:0.68rem; color:var(--text-muted); margin-top:0.2rem;">Foto pemandangan nyata: Traktor, Sensor Tanah, Drone, Greenhouse</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group" id="genAssetPickerGroup">
+              <!-- AI GRAPHIC & POSTER SYNTHESIZER (100% GENERATED BARU) -->
+              <div class="form-group" style="background:rgba(245, 158, 11, 0.08); border:1.5px solid rgba(245, 158, 11, 0.35); border-radius:var(--radius-md); padding:1.1rem;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
-                  <label class="form-label" style="margin-bottom:0;">Pilihan Koleksi Visual Foto Lapangan (12 Aset 8K)</label>
-                  <span style="font-size:0.7rem; color:var(--text-dim);">Pilih manual atau biarkan AI memilih otomatis</span>
+                  <span style="font-weight:800; font-size:0.88rem; color:#F59E0B; display:flex; align-items:center; gap:0.4rem;">
+                    <i class="ri-sparkling-fill"></i> AI Graphic & Poster Synthesizer
+                  </span>
+                  <span class="badge" style="background:#10B981; color:#0F172A; font-weight:800; font-size:0.7rem;">100% Desain Fresh (Bukan Foto Stok)</span>
                 </div>
-                <div class="asset-picker-grid" style="max-height:105px;" id="genAssetPicker">
-                  <div class="asset-thumb selected" data-asset="a10" onclick="selectGenAsset('a10', this)">
-                    <img src="assets/ig_soil_probe_iot.jpg" alt="Sensor Tanah IoT" title="Sensor Tanah IoT Makro">
+                <p style="font-size:0.75rem; color:var(--text-muted); margin:0 0 0.85rem 0; line-height:1.45;">
+                  Setiap kali tombol di bawah ditekan, mesin Canvas Studio akan <strong>menggambar 3 desain poster grafis 1080x1080 baru</strong> secara dinamis lengkap dengan headline judul konten, indikator metrik agrotech, dan watermark resmi @cvagrotechnology.
+                </p>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.5rem;" id="styleSelectorGrid">
+                  <div class="style-pill active" id="stylePill0" style="border:1.5px solid #10B981; background:rgba(16,185,129,0.15); padding:0.6rem 0.4rem; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectThemeStyle(0)">
+                    <div style="font-size:0.78rem; font-weight:700; color:#10B981;">🌿 Emerald IoT</div>
+                    <div style="font-size:0.65rem; color:var(--text-dim); margin-top:2px;">Cyber Smart Farm</div>
                   </div>
-                  <div class="asset-thumb" data-asset="a9" onclick="selectGenAsset('a9', this)">
-                    <img src="assets/ig_smart_tractor.jpg" alt="Traktor Otonom" title="Traktor Otonom Sawah">
+                  <div class="style-pill" id="stylePill1" style="border:1px solid var(--dark-border); background:var(--dark-surface); padding:0.6rem 0.4rem; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectThemeStyle(1)">
+                    <div style="font-size:0.78rem; font-weight:700; color:#38BDF8;">🛰️ Sky Satellite</div>
+                    <div style="font-size:0.65rem; color:var(--text-dim); margin-top:2px;">Radar & NDVI Lahan</div>
                   </div>
-                  <div class="asset-thumb" data-asset="a11" onclick="selectGenAsset('a11', this)">
-                    <img src="assets/ig_agronomist_lab.jpg" alt="Agronomis Lab" title="Agronomis Lab Vertikal">
-                  </div>
-                  <div class="asset-thumb" data-asset="a12" onclick="selectGenAsset('a12', this)">
-                    <img src="assets/ig_aerial_ndvi_farm.jpg" alt="Peta NDVI Udara" title="Peta Spasial NDVI Udara">
-                  </div>
-                  <div class="asset-thumb" data-asset="a6" onclick="selectGenAsset('a6', this)">
-                    <img src="assets/ig_greenhouse_iot.jpg" alt="Greenhouse" title="Smart Greenhouse IoT">
-                  </div>
-                  <div class="asset-thumb" data-asset="a7" onclick="selectGenAsset('a7', this)">
-                    <img src="assets/ig_drone_multispectral.jpg" alt="Drone" title="Drone Multispektral">
-                  </div>
-                  <div class="asset-thumb" data-asset="a8" onclick="selectGenAsset('a8', this)">
-                    <img src="assets/ig_harvest_success.jpg" alt="Panen" title="Hasil Panen Melimpah">
-                  </div>
-                  <div class="asset-thumb" data-asset="a3" onclick="selectGenAsset('a3', this)">
-                    <img src="assets/ig_edu_precision_fertigation.jpg" alt="Fertigasi" title="Sensor Fertigasi Presisi">
-                  </div>
-                  <div class="asset-thumb" data-asset="a4" onclick="selectGenAsset('a4', this)">
-                    <img src="assets/ig_promo_satellite_ndvi.jpg" alt="NDVI" title="Satelit NDVI Lahan">
-                  </div>
-                  <div class="asset-thumb" data-asset="a2" onclick="selectGenAsset('a2', this)">
-                    <img src="assets/ig_edu_carousel_1.jpg" alt="Carousel" title="Carousel Edukasi">
-                  </div>
-                  <div class="asset-thumb" data-asset="a1" onclick="selectGenAsset('a1', this)">
-                    <img src="assets/ig_reels_promo_1.jpg" alt="Reels" title="Reels Promo">
-                  </div>
-                  <div class="asset-thumb" data-asset="a5" onclick="selectGenAsset('a5', this)">
-                    <img src="assets/ig_profile_logo_1.jpg" alt="Logo" title="Logo Agrotech">
+                  <div class="style-pill" id="stylePill2" style="border:1px solid var(--dark-border); background:var(--dark-surface); padding:0.6rem 0.4rem; border-radius:8px; text-align:center; cursor:pointer;" onclick="selectThemeStyle(2)">
+                    <div style="font-size:0.78rem; font-weight:700; color:#F59E0B;">🏆 Golden Yield</div>
+                    <div style="font-size:0.65rem; color:var(--text-dim); margin-top:2px;">Harvest ROI Pro</div>
                   </div>
                 </div>
               </div>
 
-              <button class="btn btn-primary" style="background:linear-gradient(135deg, #F59E0B, #D97706); color:#0F172A; font-weight:800; padding:0.9rem; font-size:0.95rem; border:none;" onclick="triggerAiGeneration()">
-                <i class="ri-sparkling-fill"></i> Generate 3 Variasi Konten Sekarang
+              <button class="btn btn-primary" style="background:linear-gradient(135deg, #F59E0B, #D97706); color:#0F172A; font-weight:800; padding:1rem; font-size:1rem; border:none; box-shadow:0 4px 16px rgba(245,158,11,0.3);" onclick="triggerAiGeneration()">
+                <i class="ri-sparkling-fill"></i> Generate 3 Variasi Konten & Desain Poster Baru
               </button>
             </div>
 
@@ -1901,6 +1865,6 @@ print("Hasil Publikasi:", res_publish)
     <span id="toastMsg">Aksi berhasil dilakukan!</span>
   </div>
 
-  <script src="ig-manager.js"></script>
+  <script src="ig-manager.js?v=20261021_ai_studio_v5"></script>
 </body>
 </html>

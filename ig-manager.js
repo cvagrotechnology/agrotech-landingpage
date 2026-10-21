@@ -1359,6 +1359,27 @@ function setVisualGenMode(mode) {
   triggerAiGeneration();
 }
 
+let selectedThemeStyleIdx = 0;
+function selectThemeStyle(idx) {
+  selectedThemeStyleIdx = idx;
+  for (let i = 0; i < 3; i++) {
+    const pill = document.getElementById(`stylePill${i}`);
+    if (pill) {
+      if (i === idx) {
+        pill.classList.add('active');
+        pill.style.border = i === 0 ? '1.5px solid #10B981' : i === 1 ? '1.5px solid #38BDF8' : '1.5px solid #F59E0B';
+        pill.style.background = i === 0 ? 'rgba(16,185,129,0.15)' : i === 1 ? 'rgba(56,189,248,0.15)' : 'rgba(245,158,11,0.15)';
+      } else {
+        pill.classList.remove('active');
+        pill.style.border = '1px solid var(--dark-border)';
+        pill.style.background = 'var(--dark-surface)';
+      }
+    }
+  }
+  showToast(`🎨 Gaya Visual: ${idx === 0 ? 'Emerald IoT' : idx === 1 ? 'Sky Satellite' : 'Golden Yield'} dipilih!`);
+  triggerAiGeneration();
+}
+
 // CANVAS BANNER SYNTHESIZER (Menghasilkan gambar beresolusi 1080x1080 unik)
 function createSynthesizedBanner(hookTitle, subtitle, themeIndex, pillarKey) {
   const canvas = document.createElement('canvas');
@@ -1930,21 +1951,41 @@ function renderModalAssetPicker() {
   if (!picker) return;
   picker.innerHTML = '';
 
-  DEFAULT_ASSETS.forEach(asset => {
+  const hook = (currentPreFlightPost && currentPreFlightPost.caption) 
+    ? (currentPreFlightPost.caption.split('\n')[0] || currentPreFlightPost.topic)
+    : 'Solusi Pertanian Cerdas Agrotech';
+
+  const designOptions = [
+    { label: '🌿 Emerald', themeIdx: 0, color: '#10B981' },
+    { label: '🛰️ Sky Blue', themeIdx: 1, color: '#38BDF8' },
+    { label: '🏆 Harvest', themeIdx: 2, color: '#F59E0B' }
+  ];
+
+  designOptions.forEach((opt, idx) => {
     const thumb = document.createElement('div');
-    const isSelected = (currentPreFlightPost.localMedia === asset.path) || (currentPreFlightPost.mediaUrl === asset.onlineUrl);
-    thumb.className = `asset-thumb ${isSelected ? 'selected' : ''}`;
-    thumb.innerHTML = `<img src="${asset.path}" alt="${asset.name}">`;
+    const bannerUrl = createSynthesizedBanner(hook, '', opt.themeIdx, 'iot');
+    thumb.className = 'asset-thumb';
+    thumb.style.height = '64px';
+    thumb.style.minWidth = '92px';
+    thumb.style.cursor = 'pointer';
+    thumb.style.borderRadius = '8px';
+    thumb.style.border = `1.5px solid ${opt.color}66`;
+    thumb.style.background = 'rgba(0,0,0,0.5)';
+    thumb.style.padding = '3px';
+    thumb.innerHTML = `
+      <img src="${bannerUrl}" alt="${opt.label}" style="width:100%; height:40px; object-fit:cover; border-radius:4px;">
+      <div style="font-size:0.62rem; color:${opt.color}; text-align:center; font-weight:700; margin-top:2px;">${opt.label}</div>
+    `;
     thumb.onclick = () => {
-      picker.querySelectorAll('.asset-thumb').forEach(t => t.classList.remove('selected'));
-      thumb.classList.add('selected');
-      currentPreFlightPost.localMedia = asset.path;
-      currentPreFlightPost.mediaUrl = asset.onlineUrl || asset.path;
-      currentPreFlightPost.assetName = `📸 ${asset.name}`;
+      picker.querySelectorAll('.asset-thumb').forEach(t => t.style.borderColor = 'rgba(255,255,255,0.1)');
+      thumb.style.borderColor = opt.color;
+      currentPreFlightPost.localMedia = bannerUrl;
+      currentPreFlightPost.mediaUrl = bannerUrl;
+      currentPreFlightPost.assetName = `🎨 Desain Poster ${opt.label}`;
       const modalMedia = document.getElementById('modalMediaImg');
-      if (modalMedia) modalMedia.src = asset.path;
+      if (modalMedia) modalMedia.src = bannerUrl;
       updatePreFlightChecklist();
-      showToast(`📸 Foto pratinjau diganti: ${asset.name}`);
+      showToast(`🎨 Poster ${opt.label} diterapkan ke pratinjau!`);
     };
     picker.appendChild(thumb);
   });
