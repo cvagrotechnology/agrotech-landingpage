@@ -1260,109 +1260,340 @@ function wrapTextLines(ctx, text, x, y, maxWidth, lineHeight) {
   ctx.fillText(line.trim(), x, curY);
 }
 
-// DAFTAR TEMA INFOGRAFIS EDITORIAL KONSULTAN AGRIBISNIS TERANG BULAN CONSULTING (@terangbulan.consulting)
+// DAFTAR 6 FORMAT TEMA INFOGRAFIS BERVARIASI PERSIS POSTINGAN @terangbulan.consulting
+// SETIAP TEMA MEMILIKI ARSITEKTUR LAYOUT VISUAL YANG BERBEDA SECARA STRUKTURAL
 const CONSULTING_THEMES = [
+  // THEME 0: BENTO 2x2 GRID (4 Kunci Produktivitas Lahan)
   {
+    layoutType: 'bento_2x2',
+    name: 'Bento 2x2 Grid',
     ribbonText: 'LAHAN SAMA, HASIL HARUS BERBEDA',
     headline: 'Mengapa Produktivitas Kebun Harus Naik, Bukan Sekadar Luas Lahan?',
     c1Title: 'EFISIENSI LEBIH PENTING',
-    c1Desc: 'Maksimalkan potensi hasil dari lahan yang sudah ada sebelum membuka atau menambah areal baru.',
-    c2Title: 'PRODUKTIVITAS = KUNCI PROFIT',
-    c2Desc: 'Hasil per hektare yang lebih tinggi membantu meningkatkan efisiensi biaya dan keuntungan usaha.',
-    c3Title: 'DATA MENENTUKAN KEPUTUSAN',
-    c3Desc: 'Monitoring produksi, kondisi tanah, pemupukan, air, dan kesehatan tanaman temukan masalah lebih tepat.',
-    c4Title: 'MANAJEMEN KEBUN NAIK KELAS',
-    c4Desc: 'Perawatan tepat, SOP konsisten, teknologi cerdas, dan evaluasi rutin bikin lahan hasilkan panen optimal.',
+    c1Desc: 'Maksimalkan potensi hasil dari lahan yang sudah ada sebelum membuka areal baru.',
+    c2Title: 'PRODUKTIVITAS = PROFIT',
+    c2Desc: 'Hasil per hektare yang tinggi membantu efisiensi biaya dan meningkatkan laba bersih.',
+    c3Title: 'DATA TENTUKAN KEPUTUSAN',
+    c3Desc: 'Monitoring kondisi tanah, pupuk, air, dan tanaman temukan masalah lebih cepat.',
+    c4Title: 'MANAJEMEN NAIK KELAS',
+    c4Desc: 'SOP konsisten, teknologi cerdas, dan evaluasi berkala hasilkan panen optimal.',
     quote1: 'Bukan soal punya lahan lebih luas.',
     quote2: 'Tapi bagaimana membuat setiap hektare menghasilkan lebih optimal.',
-    heroIdx: 1 // ig_aerial_ndvi_farm.jpg (kebun perbukitan persis seperti foto TBS)
+    heroIdx: 1 // ig_aerial_ndvi_farm.jpg
   },
+
+  // THEME 1: 5-ROW VERTICAL CHECKLIST AUDIT (5 Tanda Butuh Transformasi Kebun)
   {
-    ribbonText: 'ERA BARU PERKEBUNAN CERDAS',
+    layoutType: 'checklist_5',
+    name: '5 Checklist Audit',
+    ribbonText: 'AUDIT LAPANGAN PERKEBUNAN',
     headline: '5 Tanda Kebun Anda Mendesak Butuh Sentuhan Teknologi & IoT',
-    c1Title: 'BIAYA PUPUK MEMBENGKAK',
-    c1Desc: 'Dosis pupuk tanpa takaran sensor menguras biaya operasional tanpa diiringi kenaikan tonase.',
-    c2Title: 'KONDISI TANAH TIDAK TERPANTAU',
-    c2Desc: 'pH tanah dan kelembaban yang drop memicu stres akar dan tanaman mudah layu terserang hama.',
-    c3Title: 'TELAT DETEKSI SERANGAN HAMA',
-    c3Desc: 'Citra drone spasial NDVI mendeteksi anomali klorofil daun sebelum bercak penyakit menular.',
-    c4Title: 'PEMBUKUAN KEBUN MASIH MANUAL',
-    c4Desc: 'Catatan basah dan nota hilang di pos kebun digantikan rekapitulasi data cloud otomatis di HP.',
-    quote1: 'Teknologi bukan sekadar biaya,',
-    quote2: 'melainkan investasi untuk memangkas pemborosan kebun hingga 35%.',
+    checklist: [
+      {
+        num: '01',
+        title: 'BIAYA PUPUK MEMBENGKAK TANPA KENAIKAN TONASE',
+        desc: 'Aplikasi pupuk tanpa takaran sensor tanah menguras anggaran tanpa diiringi kenaikan panen.',
+        tag: 'BIAYA BOROS'
+      },
+      {
+        num: '02',
+        title: 'KONDISI TANAH & LENGAS TIDAK PERNAH TERUKUR',
+        desc: 'pH tanah drop atau kelembaban ekstrem memicu stres akar dan tanaman mudah layu terserang hama.',
+        tag: 'BUTA DATA'
+      },
+      {
+        num: '03',
+        title: 'SERANGAN HAMA & PENYAKIT SELALU TELAT DIKETAHUI',
+        desc: 'Baru ditangani saat daun kuning meluas, bukan sejak fase deteksi dini klorofil via drone NDVI.',
+        tag: 'SERANGAN HAMA'
+      },
+      {
+        num: '04',
+        title: 'PEMBUKUAN KAS & MANDOR MASIH PAKAI NOTA KERTAS',
+        desc: 'Catatan basah, nota sobek, dan selisih timbangan di pos panen tidak pernah terlacak transparan.',
+        tag: 'NOTA HILANG'
+      },
+      {
+        num: '05',
+        title: 'KESERAGAMAN BUAH RENDAH (GRADE B & C TINGGI)',
+        desc: 'Distribusi air dan fertigasi tidak merata menyebabkan ukuran dan bobot buah panen belang-belang.',
+        tag: 'GRADE BELANG'
+      }
+    ],
+    alert1: 'EVALUASI MANDIRI KEBUN ANDA',
+    alert2: 'Jika kebun Anda mengalami 2 tanda di atas, segera jadwalkan audit SOP bersama tim agronomis Agrotech.',
     heroIdx: 0 // ig_soil_probe_iot.jpg
   },
+
+  // THEME 2: 2-COLUMN SIDE-BY-SIDE VS COMPARISON (Cara Lama vs Solusi Modern)
   {
-    ribbonText: 'NUTRISI TEPAT SASARAN',
-    headline: 'Rahasia Nutrisi Efisien: Solusi Smart Fertigation Tanpa Terbuang',
-    c1Title: 'HEMAT AIR HINGGA 50%',
-    c1Desc: 'Katup solenoid otomatis membuka sesuai kebutuhan lengas tanah riil per blok perkebunan.',
-    c2Title: 'PENYERAPAN HARA MAKSIMAL',
-    c2Desc: 'Pupuk cair terlarut dialirkan langsung ke zona perakaran aktif tanpa menguap sia-sia.',
-    c3Title: 'PERTUMBUHAN SERAGAM',
-    c3Desc: 'Setiap pohon menerima takaran nutrisi yang sama presisi, panen buah grade A seragam merata.',
-    c4Title: 'EFISIENSI BIAYA OPERASIONAL',
-    c4Desc: 'Pengontrolan fertigasi puluhan hektar cukup dijalankan 1 operator dari aplikasi HP Agrotech.',
-    quote1: 'Pupuk berkualitas akan sia-sia',
-    quote2: 'jika cara aplikasi dan distribusinya ke perakaran tanaman tidak presisi.',
+    layoutType: 'comparison_vs',
+    name: 'VS Perbandingan',
+    ribbonText: 'PERBANDINGAN STRATEGIS',
+    headline: 'Metode Konvensional vs Smart Farming Presisi',
+    vsOldTitle: 'CARA KONVENSIONAL (LAMA)',
+    vsOldItems: [
+      { t: 'Takaran Dosis Kira-Kira', d: 'Pupuk disebar tanpa data riil uji kesuburan tanah.' },
+      { t: 'Penyiraman Manual', d: 'Jadwal siram hanya mengira-ira, rawan becek & layu.' },
+      { t: 'Catatan Mandor di Buku', d: 'Kertas basah, nota tercecer, pembukuan sering selisih.' },
+      { t: 'Timbangan Panen Pos Rawan Bocor', d: 'Data hasil panen telat sampai ke telinga pemilik kebun.' }
+    ],
+    vsOldResult: 'DAMPAK: Biaya Boros & Hasil Panen Fluktuatif',
+    vsNewTitle: 'SOLUSI AGROTECH CERDAS',
+    vsNewItems: [
+      { t: 'Dosis NPK Presisi Sensor', d: 'Nutrisi diukur berdasarkan pH & lengas riil tanah.' },
+      { t: 'Fertigasi Solenoid Otomatis', d: 'Katup pengairan membuka teratur sesuai kebutuhan tanaman.' },
+      { t: 'Rekapitulasi Cloud di HP', d: 'Absensi mandor dan stok pupuk tercatat otomatis.' },
+      { t: 'Timbangan Pos Terhubung Live', d: 'Tonase panen langsung masuk dashboard pemilik seketika.' }
+    ],
+    vsNewResult: 'DAMPAK: Hemat Biaya 35% & Panen Seragam Grade A',
+    summaryQuote: 'Modernisasi kebun bukan sekadar biaya, tapi strategi menghentikan kebocoran profit.',
     heroIdx: 4 // ig_greenhouse_iot.jpg
   },
+
+  // THEME 3: BIG STAT ROI HIGHLIGHT (Angka & Bukti Finansial Riil)
   {
-    ribbonText: 'AUDIT KEBUN BERBASIS DATA',
-    headline: 'Pantau Kesehatan 50 Hektar Kebun Cukup 10 Menit Dari Udara',
-    c1Title: 'PEMETAAN INDEKS NDVI HD',
-    c1Desc: 'Kamera multispektral membaca tingkat klorofil daun dan stres tanaman secara akurat per pohon.',
-    c2Title: 'SENSUS POHON DIGITAL',
-    c2Desc: 'AI menghitung populasi tegakan pohon produktif dan titik pohon mati otomatis tanpa manual.',
-    c3Title: 'ZONASI PEMUPUKAN MIKRO',
-    c3Desc: 'Pupuk hanya disebar pada blok yang kekurangan hara, mencegah pemborosan di blok subur.',
-    c4Title: 'HISTORIS DIGITAL KEBUN',
-    c4Desc: 'Rekam jejak visual perkebunan tersimpan rapi untuk kebutuhan valuasi dan laporan investor.',
+    layoutType: 'big_stat_roi',
+    name: 'Big Stat ROI',
+    ribbonText: 'BUKTI DATA & ROI FINANSIAL',
+    headline: 'Pangkas Pemborosan Biaya Operasional Kebun Hingga 35%',
+    bigStat: '35%',
+    bigStatLabel: 'PENGHEMATAN BIAYA PUPUK & AIR PER HEKTAR',
+    subDetails: 'Terbukti pada audit implementasi kebun hortikultura & komoditas perkebunan.',
+    metrics: [
+      { val: '+28%', label: 'Kenaikan Tonase Grade A' },
+      { val: '100%', label: 'Transparansi Stok & Kas' },
+      { val: '10 Mnt', label: 'Audit Spasial 50 Ha' }
+    ],
+    card1Title: '💧 SMART FERTIGATION PRESISI',
+    card1Desc: 'Pupuk cair terlarut disalurkan langsung ke zona perakaran aktif tanpa menguap sia-sia atau hanyut tergerus hujan.',
+    card2Title: '🛰️ SENSUS & AUDIT NDVI DRONE',
+    card2Desc: 'Kamera multispektral membaca stres tanaman dan zonasi defisiensi hara sebelum bercak daun menular ke seluruh blok.',
     quote1: 'Keputusan agribisnis terbaik',
     quote2: 'dilahirkan dari data lapangan yang presisi, bukan sekadar firasat.',
     heroIdx: 6 // ig_drone_multispectral.jpg
   },
+
+  // THEME 4: 3-TAHAP HORIZONTAL FLOW TIMELINE (Roadmap Transformasi Kebun)
   {
-    ribbonText: 'MANAJEMEN KAS PROFESIONAL',
-    headline: 'Pangkas Kebocoran Biaya Kebun: Dari Mandor Langsung ke Pemilik',
-    c1Title: 'KONTROL STOK GUDANG KEBUN',
-    c1Desc: 'Penerimaan dan pemakaian pupuk, herbisida, dan solar tercatat transparan per transaksi.',
-    c2Title: 'UPAH PEKERJA TERUKUR',
-    c2Desc: 'Absensi digital mandor dan borongan panen terhitung otomatis tanpa risiko selisih hitungan.',
-    c3Title: 'TIMBANGAN PANEN LIVE',
-    c3Desc: 'Tonase panen yang ditimbang di pos kebun langsung terhubung ke dashboard pemilik secara real-time.',
-    c4Title: 'ANALISIS HPP PER KILOGRAM',
-    c4Desc: 'Ketahui persis biaya pokok produksi per kg untuk menentukan margin keuntungan bersih usaha.',
-    quote1: 'Kebun yang sukses dan menguntungkan',
-    quote2: 'adalah kebun yang setiap rupiah biaya dan hasil panennya terdata rapi.',
+    layoutType: 'steps_timeline',
+    name: '3 Alur Tahap',
+    ribbonText: 'ROADMAP TRANSFORMASI KEBUN',
+    headline: '3 Langkah Strategis Mengubah Kebun Menjadi Mesin Profit Terukur',
+    steps: [
+      {
+        num: '01',
+        tag: 'FASE 01: SENSUS & DIAGNOSTIK',
+        title: 'Pemetaan Drone NDVI & Uji Hara Tanah Laboratorium',
+        desc: 'Scan aerial multispektral 50 ha, sensus populasi pohon produktif, dan petakan zona kritis yang butuh perbaikan segera.'
+      },
+      {
+        num: '02',
+        tag: 'FASE 02: OTOMASI IOT & SMART FERTIGASI',
+        title: 'Instalasi Sensor Nirkabel & Solenoid Nutrisi Otomatis',
+        desc: 'Katup pengairan nutrisi membuka presisi sesuai lengas tanah riil, memangkas pemborosan pupuk hingga 35%.'
+      },
+      {
+        num: '03',
+        tag: 'FASE 03: CONTROLLING ERP & OPTIMASI PANEN',
+        title: 'Integrasi Timbangan Live & Dashboard Finansial HP',
+        desc: 'Catatan borongan mandor, rekapitulasi timbangan panen live, dan analisis HPP per kg langsung di genggaman pemilik.'
+      }
+    ],
+    tipTitle: 'PENDAMPINGAN KONSULTAN LAPANGAN',
+    tipText: 'Tim agronomis Agrotech mendampingi kebun Anda di setiap tahapan transformasi hingga SOP berjalan mandiri dan panen optimal.',
     heroIdx: 5 // ig_smart_tractor.jpg
   },
+
+  // THEME 5: EXECUTIVE EDITORIAL QUOTE (Filosofi & Mindset Agribisnis Modern)
   {
-    ribbonText: 'FORMULA HASIL MAKSIMAL',
-    headline: 'Strategi Petani Modern Dongkrak Tonase Panen Hingga 28%',
-    c1Title: 'PERBAIKAN STRUKTUR TANAH',
-    c1Desc: 'Aplikasi mikroorganisme dan pembenah tanah mengembalikan kesuburan dan aerasi tanah.',
-    c2Title: 'FORMULA SPESIFIK FASE',
-    c2Desc: 'Takaran unsur hara makro NPK dan mikro disesuaikan kebutuhan spesifik fase vegetatif & generatif.',
-    c3Title: 'PENDAMPINGAN LAPANGAN',
-    c3Desc: 'Konsultasi berkala bersama tim agronomis Agrotech mendeteksi dini kendala budidaya di kebun.',
-    c4Title: 'STANDAR PASAR PREMIUM',
-    c4Desc: 'Keseragaman ukuran, bobot, dan kematangan hasil panen memenuhi kualifikasi harga industri tinggi.',
-    quote1: 'Hasil panen melimpah bukan kebetulan,',
-    quote2: 'tetapi buah dari penerapan SOP budidaya yang konsisten dan terukur.',
+    layoutType: 'editorial_quote',
+    name: 'Quote Mindset',
+    ribbonText: 'MINDSET AGRIBISNIS MODERN',
+    headline: 'Bukan Luas Lahan yang Menentukan Profit, Tapi Bagaimana Anda Mengelolanya',
+    mainQuote: 'Kebun yang sukses bukan yang lahannya paling luas, melainkan yang setiap jengkal tanahnya dikelola dengan data yang presisi.',
+    subQuote: 'Membuka areal baru tanpa sistem hanya melipatgandakan pemborosan. Mulai dengan efisiensi pemupukan, standarisasi SOP budidaya, dan pengawasan berbasis sensor cerdas.',
+    author: 'CV AGROTEKNOLOGI NUSANTARA',
+    role: 'Partner Konsultasi & Transformasi Digital Agribisnis Indonesia',
+    pills: ['📊 Data Driven', '🌱 SOP Terukur', '⚙️ Efisiensi Biaya'],
+    tipText: 'Simpan insight ini sebagai panduan arah strategi perkebunan Anda.',
     heroIdx: 2 // ig_harvest_success.jpg
   }
 ];
 
-function buildConsultingCaption(t) {
+function buildConsultingCaption(t, idx) {
+  const themeIndex = (typeof idx === 'number') ? idx : 0;
+  const layout = t.layoutType || 'bento_2x2';
+
+  if (layout === 'checklist_5') {
+    return `${t.ribbonText}.
+
+${t.headline}
+
+Banyak pemilik kebun mengeluhkan biaya operasional yang terus naik tetapi tonase panen jalan di tempat. Seringkali, kebocoran terjadi pada hal-hal mendasar yang luput dari pantauan harian.
+
+📋 5 TANDA PERIKSA AUDIT KEBUN ANDA:
+
+1️⃣ ${t.checklist[0].title}
+👉 ${t.checklist[0].desc}
+
+2️⃣ ${t.checklist[1].title}
+👉 ${t.checklist[1].desc}
+
+3️⃣ ${t.checklist[2].title}
+👉 ${t.checklist[2].desc}
+
+4️⃣ ${t.checklist[3].title}
+👉 ${t.checklist[3].desc}
+
+5️⃣ ${t.checklist[4].title}
+👉 ${t.checklist[4].desc}
+
+⚠️ EVALUASI KEBUN ANDA:
+Jika kebun Anda mengalami minimal 2 dari 5 tanda di atas, sudah saatnya melakukan audit SOP dan transformasi digital kebun bersama kami.
+
+🔖 Simpan postingan ini untuk checklist evaluasi mandor dan tim kebun Anda!
+Konsultasi & Audit Lapangan bersama CV Agroteknologi Nusantara:
+📲 Amanda: 0857-1385-0615
+📲 Hardadi: 0813-1307-8216
+🌐 www.cvagrotechnology.com
+
+#SmartFarming #AuditKebun #Agrotech #KonsultanPerkebunan #ManajemenKebun #AgribisnisIndonesia #PertanianPresisi #cvagrotechnology`;
+  }
+
+  if (layout === 'comparison_vs') {
+    return `${t.ribbonText}.
+
+${t.headline}
+
+Apakah cara mengelola kebun Anda saat ini masih mengandalkan perkiraan dan kebiasaan lama?
+Mari bandingkan dampak finansial dan operasional antara pendekatan konvensional vs sistem cerdas berbasis data:
+
+❌ METODE KONVENSIONAL (LAMA):
+• ${t.vsOldItems[0].t} — ${t.vsOldItems[0].d}
+• ${t.vsOldItems[1].t} — ${t.vsOldItems[1].d}
+• ${t.vsOldItems[2].t} — ${t.vsOldItems[2].d}
+• ${t.vsOldItems[3].t} — ${t.vsOldItems[3].d}
+👉 Hasil: ${t.vsOldResult}
+
+VS
+
+✅ SOLUSI CERDAS AGROTECH:
+• ${t.vsNewItems[0].t} — ${t.vsNewItems[0].d}
+• ${t.vsNewItems[1].t} — ${t.vsNewItems[1].d}
+• ${t.vsNewItems[2].t} — ${t.vsNewItems[2].d}
+• ${t.vsNewItems[3].t} — ${t.vsNewItems[3].d}
+👉 Hasil: ${t.vsNewResult}
+
+💡 "${t.summaryQuote}"
+
+🔖 Simpan postingan ini agar tidak salah langkah dalam investasi kebun!
+Konsultasikan modernisasi perkebunan Anda bersama CV Agroteknologi Nusantara:
+📲 Amanda: 0857-1385-0615
+📲 Hardadi: 0813-1307-8216
+🌐 www.cvagrotechnology.com
+
+#SmartFarming #PerbandinganMetode #Agrotech #KonsultanAgribisnis #EfisiensiPupuk #ModernisasiPertanian #IoTPertanian #cvagrotechnology`;
+  }
+
+  if (layout === 'big_stat_roi') {
+    return `${t.ribbonText}.
+
+${t.headline}
+
+Bagi pengusaha agribisnis dan pemilik perkebunan, angka efisiensi bukan sekadar teori, melainkan penentu kelangsungan laba bersih usaha.
+
+📊 BUKTI DATA LAPANGAN AGROTECH:
+🔥 ${t.bigStat} ${t.bigStatLabel}
+📈 ${t.metrics[0].val} — ${t.metrics[0].label}
+💼 ${t.metrics[1].val} — ${t.metrics[1].label}
+🛰️ ${t.metrics[2].val} — ${t.metrics[2].label}
+
+Bagaimana sistem ini memangkas biaya operasional kebun Anda?
+💧 1. ${t.card1Title}
+${t.card1Desc}
+
+🛰️ 2. ${t.card2Title}
+${t.card2Desc}
+
+💡 "${t.quote1} ${t.quote2}"
+
+🔖 Simpan insight data ini untuk diskusi anggaran kebun tahun ini!
+Konsultasi & Hitung Potensi Efisiensi Kebun Anda:
+📲 Amanda: 0857-1385-0615
+📲 Hardadi: 0813-1307-8216
+🌐 www.cvagrotechnology.com
+
+#SmartFarming #ROIKebun #EfisiensiBiaya #Agrotech #FertigasiPresisi #DroneNDVI #AgribisnisIndonesia #cvagrotechnology`;
+  }
+
+  if (layout === 'steps_timeline') {
+    return `${t.ribbonText}.
+
+${t.headline}
+
+Banyak pemilik kebun ragu memulai modernisasi karena takut rumit atau khawatir mandor tidak siap. Padahal, transformasi yang sukses selalu dijalankan bertahap dengan SOP yang jelas:
+
+🚀 3 TAHAP ROADMAP TRANSFORMASI AGROTECH:
+
+📍 ${t.steps[0].tag}
+${t.steps[0].title}
+👉 ${t.steps[0].desc}
+
+📍 ${t.steps[1].tag}
+${t.steps[1].title}
+👉 ${t.steps[1].desc}
+
+📍 ${t.steps[2].tag}
+${t.steps[2].title}
+👉 ${t.steps[2].desc}
+
+🎯 ${t.tipTitle}:
+${t.tipText}
+
+🔖 Simpan roadmap ini sebagai panduan melangkah bagi manajemen kebun Anda!
+Mulai transformasi kebun Anda hari ini bersama CV Agroteknologi Nusantara:
+📲 Amanda: 0857-1385-0615
+📲 Hardadi: 0813-1307-8216
+🌐 www.cvagrotechnology.com
+
+#SmartFarming #RoadmapKebun #Agrotech #SOPPerkebunan #TransformasiDigital #KonsultanPerkebunan #AgribisnisIndonesia #cvagrotechnology`;
+  }
+
+  if (layout === 'editorial_quote') {
+    return `${t.ribbonText}.
+
+"${t.mainQuote}"
+
+Seringkali kita melihat pemilik lahan berlomba-lomba memperluas hektare kebunnya. Namun tanpa SOP budidaya yang presisi dan pembukuan data yang rapi, membuka lahan baru justru mempercepat kebocoran biaya.
+
+${t.subQuote}
+
+Tiga pilar utama agribisnis modern:
+📊 1. Keputusan Berbasis Data Riil (Bukan Firasat)
+🌱 2. Standar Operasional Prosedur (SOP) Terukur
+⚙️ 3. Efisiensi Biaya Operasional Berkelanjutan
+
+Mari naik kelas bersama mitra agronomis terpercaya.
+
+🔖 Simpan insight ini sebagai pengingat arah visi bisnis perkebunan Anda!
+Konsultasi & Diskusi Strategis bersama CV Agroteknologi Nusantara:
+📲 Amanda: 0857-1385-0615
+📲 Hardadi: 0813-1307-8216
+🌐 www.cvagrotechnology.com
+
+#MindsetAgribisnis #KonsultanPerkebunan #SmartFarming #Agrotech #PetaniMilenial #PertanianIndonesia #ManajemenKebun #cvagrotechnology`;
+  }
+
+  // DEFAULT: BENTO 2x2
   return `${t.ribbonText}.
 
 ${t.headline}
 
 Apakah meningkatkan produktivitas kebun harus selalu dengan menambah luas lahan? Belum tentu.
-Justru, tantangan agribisnis dan perkebunan modern adalah bagaimana membuat setiap hektare menghasilkan lebih optimal dan terukur.
+Justru, tantangan agribisnis modern adalah bagaimana membuat setiap hektare menghasilkan lebih optimal dan terukur.
 
-📌 Mengapa hal ini krusial bagi perkebunan Anda?
+📌 4 PILAR PENTING PRODUKTIVITAS LAHAN:
 
 1️⃣ ${t.c1Title}
 ${t.c1Desc}
@@ -1387,7 +1618,7 @@ Konsultasikan kebutuhan teknologi sensor IoT, drone NDVI, dan modernisasi perkeb
 #SmartFarming #Agrotech #ManajemenKebun #AgribisnisIndonesia #PertanianModern #KonsultanPerkebunan #IoTPertanian #cvagrotechnology`;
 }
 
-// SEED 6 POSTINGAN DEFAULT DENGAN FORMAT TERANG BULAN CONSULTING
+// SEED 6 POSTINGAN DEFAULT DENGAN FORMAT BERAGAM PERSIS @terangbulan.consulting
 INITIAL_POSTS.push(
   {
     id: 'post-tb-1',
@@ -1395,299 +1626,100 @@ INITIAL_POSTS.push(
     category: 'edu',
     format: 'feed',
     mediaUrl: 'assets/ig_aerial_ndvi_farm.jpg',
-    caption: buildConsultingCaption(CONSULTING_THEMES[0]),
+    caption: buildConsultingCaption(CONSULTING_THEMES[0], 0),
     date: '2026-10-23',
     time: '08:00',
     status: 'scheduled'
   },
   {
     id: 'post-tb-2',
-    topic: 'ERA BARU PERKEBUNAN CERDAS',
+    topic: 'AUDIT LAPANGAN PERKEBUNAN',
     category: 'edu',
     format: 'feed',
     mediaUrl: 'assets/ig_soil_probe_iot.jpg',
-    caption: buildConsultingCaption(CONSULTING_THEMES[1]),
+    caption: buildConsultingCaption(CONSULTING_THEMES[1], 1),
     date: '2026-10-25',
     time: '10:00',
     status: 'scheduled'
   },
   {
     id: 'post-tb-3',
-    topic: 'NUTRISI TEPAT SASARAN',
+    topic: 'PERBANDINGAN STRATEGIS',
     category: 'edu',
     format: 'feed',
     mediaUrl: 'assets/ig_greenhouse_iot.jpg',
-    caption: buildConsultingCaption(CONSULTING_THEMES[2]),
+    caption: buildConsultingCaption(CONSULTING_THEMES[2], 2),
     date: '2026-10-27',
     time: '14:00',
     status: 'scheduled'
   },
   {
     id: 'post-tb-4',
-    topic: 'AUDIT KEBUN BERBASIS DATA',
+    topic: 'BUKTI DATA & ROI FINANSIAL',
     category: 'edu',
     format: 'feed',
     mediaUrl: 'assets/ig_drone_multispectral.jpg',
-    caption: buildConsultingCaption(CONSULTING_THEMES[3]),
+    caption: buildConsultingCaption(CONSULTING_THEMES[3], 3),
     date: '2026-10-29',
     time: '09:00',
     status: 'scheduled'
   },
   {
     id: 'post-tb-5',
-    topic: 'MANAJEMEN KAS PROFESIONAL',
+    topic: 'ROADMAP TRANSFORMASI KEBUN',
     category: 'edu',
     format: 'feed',
     mediaUrl: 'assets/ig_smart_tractor.jpg',
-    caption: buildConsultingCaption(CONSULTING_THEMES[4]),
+    caption: buildConsultingCaption(CONSULTING_THEMES[4], 4),
     date: '2026-10-31',
     time: '16:00',
     status: 'scheduled'
   },
   {
     id: 'post-tb-6',
-    topic: 'FORMULA HASIL MAKSIMAL',
+    topic: 'MINDSET AGRIBISNIS MODERN',
     category: 'edu',
     format: 'feed',
     mediaUrl: 'assets/ig_harvest_success.jpg',
-    caption: buildConsultingCaption(CONSULTING_THEMES[5]),
+    caption: buildConsultingCaption(CONSULTING_THEMES[5], 5),
     date: '2026-11-02',
     time: '11:00',
     status: 'scheduled'
   }
 );
 
-// CANVAS BANNER SYNTHESIZER: PERSIS MODEL KONTEN KONSULTAN AGRIBISNIS TERANG BULAN CONSULTING (@terangbulan.consulting)
-function createSynthesizedBanner(hookTitle, subtitle, themeIndex, pillarKey) {
-  const canvas = document.createElement('canvas');
-  canvas.width = 1080;
-  canvas.height = 1080;
-  const ctx = canvas.getContext('2d');
-
-  const t = CONSULTING_THEMES[themeIndex % CONSULTING_THEMES.length];
-
-  // 1. BASE CANVAS: CLEAN CRISP WHITE / LIGHT BG (SESUAI CONTOH TERANG BULAN CONSULTING)
-  ctx.fillStyle = '#FFFFFF';
-  ctx.fillRect(0, 0, 1080, 1080);
-
-  // Bagian bawah kartu diberi nuansa abu-abu sangat lembut untuk kontras
-  ctx.fillStyle = '#F8FAFC';
-  ctx.fillRect(0, 440, 1080, 640);
-
-  // 2. TOP HERO PHOTO SECTION (y = 0 to 450)
-  const heroH = 450;
-  const photo = PRELOADED_CONSULTING_IMGS[t.heroIdx % PRELOADED_CONSULTING_IMGS.length];
-  if (photo && photo.complete && photo.naturalWidth > 0) {
-    ctx.drawImage(photo, 0, 0, 1080, heroH);
-  } else {
-    // Fallback gradient pemandangan perkebunan hijau
-    const pGrad = ctx.createLinearGradient(0, 0, 1080, heroH);
-    pGrad.addColorStop(0, '#1E3A2F');
-    pGrad.addColorStop(0.5, '#2D5A43');
-    pGrad.addColorStop(1, '#4A7C59');
-    ctx.fillStyle = pGrad;
-    ctx.fillRect(0, 0, 1080, heroH);
-  }
-
-  // Gradient Soft Light Mask di sisi kiri foto agar teks headline terbaca kontras & tajam
-  const leftScrim = ctx.createLinearGradient(0, 0, 680, 0);
-  leftScrim.addColorStop(0, 'rgba(255, 255, 255, 0.94)');
-  leftScrim.addColorStop(0.5, 'rgba(255, 255, 255, 0.85)');
-  leftScrim.addColorStop(0.8, 'rgba(255, 255, 255, 0.35)');
-  leftScrim.addColorStop(1, 'rgba(255, 255, 255, 0)');
-  ctx.fillStyle = leftScrim;
-  ctx.fillRect(0, 0, 680, heroH);
-
-  // Gradient Fade di bagian bawah foto (menyatu mulus ke area putih kartu di bawahnya)
-  const bottomScrim = ctx.createLinearGradient(0, heroH - 90, 0, heroH);
-  bottomScrim.addColorStop(0, 'rgba(255, 255, 255, 0)');
-  bottomScrim.addColorStop(1, 'rgba(248, 250, 252, 1)');
-  ctx.fillStyle = bottomScrim;
-  ctx.fillRect(0, heroH - 90, 1080, 90);
-
-  // Elemen Holografik Cerdas di Sisi Kanan Foto (Mewakili teknologi agronomis tablet di foto TBS)
-  ctx.fillStyle = 'rgba(15, 35, 60, 0.65)';
-  ctx.strokeStyle = '#38BDF8';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 810, 140, 220, 160, 14);
-  ctx.fill();
-  ctx.stroke();
-
-  // Mini Bar Chart Hologram
-  ctx.fillStyle = '#10B981';
-  ctx.fillRect(835, 240, 18, 40);
-  ctx.fillRect(865, 220, 18, 60);
-  ctx.fillRect(895, 200, 18, 80);
-  ctx.fillRect(925, 180, 18, 100);
-  ctx.fillRect(955, 160, 18, 120);
-
-  // Line Chart overlay
-  ctx.strokeStyle = '#FCD34D';
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.moveTo(844, 235);
-  ctx.lineTo(874, 215);
-  ctx.lineTo(904, 195);
-  ctx.lineTo(934, 175);
-  ctx.lineTo(964, 155);
-  ctx.stroke();
-
-  // Mini label hologram
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 12px sans-serif';
-  ctx.fillText('📈 LIVE TELEMETRI KEBUN', 835, 158);
-
-  // 3. LOGO RESMI AGROTECH DI POJOK KANAN ATAS (PERSIS LOGO TBS)
+// HELPER: RENDER LOGO AGROTECH
+function renderAgrotechLogo(ctx, x, y) {
+  ctx.save();
   ctx.fillStyle = '#FFFFFF';
   ctx.strokeStyle = '#E2E8F0';
   ctx.lineWidth = 1;
-  drawRoundRectPath(ctx, 830, 26, 210, 58, 12);
+  drawRoundRectPath(ctx, x, y, 210, 58, 12);
   ctx.fill();
   ctx.stroke();
 
   // Logo Box
   ctx.fillStyle = '#0F2B4E';
-  drawRoundRectPath(ctx, 842, 34, 46, 42, 8);
+  drawRoundRectPath(ctx, x + 12, y + 8, 46, 42, 8);
   ctx.fill();
 
   ctx.fillStyle = '#10B981';
   ctx.font = 'bold 20px sans-serif';
-  ctx.fillText('AG', 850, 62);
+  ctx.fillText('AG', x + 20, y + 36);
 
   ctx.fillStyle = '#0F2B4E';
   ctx.font = 'bold 18px sans-serif';
-  ctx.fillText('AGROTECH', 898, 52);
+  ctx.fillText('AGROTECH', x + 68, y + 26);
 
   ctx.fillStyle = '#64748B';
   ctx.font = '9px sans-serif';
-  ctx.fillText('SMART AGRIBISNIS', 898, 68);
+  ctx.fillText('SMART AGRIBISNIS', x + 68, y + 42);
+  ctx.restore();
+}
 
-  // 4. PITA KUNING BRUSH DI KIRI ATAS (PERSIS "LAHAN SAMA, HASIL HARUS BERBEDA" DI POSTINGAN TBS)
-  ctx.fillStyle = '#EAB308'; // Mustard Gold TBS
-  drawRoundRectPath(ctx, 45, 30, 480, 58, 8);
-  ctx.fill();
-
-  // Aksen garis dekoratif pita
-  ctx.fillStyle = '#CA8A04';
-  ctx.fillRect(45, 84, 480, 4);
-
-  ctx.fillStyle = '#0A2342'; // Dark Navy
-  ctx.font = 'bold 24px sans-serif';
-  ctx.fillText(t.ribbonText, 65, 67);
-
-  // 5. HEADLINE UTAMA BERTEMA KONSULTAN (Bukan sekadar teks biasa)
-  // Font tegas, navy gelap, kontras di atas foto
-  ctx.fillStyle = '#0A2342';
-  ctx.font = 'bold 36px sans-serif';
-  wrapTextLines(ctx, t.headline, 55, 138, 540, 46);
-
-  // 6. AREA 4 KARTU INFOGRAFIS (GRID 2x2 PERSIS POSTINGAN TBS: 01, 02, 03, 04)
-  const cardW = 475;
-  const cardH = 165;
-  const cardRadius = 14;
-
-  const cardData = [
-    { num: '01', title: t.c1Title, desc: t.c1Desc, x: 45, y: 465, color: '#059669', icon: '🌱' },
-    { num: '02', title: t.c2Title, desc: t.c2Desc, x: 560, y: 465, color: '#0284C7', icon: '📈' },
-    { num: '03', title: t.c3Title, desc: t.c3Desc, x: 45, y: 645, color: '#0369A1', icon: '📋' },
-    { num: '04', title: t.c4Title, desc: t.c4Desc, x: 560, y: 645, color: '#16A34A', icon: '⚙️' }
-  ];
-
-  cardData.forEach(c => {
-    // Background Kartu Putih Bersih
-    ctx.fillStyle = '#FFFFFF';
-    ctx.strokeStyle = '#E2E8F0';
-    ctx.lineWidth = 1.5;
-    drawRoundRectPath(ctx, c.x, c.y, cardW, cardH, cardRadius);
-    ctx.fill();
-    ctx.stroke();
-
-    // Lingkaran Ikon Berwarna di Kiri (Persis Ikon Hijau/Biru TBS)
-    ctx.fillStyle = c.color;
-    ctx.beginPath();
-    ctx.arc(c.x + 48, c.y + 48, 26, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Ikon Grafis
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = '22px sans-serif';
-    ctx.fillText(c.icon, c.x + 37, c.y + 56);
-
-    // Nomor Poin
-    ctx.fillStyle = c.color;
-    ctx.font = 'bold 24px sans-serif';
-    ctx.fillText(c.num, c.x + 88, c.y + 44);
-
-    // Judul Poin (Huruf Besar Navy Bold)
-    ctx.fillStyle = '#0A2342';
-    ctx.font = 'bold 17px sans-serif';
-    ctx.fillText(c.title, c.x + 128, c.y + 44);
-
-    // Penjelasan Poin (Teks Abu-abu Gelap Rapi 3 baris)
-    ctx.fillStyle = '#334155';
-    ctx.font = '14.5px sans-serif';
-    wrapTextLines(ctx, c.desc, c.x + 88, c.y + 74, 365, 23);
-  });
-
-  // 7. BANNER QUOTE BIRU NAVY DI KIRI BAWAH (PERSIS BANNER BIRU TBS DENGAN LAMPU BOHLAM KUNING)
-  const quoteX = 45;
-  const quoteY = 828;
-  const quoteW = 635;
-  const quoteH = 92;
-
-  ctx.fillStyle = '#0A2540'; // Deep Navy TBS
-  drawRoundRectPath(ctx, quoteX, quoteY, quoteW, quoteH, 16);
-  ctx.fill();
-
-  // Lingkaran Bohlam Kuning di Kiri
-  ctx.fillStyle = '#EAB308';
-  ctx.beginPath();
-  ctx.arc(quoteX + 46, quoteY + 46, 26, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.fillStyle = '#0A2540';
-  ctx.font = '24px sans-serif';
-  ctx.fillText('💡', quoteX + 34, quoteY + 54);
-
-  // Teks Quote 2 Baris (Baris 1 Putih, Baris 2 Kuning Terang)
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 17px sans-serif';
-  ctx.fillText(t.quote1, quoteX + 86, quoteY + 38);
-
-  ctx.fillStyle = '#FCD34D'; // Kuning Terang
-  ctx.font = 'bold 17px sans-serif';
-  ctx.fillText(t.quote2, quoteX + 86, quoteY + 68);
-
-  // 8. KOTAK BOOKMARK "SAVE →" DI KANAN BAWAH (PERSIS TOMBOL SAVE TBS)
-  const saveX = 698;
-  const saveY = 828;
-  const saveW = 337;
-  const saveH = 92;
-
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#CBD5E1';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, saveX, saveY, saveW, saveH, 16);
-  ctx.fill();
-  ctx.stroke();
-
-  // Ikon Bookmark Kuning
-  ctx.fillStyle = '#EAB308';
-  ctx.font = '32px sans-serif';
-  ctx.fillText('🔖', saveX + 20, saveY + 58);
-
-  // Tulisan SAVE ->
-  ctx.fillStyle = '#0A2540';
-  ctx.font = 'bold 24px sans-serif';
-  ctx.fillText('SAVE →', saveX + 70, saveY + 44);
-
-  // Subteks Simpan Insight
-  ctx.fillStyle = '#64748B';
-  ctx.font = '13px sans-serif';
-  ctx.fillText('Simpan insight ini untuk', saveX + 70, saveY + 66);
-  ctx.fillText('evaluasi kebun Anda.', saveX + 70, saveY + 82);
-
-  // 9. FOOTER BAR ELEGAN DI BAGIAN PALING BAWAH (PERSIS FOOTER TERANG BULAN)
+// HELPER: RENDER FOOTER RESMI AGROTECH
+function renderAgrotechFooter(ctx) {
+  ctx.save();
   const footerY = 938;
   const footerH = 142;
 
@@ -1702,7 +1734,7 @@ function createSynthesizedBanner(hookTitle, subtitle, themeIndex, pillarKey) {
   ctx.fillStyle = '#EAB308';
   ctx.fillRect(0, footerY, 1080, 4);
 
-  // Aksen Daun Hijau di Pojok Kiri Bawah (Dekoratif Perkebunan)
+  // Aksen Daun Hijau di Pojok Kiri Bawah
   ctx.fillStyle = 'rgba(16, 185, 129, 0.25)';
   ctx.beginPath();
   ctx.arc(30, 1070, 70, 0, Math.PI * 2);
@@ -1721,6 +1753,1006 @@ function createSynthesizedBanner(hookTitle, subtitle, themeIndex, pillarKey) {
   ctx.fillStyle = '#FCD34D';
   ctx.font = 'bold 20px sans-serif';
   ctx.fillText('📲 Konsultasi & Demo: Amanda (0857-1385-0615)  |  Hardadi (0813-1307-8216)', 65, footerY + 95);
+  ctx.restore();
+}
+
+// ============================================================================
+// 6 LAYOUT RENDERERS (PERSIS 6 GAYA POSTINGAN @terangbulan.consulting)
+// ============================================================================
+
+// LAYOUT 0: BENTO 2x2 GRID
+function renderLayoutBento2x2(ctx, t, photo, customHook) {
+  const heroH = 450;
+  if (photo && photo.complete && photo.naturalWidth > 0) {
+    ctx.drawImage(photo, 0, 0, 1080, heroH);
+  } else {
+    const pGrad = ctx.createLinearGradient(0, 0, 1080, heroH);
+    pGrad.addColorStop(0, '#1E3A2F');
+    pGrad.addColorStop(0.5, '#2D5A43');
+    pGrad.addColorStop(1, '#4A7C59');
+    ctx.fillStyle = pGrad;
+    ctx.fillRect(0, 0, 1080, heroH);
+  }
+
+  // Scrims
+  const leftScrim = ctx.createLinearGradient(0, 0, 680, 0);
+  leftScrim.addColorStop(0, 'rgba(255, 255, 255, 0.94)');
+  leftScrim.addColorStop(0.5, 'rgba(255, 255, 255, 0.85)');
+  leftScrim.addColorStop(0.8, 'rgba(255, 255, 255, 0.35)');
+  leftScrim.addColorStop(1, 'rgba(255, 255, 255, 0)');
+  ctx.fillStyle = leftScrim;
+  ctx.fillRect(0, 0, 680, heroH);
+
+  const bottomScrim = ctx.createLinearGradient(0, heroH - 90, 0, heroH);
+  bottomScrim.addColorStop(0, 'rgba(255, 255, 255, 0)');
+  bottomScrim.addColorStop(1, 'rgba(248, 250, 252, 1)');
+  ctx.fillStyle = bottomScrim;
+  ctx.fillRect(0, heroH - 90, 1080, 90);
+
+  // Hologram Live Telemetri
+  ctx.fillStyle = 'rgba(15, 35, 60, 0.65)';
+  ctx.strokeStyle = '#38BDF8';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 810, 140, 220, 160, 14);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#10B981';
+  ctx.fillRect(835, 240, 18, 40);
+  ctx.fillRect(865, 220, 18, 60);
+  ctx.fillRect(895, 200, 18, 80);
+  ctx.fillRect(925, 180, 18, 100);
+  ctx.fillRect(955, 160, 18, 120);
+
+  ctx.strokeStyle = '#FCD34D';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(844, 235);
+  ctx.lineTo(874, 215);
+  ctx.lineTo(904, 195);
+  ctx.lineTo(934, 175);
+  ctx.lineTo(964, 155);
+  ctx.stroke();
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 12px sans-serif';
+  ctx.fillText('📈 LIVE TELEMETRI KEBUN', 835, 158);
+
+  // Logo & Ribbon
+  renderAgrotechLogo(ctx, 830, 26);
+
+  ctx.fillStyle = '#EAB308';
+  drawRoundRectPath(ctx, 45, 30, 480, 58, 8);
+  ctx.fill();
+  ctx.fillStyle = '#CA8A04';
+  ctx.fillRect(45, 84, 480, 4);
+  ctx.fillStyle = '#0A2342';
+  ctx.font = 'bold 24px sans-serif';
+  ctx.fillText(t.ribbonText, 65, 67);
+
+  // Headline
+  ctx.fillStyle = '#0A2342';
+  ctx.font = 'bold 36px sans-serif';
+  const headline = customHook || t.headline;
+  wrapTextLines(ctx, headline, 55, 138, 540, 46);
+
+  // 4 Bento Cards
+  const cardW = 475;
+  const cardH = 165;
+  const cardData = [
+    { num: '01', title: t.c1Title, desc: t.c1Desc, x: 45, y: 465, color: '#059669', icon: '🌱' },
+    { num: '02', title: t.c2Title, desc: t.c2Desc, x: 560, y: 465, color: '#0284C7', icon: '📈' },
+    { num: '03', title: t.c3Title, desc: t.c3Desc, x: 45, y: 645, color: '#0369A1', icon: '📋' },
+    { num: '04', title: t.c4Title, desc: t.c4Desc, x: 560, y: 645, color: '#16A34A', icon: '⚙️' }
+  ];
+
+  cardData.forEach(c => {
+    ctx.fillStyle = '#FFFFFF';
+    ctx.strokeStyle = '#E2E8F0';
+    ctx.lineWidth = 1.5;
+    drawRoundRectPath(ctx, c.x, c.y, cardW, cardH, 14);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = c.color;
+    ctx.beginPath();
+    ctx.arc(c.x + 48, c.y + 48, 26, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '22px sans-serif';
+    ctx.fillText(c.icon, c.x + 37, c.y + 56);
+
+    ctx.fillStyle = c.color;
+    ctx.font = 'bold 24px sans-serif';
+    ctx.fillText(c.num, c.x + 88, c.y + 44);
+
+    ctx.fillStyle = '#0A2342';
+    ctx.font = 'bold 17px sans-serif';
+    ctx.fillText(c.title, c.x + 128, c.y + 44);
+
+    ctx.fillStyle = '#334155';
+    ctx.font = '14.5px sans-serif';
+    wrapTextLines(ctx, c.desc, c.x + 88, c.y + 74, 365, 23);
+  });
+
+  // Quote Box & Save Button
+  const quoteX = 45;
+  const quoteY = 828;
+  const quoteW = 635;
+  const quoteH = 92;
+
+  ctx.fillStyle = '#0A2540';
+  drawRoundRectPath(ctx, quoteX, quoteY, quoteW, quoteH, 16);
+  ctx.fill();
+
+  ctx.fillStyle = '#EAB308';
+  ctx.beginPath();
+  ctx.arc(quoteX + 46, quoteY + 46, 26, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#0A2540';
+  ctx.font = '24px sans-serif';
+  ctx.fillText('💡', quoteX + 34, quoteY + 54);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 17px sans-serif';
+  ctx.fillText(t.quote1, quoteX + 86, quoteY + 38);
+  ctx.fillStyle = '#FCD34D';
+  ctx.font = 'bold 17px sans-serif';
+  ctx.fillText(t.quote2, quoteX + 86, quoteY + 68);
+
+  const saveX = 698;
+  const saveY = 828;
+  const saveW = 337;
+  const saveH = 92;
+  ctx.fillStyle = '#FFFFFF';
+  ctx.strokeStyle = '#CBD5E1';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, saveX, saveY, saveW, saveH, 16);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#EAB308';
+  ctx.font = '32px sans-serif';
+  ctx.fillText('🔖', saveX + 20, saveY + 58);
+  ctx.fillStyle = '#0A2540';
+  ctx.font = 'bold 24px sans-serif';
+  ctx.fillText('SAVE →', saveX + 70, saveY + 44);
+  ctx.fillStyle = '#64748B';
+  ctx.font = '13px sans-serif';
+  ctx.fillText('Simpan insight ini untuk', saveX + 70, saveY + 66);
+  ctx.fillText('evaluasi kebun Anda.', saveX + 70, saveY + 82);
+
+  renderAgrotechFooter(ctx);
+}
+
+// LAYOUT 1: 5-ROW VERTICAL CHECKLIST AUDIT LAPANGAN
+function renderLayoutChecklist5(ctx, t, photo, customHook) {
+  const heroH = 240;
+  if (photo && photo.complete && photo.naturalWidth > 0) {
+    ctx.drawImage(photo, 0, 0, 1080, heroH);
+  } else {
+    const pGrad = ctx.createLinearGradient(0, 0, 1080, heroH);
+    pGrad.addColorStop(0, '#0F2B48');
+    pGrad.addColorStop(1, '#1A4D32');
+    ctx.fillStyle = pGrad;
+    ctx.fillRect(0, 0, 1080, heroH);
+  }
+
+  // Dark scrim overlay for high contrast headline
+  const topScrim = ctx.createLinearGradient(0, 0, 0, heroH);
+  topScrim.addColorStop(0, 'rgba(10, 37, 64, 0.75)');
+  topScrim.addColorStop(1, 'rgba(10, 37, 64, 0.95)');
+  ctx.fillStyle = topScrim;
+  ctx.fillRect(0, 0, 1080, heroH);
+
+  renderAgrotechLogo(ctx, 830, 22);
+
+  // Ribbon Badge
+  ctx.fillStyle = '#10B981';
+  drawRoundRectPath(ctx, 45, 24, 450, 48, 8);
+  ctx.fill();
+  ctx.fillStyle = '#041008';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('📋 ' + t.ribbonText, 65, 56);
+
+  // Headline
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 32px sans-serif';
+  const headline = customHook || t.headline;
+  wrapTextLines(ctx, headline, 45, 115, 760, 40);
+
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '16px sans-serif';
+  ctx.fillText('Periksa apakah kebun Anda mengalami tanda-tanda pemborosan di bawah ini:', 45, 205);
+
+  // 5 Rows Stacked
+  const startY = 255;
+  const rowH = 88;
+  const gap = 12;
+
+  t.checklist.forEach((item, i) => {
+    const curY = startY + i * (rowH + gap);
+
+    // Card background
+    ctx.fillStyle = '#FFFFFF';
+    ctx.strokeStyle = '#E2E8F0';
+    ctx.lineWidth = 1.5;
+    drawRoundRectPath(ctx, 45, curY, 990, rowH, 12);
+    ctx.fill();
+    ctx.stroke();
+
+    // Left accent bar
+    ctx.fillStyle = '#10B981';
+    ctx.fillRect(45, curY + 12, 6, rowH - 24);
+
+    // Number circle badge
+    ctx.fillStyle = '#ECFDF5';
+    ctx.strokeStyle = '#10B981';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(88, curY + (rowH / 2), 24, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#059669';
+    ctx.font = 'bold 18px sans-serif';
+    ctx.fillText(item.num, 77, curY + (rowH / 2) + 7);
+
+    // Title
+    ctx.fillStyle = '#0A2540';
+    ctx.font = 'bold 17px sans-serif';
+    ctx.fillText(item.title, 130, curY + 34);
+
+    // Description
+    ctx.fillStyle = '#475569';
+    ctx.font = '14.5px sans-serif';
+    wrapTextLines(ctx, item.desc, 130, curY + 62, 720, 20);
+
+    // Right warning pill
+    ctx.fillStyle = '#FEF2F2';
+    ctx.strokeStyle = '#FCA5A5';
+    ctx.lineWidth = 1;
+    drawRoundRectPath(ctx, 875, curY + 26, 145, 36, 8);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#DC2626';
+    ctx.font = 'bold 13px sans-serif';
+    ctx.fillText('⚠️ ' + item.tag, 888, curY + 49);
+  });
+
+  // Bottom Alert Box
+  const alertY = startY + 5 * (rowH + gap) + 6;
+  ctx.fillStyle = '#0A2540';
+  drawRoundRectPath(ctx, 45, alertY, 990, 135, 14);
+  ctx.fill();
+
+  ctx.fillStyle = '#FCD34D';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText('⚠️ ' + t.alert1, 75, alertY + 40);
+
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '15px sans-serif';
+  wrapTextLines(ctx, t.alert2, 75, alertY + 70, 700, 24);
+
+  // Bookmark tag on right side
+  ctx.fillStyle = '#FFFFFF';
+  ctx.strokeStyle = '#38BDF8';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 825, alertY + 32, 185, 70, 10);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#0A2540';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('🔖 SIMPAN POST', 845, alertY + 62);
+  ctx.fillStyle = '#64748B';
+  ctx.font = '12px sans-serif';
+  ctx.fillText('Untuk audit kebun', 845, alertY + 84);
+
+  renderAgrotechFooter(ctx);
+}
+
+// LAYOUT 2: 2-COLUMN SIDE-BY-SIDE VS COMPARISON (Cara Lama vs Solusi Modern)
+function renderLayoutComparisonVS(ctx, t, photo, customHook) {
+  const heroH = 210;
+  if (photo && photo.complete && photo.naturalWidth > 0) {
+    ctx.drawImage(photo, 0, 0, 1080, heroH);
+  } else {
+    const pGrad = ctx.createLinearGradient(0, 0, 1080, heroH);
+    pGrad.addColorStop(0, '#1E293B');
+    pGrad.addColorStop(1, '#0F172A');
+    ctx.fillStyle = pGrad;
+    ctx.fillRect(0, 0, 1080, heroH);
+  }
+
+  const scrim = ctx.createLinearGradient(0, 0, 0, heroH);
+  scrim.addColorStop(0, 'rgba(15, 23, 42, 0.7)');
+  scrim.addColorStop(1, 'rgba(15, 23, 42, 0.95)');
+  ctx.fillStyle = scrim;
+  ctx.fillRect(0, 0, 1080, heroH);
+
+  renderAgrotechLogo(ctx, 830, 20);
+
+  // Ribbon
+  ctx.fillStyle = '#F59E0B';
+  drawRoundRectPath(ctx, 45, 22, 450, 48, 8);
+  ctx.fill();
+  ctx.fillStyle = '#041008';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('⚖️ ' + t.ribbonText, 65, 54);
+
+  // Headline
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 30px sans-serif';
+  const headline = customHook || t.headline;
+  wrapTextLines(ctx, headline, 45, 105, 760, 38);
+
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '15px sans-serif';
+  ctx.fillText('Bandingkan efisiensi operasional dan hasil panen antara 2 pendekatan kebun:', 45, 185);
+
+  const colY = 220;
+  const colW = 475;
+  const colH = 585;
+
+  // LEFT COLUMN: CARA KONVENSIONAL (LAMA)
+  ctx.fillStyle = '#FFF8F8';
+  ctx.strokeStyle = '#FCA5A5';
+  ctx.lineWidth = 2;
+  drawRoundRectPath(ctx, 45, colY, colW, colH, 16);
+  ctx.fill();
+  ctx.stroke();
+
+  // Header Bar Left
+  ctx.fillStyle = '#EF4444';
+  drawRoundRectPath(ctx, 45, colY, colW, 60, 16);
+  ctx.fill();
+  ctx.fillRect(45, colY + 30, colW, 30); // square off bottom corners of header
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText('❌ ' + t.vsOldTitle, 75, colY + 38);
+
+  // Left Items
+  const itemStartY = colY + 80;
+  const itemH = 95;
+  t.vsOldItems.forEach((it, idx) => {
+    const curY = itemStartY + idx * itemH;
+    ctx.fillStyle = '#FEE2E2';
+    ctx.beginPath();
+    ctx.arc(80, curY + 20, 16, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#DC2626';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText('✕', 73, curY + 26);
+
+    ctx.fillStyle = '#0A2540';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText(it.t, 108, curY + 16);
+
+    ctx.fillStyle = '#64748B';
+    ctx.font = '13.5px sans-serif';
+    wrapTextLines(ctx, it.d, 108, curY + 38, 385, 20);
+  });
+
+  // Left Result Tag
+  ctx.fillStyle = '#FEE2E2';
+  ctx.strokeStyle = '#F87171';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 65, colY + colH - 85, colW - 40, 65, 10);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#991B1B';
+  ctx.font = 'bold 15px sans-serif';
+  wrapTextLines(ctx, '⚠️ ' + t.vsOldResult, 80, colY + colH - 58, colW - 70, 22);
+
+  // RIGHT COLUMN: SOLUSI AGROTECH
+  ctx.fillStyle = '#F0FDF4';
+  ctx.strokeStyle = '#10B981';
+  ctx.lineWidth = 2;
+  drawRoundRectPath(ctx, 560, colY, colW, colH, 16);
+  ctx.fill();
+  ctx.stroke();
+
+  // Header Bar Right
+  ctx.fillStyle = '#059669';
+  drawRoundRectPath(ctx, 560, colY, colW, 60, 16);
+  ctx.fill();
+  ctx.fillRect(560, colY + 30, colW, 30);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText('✅ ' + t.vsNewTitle, 590, colY + 38);
+
+  // Right Items
+  t.vsNewItems.forEach((it, idx) => {
+    const curY = itemStartY + idx * itemH;
+    ctx.fillStyle = '#DCFCE7';
+    ctx.beginPath();
+    ctx.arc(595, curY + 20, 16, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#16A34A';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText('✓', 589, curY + 26);
+
+    ctx.fillStyle = '#0A2540';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText(it.t, 623, curY + 16);
+
+    ctx.fillStyle = '#334155';
+    ctx.font = '13.5px sans-serif';
+    wrapTextLines(ctx, it.d, 623, curY + 38, 385, 20);
+  });
+
+  // Right Result Tag
+  ctx.fillStyle = '#DCFCE7';
+  ctx.strokeStyle = '#34D399';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 580, colY + colH - 85, colW - 40, 65, 10);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#166534';
+  ctx.font = 'bold 15px sans-serif';
+  wrapTextLines(ctx, '🏆 ' + t.vsNewResult, 595, colY + colH - 58, colW - 70, 22);
+
+  // Floating Central VS Badge
+  ctx.fillStyle = '#0A2540';
+  ctx.strokeStyle = '#EAB308';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.arc(540, colY + 250, 36, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('VS', 524, colY + 258);
+
+  // Bottom Summary Pill
+  const sumY = 825;
+  ctx.fillStyle = '#0A2540';
+  drawRoundRectPath(ctx, 45, sumY, 990, 92, 14);
+  ctx.fill();
+
+  ctx.fillStyle = '#EAB308';
+  ctx.beginPath();
+  ctx.arc(88, sumY + 46, 24, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#0A2540';
+  ctx.font = '22px sans-serif';
+  ctx.fillText('💡', 77, sumY + 54);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 16px sans-serif';
+  wrapTextLines(ctx, `"${t.summaryQuote}"`, 130, sumY + 42, 680, 24);
+
+  // Bookmark Save on right
+  ctx.fillStyle = '#FFFFFF';
+  ctx.strokeStyle = '#CBD5E1';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 835, sumY + 16, 180, 60, 10);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#EAB308';
+  ctx.font = '24px sans-serif';
+  ctx.fillText('🔖', 850, sumY + 54);
+  ctx.fillStyle = '#0A2540';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('SAVE →', 885, sumY + 52);
+
+  renderAgrotechFooter(ctx);
+}
+
+// LAYOUT 3: BIG STAT / ROI HIGHLIGHT (Angka & Bukti Finansial Riil)
+function renderLayoutBigStatROI(ctx, t, photo, customHook) {
+  const heroH = 195;
+  if (photo && photo.complete && photo.naturalWidth > 0) {
+    ctx.drawImage(photo, 0, 0, 1080, heroH);
+  } else {
+    const pGrad = ctx.createLinearGradient(0, 0, 1080, heroH);
+    pGrad.addColorStop(0, '#0C4A6E');
+    pGrad.addColorStop(1, '#075985');
+    ctx.fillStyle = pGrad;
+    ctx.fillRect(0, 0, 1080, heroH);
+  }
+
+  const scrim = ctx.createLinearGradient(0, 0, 0, heroH);
+  scrim.addColorStop(0, 'rgba(8, 47, 73, 0.7)');
+  scrim.addColorStop(1, 'rgba(8, 47, 73, 0.96)');
+  ctx.fillStyle = scrim;
+  ctx.fillRect(0, 0, 1080, heroH);
+
+  renderAgrotechLogo(ctx, 830, 20);
+
+  // Ribbon
+  ctx.fillStyle = '#0284C7';
+  drawRoundRectPath(ctx, 45, 20, 450, 48, 8);
+  ctx.fill();
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('📊 ' + t.ribbonText, 65, 52);
+
+  // Headline
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 30px sans-serif';
+  const headline = customHook || t.headline;
+  wrapTextLines(ctx, headline, 45, 102, 760, 38);
+
+  ctx.fillStyle = '#BAE6FD';
+  ctx.font = '15px sans-serif';
+  ctx.fillText('Data riil efisiensi operasional kebun dari implementasi sensor IoT & fertigasi presisi:', 45, 175);
+
+  // Massive Hero Stat Card
+  const statBoxY = 210;
+  const statBoxH = 320;
+  const sGrad = ctx.createLinearGradient(45, statBoxY, 1035, statBoxY + statBoxH);
+  sGrad.addColorStop(0, '#06182C');
+  sGrad.addColorStop(1, '#0B3B60');
+  ctx.fillStyle = sGrad;
+  ctx.strokeStyle = '#EAB308';
+  ctx.lineWidth = 2.5;
+  drawRoundRectPath(ctx, 45, statBoxY, 990, statBoxH, 18);
+  ctx.fill();
+  ctx.stroke();
+
+  // Left Big Number Display
+  ctx.fillStyle = '#10B981';
+  ctx.font = 'bold 100px sans-serif';
+  ctx.fillText(t.bigStat, 85, statBoxY + 125);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 20px sans-serif';
+  wrapTextLines(ctx, t.bigStatLabel, 85, statBoxY + 175, 480, 28);
+
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '14.5px sans-serif';
+  wrapTextLines(ctx, t.subDetails, 85, statBoxY + 250, 480, 22);
+
+  // Vertical Divider
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(600, statBoxY + 25);
+  ctx.lineTo(600, statBoxY + statBoxH - 25);
+  ctx.stroke();
+
+  // Right 3 Metric Bars
+  const rightStartY = statBoxY + 30;
+  t.metrics.forEach((m, idx) => {
+    const curY = rightStartY + idx * 88;
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+    ctx.lineWidth = 1;
+    drawRoundRectPath(ctx, 625, curY, 385, 74, 10);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#38BDF8';
+    ctx.font = 'bold 32px sans-serif';
+    ctx.fillText(m.val, 645, curY + 48);
+
+    ctx.fillStyle = '#F8FAFC';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText(m.label, 775, curY + 44);
+  });
+
+  // 2 Horizontal Detail Cards
+  const c1Y = 548;
+  const c2Y = 680;
+  const cardH = 118;
+
+  // Card 1
+  ctx.fillStyle = '#FFFFFF';
+  ctx.strokeStyle = '#E2E8F0';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 45, c1Y, 990, cardH, 14);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#0284C7';
+  ctx.fillRect(45, c1Y + 12, 6, cardH - 24);
+
+  ctx.fillStyle = '#0A2540';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText(t.card1Title, 75, c1Y + 40);
+
+  ctx.fillStyle = '#475569';
+  ctx.font = '14.5px sans-serif';
+  wrapTextLines(ctx, t.card1Desc, 75, c1Y + 70, 920, 22);
+
+  // Card 2
+  ctx.fillStyle = '#FFFFFF';
+  ctx.strokeStyle = '#E2E8F0';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 45, c2Y, 990, cardH, 14);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#059669';
+  ctx.fillRect(45, c2Y + 12, 6, cardH - 24);
+
+  ctx.fillStyle = '#0A2540';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText(t.card2Title, 75, c2Y + 40);
+
+  ctx.fillStyle = '#475569';
+  ctx.font = '14.5px sans-serif';
+  wrapTextLines(ctx, t.card2Desc, 75, c2Y + 70, 920, 22);
+
+  // Bottom Quote Box
+  const qY = 818;
+  ctx.fillStyle = '#0A2540';
+  drawRoundRectPath(ctx, 45, qY, 990, 100, 14);
+  ctx.fill();
+
+  ctx.fillStyle = '#EAB308';
+  ctx.beginPath();
+  ctx.arc(88, qY + 50, 24, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#0A2540';
+  ctx.font = '22px sans-serif';
+  ctx.fillText('💡', 77, qY + 58);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText(`"${t.quote1}"`, 130, qY + 42);
+  ctx.fillStyle = '#FCD34D';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText(`${t.quote2}`, 130, qY + 70);
+
+  // Bookmark Save on right
+  ctx.fillStyle = '#FFFFFF';
+  ctx.strokeStyle = '#CBD5E1';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 835, qY + 20, 180, 60, 10);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#EAB308';
+  ctx.font = '24px sans-serif';
+  ctx.fillText('🔖', 850, qY + 58);
+  ctx.fillStyle = '#0A2540';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('SAVE →', 885, qY + 56);
+
+  renderAgrotechFooter(ctx);
+}
+
+// LAYOUT 4: 3-TAHAP HORIZONTAL FLOW TIMELINE (Roadmap Transformasi Kebun)
+function renderLayout3StepsTimeline(ctx, t, photo, customHook) {
+  const heroH = 205;
+  if (photo && photo.complete && photo.naturalWidth > 0) {
+    ctx.drawImage(photo, 0, 0, 1080, heroH);
+  } else {
+    const pGrad = ctx.createLinearGradient(0, 0, 1080, heroH);
+    pGrad.addColorStop(0, '#312E81');
+    pGrad.addColorStop(1, '#1E1B4B');
+    ctx.fillStyle = pGrad;
+    ctx.fillRect(0, 0, 1080, heroH);
+  }
+
+  const scrim = ctx.createLinearGradient(0, 0, 0, heroH);
+  scrim.addColorStop(0, 'rgba(30, 27, 75, 0.7)');
+  scrim.addColorStop(1, 'rgba(30, 27, 75, 0.96)');
+  ctx.fillStyle = scrim;
+  ctx.fillRect(0, 0, 1080, heroH);
+
+  renderAgrotechLogo(ctx, 830, 20);
+
+  // Ribbon
+  ctx.fillStyle = '#8B5CF6';
+  drawRoundRectPath(ctx, 45, 20, 450, 48, 8);
+  ctx.fill();
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('🚀 ' + t.ribbonText, 65, 52);
+
+  // Headline
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 30px sans-serif';
+  const headline = customHook || t.headline;
+  wrapTextLines(ctx, headline, 45, 102, 760, 38);
+
+  ctx.fillStyle = '#DDD6FE';
+  ctx.font = '15px sans-serif';
+  ctx.fillText('Alur SOP modernisasi agribisnis dari tahap audit awal hingga kestabilan panen:', 45, 180);
+
+  // Vertical Connecting Dotted Line
+  ctx.strokeStyle = '#EAB308';
+  ctx.lineWidth = 3.5;
+  ctx.setLineDash([8, 6]);
+  ctx.beginPath();
+  ctx.moveTo(100, 240);
+  ctx.lineTo(100, 760);
+  ctx.stroke();
+  ctx.setLineDash([]); // reset
+
+  // 3 Horizontal Step Cards
+  const startY = 225;
+  const stepH = 165;
+  const stepGap = 20;
+
+  const stepColors = ['#0284C7', '#059669', '#D97706'];
+
+  t.steps.forEach((st, idx) => {
+    const curY = startY + idx * (stepH + stepGap);
+
+    // Card White Box
+    ctx.fillStyle = '#FFFFFF';
+    ctx.strokeStyle = '#E2E8F0';
+    ctx.lineWidth = 1.5;
+    drawRoundRectPath(ctx, 155, curY, 880, stepH, 16);
+    ctx.fill();
+    ctx.stroke();
+
+    // Left color bar on card
+    ctx.fillStyle = stepColors[idx];
+    ctx.fillRect(155, curY + 16, 6, stepH - 32);
+
+    // Circular Step Number on Timeline
+    ctx.fillStyle = '#0A2540';
+    ctx.strokeStyle = '#EAB308';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(100, curY + (stepH / 2), 28, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#FCD34D';
+    ctx.font = 'bold 20px sans-serif';
+    ctx.fillText(st.num, 89, curY + (stepH / 2) + 7);
+
+    // Phase Tag Pill
+    ctx.fillStyle = `${stepColors[idx]}18`;
+    ctx.strokeStyle = stepColors[idx];
+    ctx.lineWidth = 1;
+    drawRoundRectPath(ctx, 185, curY + 20, 270, 30, 6);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = stepColors[idx];
+    ctx.font = 'bold 12.5px sans-serif';
+    ctx.fillText(st.tag, 198, curY + 40);
+
+    // Title
+    ctx.fillStyle = '#0A2540';
+    ctx.font = 'bold 18px sans-serif';
+    ctx.fillText(st.title, 185, curY + 80);
+
+    // Description
+    ctx.fillStyle = '#475569';
+    ctx.font = '14.5px sans-serif';
+    wrapTextLines(ctx, st.desc, 185, curY + 110, 810, 22);
+  });
+
+  // Bottom Tip Card
+  const tipY = 790;
+  ctx.fillStyle = '#0A2540';
+  drawRoundRectPath(ctx, 45, tipY, 990, 128, 14);
+  ctx.fill();
+
+  ctx.fillStyle = '#FCD34D';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText('🎯 ' + t.tipTitle, 75, tipY + 40);
+
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '15px sans-serif';
+  wrapTextLines(ctx, t.tipText, 75, tipY + 70, 720, 24);
+
+  // Bookmark tag
+  ctx.fillStyle = '#FFFFFF';
+  ctx.strokeStyle = '#38BDF8';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 835, tipY + 30, 180, 68, 10);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#0A2540';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('🔖 ROADMAP', 860, tipY + 60);
+  ctx.fillStyle = '#64748B';
+  ctx.font = '12px sans-serif';
+  ctx.fillText('Simpan di HP', 860, tipY + 82);
+
+  renderAgrotechFooter(ctx);
+}
+
+// LAYOUT 5: EXECUTIVE EDITORIAL QUOTE (Filosofi & Mindset Agribisnis Modern)
+function renderLayoutExecutiveQuote(ctx, t, photo, customHook) {
+  // Dominant full cinematic photo taking 52% of canvas!
+  const heroH = 550;
+  if (photo && photo.complete && photo.naturalWidth > 0) {
+    ctx.drawImage(photo, 0, 0, 1080, heroH);
+  } else {
+    const pGrad = ctx.createLinearGradient(0, 0, 1080, heroH);
+    pGrad.addColorStop(0, '#1E3A2F');
+    pGrad.addColorStop(0.5, '#2D5A43');
+    pGrad.addColorStop(1, '#4A7C59');
+    ctx.fillStyle = pGrad;
+    ctx.fillRect(0, 0, 1080, heroH);
+  }
+
+  // Dark vignette gradient overlay over photo
+  const grad = ctx.createLinearGradient(0, 0, 0, heroH);
+  grad.addColorStop(0, 'rgba(6, 24, 44, 0.8)');
+  grad.addColorStop(0.4, 'rgba(6, 24, 44, 0.4)');
+  grad.addColorStop(0.8, 'rgba(6, 24, 44, 0.7)');
+  grad.addColorStop(1, 'rgba(248, 250, 252, 1)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1080, heroH);
+
+  renderAgrotechLogo(ctx, 830, 26);
+
+  // Ribbon
+  ctx.fillStyle = '#EAB308';
+  drawRoundRectPath(ctx, 45, 26, 450, 50, 8);
+  ctx.fill();
+  ctx.fillStyle = '#041008';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('💡 ' + t.ribbonText, 65, 58);
+
+  // Top Headline
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 32px sans-serif';
+  const headline = customHook || t.headline;
+  wrapTextLines(ctx, headline, 45, 125, 760, 42);
+
+  // FLOATING LUXURY EXECUTIVE QUOTE CARD
+  const cardX = 55;
+  const cardY = 240;
+  const cardW = 970;
+  const cardH = 485;
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.strokeStyle = '#E2E8F0';
+  ctx.lineWidth = 2;
+  drawRoundRectPath(ctx, cardX, cardY, cardW, cardH, 20);
+  ctx.fill();
+  ctx.stroke();
+
+  // Golden accent bar on top of the card
+  ctx.fillStyle = '#EAB308';
+  drawRoundRectPath(ctx, cardX, cardY, cardW, 8, 20);
+  ctx.fill();
+
+  // Giant decorative quotation mark
+  ctx.fillStyle = '#059669';
+  ctx.font = 'bold 110px serif';
+  ctx.fillText('“', cardX + 45, cardY + 110);
+
+  // Main Quote Text
+  ctx.fillStyle = '#0A2540';
+  ctx.font = 'bold 28px sans-serif';
+  wrapTextLines(ctx, `"${t.mainQuote}"`, cardX + 110, cardY + 90, 800, 42);
+
+  // Subtitle / Supporting context
+  ctx.fillStyle = '#475569';
+  ctx.font = '16.5px sans-serif';
+  wrapTextLines(ctx, t.subQuote, cardX + 110, cardY + 235, 800, 26);
+
+  // Consultant Signature Box
+  const sigX = cardX + 45;
+  const sigY = cardY + 340;
+  const sigW = cardW - 90;
+  const sigH = 105;
+
+  ctx.fillStyle = '#F8FAFC';
+  ctx.strokeStyle = '#CBD5E1';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, sigX, sigY, sigW, sigH, 12);
+  ctx.fill();
+  ctx.stroke();
+
+  // Round badge icon
+  ctx.fillStyle = '#0F2B4E';
+  ctx.beginPath();
+  ctx.arc(sigX + 55, sigY + 52, 32, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#10B981';
+  ctx.font = 'bold 20px sans-serif';
+  ctx.fillText('AG', sigX + 39, sigY + 60);
+
+  ctx.fillStyle = '#0A2540';
+  ctx.font = 'bold 19px sans-serif';
+  ctx.fillText(t.author, sigX + 105, sigY + 44);
+
+  ctx.fillStyle = '#059669';
+  ctx.font = 'bold 14px sans-serif';
+  ctx.fillText('PARTNER KONSULTASI & STRATEGI PERKEBUNAN', sigX + 105, sigY + 68);
+
+  ctx.fillStyle = '#64748B';
+  ctx.font = '13px sans-serif';
+  ctx.fillText(t.role, sigX + 105, sigY + 88);
+
+  // 3 Strategy Badges underneath the quote card
+  const badgeY = 745;
+  const badgeW = 300;
+  const badgeH = 58;
+  const badgeGap = 35;
+  const bColors = ['#0284C7', '#059669', '#D97706'];
+
+  t.pills.forEach((p, idx) => {
+    const curX = 55 + idx * (badgeW + badgeGap);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.strokeStyle = bColors[idx];
+    ctx.lineWidth = 1.5;
+    drawRoundRectPath(ctx, curX, badgeY, badgeW, badgeH, 10);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#0A2540';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText(p, curX + 25, badgeY + 36);
+  });
+
+  // Bottom Tip Card
+  const tipY = 820;
+  ctx.fillStyle = '#0A2540';
+  drawRoundRectPath(ctx, 55, tipY, 970, 95, 14);
+  ctx.fill();
+
+  ctx.fillStyle = '#FCD34D';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('💡 STRATEGI BISNIS PERKEBUNAN', 85, tipY + 40);
+
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '15px sans-serif';
+  ctx.fillText(t.tipText, 85, tipY + 68);
+
+  // Bookmark Save on right
+  ctx.fillStyle = '#FFFFFF';
+  ctx.strokeStyle = '#CBD5E1';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 815, tipY + 18, 185, 60, 10);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#EAB308';
+  ctx.font = '24px sans-serif';
+  ctx.fillText('🔖', 830, tipY + 56);
+  ctx.fillStyle = '#0A2540';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('SAVE →', 865, tipY + 54);
+
+  renderAgrotechFooter(ctx);
+}
+
+// CANVAS BANNER SYNTHESIZER DISPATCHER
+function createSynthesizedBanner(hookTitle, subtitle, themeIndex, pillarKey) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1080;
+  canvas.height = 1080;
+  const ctx = canvas.getContext('2d');
+
+  // Base canvas clean white
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillRect(0, 0, 1080, 1080);
+
+  const idx = (typeof themeIndex === 'number') ? themeIndex : 0;
+  const t = CONSULTING_THEMES[idx % CONSULTING_THEMES.length];
+  const photo = PRELOADED_CONSULTING_IMGS[t.heroIdx % PRELOADED_CONSULTING_IMGS.length];
+
+  const layoutMode = idx % 6;
+
+  switch (layoutMode) {
+    case 1:
+      renderLayoutChecklist5(ctx, t, photo, hookTitle);
+      break;
+    case 2:
+      renderLayoutComparisonVS(ctx, t, photo, hookTitle);
+      break;
+    case 3:
+      renderLayoutBigStatROI(ctx, t, photo, hookTitle);
+      break;
+    case 4:
+      renderLayout3StepsTimeline(ctx, t, photo, hookTitle);
+      break;
+    case 5:
+      renderLayoutExecutiveQuote(ctx, t, photo, hookTitle);
+      break;
+    case 0:
+    default:
+      renderLayoutBento2x2(ctx, t, photo, hookTitle);
+      break;
+  }
 
   return canvas.toDataURL('image/jpeg', 0.94);
 }
@@ -1871,7 +2903,7 @@ function triggerAiGeneration() {
       mediaUrl: mediaUrl1,
       localMedia: media1,
       assetName: assetName1,
-      caption: buildConsultingCaption(CONSULTING_THEMES[themeA])
+      caption: buildConsultingCaption(CONSULTING_THEMES[themeA], themeA)
     },
     {
       id: `gen-v2-${Date.now()}`,
@@ -1883,7 +2915,7 @@ function triggerAiGeneration() {
       mediaUrl: mediaUrl2,
       localMedia: media2,
       assetName: assetName2,
-      caption: buildConsultingCaption(CONSULTING_THEMES[themeB])
+      caption: buildConsultingCaption(CONSULTING_THEMES[themeB], themeB)
     },
     {
       id: `gen-v3-${Date.now()}`,
@@ -1895,7 +2927,7 @@ function triggerAiGeneration() {
       mediaUrl: mediaUrl3,
       localMedia: media3,
       assetName: assetName3,
-      caption: buildConsultingCaption(CONSULTING_THEMES[themeC])
+      caption: buildConsultingCaption(CONSULTING_THEMES[themeC], themeC)
     }
   ];
 
@@ -2051,12 +3083,12 @@ function renderModalAssetPicker() {
     : 'Solusi Pertanian Cerdas Agrotech';
 
   const designOptions = [
-    { label: '🌾 Produktivitas', themeIdx: 0, color: '#EAB308' },
-    { label: '⚙️ 5 Tanda IoT', themeIdx: 1, color: '#10B981' },
-    { label: '💧 Fertigasi', themeIdx: 2, color: '#38BDF8' },
-    { label: '🛰️ Drone NDVI', themeIdx: 3, color: '#0284C7' },
-    { label: '📊 Stop Bocor', themeIdx: 4, color: '#F59E0B' },
-    { label: '🏆 Grade A', themeIdx: 5, color: '#22C55E' }
+    { label: '🌾 Bento 2x2', themeIdx: 0, color: '#EAB308' },
+    { label: '📋 5 Checklist', themeIdx: 1, color: '#10B981' },
+    { label: '⚖️ VS Perbandingan', themeIdx: 2, color: '#F59E0B' },
+    { label: '📊 Big Stat ROI', themeIdx: 3, color: '#0284C7' },
+    { label: '🚀 3 Alur Tahap', themeIdx: 4, color: '#8B5CF6' },
+    { label: '💡 Quote Mindset', themeIdx: 5, color: '#22C55E' }
   ];
 
   designOptions.forEach((opt, idx) => {
@@ -2082,7 +3114,7 @@ function renderModalAssetPicker() {
       currentPreFlightPost.mediaUrl = bannerUrl;
       currentPreFlightPost.assetName = `✨ ${themeObj.ribbonText}`;
       currentPreFlightPost.topic = themeObj.ribbonText;
-      currentPreFlightPost.caption = buildConsultingCaption(themeObj);
+      currentPreFlightPost.caption = buildConsultingCaption(themeObj, opt.themeIdx);
 
       const modalMedia = document.getElementById('modalMediaImg');
       if (modalMedia) modalMedia.src = bannerUrl;
@@ -2115,7 +3147,7 @@ function regenerateCurrentModalImage() {
   currentPreFlightPost.mediaUrl = newDataUrl;
   currentPreFlightPost.assetName = `✨ ${theme.ribbonText}`;
   currentPreFlightPost.topic = theme.ribbonText;
-  currentPreFlightPost.caption = buildConsultingCaption(theme);
+  currentPreFlightPost.caption = buildConsultingCaption(theme, nextThemeIdx);
 
   const modalMedia = document.getElementById('modalMediaImg');
   if (modalMedia) modalMedia.src = newDataUrl;
