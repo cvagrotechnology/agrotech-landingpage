@@ -1757,12 +1757,286 @@ function renderAgrotechFooter(ctx) {
 }
 
 // ============================================================================
-// 6 LAYOUT RENDERERS (PERSIS 6 GAYA POSTINGAN @terangbulan.consulting)
+// VISUAL INFOGRAPHIC ILLUSTRATION HELPERS (MENGUTAMAKAN ILUSTRASI VISUAL GRAFIS)
 // ============================================================================
 
-// LAYOUT 0: BENTO 2x2 GRID
+// 1. ILUSTRASI GAUGE METER KELEMBABAN TANAH / pH SENSOR
+function drawVisualDialGauge(ctx, cx, cy, radius, percent, labelText, valueText) {
+  ctx.save();
+  // Background card
+  ctx.fillStyle = 'rgba(6, 24, 44, 0.88)';
+  ctx.strokeStyle = '#38BDF8';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, cx - radius - 25, cy - radius - 15, (radius + 25) * 2, radius * 2 + 50, 16);
+  ctx.fill();
+  ctx.stroke();
+
+  // Arc track (from PI*0.8 to PI*2.2)
+  const startAngle = Math.PI * 0.8;
+  const endAngle = Math.PI * 2.2;
+  const totalAngle = endAngle - startAngle;
+
+  // Background arc
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+  ctx.lineWidth = 14;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.arc(cx, cy + 10, radius, startAngle, endAngle);
+  ctx.stroke();
+
+  // Colored progress arc (Emerald to Cyan gradient)
+  const arcGrad = ctx.createLinearGradient(cx - radius, cy, cx + radius, cy);
+  arcGrad.addColorStop(0, '#EF4444');
+  arcGrad.addColorStop(0.35, '#F59E0B');
+  arcGrad.addColorStop(0.7, '#10B981');
+  arcGrad.addColorStop(1, '#06B6D4');
+  ctx.strokeStyle = arcGrad;
+  ctx.lineWidth = 14;
+  ctx.beginPath();
+  ctx.arc(cx, cy + 10, radius, startAngle, startAngle + totalAngle * (percent / 100));
+  ctx.stroke();
+
+  // Pointer needle center dot
+  ctx.fillStyle = '#FFFFFF';
+  ctx.beginPath();
+  ctx.arc(cx, cy + 10, 8, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Needle
+  const needleAngle = startAngle + totalAngle * (percent / 100);
+  ctx.strokeStyle = '#FCD34D';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy + 10);
+  ctx.lineTo(cx + Math.cos(needleAngle) * (radius - 12), cy + 10 + Math.sin(needleAngle) * (radius - 12));
+  ctx.stroke();
+
+  // Value Display
+  ctx.fillStyle = '#10B981';
+  ctx.font = 'bold 28px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(valueText || `${percent}%`, cx, cy + 38);
+
+  // Label text
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = 'bold 12.5px sans-serif';
+  ctx.fillText(labelText || 'LENGAS TANAH OPTIMAL', cx, cy + 58);
+  ctx.textAlign = 'left'; // reset
+  ctx.restore();
+}
+
+// 2. ILUSTRASI DRONE RADAR HUD & SPEKTRUM NDVI SPASIAL
+function drawVisualDroneHUD(ctx, x, y, w, h) {
+  ctx.save();
+  // Glassmorphic HUD container
+  ctx.fillStyle = 'rgba(6, 24, 44, 0.85)';
+  ctx.strokeStyle = '#10B981';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, x, y, w, h, 14);
+  ctx.fill();
+  ctx.stroke();
+
+  // Scanning radar circles
+  const rcx = x + 65;
+  const rcy = y + h / 2;
+  ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(rcx, rcy, 45, 0, Math.PI * 2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(rcx, rcy, 28, 0, Math.PI * 2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(rcx, rcy, 12, 0, Math.PI * 2); ctx.stroke();
+
+  // Radar crosshairs
+  ctx.strokeStyle = 'rgba(16, 185, 129, 0.6)';
+  ctx.beginPath();
+  ctx.moveTo(rcx - 45, rcy); ctx.lineTo(rcx + 45, rcy);
+  ctx.moveTo(rcx, rcy - 45); ctx.lineTo(rcx, rcy + 45);
+  ctx.stroke();
+
+  // Blip dot
+  ctx.fillStyle = '#F59E0B';
+  ctx.beginPath();
+  ctx.arc(rcx + 18, rcy - 14, 5, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Sweep sector
+  ctx.fillStyle = 'rgba(16, 185, 129, 0.25)';
+  ctx.beginPath();
+  ctx.moveTo(rcx, rcy);
+  ctx.arc(rcx, rcy, 45, -0.6, 0.2);
+  ctx.closePath();
+  ctx.fill();
+
+  // HUD Text & NDVI Bar
+  ctx.fillStyle = '#38BDF8';
+  ctx.font = 'bold 15px sans-serif';
+  ctx.fillText('🛰️ DRONE NDVI SCAN: LIVE', x + 125, y + 30);
+
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '13px sans-serif';
+  ctx.fillText('Blok A-3  |  Akurasi Spasial 99.4%  |  Klorofil Tinggi', x + 125, y + 52);
+
+  // NDVI Spectrum Color Bar
+  const barX = x + 125;
+  const barY = y + 64;
+  const barW = w - 145;
+  const barH = 14;
+  const ndviGrad = ctx.createLinearGradient(barX, barY, barX + barW, barY);
+  ndviGrad.addColorStop(0, '#DC2626');   // Stres
+  ndviGrad.addColorStop(0.35, '#F59E0B'); // Sedang
+  ndviGrad.addColorStop(0.7, '#10B981');  // Subur
+  ndviGrad.addColorStop(1, '#047857');    // Sangat Sehat
+  ctx.fillStyle = ndviGrad;
+  drawRoundRectPath(ctx, barX, barY, barW, barH, 6);
+  ctx.fill();
+
+  ctx.fillStyle = '#94A3B8';
+  ctx.font = '10px sans-serif';
+  ctx.fillText('STRES', barX, barY + barH + 13);
+  ctx.fillText('NORMAL', barX + barW * 0.45, barY + barH + 13);
+  ctx.fillStyle = '#10B981';
+  ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('PRIME 98% ▲', barX + barW - 65, barY + barH + 13);
+
+  ctx.restore();
+}
+
+// 3. ILUSTRASI DIAGRAM PIPA SMART FERTIGASI & DOSING NUTRISI
+function drawVisualFertigationDiagram(ctx, x, y, w, h) {
+  ctx.save();
+  ctx.fillStyle = 'rgba(6, 24, 44, 0.9)';
+  ctx.strokeStyle = '#0284C7';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, x, y, w, h, 14);
+  ctx.fill();
+  ctx.stroke();
+
+  // Pipe graphic horizontal
+  ctx.fillStyle = '#1E3A8A';
+  ctx.fillRect(x + 25, y + 42, w - 50, 16);
+
+  // Water droplets flowing
+  for (let i = 0; i < 7; i++) {
+    const dropX = x + 60 + i * ((w - 120) / 6);
+    ctx.fillStyle = '#38BDF8';
+    ctx.beginPath();
+    ctx.arc(dropX, y + 50, 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Drip down to root zone
+    ctx.strokeStyle = '#60A5FA';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(dropX, y + 58);
+    ctx.lineTo(dropX, y + 80);
+    ctx.stroke();
+
+    ctx.fillStyle = '#10B981';
+    ctx.beginPath();
+    ctx.arc(dropX, y + 86, 5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Header Title
+  ctx.fillStyle = '#38BDF8';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('💧 SMART FERTIGASI: DOSING PRESISI', x + 25, y + 26);
+
+  // Status Badge
+  ctx.fillStyle = '#10B981';
+  ctx.font = 'bold 13px sans-serif';
+  ctx.fillText('● SOLENOID AKTIF: 45 L/MENIT', x + w - 240, y + 26);
+
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '13px sans-serif';
+  ctx.fillText('Nutrisi NPK cair terukur langsung ke zona perakaran aktif tanpa menguap.', x + 25, y + 112);
+  ctx.restore();
+}
+
+// 4. ILUSTRASI GRAFIK BAR PERTUMBUHAN TONASE & HASIL PANEN
+function drawVisualGrowthPillars(ctx, x, y, w, h) {
+  ctx.save();
+  ctx.fillStyle = 'rgba(6, 24, 44, 0.92)';
+  ctx.strokeStyle = '#F59E0B';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, x, y, w, h, 16);
+  ctx.fill();
+  ctx.stroke();
+
+  // 4 Growth Pillar Bars
+  const barData = [
+    { label: 'Tradisional', val: '4.2 T', pct: 0.45, color: '#64748B' },
+    { label: 'Uji Coba', val: '5.8 T', pct: 0.65, color: '#38BDF8' },
+    { label: 'Smart IoT', val: '7.1 T', pct: 0.85, color: '#10B981' },
+    { label: 'Agrotech', val: '+28%', pct: 1.0, color: '#F59E0B' }
+  ];
+
+  const barWidth = 44;
+  const startBarX = x + 35;
+  const baseLineY = y + h - 40;
+  const maxBarH = h - 85;
+
+  barData.forEach((b, idx) => {
+    const curX = startBarX + idx * 72;
+    const curH = maxBarH * b.pct;
+    const curY = baseLineY - curH;
+
+    // Bar column
+    const bGrad = ctx.createLinearGradient(curX, curY, curX + barWidth, baseLineY);
+    bGrad.addColorStop(0, b.color);
+    bGrad.addColorStop(1, '#06182C');
+    ctx.fillStyle = bGrad;
+    drawRoundRectPath(ctx, curX, curY, barWidth, curH, 6);
+    ctx.fill();
+
+    // Top value text
+    ctx.fillStyle = b.color;
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(b.val, curX + barWidth / 2, curY - 6);
+
+    // Bottom label
+    ctx.fillStyle = '#94A3B8';
+    ctx.font = '10px sans-serif';
+    ctx.fillText(b.label, curX + barWidth / 2, baseLineY + 16);
+  });
+  ctx.textAlign = 'left'; // reset
+
+  // Right Side Trophy / Result Badge
+  const badgeX = x + 320;
+  ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+  ctx.strokeStyle = '#F59E0B';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, badgeX, y + 20, w - 340, h - 40, 12);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#F59E0B';
+  ctx.font = '34px sans-serif';
+  ctx.fillText('🏆', badgeX + 16, y + 68);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText('GRADE A+ PREMIUM', badgeX + 68, y + 50);
+
+  ctx.fillStyle = '#10B981';
+  ctx.font = 'bold 14px sans-serif';
+  ctx.fillText('Tonase Panen: +28%', badgeX + 68, y + 74);
+
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '12px sans-serif';
+  ctx.fillText('Keseragaman ukuran & bobot buah.', badgeX + 68, y + 96);
+
+  ctx.restore();
+}
+
+// ============================================================================
+// 6 LAYOUT RENDERERS (DOMINAN ILUSTRASI GRAFIS & FOTO, MINIMAL TEKS)
+// ============================================================================
+
+// LAYOUT 0: BENTO 2x2 DENGAN ILUSTRASI VISUAL TELEMETRI & DIAL GAUGE
 function renderLayoutBento2x2(ctx, t, photo, customHook) {
-  const heroH = 450;
+  // Foto & Visual mendominasi 58% kanvas (heroH = 610px)!
+  const heroH = 610;
   if (photo && photo.complete && photo.naturalWidth > 0) {
     ctx.drawImage(photo, 0, 0, 1080, heroH);
   } else {
@@ -1774,161 +2048,100 @@ function renderLayoutBento2x2(ctx, t, photo, customHook) {
     ctx.fillRect(0, 0, 1080, heroH);
   }
 
-  // Scrims
-  const leftScrim = ctx.createLinearGradient(0, 0, 680, 0);
-  leftScrim.addColorStop(0, 'rgba(255, 255, 255, 0.94)');
-  leftScrim.addColorStop(0.5, 'rgba(255, 255, 255, 0.85)');
-  leftScrim.addColorStop(0.8, 'rgba(255, 255, 255, 0.35)');
-  leftScrim.addColorStop(1, 'rgba(255, 255, 255, 0)');
-  ctx.fillStyle = leftScrim;
-  ctx.fillRect(0, 0, 680, heroH);
+  // Soft contrast scrim
+  const topScrim = ctx.createLinearGradient(0, 0, 0, heroH);
+  topScrim.addColorStop(0, 'rgba(6, 24, 44, 0.7)');
+  topScrim.addColorStop(0.5, 'rgba(6, 24, 44, 0.2)');
+  topScrim.addColorStop(1, 'rgba(248, 250, 252, 1)');
+  ctx.fillStyle = topScrim;
+  ctx.fillRect(0, 0, 1080, heroH);
 
-  const bottomScrim = ctx.createLinearGradient(0, heroH - 90, 0, heroH);
-  bottomScrim.addColorStop(0, 'rgba(255, 255, 255, 0)');
-  bottomScrim.addColorStop(1, 'rgba(248, 250, 252, 1)');
-  ctx.fillStyle = bottomScrim;
-  ctx.fillRect(0, heroH - 90, 1080, 90);
-
-  // Hologram Live Telemetri
-  ctx.fillStyle = 'rgba(15, 35, 60, 0.65)';
-  ctx.strokeStyle = '#38BDF8';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 810, 140, 220, 160, 14);
-  ctx.fill();
-  ctx.stroke();
-
-  ctx.fillStyle = '#10B981';
-  ctx.fillRect(835, 240, 18, 40);
-  ctx.fillRect(865, 220, 18, 60);
-  ctx.fillRect(895, 200, 18, 80);
-  ctx.fillRect(925, 180, 18, 100);
-  ctx.fillRect(955, 160, 18, 120);
-
-  ctx.strokeStyle = '#FCD34D';
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.moveTo(844, 235);
-  ctx.lineTo(874, 215);
-  ctx.lineTo(904, 195);
-  ctx.lineTo(934, 175);
-  ctx.lineTo(964, 155);
-  ctx.stroke();
-
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 12px sans-serif';
-  ctx.fillText('📈 LIVE TELEMETRI KEBUN', 835, 158);
-
-  // Logo & Ribbon
-  renderAgrotechLogo(ctx, 830, 26);
+  // Logo & Ribbon Atas
+  renderAgrotechLogo(ctx, 830, 24);
 
   ctx.fillStyle = '#EAB308';
-  drawRoundRectPath(ctx, 45, 30, 480, 58, 8);
+  drawRoundRectPath(ctx, 45, 26, 450, 50, 8);
   ctx.fill();
-  ctx.fillStyle = '#CA8A04';
-  ctx.fillRect(45, 84, 480, 4);
   ctx.fillStyle = '#0A2342';
-  ctx.font = 'bold 24px sans-serif';
-  ctx.fillText(t.ribbonText, 65, 67);
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('🌾 ' + t.ribbonText, 65, 58);
 
-  // Headline
-  ctx.fillStyle = '#0A2342';
-  ctx.font = 'bold 36px sans-serif';
+  // Headline Tegas & Singkat
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 32px sans-serif';
   const headline = customHook || t.headline;
-  wrapTextLines(ctx, headline, 55, 138, 540, 46);
+  wrapTextLines(ctx, headline, 45, 120, 740, 40);
 
-  // 4 Bento Cards
+  // DUA ILUSTRASI VISUAL UTAMA DI ATAS FOTO:
+  // 1. Dial Gauge Meter Sensor Tanah
+  drawVisualDialGauge(ctx, 175, 410, 85, 78, 'LENGAS TANAH OPTIMAL', '78%');
+  // 2. Drone NDVI Radar Scanning HUD
+  drawVisualDroneHUD(ctx, 385, 345, 650, 165);
+
+  // BAGIAN BAWAH: 4 KARTU VISUAL PUNCHY (MINIMAL TEKS, BESAR IKON & NILAI)
   const cardW = 475;
-  const cardH = 165;
-  const cardData = [
-    { num: '01', title: t.c1Title, desc: t.c1Desc, x: 45, y: 465, color: '#059669', icon: '🌱' },
-    { num: '02', title: t.c2Title, desc: t.c2Desc, x: 560, y: 465, color: '#0284C7', icon: '📈' },
-    { num: '03', title: t.c3Title, desc: t.c3Desc, x: 45, y: 645, color: '#0369A1', icon: '📋' },
-    { num: '04', title: t.c4Title, desc: t.c4Desc, x: 560, y: 645, color: '#16A34A', icon: '⚙️' }
+  const cardH = 88;
+  const cards = [
+    { icon: '🌱', title: 'Dosis Pupuk Presisi', val: 'Hemat 35% Operasional', color: '#059669', x: 45, y: 630 },
+    { icon: '📊', title: 'Sensor pH Tanah IoT', val: 'Monitoring Live di HP', color: '#0284C7', x: 560, y: 630 },
+    { icon: '💧', title: 'Smart Fertigasi', val: 'Solenoid Dosing Otomatis', color: '#0369A1', x: 45, y: 730 },
+    { icon: '🏆', title: 'Hasil Panen Seragam', val: 'Kualitas Grade A Premium', color: '#16A34A', x: 560, y: 730 }
   ];
 
-  cardData.forEach(c => {
+  cards.forEach(c => {
     ctx.fillStyle = '#FFFFFF';
     ctx.strokeStyle = '#E2E8F0';
     ctx.lineWidth = 1.5;
-    drawRoundRectPath(ctx, c.x, c.y, cardW, cardH, 14);
+    drawRoundRectPath(ctx, c.x, c.y, cardW, cardH, 12);
     ctx.fill();
     ctx.stroke();
 
+    // Icon Circle
     ctx.fillStyle = c.color;
     ctx.beginPath();
-    ctx.arc(c.x + 48, c.y + 48, 26, 0, Math.PI * 2);
+    ctx.arc(c.x + 44, c.y + 44, 26, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.fillStyle = '#FFFFFF';
     ctx.font = '22px sans-serif';
-    ctx.fillText(c.icon, c.x + 37, c.y + 56);
+    ctx.fillText(c.icon, c.x + 33, c.y + 52);
 
-    ctx.fillStyle = c.color;
-    ctx.font = 'bold 24px sans-serif';
-    ctx.fillText(c.num, c.x + 88, c.y + 44);
-
-    ctx.fillStyle = '#0A2342';
+    // Title
+    ctx.fillStyle = '#0A2540';
     ctx.font = 'bold 17px sans-serif';
-    ctx.fillText(c.title, c.x + 128, c.y + 44);
+    ctx.fillText(c.title, c.x + 85, c.y + 36);
 
-    ctx.fillStyle = '#334155';
-    ctx.font = '14.5px sans-serif';
-    wrapTextLines(ctx, c.desc, c.x + 88, c.y + 74, 365, 23);
+    // Punchy Value (1 baris bersih)
+    ctx.fillStyle = c.color;
+    ctx.font = 'bold 14px sans-serif';
+    ctx.fillText(c.val, c.x + 85, c.y + 62);
   });
 
-  // Quote Box & Save Button
-  const quoteX = 45;
-  const quoteY = 828;
-  const quoteW = 635;
-  const quoteH = 92;
-
+  // Bottom Tip Pill
+  const sumY = 835;
   ctx.fillStyle = '#0A2540';
-  drawRoundRectPath(ctx, quoteX, quoteY, quoteW, quoteH, 16);
+  drawRoundRectPath(ctx, 45, sumY, 990, 85, 14);
   ctx.fill();
 
   ctx.fillStyle = '#EAB308';
   ctx.beginPath();
-  ctx.arc(quoteX + 46, quoteY + 46, 26, 0, Math.PI * 2);
+  ctx.arc(85, sumY + 42, 22, 0, Math.PI * 2);
   ctx.fill();
   ctx.fillStyle = '#0A2540';
-  ctx.font = '24px sans-serif';
-  ctx.fillText('💡', quoteX + 34, quoteY + 54);
+  ctx.font = '20px sans-serif';
+  ctx.fillText('💡', 75, sumY + 50);
 
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 17px sans-serif';
-  ctx.fillText(t.quote1, quoteX + 86, quoteY + 38);
-  ctx.fillStyle = '#FCD34D';
-  ctx.font = 'bold 17px sans-serif';
-  ctx.fillText(t.quote2, quoteX + 86, quoteY + 68);
-
-  const saveX = 698;
-  const saveY = 828;
-  const saveW = 337;
-  const saveH = 92;
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#CBD5E1';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, saveX, saveY, saveW, saveH, 16);
-  ctx.fill();
-  ctx.stroke();
-
-  ctx.fillStyle = '#EAB308';
-  ctx.font = '32px sans-serif';
-  ctx.fillText('🔖', saveX + 20, saveY + 58);
-  ctx.fillStyle = '#0A2540';
-  ctx.font = 'bold 24px sans-serif';
-  ctx.fillText('SAVE →', saveX + 70, saveY + 44);
-  ctx.fillStyle = '#64748B';
-  ctx.font = '13px sans-serif';
-  ctx.fillText('Simpan insight ini untuk', saveX + 70, saveY + 66);
-  ctx.fillText('evaluasi kebun Anda.', saveX + 70, saveY + 82);
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('Bukan soal punya lahan lebih luas, tapi bagaimana membuat setiap hektare menghasilkan lebih optimal.', 125, sumY + 48);
 
   renderAgrotechFooter(ctx);
 }
 
-// LAYOUT 1: 5-ROW VERTICAL CHECKLIST AUDIT LAPANGAN
+// LAYOUT 1: 5 CHECKLIST AUDIT DENGAN ILUSTRASI DRONE SCAN HUD DOMINAN
 function renderLayoutChecklist5(ctx, t, photo, customHook) {
-  const heroH = 240;
+  // Foto mengambil 50% kanvas (heroH = 510px)!
+  const heroH = 510;
   if (photo && photo.complete && photo.naturalWidth > 0) {
     ctx.drawImage(photo, 0, 0, 1080, heroH);
   } else {
@@ -1939,18 +2152,18 @@ function renderLayoutChecklist5(ctx, t, photo, customHook) {
     ctx.fillRect(0, 0, 1080, heroH);
   }
 
-  // Dark scrim overlay for high contrast headline
-  const topScrim = ctx.createLinearGradient(0, 0, 0, heroH);
-  topScrim.addColorStop(0, 'rgba(10, 37, 64, 0.75)');
-  topScrim.addColorStop(1, 'rgba(10, 37, 64, 0.95)');
-  ctx.fillStyle = topScrim;
+  const scrim = ctx.createLinearGradient(0, 0, 0, heroH);
+  scrim.addColorStop(0, 'rgba(6, 24, 44, 0.75)');
+  scrim.addColorStop(0.6, 'rgba(6, 24, 44, 0.2)');
+  scrim.addColorStop(1, 'rgba(248, 250, 252, 1)');
+  ctx.fillStyle = scrim;
   ctx.fillRect(0, 0, 1080, heroH);
 
   renderAgrotechLogo(ctx, 830, 22);
 
-  // Ribbon Badge
+  // Ribbon
   ctx.fillStyle = '#10B981';
-  drawRoundRectPath(ctx, 45, 24, 450, 48, 8);
+  drawRoundRectPath(ctx, 45, 24, 430, 48, 8);
   ctx.fill();
   ctx.fillStyle = '#041008';
   ctx.font = 'bold 22px sans-serif';
@@ -1958,105 +2171,82 @@ function renderLayoutChecklist5(ctx, t, photo, customHook) {
 
   // Headline
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 32px sans-serif';
+  ctx.font = 'bold 30px sans-serif';
   const headline = customHook || t.headline;
-  wrapTextLines(ctx, headline, 45, 115, 760, 40);
+  wrapTextLines(ctx, headline, 45, 115, 750, 38);
 
-  ctx.fillStyle = '#94A3B8';
-  ctx.font = '16px sans-serif';
-  ctx.fillText('Periksa apakah kebun Anda mengalami tanda-tanda pemborosan di bawah ini:', 45, 205);
+  // ILUSTRASI HUD DRONE AUDIT SPASIAL DI ATAS FOTO
+  drawVisualDroneHUD(ctx, 45, 280, 990, 175);
 
-  // 5 Rows Stacked
-  const startY = 255;
-  const rowH = 88;
-  const gap = 12;
+  // 5 BARIS CHECKLIST VISUAL SLEEK (1 BARIS BERSIH, TANPA PARAGRAF PANJANG)
+  const checklistData = [
+    { num: '01', title: 'Pemupukan Terukur Sensor Tanah', tag: 'HEMAT PUPUK', icon: '🌱' },
+    { num: '02', title: 'Monitoring pH & Lengas Tanah Otomatis', tag: 'TANAH STABIL', icon: '📊' },
+    { num: '03', title: 'Deteksi Dini Stres Klorofil Drone NDVI', tag: 'CEGAH HAMA', icon: '🛰️' },
+    { num: '04', title: 'Rekapitulasi Kas & Mandor Cloud di HP', tag: 'DATA TRANSPARAN', icon: '📲' },
+    { num: '05', title: 'Aplikasi Smart Fertigasi Merata', tag: 'GRADE A+ SERAGAM', icon: '🏆' }
+  ];
 
-  t.checklist.forEach((item, i) => {
+  const startY = 530;
+  const rowH = 54;
+  const gap = 8;
+
+  checklistData.forEach((item, i) => {
     const curY = startY + i * (rowH + gap);
-
-    // Card background
     ctx.fillStyle = '#FFFFFF';
     ctx.strokeStyle = '#E2E8F0';
     ctx.lineWidth = 1.5;
-    drawRoundRectPath(ctx, 45, curY, 990, rowH, 12);
+    drawRoundRectPath(ctx, 45, curY, 990, rowH, 10);
     ctx.fill();
     ctx.stroke();
 
-    // Left accent bar
+    // Check circle
     ctx.fillStyle = '#10B981';
-    ctx.fillRect(45, curY + 12, 6, rowH - 24);
-
-    // Number circle badge
-    ctx.fillStyle = '#ECFDF5';
-    ctx.strokeStyle = '#10B981';
-    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.arc(88, curY + (rowH / 2), 24, 0, Math.PI * 2);
+    ctx.arc(75, curY + rowH / 2, 16, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 15px sans-serif';
+    ctx.fillText('✓', 70, curY + rowH / 2 + 5);
+
+    // Item Title (1 baris bersih)
+    ctx.fillStyle = '#0A2540';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText(`${item.num}. ${item.title}`, 105, curY + rowH / 2 + 5);
+
+    // Right Status Tag
+    ctx.fillStyle = 'rgba(16, 185, 129, 0.12)';
+    ctx.strokeStyle = '#10B981';
+    ctx.lineWidth = 1;
+    drawRoundRectPath(ctx, 810, curY + 10, 205, 34, 6);
     ctx.fill();
     ctx.stroke();
 
     ctx.fillStyle = '#059669';
-    ctx.font = 'bold 18px sans-serif';
-    ctx.fillText(item.num, 77, curY + (rowH / 2) + 7);
-
-    // Title
-    ctx.fillStyle = '#0A2540';
-    ctx.font = 'bold 17px sans-serif';
-    ctx.fillText(item.title, 130, curY + 34);
-
-    // Description
-    ctx.fillStyle = '#475569';
-    ctx.font = '14.5px sans-serif';
-    wrapTextLines(ctx, item.desc, 130, curY + 62, 720, 20);
-
-    // Right warning pill
-    ctx.fillStyle = '#FEF2F2';
-    ctx.strokeStyle = '#FCA5A5';
-    ctx.lineWidth = 1;
-    drawRoundRectPath(ctx, 875, curY + 26, 145, 36, 8);
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.fillStyle = '#DC2626';
-    ctx.font = 'bold 13px sans-serif';
-    ctx.fillText('⚠️ ' + item.tag, 888, curY + 49);
+    ctx.font = 'bold 12.5px sans-serif';
+    ctx.fillText(item.icon + ' ' + item.tag, 825, curY + 32);
   });
 
-  // Bottom Alert Box
+  // Bottom Alert Bar
   const alertY = startY + 5 * (rowH + gap) + 6;
   ctx.fillStyle = '#0A2540';
-  drawRoundRectPath(ctx, 45, alertY, 990, 135, 14);
+  drawRoundRectPath(ctx, 45, alertY, 990, 85, 12);
   ctx.fill();
 
   ctx.fillStyle = '#FCD34D';
-  ctx.font = 'bold 18px sans-serif';
-  ctx.fillText('⚠️ ' + t.alert1, 75, alertY + 40);
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('🛡️ AUDIT LAPANGAN AGROTECH:', 75, alertY + 36);
 
   ctx.fillStyle = '#E2E8F0';
-  ctx.font = '15px sans-serif';
-  wrapTextLines(ctx, t.alert2, 75, alertY + 70, 700, 24);
-
-  // Bookmark tag on right side
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#38BDF8';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 825, alertY + 32, 185, 70, 10);
-  ctx.fill();
-  ctx.stroke();
-
-  ctx.fillStyle = '#0A2540';
-  ctx.font = 'bold 16px sans-serif';
-  ctx.fillText('🔖 SIMPAN POST', 845, alertY + 62);
-  ctx.fillStyle = '#64748B';
-  ctx.font = '12px sans-serif';
-  ctx.fillText('Untuk audit kebun', 845, alertY + 84);
+  ctx.font = '14.5px sans-serif';
+  ctx.fillText('Jika kebun Anda mengalami tanda pemborosan, jadwalkan audit SOP bersama tim agronomis kami.', 75, alertY + 62);
 
   renderAgrotechFooter(ctx);
 }
 
-// LAYOUT 2: 2-COLUMN SIDE-BY-SIDE VS COMPARISON (Cara Lama vs Solusi Modern)
+// LAYOUT 2: 2-COLUMN SIDE-BY-SIDE VS COMPARISON (GRAFIS KONTRASTING)
 function renderLayoutComparisonVS(ctx, t, photo, customHook) {
-  const heroH = 210;
+  const heroH = 410;
   if (photo && photo.complete && photo.naturalWidth > 0) {
     ctx.drawImage(photo, 0, 0, 1080, heroH);
   } else {
@@ -2069,7 +2259,8 @@ function renderLayoutComparisonVS(ctx, t, photo, customHook) {
 
   const scrim = ctx.createLinearGradient(0, 0, 0, heroH);
   scrim.addColorStop(0, 'rgba(15, 23, 42, 0.7)');
-  scrim.addColorStop(1, 'rgba(15, 23, 42, 0.95)');
+  scrim.addColorStop(0.6, 'rgba(15, 23, 42, 0.2)');
+  scrim.addColorStop(1, 'rgba(241, 245, 249, 1)');
   ctx.fillStyle = scrim;
   ctx.fillRect(0, 0, 1080, heroH);
 
@@ -2089,64 +2280,71 @@ function renderLayoutComparisonVS(ctx, t, photo, customHook) {
   const headline = customHook || t.headline;
   wrapTextLines(ctx, headline, 45, 105, 760, 38);
 
+  // VISUAL MINI COMPARISON BANNER DI ATAS FOTO
+  ctx.fillStyle = 'rgba(6, 24, 44, 0.88)';
+  ctx.strokeStyle = '#F59E0B';
+  ctx.lineWidth = 1.5;
+  drawRoundRectPath(ctx, 45, 220, 990, 140, 14);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#EF4444';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('❌ Tradisional: Pemborosan 35%', 85, 275);
   ctx.fillStyle = '#94A3B8';
-  ctx.font = '15px sans-serif';
-  ctx.fillText('Bandingkan efisiensi operasional dan hasil panen antara 2 pendekatan kebun:', 45, 185);
+  ctx.font = '14px sans-serif';
+  ctx.fillText('Dosis pupuk kira-kira & pembukuan nota manual.', 85, 305);
 
-  const colY = 220;
+  ctx.fillStyle = '#10B981';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('✅ Agrotech Cerdas: Efisiensi 99%', 560, 275);
+  ctx.fillStyle = '#E2E8F0';
+  ctx.font = '14px sans-serif';
+  ctx.fillText('Sensor presisi IoT & dashboard cloud langsung di HP.', 560, 305);
+
+  // 2 KOLOM BESAR DI BAWAH (MINIMAL TEKS, PUNCHY BADGES)
+  const colY = 430;
   const colW = 475;
-  const colH = 585;
+  const colH = 390;
 
-  // LEFT COLUMN: CARA KONVENSIONAL (LAMA)
-  ctx.fillStyle = '#FFF8F8';
+  // LEFT COLUMN: CARA KONVENSIONAL
+  ctx.fillStyle = '#FFF5F5';
   ctx.strokeStyle = '#FCA5A5';
   ctx.lineWidth = 2;
   drawRoundRectPath(ctx, 45, colY, colW, colH, 16);
   ctx.fill();
   ctx.stroke();
 
-  // Header Bar Left
   ctx.fillStyle = '#EF4444';
-  drawRoundRectPath(ctx, 45, colY, colW, 60, 16);
+  drawRoundRectPath(ctx, 45, colY, colW, 55, 16);
   ctx.fill();
-  ctx.fillRect(45, colY + 30, colW, 30); // square off bottom corners of header
+  ctx.fillRect(45, colY + 30, colW, 25);
   ctx.fillStyle = '#FFFFFF';
   ctx.font = 'bold 18px sans-serif';
-  ctx.fillText('❌ ' + t.vsOldTitle, 75, colY + 38);
+  ctx.fillText('❌ METODE KONVENSIONAL (LAMA)', 75, colY + 36);
 
-  // Left Items
-  const itemStartY = colY + 80;
-  const itemH = 95;
-  t.vsOldItems.forEach((it, idx) => {
-    const curY = itemStartY + idx * itemH;
-    ctx.fillStyle = '#FEE2E2';
-    ctx.beginPath();
-    ctx.arc(80, curY + 20, 16, 0, Math.PI * 2);
+  const leftBadges = [
+    { icon: '🍂', t: 'Dosis Pupuk Tebak-Tebakan', d: 'Tanpa data uji riil kesuburan tanah' },
+    { icon: '📝', t: 'Catatan Buku Kertas Basah', d: 'Nota hilang & selisih timbangan panen' },
+    { icon: '📉', t: 'Hasil Fluktuatif & Biaya Boros', d: 'Margin profit kebun tidak terkontrol' }
+  ];
+
+  leftBadges.forEach((b, i) => {
+    const curY = colY + 75 + i * 85;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.strokeStyle = '#FECACA';
+    ctx.lineWidth = 1;
+    drawRoundRectPath(ctx, 65, curY, colW - 40, 72, 10);
     ctx.fill();
-
-    ctx.fillStyle = '#DC2626';
-    ctx.font = 'bold 16px sans-serif';
-    ctx.fillText('✕', 73, curY + 26);
+    ctx.stroke();
 
     ctx.fillStyle = '#0A2540';
     ctx.font = 'bold 16px sans-serif';
-    ctx.fillText(it.t, 108, curY + 16);
-
+    ctx.fillText(b.icon + ' ' + b.t, 85, curY + 32);
     ctx.fillStyle = '#64748B';
-    ctx.font = '13.5px sans-serif';
-    wrapTextLines(ctx, it.d, 108, curY + 38, 385, 20);
+    ctx.font = '13px sans-serif';
+    ctx.fillText(b.d, 85, curY + 54);
   });
-
-  // Left Result Tag
-  ctx.fillStyle = '#FEE2E2';
-  ctx.strokeStyle = '#F87171';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 65, colY + colH - 85, colW - 40, 65, 10);
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = '#991B1B';
-  ctx.font = 'bold 15px sans-serif';
-  wrapTextLines(ctx, '⚠️ ' + t.vsOldResult, 80, colY + colH - 58, colW - 70, 22);
 
   // RIGHT COLUMN: SOLUSI AGROTECH
   ctx.fillStyle = '#F0FDF4';
@@ -2156,97 +2354,70 @@ function renderLayoutComparisonVS(ctx, t, photo, customHook) {
   ctx.fill();
   ctx.stroke();
 
-  // Header Bar Right
   ctx.fillStyle = '#059669';
-  drawRoundRectPath(ctx, 560, colY, colW, 60, 16);
+  drawRoundRectPath(ctx, 560, colY, colW, 55, 16);
   ctx.fill();
-  ctx.fillRect(560, colY + 30, colW, 30);
+  ctx.fillRect(560, colY + 30, colW, 25);
   ctx.fillStyle = '#FFFFFF';
   ctx.font = 'bold 18px sans-serif';
-  ctx.fillText('✅ ' + t.vsNewTitle, 590, colY + 38);
+  ctx.fillText('✅ SOLUSI AGROTECH CERDAS', 590, colY + 36);
 
-  // Right Items
-  t.vsNewItems.forEach((it, idx) => {
-    const curY = itemStartY + idx * itemH;
-    ctx.fillStyle = '#DCFCE7';
-    ctx.beginPath();
-    ctx.arc(595, curY + 20, 16, 0, Math.PI * 2);
+  const rightBadges = [
+    { icon: '🎯', t: 'Dosis Sensor Presisi IoT', d: 'Terukur akurat sesuai lengas tanah' },
+    { icon: '📲', t: 'Rekapitulasi Cloud di HP', d: 'Absensi mandor & stok pupuk live' },
+    { icon: '📈', t: 'Hemat 35% & Grade A Seragam', d: 'Profitabilitas kebun maksimal terukur' }
+  ];
+
+  rightBadges.forEach((b, i) => {
+    const curY = colY + 75 + i * 85;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.strokeStyle = '#A7F3D0';
+    ctx.lineWidth = 1;
+    drawRoundRectPath(ctx, 580, curY, colW - 40, 72, 10);
     ctx.fill();
-
-    ctx.fillStyle = '#16A34A';
-    ctx.font = 'bold 16px sans-serif';
-    ctx.fillText('✓', 589, curY + 26);
+    ctx.stroke();
 
     ctx.fillStyle = '#0A2540';
     ctx.font = 'bold 16px sans-serif';
-    ctx.fillText(it.t, 623, curY + 16);
-
-    ctx.fillStyle = '#334155';
-    ctx.font = '13.5px sans-serif';
-    wrapTextLines(ctx, it.d, 623, curY + 38, 385, 20);
+    ctx.fillText(b.icon + ' ' + b.t, 600, curY + 32);
+    ctx.fillStyle = '#059669';
+    ctx.font = 'bold 13px sans-serif';
+    ctx.fillText(b.d, 600, curY + 54);
   });
 
-  // Right Result Tag
-  ctx.fillStyle = '#DCFCE7';
-  ctx.strokeStyle = '#34D399';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 580, colY + colH - 85, colW - 40, 65, 10);
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = '#166534';
-  ctx.font = 'bold 15px sans-serif';
-  wrapTextLines(ctx, '🏆 ' + t.vsNewResult, 595, colY + colH - 58, colW - 70, 22);
-
-  // Floating Central VS Badge
+  // Giant Floating VS Emblem in Center
   ctx.fillStyle = '#0A2540';
   ctx.strokeStyle = '#EAB308';
   ctx.lineWidth = 4;
   ctx.beginPath();
-  ctx.arc(540, colY + 250, 36, 0, Math.PI * 2);
+  ctx.arc(540, colY + 185, 42, 0, Math.PI * 2);
   ctx.fill();
   ctx.stroke();
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 22px sans-serif';
-  ctx.fillText('VS', 524, colY + 258);
+  ctx.font = 'bold 24px sans-serif';
+  ctx.fillText('VS', 523, colY + 193);
 
   // Bottom Summary Pill
-  const sumY = 825;
+  const sumY = 835;
   ctx.fillStyle = '#0A2540';
-  drawRoundRectPath(ctx, 45, sumY, 990, 92, 14);
+  drawRoundRectPath(ctx, 45, sumY, 990, 85, 14);
   ctx.fill();
 
-  ctx.fillStyle = '#EAB308';
-  ctx.beginPath();
-  ctx.arc(88, sumY + 46, 24, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.fillStyle = '#0A2540';
-  ctx.font = '22px sans-serif';
-  ctx.fillText('💡', 77, sumY + 54);
+  ctx.fillStyle = '#FCD34D';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('💡 KESIMPULAN STRATEGIS:', 75, sumY + 36);
 
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 16px sans-serif';
-  wrapTextLines(ctx, `"${t.summaryQuote}"`, 130, sumY + 42, 680, 24);
-
-  // Bookmark Save on right
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#CBD5E1';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 835, sumY + 16, 180, 60, 10);
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = '#EAB308';
-  ctx.font = '24px sans-serif';
-  ctx.fillText('🔖', 850, sumY + 54);
-  ctx.fillStyle = '#0A2540';
-  ctx.font = 'bold 16px sans-serif';
-  ctx.fillText('SAVE →', 885, sumY + 52);
+  ctx.font = '14.5px sans-serif';
+  ctx.fillText('Modernisasi kebun bukan sekadar biaya, tapi cara tercepat menghentikan kebocoran profit usaha.', 75, sumY + 62);
 
   renderAgrotechFooter(ctx);
 }
 
-// LAYOUT 3: BIG STAT / ROI HIGHLIGHT (Angka & Bukti Finansial Riil)
+// LAYOUT 3: BIG STAT ROI DENGAN GRAFIK 3D PILLARS & DIAGRAM FERTIGASI
 function renderLayoutBigStatROI(ctx, t, photo, customHook) {
-  const heroH = 195;
+  // Foto mengambil 480px kanvas
+  const heroH = 480;
   if (photo && photo.complete && photo.naturalWidth > 0) {
     ctx.drawImage(photo, 0, 0, 1080, heroH);
   } else {
@@ -2259,7 +2430,8 @@ function renderLayoutBigStatROI(ctx, t, photo, customHook) {
 
   const scrim = ctx.createLinearGradient(0, 0, 0, heroH);
   scrim.addColorStop(0, 'rgba(8, 47, 73, 0.7)');
-  scrim.addColorStop(1, 'rgba(8, 47, 73, 0.96)');
+  scrim.addColorStop(0.5, 'rgba(8, 47, 73, 0.2)');
+  scrim.addColorStop(1, 'rgba(248, 250, 252, 1)');
   ctx.fillStyle = scrim;
   ctx.fillRect(0, 0, 1080, heroH);
 
@@ -2277,150 +2449,69 @@ function renderLayoutBigStatROI(ctx, t, photo, customHook) {
   ctx.fillStyle = '#FFFFFF';
   ctx.font = 'bold 30px sans-serif';
   const headline = customHook || t.headline;
-  wrapTextLines(ctx, headline, 45, 102, 760, 38);
+  wrapTextLines(ctx, headline, 45, 100, 760, 38);
 
-  ctx.fillStyle = '#BAE6FD';
-  ctx.font = '15px sans-serif';
-  ctx.fillText('Data riil efisiensi operasional kebun dari implementasi sensor IoT & fertigasi presisi:', 45, 175);
+  // DUA ILUSTRASI UTAMA DI AREA ATAS:
+  // 1. Dial Gauge Meter Hemat Biaya Pupuk 35%
+  drawVisualDialGauge(ctx, 195, 305, 95, 35, 'PENGHEMATAN PUPUK & AIR', '35%');
+  // 2. Growth Pillars Bar Chart + Trophy Grade A+
+  drawVisualGrowthPillars(ctx, 420, 215, 615, 195);
 
-  // Massive Hero Stat Card
-  const statBoxY = 210;
-  const statBoxH = 320;
-  const sGrad = ctx.createLinearGradient(45, statBoxY, 1035, statBoxY + statBoxH);
-  sGrad.addColorStop(0, '#06182C');
-  sGrad.addColorStop(1, '#0B3B60');
-  ctx.fillStyle = sGrad;
-  ctx.strokeStyle = '#EAB308';
-  ctx.lineWidth = 2.5;
-  drawRoundRectPath(ctx, 45, statBoxY, 990, statBoxH, 18);
-  ctx.fill();
-  ctx.stroke();
+  // ILUSTRASI KETIGA DI BAWAH: DIAGRAM PIPA SMART FERTIGASI AKTIF
+  drawVisualFertigationDiagram(ctx, 45, 500, 990, 145);
 
-  // Left Big Number Display
-  ctx.fillStyle = '#10B981';
-  ctx.font = 'bold 100px sans-serif';
-  ctx.fillText(t.bigStat, 85, statBoxY + 125);
+  // 3 KARTU METRIK ROI BESAR DI BAWAHNYA (MINIMAL TEKS)
+  const mY = 665;
+  const mW = 310;
+  const mH = 150;
+  const metrics = [
+    { icon: '📈', val: '+28%', lbl: 'Kenaikan Tonase Panen', sub: 'Keseragaman Buah Grade A', color: '#10B981' },
+    { icon: '🛰️', val: '10 Mnt', lbl: 'Audit Spasial 50 Ha', sub: 'Sensor Drone Multispektral', color: '#38BDF8' },
+    { icon: '💼', val: '100%', lbl: 'Transparansi Stok & Kas', sub: 'Rekap Real-Time di HP Mandor', color: '#F59E0B' }
+  ];
 
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 20px sans-serif';
-  wrapTextLines(ctx, t.bigStatLabel, 85, statBoxY + 175, 480, 28);
-
-  ctx.fillStyle = '#94A3B8';
-  ctx.font = '14.5px sans-serif';
-  wrapTextLines(ctx, t.subDetails, 85, statBoxY + 250, 480, 22);
-
-  // Vertical Divider
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(600, statBoxY + 25);
-  ctx.lineTo(600, statBoxY + statBoxH - 25);
-  ctx.stroke();
-
-  // Right 3 Metric Bars
-  const rightStartY = statBoxY + 30;
-  t.metrics.forEach((m, idx) => {
-    const curY = rightStartY + idx * 88;
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-    ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
-    ctx.lineWidth = 1;
-    drawRoundRectPath(ctx, 625, curY, 385, 74, 10);
+  metrics.forEach((m, idx) => {
+    const curX = 45 + idx * 340;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.strokeStyle = '#E2E8F0';
+    ctx.lineWidth = 1.5;
+    drawRoundRectPath(ctx, curX, mY, mW, mH, 14);
     ctx.fill();
     ctx.stroke();
 
-    ctx.fillStyle = '#38BDF8';
-    ctx.font = 'bold 32px sans-serif';
-    ctx.fillText(m.val, 645, curY + 48);
+    ctx.fillStyle = m.color;
+    ctx.font = 'bold 38px sans-serif';
+    ctx.fillText(m.icon + ' ' + m.val, curX + 24, curY + 54);
 
-    ctx.fillStyle = '#F8FAFC';
-    ctx.font = 'bold 16px sans-serif';
-    ctx.fillText(m.label, 775, curY + 44);
+    ctx.fillStyle = '#0A2540';
+    ctx.font = 'bold 17px sans-serif';
+    ctx.fillText(m.lbl, curX + 24, curY + 92);
+
+    ctx.fillStyle = '#64748B';
+    ctx.font = '13px sans-serif';
+    ctx.fillText(m.sub, curX + 24, curY + 120);
   });
 
-  // 2 Horizontal Detail Cards
-  const c1Y = 548;
-  const c2Y = 680;
-  const cardH = 118;
-
-  // Card 1
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#E2E8F0';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 45, c1Y, 990, cardH, 14);
-  ctx.fill();
-  ctx.stroke();
-
-  ctx.fillStyle = '#0284C7';
-  ctx.fillRect(45, c1Y + 12, 6, cardH - 24);
-
+  // Bottom Quote Pill
+  const sumY = 835;
   ctx.fillStyle = '#0A2540';
-  ctx.font = 'bold 18px sans-serif';
-  ctx.fillText(t.card1Title, 75, c1Y + 40);
-
-  ctx.fillStyle = '#475569';
-  ctx.font = '14.5px sans-serif';
-  wrapTextLines(ctx, t.card1Desc, 75, c1Y + 70, 920, 22);
-
-  // Card 2
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#E2E8F0';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 45, c2Y, 990, cardH, 14);
-  ctx.fill();
-  ctx.stroke();
-
-  ctx.fillStyle = '#059669';
-  ctx.fillRect(45, c2Y + 12, 6, cardH - 24);
-
-  ctx.fillStyle = '#0A2540';
-  ctx.font = 'bold 18px sans-serif';
-  ctx.fillText(t.card2Title, 75, c2Y + 40);
-
-  ctx.fillStyle = '#475569';
-  ctx.font = '14.5px sans-serif';
-  wrapTextLines(ctx, t.card2Desc, 75, c2Y + 70, 920, 22);
-
-  // Bottom Quote Box
-  const qY = 818;
-  ctx.fillStyle = '#0A2540';
-  drawRoundRectPath(ctx, 45, qY, 990, 100, 14);
+  drawRoundRectPath(ctx, 45, sumY, 990, 85, 14);
   ctx.fill();
 
-  ctx.fillStyle = '#EAB308';
-  ctx.beginPath();
-  ctx.arc(88, qY + 50, 24, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.fillStyle = '#0A2540';
-  ctx.font = '22px sans-serif';
-  ctx.fillText('💡', 77, qY + 58);
-
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 16px sans-serif';
-  ctx.fillText(`"${t.quote1}"`, 130, qY + 42);
-  ctx.fillStyle = '#FCD34D';
-  ctx.font = 'bold 16px sans-serif';
-  ctx.fillText(`${t.quote2}`, 130, qY + 70);
-
-  // Bookmark Save on right
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#CBD5E1';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 835, qY + 20, 180, 60, 10);
-  ctx.fill();
-  ctx.stroke();
   ctx.fillStyle = '#EAB308';
   ctx.font = '24px sans-serif';
-  ctx.fillText('🔖', 850, qY + 58);
-  ctx.fillStyle = '#0A2540';
-  ctx.font = 'bold 16px sans-serif';
-  ctx.fillText('SAVE →', 885, qY + 56);
+  ctx.fillText('💡', 75, sumY + 50);
+
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 15.5px sans-serif';
+  ctx.fillText('"Keputusan agribisnis terbaik dilahirkan dari data riil lapangan yang presisi, bukan sekadar firasat."', 120, sumY + 48);
 
   renderAgrotechFooter(ctx);
 }
 
-// LAYOUT 4: 3-TAHAP HORIZONTAL FLOW TIMELINE (Roadmap Transformasi Kebun)
+// LAYOUT 4: 3-TAHAP HORIZONTAL FLOW TIMELINE (FLOWCHART PROSES VISUAL)
 function renderLayout3StepsTimeline(ctx, t, photo, customHook) {
-  const heroH = 205;
+  const heroH = 410;
   if (photo && photo.complete && photo.naturalWidth > 0) {
     ctx.drawImage(photo, 0, 0, 1080, heroH);
   } else {
@@ -2433,7 +2524,8 @@ function renderLayout3StepsTimeline(ctx, t, photo, customHook) {
 
   const scrim = ctx.createLinearGradient(0, 0, 0, heroH);
   scrim.addColorStop(0, 'rgba(30, 27, 75, 0.7)');
-  scrim.addColorStop(1, 'rgba(30, 27, 75, 0.96)');
+  scrim.addColorStop(0.6, 'rgba(30, 27, 75, 0.2)');
+  scrim.addColorStop(1, 'rgba(248, 250, 252, 1)');
   ctx.fillStyle = scrim;
   ctx.fillRect(0, 0, 1080, heroH);
 
@@ -2451,115 +2543,92 @@ function renderLayout3StepsTimeline(ctx, t, photo, customHook) {
   ctx.fillStyle = '#FFFFFF';
   ctx.font = 'bold 30px sans-serif';
   const headline = customHook || t.headline;
-  wrapTextLines(ctx, headline, 45, 102, 760, 38);
+  wrapTextLines(ctx, headline, 45, 100, 760, 38);
 
-  ctx.fillStyle = '#DDD6FE';
-  ctx.font = '15px sans-serif';
-  ctx.fillText('Alur SOP modernisasi agribisnis dari tahap audit awal hingga kestabilan panen:', 45, 180);
+  // ILUSTRASI HUD SENSOR DRONE DI AREA FOTO
+  drawVisualDroneHUD(ctx, 45, 200, 990, 175);
 
-  // Vertical Connecting Dotted Line
+  // 3 KARTU ALUR FLOWCHART BERURUTAN (PUNCHY, MINIMAL TEKS)
+  const steps = [
+    { num: '01', icon: '🛰️', title: 'FASE 1: SENSUS & AUDIT SPASIAL', desc: 'Pemetaan drone NDVI 50 Ha & uji laboratorium pH hara tanah', color: '#0284C7' },
+    { num: '02', icon: '⚙️', title: 'FASE 2: OTOMASI IOT & FERTIGASI', desc: 'Pemasangan katup solenoid cerdas & sensor lengas tanah nirkabel', color: '#059669' },
+    { num: '03', icon: '📈', title: 'FASE 3: CONTROLLING CLOUD & PANEN', desc: 'Integrasi timbangan live di HP & stabilisasi panen Grade A', color: '#D97706' }
+  ];
+
+  const startY = 430;
+  const stepH = 118;
+  const gap = 16;
+
+  // Dotted vertical flow line
   ctx.strokeStyle = '#EAB308';
-  ctx.lineWidth = 3.5;
+  ctx.lineWidth = 3;
   ctx.setLineDash([8, 6]);
   ctx.beginPath();
-  ctx.moveTo(100, 240);
-  ctx.lineTo(100, 760);
+  ctx.moveTo(90, startY + 20);
+  ctx.lineTo(90, startY + 2 * (stepH + gap) + 60);
   ctx.stroke();
   ctx.setLineDash([]); // reset
 
-  // 3 Horizontal Step Cards
-  const startY = 225;
-  const stepH = 165;
-  const stepGap = 20;
-
-  const stepColors = ['#0284C7', '#059669', '#D97706'];
-
-  t.steps.forEach((st, idx) => {
-    const curY = startY + idx * (stepH + stepGap);
+  steps.forEach((st, idx) => {
+    const curY = startY + idx * (stepH + gap);
 
     // Card White Box
     ctx.fillStyle = '#FFFFFF';
     ctx.strokeStyle = '#E2E8F0';
     ctx.lineWidth = 1.5;
-    drawRoundRectPath(ctx, 155, curY, 880, stepH, 16);
+    drawRoundRectPath(ctx, 140, curY, 895, stepH, 14);
     ctx.fill();
     ctx.stroke();
 
-    // Left color bar on card
-    ctx.fillStyle = stepColors[idx];
-    ctx.fillRect(155, curY + 16, 6, stepH - 32);
+    // Left accent bar
+    ctx.fillStyle = st.color;
+    ctx.fillRect(140, curY + 12, 6, stepH - 24);
 
-    // Circular Step Number on Timeline
+    // Number Badge on timeline
     ctx.fillStyle = '#0A2540';
     ctx.strokeStyle = '#EAB308';
     ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.arc(100, curY + (stepH / 2), 28, 0, Math.PI * 2);
+    ctx.arc(90, curY + stepH / 2, 28, 0, Math.PI * 2);
     ctx.fill();
     ctx.stroke();
 
     ctx.fillStyle = '#FCD34D';
     ctx.font = 'bold 20px sans-serif';
-    ctx.fillText(st.num, 89, curY + (stepH / 2) + 7);
-
-    // Phase Tag Pill
-    ctx.fillStyle = `${stepColors[idx]}18`;
-    ctx.strokeStyle = stepColors[idx];
-    ctx.lineWidth = 1;
-    drawRoundRectPath(ctx, 185, curY + 20, 270, 30, 6);
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.fillStyle = stepColors[idx];
-    ctx.font = 'bold 12.5px sans-serif';
-    ctx.fillText(st.tag, 198, curY + 40);
+    ctx.fillText(st.num, 79, curY + stepH / 2 + 7);
 
     // Title
-    ctx.fillStyle = '#0A2540';
+    ctx.fillStyle = st.color;
     ctx.font = 'bold 18px sans-serif';
-    ctx.fillText(st.title, 185, curY + 80);
+    ctx.fillText(st.icon + ' ' + st.title, 165, curY + 45);
 
-    // Description
-    ctx.fillStyle = '#475569';
+    // 1-line clean description
+    ctx.fillStyle = '#334155';
     ctx.font = '14.5px sans-serif';
-    wrapTextLines(ctx, st.desc, 185, curY + 110, 810, 22);
+    ctx.fillText(st.desc, 165, curY + 80);
   });
 
   // Bottom Tip Card
-  const tipY = 790;
+  const tipY = 835;
   ctx.fillStyle = '#0A2540';
-  drawRoundRectPath(ctx, 45, tipY, 990, 128, 14);
+  drawRoundRectPath(ctx, 45, tipY, 990, 85, 14);
   ctx.fill();
 
   ctx.fillStyle = '#FCD34D';
-  ctx.font = 'bold 18px sans-serif';
-  ctx.fillText('🎯 ' + t.tipTitle, 75, tipY + 40);
+  ctx.font = 'bold 16px sans-serif';
+  ctx.fillText('🎯 PENDAMPINGAN KONSULTAN:', 75, tipY + 36);
 
   ctx.fillStyle = '#E2E8F0';
-  ctx.font = '15px sans-serif';
-  wrapTextLines(ctx, t.tipText, 75, tipY + 70, 720, 24);
-
-  // Bookmark tag
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#38BDF8';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 835, tipY + 30, 180, 68, 10);
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = '#0A2540';
-  ctx.font = 'bold 16px sans-serif';
-  ctx.fillText('🔖 ROADMAP', 860, tipY + 60);
-  ctx.fillStyle = '#64748B';
-  ctx.font = '12px sans-serif';
-  ctx.fillText('Simpan di HP', 860, tipY + 82);
+  ctx.font = '14.5px sans-serif';
+  ctx.fillText('Tim agronomis Agrotech mendampingi kebun Anda di setiap tahap hingga SOP berjalan mandiri.', 75, tipY + 62);
 
   renderAgrotechFooter(ctx);
 }
 
-// LAYOUT 5: EXECUTIVE EDITORIAL QUOTE (Filosofi & Mindset Agribisnis Modern)
+// LAYOUT 5: EXECUTIVE EDITORIAL QUOTE (FOTO SINEMATIK LUAS 72% + FLOATING BADGE)
 function renderLayoutExecutiveQuote(ctx, t, photo, customHook) {
-  // Dominant full cinematic photo taking 52% of canvas!
-  const heroH = 550;
+  // Dominan foto sinematik 72% dari kanvas (heroH = 750px)!
+  const heroH = 750;
   if (photo && photo.complete && photo.naturalWidth > 0) {
     ctx.drawImage(photo, 0, 0, 1080, heroH);
   } else {
@@ -2571,12 +2640,12 @@ function renderLayoutExecutiveQuote(ctx, t, photo, customHook) {
     ctx.fillRect(0, 0, 1080, heroH);
   }
 
-  // Dark vignette gradient overlay over photo
+  // Dramatic cinematic vignette overlay
   const grad = ctx.createLinearGradient(0, 0, 0, heroH);
-  grad.addColorStop(0, 'rgba(6, 24, 44, 0.8)');
-  grad.addColorStop(0.4, 'rgba(6, 24, 44, 0.4)');
-  grad.addColorStop(0.8, 'rgba(6, 24, 44, 0.7)');
-  grad.addColorStop(1, 'rgba(248, 250, 252, 1)');
+  grad.addColorStop(0, 'rgba(6, 24, 44, 0.75)');
+  grad.addColorStop(0.35, 'rgba(6, 24, 44, 0.2)');
+  grad.addColorStop(0.7, 'rgba(6, 24, 44, 0.6)');
+  grad.addColorStop(1, 'rgba(6, 24, 44, 0.95)');
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, 1080, heroH);
 
@@ -2596,121 +2665,88 @@ function renderLayoutExecutiveQuote(ctx, t, photo, customHook) {
   const headline = customHook || t.headline;
   wrapTextLines(ctx, headline, 45, 125, 760, 42);
 
-  // FLOATING LUXURY EXECUTIVE QUOTE CARD
+  // FLOATING LUXURY EXECUTIVE QUOTE CARD DI TENGAH FOTO
   const cardX = 55;
-  const cardY = 240;
+  const cardY = 280;
   const cardW = 970;
-  const cardH = 485;
+  const cardH = 380;
 
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#E2E8F0';
-  ctx.lineWidth = 2;
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+  ctx.strokeStyle = '#EAB308';
+  ctx.lineWidth = 2.5;
   drawRoundRectPath(ctx, cardX, cardY, cardW, cardH, 20);
   ctx.fill();
   ctx.stroke();
 
-  // Golden accent bar on top of the card
-  ctx.fillStyle = '#EAB308';
-  drawRoundRectPath(ctx, cardX, cardY, cardW, 8, 20);
-  ctx.fill();
-
-  // Giant decorative quotation mark
+  // Giant quotation mark
   ctx.fillStyle = '#059669';
   ctx.font = 'bold 110px serif';
-  ctx.fillText('“', cardX + 45, cardY + 110);
+  ctx.fillText('“', cardX + 45, cardY + 105);
 
-  // Main Quote Text
+  // Main Quote (1 kalimat inspiratif & berwibawa)
   ctx.fillStyle = '#0A2540';
   ctx.font = 'bold 28px sans-serif';
-  wrapTextLines(ctx, `"${t.mainQuote}"`, cardX + 110, cardY + 90, 800, 42);
+  wrapTextLines(ctx, `"${t.mainQuote}"`, cardX + 110, cardY + 85, 800, 42);
 
-  // Subtitle / Supporting context
+  // Supporting statement
   ctx.fillStyle = '#475569';
-  ctx.font = '16.5px sans-serif';
-  wrapTextLines(ctx, t.subQuote, cardX + 110, cardY + 235, 800, 26);
+  ctx.font = '16px sans-serif';
+  wrapTextLines(ctx, t.subQuote, cardX + 110, cardY + 195, 800, 26);
 
-  // Consultant Signature Box
+  // Consultant signature pill
   const sigX = cardX + 45;
-  const sigY = cardY + 340;
+  const sigY = cardY + 270;
   const sigW = cardW - 90;
-  const sigH = 105;
-
-  ctx.fillStyle = '#F8FAFC';
-  ctx.strokeStyle = '#CBD5E1';
-  ctx.lineWidth = 1.5;
+  const sigH = 80;
+  ctx.fillStyle = '#0F2B4E';
   drawRoundRectPath(ctx, sigX, sigY, sigW, sigH, 12);
   ctx.fill();
-  ctx.stroke();
 
-  // Round badge icon
-  ctx.fillStyle = '#0F2B4E';
-  ctx.beginPath();
-  ctx.arc(sigX + 55, sigY + 52, 32, 0, Math.PI * 2);
-  ctx.fill();
   ctx.fillStyle = '#10B981';
-  ctx.font = 'bold 20px sans-serif';
-  ctx.fillText('AG', sigX + 39, sigY + 60);
+  ctx.font = 'bold 24px sans-serif';
+  ctx.fillText('AG', sigX + 25, sigY + 48);
 
-  ctx.fillStyle = '#0A2540';
-  ctx.font = 'bold 19px sans-serif';
-  ctx.fillText(t.author, sigX + 105, sigY + 44);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.fillText('CV AGROTEKNOLOGI NUSANTARA', sigX + 80, sigY + 36);
 
-  ctx.fillStyle = '#059669';
-  ctx.font = 'bold 14px sans-serif';
-  ctx.fillText('PARTNER KONSULTASI & STRATEGI PERKEBUNAN', sigX + 105, sigY + 68);
-
-  ctx.fillStyle = '#64748B';
+  ctx.fillStyle = '#38BDF8';
   ctx.font = '13px sans-serif';
-  ctx.fillText(t.role, sigX + 105, sigY + 88);
+  ctx.fillText('Partner Konsultasi & Transformasi Digital Agribisnis Indonesia', sigX + 80, sigY + 60);
 
-  // 3 Strategy Badges underneath the quote card
-  const badgeY = 745;
-  const badgeW = 300;
-  const badgeH = 58;
-  const badgeGap = 35;
-  const bColors = ['#0284C7', '#059669', '#D97706'];
+  // 3 STRATEGY PILL BADGES DI BAWAH FOTO (MINIMAL TEKS)
+  const bY = 770;
+  const bW = 310;
+  const bH = 60;
+  const badges = [
+    { icon: '📊', txt: 'Keputusan Berbasis Data', color: '#0284C7' },
+    { icon: '🌱', txt: 'SOP Budidaya Presisi', color: '#059669' },
+    { icon: '🛡️', txt: 'Proteksi Laba & Efisiensi', color: '#F59E0B' }
+  ];
 
-  t.pills.forEach((p, idx) => {
-    const curX = 55 + idx * (badgeW + badgeGap);
+  badges.forEach((b, idx) => {
+    const curX = 45 + idx * 340;
     ctx.fillStyle = '#FFFFFF';
-    ctx.strokeStyle = bColors[idx];
+    ctx.strokeStyle = b.color;
     ctx.lineWidth = 1.5;
-    drawRoundRectPath(ctx, curX, badgeY, badgeW, badgeH, 10);
+    drawRoundRectPath(ctx, curX, bY, bW, bH, 10);
     ctx.fill();
     ctx.stroke();
 
     ctx.fillStyle = '#0A2540';
     ctx.font = 'bold 16px sans-serif';
-    ctx.fillText(p, curX + 25, badgeY + 36);
+    ctx.fillText(b.icon + ' ' + b.txt, curX + 22, bY + 38);
   });
 
-  // Bottom Tip Card
-  const tipY = 820;
+  // Bottom Tip
+  const tipY = 848;
   ctx.fillStyle = '#0A2540';
-  drawRoundRectPath(ctx, 55, tipY, 970, 95, 14);
+  drawRoundRectPath(ctx, 45, tipY, 990, 72, 12);
   ctx.fill();
 
   ctx.fillStyle = '#FCD34D';
-  ctx.font = 'bold 16px sans-serif';
-  ctx.fillText('💡 STRATEGI BISNIS PERKEBUNAN', 85, tipY + 40);
-
-  ctx.fillStyle = '#E2E8F0';
-  ctx.font = '15px sans-serif';
-  ctx.fillText(t.tipText, 85, tipY + 68);
-
-  // Bookmark Save on right
-  ctx.fillStyle = '#FFFFFF';
-  ctx.strokeStyle = '#CBD5E1';
-  ctx.lineWidth = 1.5;
-  drawRoundRectPath(ctx, 815, tipY + 18, 185, 60, 10);
-  ctx.fill();
-  ctx.stroke();
-  ctx.fillStyle = '#EAB308';
-  ctx.font = '24px sans-serif';
-  ctx.fillText('🔖', 830, tipY + 56);
-  ctx.fillStyle = '#0A2540';
-  ctx.font = 'bold 16px sans-serif';
-  ctx.fillText('SAVE →', 865, tipY + 54);
+  ctx.font = 'bold 15px sans-serif';
+  ctx.fillText('💡 Simpan insight ini sebagai kompas arah strategi perkebunan Anda.', 85, tipY + 42);
 
   renderAgrotechFooter(ctx);
 }
