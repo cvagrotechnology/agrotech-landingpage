@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silabus Pelatihan AI — CV Agroteknologi Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #0D3B22;
+      --gold: #CA8A04;
+      --sky: #0284C7;
+      --emerald: #16A34A;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      background: #071F12;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+      color: #0F172A;
+    }
+    .toolbar {
+      width: 100%;
+      max-width: 860px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-gold { background: #FACC15; color: #0D3B22; }
+    .btn-outline { background: transparent; color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.3); }
+    .sheet {
+      width: 100%;
+      max-width: 860px;
+      background: #F4F9F4;
+      border-radius: 16px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #0D3B22 0%, #14532D 100%);
+      color: #FFFFFF;
+      padding: 26px 24px;
+      text-align: center;
+    }
+    .header .tag {
+      display: inline-block;
+      color: #FDE047;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+    }
+    .header h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .header .sub {
+      color: #86EFAC;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    .header .meta {
+      font-size: 0.86rem;
+      color: #FEF08A;
+      font-weight: 700;
+    }
+    .content { padding: 20px 24px; display: flex; flex-direction: column; gap: 16px; }
+    .outcomes {
+      background: #FFFFFF;
+      border: 1.5px solid #86EFAC;
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .outcomes h3 { font-size: 0.9rem; color: var(--forest); margin-bottom: 8px; font-weight: 800; }
+    .outcomes ul { list-style: none; display: flex; flex-direction: column; gap: 5px; font-size: 0.84rem; color: #1E293B; }
+    .pilar-card {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid #E2E8F0;
+    }
+    .pilar-header {
+      padding: 11px 16px;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 0.92rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pilar-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.84rem;
+      color: #334155;
+    }
+    .sub-modul h4 {
+      font-size: 0.86rem;
+      color: #0F172A;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-time {
+      background: #0D3B22;
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .sub-modul ul {
+      list-style: none;
+      padding-left: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.82rem;
+    }
+    .pilar-output {
+      background: #FFFFFF;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .info-box {
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .info-box h4 { font-size: 0.88rem; color: var(--forest); margin-bottom: 8px; font-weight: 800; }
+    .info-box ul { list-style: none; display: flex; flex-direction: column; gap: 5px; font-size: 0.82rem; color: #334155; }
+    .footer {
+      background: var(--forest);
+      color: #FFFFFF;
+      padding: 18px 24px;
+      text-align: center;
+    }
+    .footer h3 { font-size: 0.95rem; color: #FDE047; margin-bottom: 6px; }
+    .footer p { font-size: 0.86rem; color: #FFFFFF; font-weight: 600; }
+    @media print {
+      body { background: transparent; padding: 0; }
+      .toolbar { display: none !important; }
+      .sheet { max-width: 100%; box-shadow: none; border-radius: 0; }
+    }
+    @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div>
+      <strong>📘 Silabus Resmi Pelatihan AI — CV Agroteknologi Nusantara</strong>
+      <span style="font-size:0.8rem; color:#86EFAC; margin-left:8px;">Kamis, 5 Nov 2026 | 17 Nov 2026 • Rp 250.000</span>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a href="Silabus_Pelatihan_AI_Agroteknologi_Nusantara.pdf" download class="btn btn-gold">⬇️ Unduh PDF Silabus</a>
+      <button onclick="window.print()" class="btn btn-outline">🖨️ Cetak PDF</button>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <div class="header">
+      <div class="tag">SILABUS & RUNDOWN KURIKULUM RESMI — CV AGROTEKNOLOGI NUSANTARA</div>
+      <h1>PELATIHAN AI: TINGKATKAN EFISIENSI OPERASIONAL</h1>
+      <div class="sub">& PANGKAS BIAYA TENAGA KERJA</div>
+      <div class="meta">🗓️ Pilihan Jadwal: Kamis, 5 November 2026 &nbsp;|&nbsp; 17 November 2026 &nbsp;&bull;&nbsp; 💰 Biaya Investasi: Rp 250.000,-</div>
+    </div>
+
+    <div class="content">
+      <div class="outcomes">
+        <h3>🎯 TARGET CAPAIAN PESERTA (SESUAI 3 KEUNGGULAN UTAMA FLYER)</h3>
+        <ul>
+          <li>⏱️ <b>1. Pangkas Jam Admin:</b> Peserta mampu mengotomatisasi pencatatan kas, absensi pekerja, & scan nota fisik ke Excel via AI.</li>
+          <li>💻 <b>2. 100% Praktek Langsung (No-Code):</b> Tanpa latar belakang IT/koding, peserta mempraktikkan langsung pembuatan sistem di laptop & HP.</li>
+          <li>✅ <b>3. Hasil Siap Pakai:</b> Pulang pelatihan langsung membawa aplikasi bisnis buatan sendiri & template laporan operasional AI.</li>
+        </ul>
+      </div>
+
+      <!-- PILAR 1 (YELLOW CARD MATCHING FLYER) -->
+      <div class="pilar-card" style="background:#FEFCE8; border-color:#FACC15;">
+        <div class="pilar-header" style="background:#CA8A04;">
+          <span>PILAR 01 (SESI PAGI 08.30 – 12.00 WIB): APLIKASI BISNIS DENGAN AI (NO-CODE)</span>
+        </div>
+        <div class="pilar-body">
+          <div class="sub-modul">
+            <h4><span class="badge-time" style="background:#A16207;">08.30 – 10.00</span> MODUL 1A — Aplikasi Kas Keuangan & Laba-Rugi</h4>
+            <ul>
+              <li>• <b>Praktek 1:</b> Teknik <i>Vibe Coding</i> (perintah bahasa Indonesia) untuk membuat form input kas masuk & pengeluaran harian (pupuk, BBM, upah).</li>
+              <li>• <b>Praktek 2:</b> Menampilkan tabel rekapitulasi transaksi otomatis & grafik laporan Laba-Rugi bulanan di layar HP/Laptop.</li>
+            </ul>
+          </div>
+          <div class="sub-modul">
+            <h4><span class="badge-time" style="background:#A16207;">10.15 – 11.15</span> MODUL 1B — Aplikasi Absensi Pekerja & Timbangan HP</h4>
+            <ul>
+              <li>• <b>Praktek 3:</b> Membuat aplikasi Absensi Kehadiran Pekerja berbasis HP lengkap dengan waktu, lokasi blok, & rekap upah/HK.</li>
+              <li>• <b>Praktek 4:</b> Membuat form input Timbangan Panen (TBS/komoditas) di HP yang langsung tersinkronisasi ke dashboard pusat.</li>
+            </ul>
+          </div>
+          <div class="sub-modul">
+            <h4><span class="badge-time" style="background:#A16207;">11.15 – 12.00</span> MODUL 1C — Scan Nota Fisik (OCR) Otomatis ke Excel</h4>
+            <ul>
+              <li>• <b>Praktek 5:</b> Memotret nota belanja fisik, kwitansi tulis tangan, & surat jalan menggunakan kamera HP.</li>
+              <li>• <b>Praktek 6:</b> Ekstraksi otomatis foto nota menjadi tabel Excel rapi (Tanggal, Item, Volume, Harga Satuan, Total Biaya).</li>
+            </ul>
+          </div>
+          <div class="pilar-output" style="color:#854D0E; border-color:#FDE047;">📌 Output Sesi Pagi: Peserta memiliki Aplikasi Kas, Aplikasi Absensi/Timbangan HP aktif, & Sistem OCR Nota ke Excel.</div>
+        </div>
+      </div>
+
+      <!-- PILAR 2 (BLUE CARD MATCHING FLYER) -->
+      <div class="pilar-card" style="background:#F0F9FF; border-color:#7DD3FC;">
+        <div class="pilar-header" style="background:#0284C7;">
+          <span>PILAR 02 (SESI SIANG 13.00 – 15.30 WIB): PENGGUNAAN AI UNTUK OPERASIONAL</span>
+        </div>
+        <div class="pilar-body">
+          <div class="sub-modul">
+            <h4><span class="badge-time" style="background:#0369A1;">13.00 – 13.50</span> MODUL 2A — Analisis Data Produktivitas Kebun</h4>
+            <ul>
+              <li>• <b>Praktek 7:</b> Upload file Excel data panen per blok & realisasi pupuk ke AI untuk menganalisis tren produktivitas (Ton/Ha).</li>
+              <li>• <b>Praktek 8:</b> Menemukan blok dengan performa terendah, menghitung efisiensi biaya per Kg panen, & proyeksi target panen.</li>
+            </ul>
+          </div>
+          <div class="sub-modul">
+            <h4><span class="badge-time" style="background:#0369A1;">13.50 – 14.40</span> MODUL 2B — Pembuatan Laporan Otomatis dengan AI</h4>
+            <ul>
+              <li>• <b>Praktek 9:</b> Mengubah catatan harian mandor dari grup WhatsApp menjadi Laporan Eksekutif Harian/Mingguan yang rapi.</li>
+              <li>• <b>Praktek 10:</b> Menyusun dokumen SOP pemupukan, SOP panen, kontrak kerja borongan, & surat resmi secara otomatis.</li>
+            </ul>
+          </div>
+          <div class="sub-modul">
+            <h4><span class="badge-time" style="background:#0369A1;">14.40 – 15.30</span> MODUL 2C — Pengenalan Pola & Deteksi Dini Masalah Kebun Berbasis AI</h4>
+            <ul>
+              <li>• <b>Praktek 11:</b> Analisis foto daun/tanaman & kondisi lapangan dengan AI Vision untuk identifikasi dini defisiensi unsur hara/hama.</li>
+              <li>• <b>Praktek 12:</b> Deteksi dini anomali biaya (kebocoran solar/pupuk) & penyusunan rekomendasi tindakan korektif mingguan.</li>
+            </ul>
+          </div>
+          <div class="pilar-output" style="color:#075985; border-color:#BAE6FD;">📌 Output Sesi Siang: Dashboard Analisis Produktivitas, Generator Laporan Otomatis, & Sistem Deteksi Dini Masalah Kebun.</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="info-box" style="background:#ECFDF5; border-color:#4ADE80;">
+          <h4>🎁 FASILITAS LENGKAP (Rp 250.000)</h4>
+          <ul>
+            <li>• <b>E-Sertifikat Resmi & Modul Praktik PDF</b> langkah demi langkah.</li>
+            <li>• <b>Source Code Aplikasi AI & Template Kerja</b> siap pakai.</li>
+            <li>• <b>Video Rekaman & Grup Pendampingan WA</b> eksklusif.</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>💻 PERANGKAT & BAHAN PRAKTEK PESERTA</h4>
+          <ul>
+            <li>• <b>Laptop + Smartphone</b> dengan koneksi internet & akun Gmail.</li>
+            <li>• <b>Contoh Nota / Struk Fisik</b> (1–2 lembar) untuk praktek OCR.</li>
+            <li>• <b>Data Laporan / Panen</b> (opsional, disediakan dataset latihan).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <h3>INFORMASI & PENDAFTARAN PELATIHAN AI (KUOTA TERBATAS)</h3>
+      <p>📞 WA Amanda: 0857-1385-0615 &nbsp;|&nbsp; 💬 WA Hardadi: 0813-1307-8216 &nbsp;|&nbsp; 🌐 www.cvagrotechnology.com</p>
+    </div>
+  </div>
+</body>
+</html>

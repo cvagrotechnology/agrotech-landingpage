@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flyer Pelatihan Google Earth & AI Bisnis — CV Agroteknologi Nusantara</title>
+  <title>Flyer Pelatihan Google Maps: Peta Poligon & Pengawasan Kebun Real-Time — CV Agroteknologi Nusantara</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
@@ -127,6 +127,93 @@
       font-size: 0.85rem;
       color: #CBD5E1;
       font-weight: 500;
+    }
+
+    /* SCHEDULE & PRICE BANNER */
+    .schedule-price-bar {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 16px;
+      background: linear-gradient(90deg, #FEF3C7 0%, #FDE68A 100%);
+      border-bottom: 2px solid #F59E0B;
+      padding: 16px 24px;
+      align-items: center;
+    }
+
+    .schedule-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .schedule-label {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #92400E;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .schedule-dates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .date-pill {
+      background: #0B2545;
+      color: #FFFFFF;
+      padding: 7px 13px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(11, 37, 69, 0.18);
+    }
+
+    .date-pill span.highlight {
+      color: #FCD34D;
+      font-weight: 800;
+    }
+
+    .price-box {
+      background: #0B2545;
+      color: #FFFFFF;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-align: center;
+      border: 2px solid #F59E0B;
+      box-shadow: 0 8px 20px rgba(11, 37, 69, 0.2);
+    }
+
+    .price-box .price-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #FCD34D;
+      font-weight: 800;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .price-box .price-amount {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.15;
+    }
+
+    .price-box .price-sub {
+      font-size: 0.7rem;
+      color: #CBD5E1;
+      display: block;
+      margin-top: 2px;
     }
 
     /* HERO SECTION */
@@ -304,8 +391,8 @@
         background: transparent;
         padding: 0;
       }
-      .toolbar {
-        display: none;
+      .toolbar, .wa-copy-box {
+        display: none !important;
       }
       .flyer-container {
         max-width: 100%;
@@ -316,6 +403,9 @@
     }
 
     @media (max-width: 640px) {
+      .schedule-price-bar {
+        grid-template-columns: 1fr;
+      }
       .hero-section {
         grid-template-columns: 1fr;
       }
@@ -333,19 +423,28 @@
   <!-- ACTION TOOLBAR -->
   <div class="toolbar">
     <div>
-      <strong>📄 Flyer Pelatihan Agrotech Nusantara</strong>
-      <span style="font-size:0.8rem; color:#94A3B8; margin-left:8px;">Format Cetak A4 / PDF</span>
+      <strong>📄 Flyer Pelatihan Google Maps & Peta Poligon — Agrotech Nusantara</strong>
+      <span style="font-size:0.8rem; color:#94A3B8; margin-left:8px;">Waktu: 13 November 2026 • Rp 250.000</span>
     </div>
-    <div style="display:flex; gap:10px;">
-      <a href="Flyer_Pelatihan_GoogleEarth_AI_Agrotech.pdf" download class="btn btn-gold">
-        ⬇️ Unduh File PDF Resmi (1 MB)
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <a href="Flyer_Pelatihan_GoogleMaps_Poligon_RealTime.pdf" download class="btn btn-gold">
+        ⬇️ Unduh PDF Flyer
       </a>
+      <a href="Silabus_Pelatihan_GoogleMaps_Poligon_Agrotech.pdf" download class="btn btn-outline" style="border-color:#FCD34D; color:#FCD34D;">
+        📚 Unduh PDF Silabus
+      </a>
+      <a href="silabus-pelatihan.html" class="btn btn-outline">
+        📋 Halaman Silabus
+      </a>
+      <a href="assets/flyer_pelatihan_google_maps_poligon.jpg" download class="btn btn-outline" style="border-color:#10B981; color:#6EE7B7;">
+        🖼️ Gambar Flyer (WA/IG)
+      </a>
+      <button onclick="copyWaText()" class="btn btn-outline" style="border-color:#38BDF8; color:#7DD3FC;">
+        💬 Salin Narasi Broadcast WA
+      </button>
       <button onclick="window.print()" class="btn btn-outline">
         🖨️ Cetak / Print
       </button>
-      <a href="ig-manager.html" class="btn btn-outline">
-        📱 IG Manager
-      </a>
     </div>
   </div>
 
@@ -353,23 +452,40 @@
   <div class="flyer-container">
     <!-- HEADER -->
     <div class="flyer-header">
-      <div class="ribbon-tag">🌟 BATCH UJI COBA MINGGU DEPAN 🌟</div>
-      <h1>OPTIMASI PERKEBUNAN & BISNIS MODERN:<br/>PEMETAAN GOOGLE EARTH & PENGEMBANGAN APLIKASI AI</h1>
-      <div class="organizer">Diselenggarakan oleh <b>CV Agroteknologi Nusantara</b> — Partner Transformasi Digital Agribisnis Indonesia</div>
+      <div class="ribbon-tag">CV AGROTEKNOLOGI NUSANTARA</div>
+      <h1>PELATIHAN PEMANFAATAN GOOGLE MAPS:<br/>PEMBUATAN PETA POLIGON & PENGAWASAN KEBUN REAL-TIME</h1>
+      <div class="organizer" style="color:#6EE7B7; font-weight:700; font-size:0.95rem;">Tingkatkan Efisiensi Operasional & Pangkas Biaya Tenaga Kerja Survei Lapangan</div>
+    </div>
+
+    <!-- SCHEDULE & PRICE BANNER -->
+    <div class="schedule-price-bar">
+      <div class="schedule-box">
+        <div class="schedule-label">🗓️ WAKTU PELAKSANAAN PELATIHAN:</div>
+        <div class="schedule-dates">
+          <div class="date-pill">
+            📅 <span class="highlight">13 November 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="price-box">
+        <span class="price-title">BIAYA INVESTASI</span>
+        <div class="price-amount">Rp 250.000,-</div>
+      </div>
     </div>
 
     <!-- HERO SECTION -->
     <div class="hero-section">
       <div class="hero-img-box">
-        <img src="assets/flyer_promosi_agrotech.jpg" alt="Flyer Promosi Smart Farming">
+        <img src="assets/flyer_pelatihan_google_maps_poligon.jpg" alt="Flyer Pelatihan Google Maps Peta Poligon & Pengawasan Kebun">
       </div>
       <div class="hero-desc">
-        <h3>🎯 Kenapa Pelatihan Ini Wajib Diikuti?</h3>
-        <p>Mengelola kebun dan operasional agribisnis di era digital tidak lagi cukup mengandalkan firasat atau tebak-tebakan. Kami memadukan <b>akurasi data spasial satelit</b> dengan <b>kecepatan kecerdasan buatan (AI)</b> untuk menekan biaya operasional hingga <b>35%</b>.</p>
+        <h3>🎯 Kenapa Wajib Ikut?</h3>
+        <p>Solusi praktis menghemat biaya survei lapangan, pemetaan blok, dan pengawasan operasional kebun:</p>
         <ul class="hero-points">
-          <li>✅ <b>100% Praktek Langsung (Hands-on):</b> Langsung dipraktikkan di laptop & HP peserta.</li>
-          <li>✅ <b>No-Code / Ramah Pemula:</b> Siapapun bisa membuat aplikasi bisnis tanpa latar belakang IT.</li>
-          <li>✅ <b>Hasil Riil Langsung Dibawa Pulang:</b> Peta poligon kebun sendiri & prototipe aplikasi kerja aktif.</li>
+          <li>✅ <b>Akurasi Luas & Batas Lahan:</b> Pemetaan poligon presisi tanpa alat ukur mahal.</li>
+          <li>✅ <b>Pengawasan Kebun Real-Time:</b> Pantau progres lapangan & posisi tim secara langsung.</li>
+          <li>✅ <b>Hemat Biaya Survei & Patroli:</b> Pangkas waktu & tenaga kontrol kebun hingga 50%.</li>
+          <li>✅ <b>100% Praktek Langsung:</b> Langsung bawa pulang peta digital kebun sendiri di HP & Laptop.</li>
         </ul>
       </div>
     </div>
@@ -377,56 +493,47 @@
     <!-- 3 MAIN MODULES -->
     <div class="modules-section">
       <div class="section-title">
-        📚 3 PILAR KURIKULUM PELATIHAN APLIKATIF
+        📚 MATERI INTI & FASILITAS PESERTA
       </div>
 
       <div class="modules-grid">
         <!-- MODUL 1 -->
         <div class="card card-modul-1">
-          <h4>MODUL 01: KOORDINAT & PETA POLIGON</h4>
-          <span class="subtag">Dasar Pemetaan Spasial Kebun via Google Earth</span>
+          <h4>1. TITIK KOORDINAT & GPS LAPANGAN</h4>
           <ul>
-            <li>Menandai titik batas kebun (waypoints) via GPS HP.</li>
-            <li>Menggambar poligon batas blok & kalkulasi luas hektar presisi.</li>
-            <li>Ekspor-impor file KML/GeoJSON antar smartphone & Google Earth.</li>
-            <li>Estimasi populasi pohon & kebutuhan pupuk per blok.</li>
+            <li>Ambil titik batas kebun via GPS HP</li>
+            <li>Penandaan blok, jalan kebun & titik kumpul</li>
+            <li>Akurasi koordinat lapangan real-time</li>
           </ul>
         </div>
 
         <!-- MODUL 2 -->
         <div class="card card-modul-2">
-          <h4>MODUL 02: PENGAWASAN KEBUN SATELIT</h4>
-          <span class="subtag">Audit & Monitoring Lapangan via Google Earth</span>
+          <h4>2. PEMBUATAN PETA POLIGON KEBUN</h4>
           <ul>
-            <li>Audit tata drainase, parit air, & jalur akses panen.</li>
-            <li>Fitur citra historis satelit (Time-Lapse) evaluasi kanopi pohon.</li>
-            <li>Deteksi dini anomali lahan & histori pembukaan/replanting.</li>
-            <li>Penyusunan zonasi blok kebun untuk mandor & tim lapangan.</li>
+            <li>Gambar poligon blok & batas lahan digital</li>
+            <li>Hitung otomatis luas hektar & populasi pohon</li>
+            <li>Ekspor-impor file KML/KMZ ke Google Maps</li>
           </ul>
         </div>
 
         <!-- MODUL 3 -->
         <div class="card card-modul-3">
-          <h4>MODUL 03: APLIKASI BISNIS DENGAN AI</h4>
-          <span class="subtag">Pengembangan Aplikasi Cepat & Otomasi No-Code</span>
+          <h4>3. SISTEM PENGAWASAN REAL-TIME</h4>
           <ul>
-            <li><b>Aplikasi Keuangan & Kas:</b> Catat nota, biaya solar/pupuk, laba rugi.</li>
-            <li><b>Aplikasi Absensi & Panen:</b> Logbook mandor & timbangan HP.</li>
-            <li><b>Video Promosi AI:</b> Bikin video avatar & voiceover otomatis.</li>
-            <li><b>Otomasi Dokumen OCR:</b> Foto nota fisik terkonversi otomatis ke Excel.</li>
+            <li>Sharing peta interaktif untuk mandor & tim</li>
+            <li>Monitoring kondisi drainase, jalan & kanopi</li>
+            <li>Tracking progres kerja & patroli blok kebun</li>
           </ul>
         </div>
 
         <!-- FASILITAS -->
         <div class="card card-fasilitas">
-          <h4>🎁 FASILITAS PESERTA LENGKAP</h4>
-          <span class="subtag">Dukungan Berkelanjutan Setelah Pelatihan</span>
+          <h4>4. FASILITAS LENGKAP (Rp 250.000)</h4>
           <ul>
-            <li>E-Sertifikat Resmi CV Agroteknologi Nusantara.</li>
-            <li>Template Peta Poligon KML & Source Code Aplikasi Siap Deploy.</li>
-            <li>Video Rekaman Sesi & Panduan Modul PDF Praktik.</li>
-            <li>Grup Diskusi & Pendampingan Eksklusif WhatsApp.</li>
-            <li><b>Peserta:</b> Pemilik kebun, pengusaha agribisnis, mandor, & UMKM.</li>
+            <li>E-Sertifikat Resmi & Modul Praktik PDF</li>
+            <li>Template Peta Poligon & File KML Siap Pakai</li>
+            <li>Video Rekaman & Grup Pendampingan WA</li>
           </ul>
         </div>
       </div>
@@ -434,15 +541,55 @@
 
     <!-- FOOTER -->
     <div class="flyer-footer">
-      <h3>KONSULTASI & PENDAFTARAN BATCH MINGGU DEPAN</h3>
+      <h3>INFORMASI & PENDAFTARAN (KUOTA TERBATAS)</h3>
       <div class="contact-info">
-        <span>📲 <b>Amanda:</b> 0857-1385-0615</span>
-        <span>📲 <b>Hardadi:</b> 0813-1307-8216</span>
-        <span>🌐 <b>Website:</b> www.cvagrotechnology.com</span>
+        <span>📲 <b>WA Amanda:</b> 0857-1385-0615</span>
+        <span>📲 <b>WA Hardadi:</b> 0813-1307-8216</span>
+        <span>🌐 <b>www.cvagrotechnology.com</b></span>
       </div>
-      <div class="note">📍 Penyelenggara: CV Agroteknologi Nusantara • Kuota Terbatas untuk Pendampingan Intensif</div>
     </div>
   </div>
 
+  <!-- WHATSAPP BROADCAST READY-TO-COPY PANEL -->
+  <div class="wa-copy-box" style="width:100%; max-width:820px; margin-top:20px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); border-radius:14px; padding:20px; color:#F8FAFC;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
+      <strong style="color:#FCD34D; font-size:0.95rem;">📲 Narasi Broadcast WhatsApp Siap Pakai (Tanpa Tulisan AI)</strong>
+      <button onclick="copyWaText()" id="btnCopyWa" class="btn btn-gold" style="padding:8px 14px; font-size:0.82rem;">📋 Salin Teks WA</button>
+    </div>
+    <pre id="waTextContent" style="white-space:pre-wrap; font-family:'Plus Jakarta Sans', sans-serif; font-size:0.84rem; line-height:1.55; background:rgba(6,24,44,0.75); padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.1); color:#E2E8F0;">📍 *PELATIHAN GOOGLE MAPS: PEMBUATAN PETA POLIGON & SISTEM PENGAWASAN KEBUN REAL-TIME*
+_Tingkatkan Efisiensi Operasional & Pangkas Biaya Tenaga Kerja Survei Lapangan_
+
+Masih ukur batas blok secara manual atau harus keliling kebun setiap hari untuk cek progres lapangan? Kini Anda bisa mengubah *Google Maps di HP & Laptop* menjadi *Sistem Pemetaan Poligon & Pengawasan Kebun Real-Time*!
+
+🎯 *Materi Praktek Langsung:*
+1️⃣ *Titik Koordinat & GPS Lapangan:* Ambil titik batas kebun, penandaan blok, jalan panen & titik kumpul via GPS HP secara akurat.
+2️⃣ *Pembuatan Peta Poligon Kebun:* Gambar poligon batas lahan digital, hitung otomatis luas hektar & estimasi populasi pohon, serta ekspor-impor file KML/KMZ.
+3️⃣ *Sistem Pengawasan Kebun Real-Time:* Sharing peta interaktif untuk mandor & tim lapangan, pantau drainase/jalan kebun, dan tracking progres patroli blok secara langsung.
+
+🗓️ *Waktu Pelaksanaan:*
+• *13 November 2026*
+
+💰 *Biaya Investasi:* *Rp 250.000,- / Peserta*
+_(Sudah termasuk E-Sertifikat Resmi, Modul Praktik PDF, Template Peta Poligon & File KML Siap Pakai, Video Rekaman & Grup Pendampingan WA)_
+
+📲 *Informasi & Pendaftaran (Kuota Terbatas):*
+• *WA Amanda:* 0857-1385-0615
+• *WA Hardadi:* 0813-1307-8216
+🌐 *Website:* www.cvagrotechnology.com</pre>
+  </div>
+
+  <script>
+    function copyWaText() {
+      const text = document.getElementById('waTextContent').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('btnCopyWa');
+        if (btn) {
+          const orig = btn.innerText;
+          btn.innerText = '✅ Berhasil Disalin!';
+          setTimeout(() => { btn.innerText = orig; }, 2000);
+        }
+      });
+    }
+  </script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+ID_Titik,Latitude,Longitude,Kategori,Blok,Keterangan_Lokasi
+PTK-01,-0.52110,101.43820,Patok Batas,Blok A1,Patok Sudut Barat Laut Blok A1 (Dekat Parit Utama)
+PTK-02,-0.52115,101.44180,Patok Batas,Blok A1,Patok Sudut Timur Laut Blok A1 (Batas Jalan Produksi)
+PTK-03,-0.52450,101.44175,Patok Batas,Blok A1,Patok Sudut Tenggara Blok A1 (Simpang Jembatan Besi)
+PTK-04,-0.52445,101.43815,Patok Batas,Blok A1,Patok Sudut Barat Daya Blok A1
+PTK-05,-0.52120,101.44520,Patok Batas,Blok A2,Patok Sudut Timur Laut Blok A2
+PTK-06,-0.52455,101.44515,Patok Batas,Blok A2,Patok Sudut Tenggara Blok A2
+TPH-01,-0.52280,101.44178,TPH Panen,Blok A1,Tempat Pengumpulan Hasil (TPH) 01 - Kapasitas 5 Ton TBS
+TPH-02,-0.52448,101.44000,TPH Panen,Blok A1,Tempat Pengumpulan Hasil (TPH) 02 - Akses Truk Utama
+TPH-03,-0.52290,101.44518,TPH Panen,Blok A2,Tempat Pengumpulan Hasil (TPH) 03 - Blok A2
+INF-01,-0.52452,101.44176,Infrastruktur,Blok A1,Jembatan Utama Akses Panen (Kondisi Baik)
+INF-02,-0.52112,101.43990,Infrastruktur,Blok A1,Pintu Air / Klep Parit Drainase Utara
+LAP-01,-0.52310,101.43950,Temuan Lapangan,Blok A1,Genangan Air / Parit Tersumbat sepanjang 40m (Perlu Cuci Parit)
+LAP-02,-0.52200,101.44350,Temuan Lapangan,Blok A2,Jalan Panen Berlubang (Rawan Amblas Saat Hujan)
+LAP-03,-0.52380,101.44410,Temuan Lapangan,Blok A2,Area Blank Spot / 18 Pokok Sawit Mati (Perlu Sisipan Bibit)
+

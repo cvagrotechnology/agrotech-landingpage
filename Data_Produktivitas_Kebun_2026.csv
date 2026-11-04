@@ -1,0 +1,20 @@
+Tanggal,Blok_Kebun,Luas_Ha,Jumlah_Pokok,Mandor_Pengawas,Pekerja_Hadir,Janjang_Panen,Tonase_Panen_Kg,Harga_Jual_Per_Kg_Rp,Pendapatan_Kotor_Rp,Pupuk_NPK_Kg,Biaya_Pupuk_Rp,Solar_Alat_Liter,Biaya_Solar_Rp,Upah_Panen_Dan_Rawat_Rp,Total_Biaya_Operasional_Rp,Laba_Bersih_Rp,Curah_Hujan_mm,Catatan_Lapangan
+2026-10-01,Blok A1 (Sawit Tua),25,3250,Bpk. Suryadi,14,1850,33300,2600,86580000,1250,8125000,45,675000,9990000,18790000,67790000,12,Kondisi normal; jalan blok baik
+2026-10-01,Blok A2 (Sawit Prima),30,4050,Bpk. Suryadi,16,2450,44100,2600,114660000,1500,9750000,50,750000,13230000,23730000,90930000,12,Blok paling produktif; panen tepat waktu
+2026-10-01,Blok B1 (Lahan Gambut),28,3640,Bpk. Hendra,15,1420,22720,2600,59072000,1800,11700000,85,1275000,7952000,20927000,38145000,28,ANOMALI: Pemakaian pupuk & solar tinggi tapi hasil panen rendah; daun pelepah bawah menguning (indikasi defisiensi Mg/K)
+2026-10-01,Blok B2 (Bukit Selatan),22,2860,Bpk. Hendra,12,1380,24840,2600,64584000,1100,7150000,95,1425000,7452000,16027000,48557000,18,ANOMALI SOLAR: Konsumsi solar traktor 95 liter (2x lipat normal) perlu audit bon BBM
+2026-10-01,Blok C1 (Tanaman Muda),20,2800,Bpk. Wakijan,11,1150,16100,2600,41860000,1000,6500000,35,525000,4830000,11855000,30005000,10,Buah pasir/muda; tren produktivitas naik 8%
+2026-10-01,Blok C2 (Lembah Timur),25,3300,Bpk. Wakijan,15,1920,34560,2600,89856000,1250,8125000,48,720000,10368000,19213000,70643000,15,Normal; pemupukan sesuai dosis SOP
+2026-10-15,Blok A1 (Sawit Tua),25,3250,Bpk. Suryadi,14,1910,34380,2650,91107000,1250,8125000,44,660000,10314000,19099000,72008000,8,Produktivitas stabil
+2026-10-15,Blok A2 (Sawit Prima),30,4050,Bpk. Suryadi,17,2580,46440,2650,123066000,1500,9750000,52,780000,13932000,24462000,98604000,8,Rekor panen tertinggi semester ini
+2026-10-15,Blok B1 (Lahan Gambut),28,3640,Bpk. Hendra,15,1210,19360,2650,51304000,1850,12025000,90,1350000,7250000,20625000,30679000,35,PERINGATAN DINI: Tonase turun 14.8% dibanding periode lalu; genangan air di parit drainase
+2026-10-15,Blok B2 (Bukit Selatan),22,2860,Bpk. Hendra,14,1320,23760,2650,62964000,1100,7150000,110,1650000,8316000,17116000,45848000,20,ANOMALI TINGGI: Solar 110 liter & jumlah pekerja naik tapi panen turun; wajib cek lapangan
+2026-10-15,Blok C1 (Tanaman Muda),20,2800,Bpk. Wakijan,11,1240,17360,2650,46004000,1000,6500000,36,540000,5208000,12248000,33756000,14,Pertumbuhan vegetatif bagus
+2026-10-15,Blok C2 (Lembah Timur),25,3300,Bpk. Wakijan,15,1980,35640,2650,94446000,1250,8125000,46,690000,10692000,19507000,74939000,14,Efisiensi biaya sangat baik
+2026-11-01,Blok A1 (Sawit Tua),25,3250,Bpk. Suryadi,14,1890,34020,2700,91854000,1250,8125000,45,675000,10206000,19006000,72848000,10,Normal
+2026-11-01,Blok A2 (Sawit Prima),30,4050,Bpk. Suryadi,16,2620,47160,2700,127332000,1500,9750000,50,750000,14148000,24648000,102684000,10,Blok percontohan terbaik
+2026-11-01,Blok B1 (Lahan Gambut),28,3640,Bpk. Hendra,15,1090,17440,2700,47088000,1900,12350000,88,1320000,6976000,20646000,26442000,40,KRITIS: Turun 3 periode berturut-turut; gejala bercak daun & kekurangan Boron/Mg
+2026-11-01,Blok B2 (Bukit Selatan),22,2860,Bpk. Hendra,15,1290,23220,2700,62694000,1100,7150000,115,1725000,8550000,17425000,45269000,22,KRITIS: Indikasi kebocoran solar & lembur fiktif
+2026-11-01,Blok C1 (Tanaman Muda),20,2800,Bpk. Wakijan,11,1310,18340,2700,49518000,1000,6500000,35,525000,5502000,12527000,36991000,12,Produktivitas naik konsisten
+2026-11-01,Blok C2 (Lembah Timur),25,3300,Bpk. Wakijan,15,2040,36720,2700,99144000,1250,8125000,47,705000,11016000,19846000,79298000,12,Performa stabil & hemat biaya
+

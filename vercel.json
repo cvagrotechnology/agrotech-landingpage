@@ -5,6 +5,8 @@
     { "source": "/api/publish", "destination": "/api/publish.py" },
     { "source": "/api/test-token", "destination": "/api/test_token.py" },
     { "source": "/ig-manager", "destination": "/ig-manager.html" },
-    { "source": "/preview", "destination": "/ig-preview.html" }
+    { "source": "/preview", "destination": "/ig-preview.html" },
+    { "source": "/slide-17nov", "destination": "/slide-pemateri-17nov.html" },
+    { "source": "/silabus", "destination": "/silabus-pelatihan.html" }
   ]
 }

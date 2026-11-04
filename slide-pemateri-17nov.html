@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slide & Naskah Lengkap Narasumber — Pelatihan AI 17 November 2026 | CV Agroteknologi Nusantara</title>
+  <style>
+    :root {
+      --green-dark: #092917;
+      --green-main: #0D3B22;
+      --green-mid: #166534;
+      --green-light: #4ADE80;
+      --green-tint: #ECFDF5;
+      --gold: #EAB308;
+      --gold-dark: #CA8A04;
+      --gold-tint: #FEFCE8;
+      --blue-dark: #0369A1;
+      --blue-main: #0284C7;
+      --blue-tint: #F0F9FF;
+      --slate-900: #0F172A;
+      --slate-700: #334155;
+      --slate-500: #64748B;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #061C10;
+      color: var(--slate-900);
+      overflow-x: hidden;
+    }
+
+    /* TOP BAR PRESENTER CONTROLLER */
+    .presenter-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 58px;
+      background: rgba(9, 41, 23, 0.96);
+      border-bottom: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 1000;
+      color: #fff;
+      backdrop-filter: blur(8px);
+    }
+
+    .presenter-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 13.5px;
+      letter-spacing: 0.3px;
+    }
+
+    .presenter-badge {
+      background: var(--gold);
+      color: var(--green-dark);
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .presenter-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-ctrl {
+      background: #14532D;
+      color: #fff;
+      border: 1px solid #22C55E;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-ctrl:hover {
+      background: var(--gold);
+      color: var(--green-dark);
+      border-color: var(--gold);
+    }
+
+    .btn-ctrl.gold {
+      background: var(--gold);
+      color: var(--green-dark);
+      border-color: var(--gold);
+    }
+
+    .slide-counter {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #A7F3D0;
+      min-width: 96px;
+      text-align: center;
+    }
+
+    /* DECK CONTAINER */
+    .deck-wrapper {
+      padding: 78px 24px 60px;
+      max-width: 1220px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    body.single-slide-mode .deck-wrapper {
+      height: 100vh;
+      padding: 70px 24px 18px;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    body.single-slide-mode .slide {
+      display: none;
+      height: calc(100vh - 96px);
+      overflow-y: auto;
+    }
+
+    body.single-slide-mode .slide.active {
+      display: flex;
+    }
+
+    /* SLIDE CARD */
+    .slide {
+      background: #FFFFFF;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      border: 2px solid rgba(234, 179, 8, 0.35);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 680px;
+      position: relative;
+    }
+
+    /* SLIDE HEADER */
+    .slide-header {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-main) 100%);
+      color: #fff;
+      padding: 18px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 4px solid var(--gold);
+    }
+
+    .slide-header.pilar-1 {
+      background: linear-gradient(135deg, #713F12 0%, #A16207 100%);
+      border-bottom-color: #FDE047;
+    }
+
+    .slide-header.pilar-2 {
+      background: linear-gradient(135deg, #0C4A6E 0%, #0284C7 100%);
+      border-bottom-color: #38BDF8;
+    }
+
+    .slide-tag {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .slide-header.pilar-1 .slide-tag { color: #FEF08A; }
+    .slide-header.pilar-2 .slide-tag { color: #BAE6FD; }
+
+    .slide-title {
+      font-size: 23px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .slide-time {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* SLIDE BODY */
+    .slide-body {
+      padding: 24px 30px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* HERO COVER SLIDE */
+    .slide.cover-slide {
+      background: radial-gradient(circle at top right, #14532D 0%, #092917 65%, #05180D 100%);
+      color: #fff;
+      text-align: left;
+      padding: 44px 50px;
+    }
+
+    .cover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(74, 222, 128, 0.3);
+      padding-bottom: 18px;
+    }
+
+    .cover-org {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      color: var(--green-light);
+    }
+
+    .cover-date-pill {
+      background: var(--gold);
+      color: var(--green-dark);
+      padding: 8px 18px;
+      border-radius: 99px;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .cover-main {
+      margin: 24px 0;
+    }
+
+    .cover-kicker {
+      display: inline-block;
+      background: rgba(74, 222, 128, 0.15);
+      border: 1px solid var(--green-light);
+      color: var(--green-light);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .cover-headline {
+      font-size: 40px;
+      font-weight: 900;
+      line-height: 1.14;
+      margin-bottom: 14px;
+      color: #FFFFFF;
+    }
+
+    .cover-headline span {
+      color: var(--gold);
+    }
+
+    .cover-sub {
+      font-size: 17.5px;
+      color: #D1FAE5;
+      max-width: 880px;
+      line-height: 1.5;
+    }
+
+    .cover-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .cover-card {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .cover-card h4 {
+      font-size: 14.5px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--gold);
+    }
+
+    .cover-card p {
+      font-size: 13px;
+      color: #ECFDF5;
+      line-height: 1.45;
+    }
+
+    /* GRID HELPERS */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .info-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-left: 5px solid var(--green-main);
+      border-radius: 12px;
+      padding: 15px 18px;
+    }
+
+    .info-box.gold {
+      background: var(--gold-tint);
+      border-color: #FEF08A;
+      border-left-color: var(--gold-dark);
+    }
+
+    .info-box.blue {
+      background: var(--blue-tint);
+      border-color: #BAE6FD;
+      border-left-color: var(--blue-main);
+    }
+
+    .info-box.green {
+      background: var(--green-tint);
+      border-color: #A7F3D0;
+      border-left-color: var(--green-mid);
+    }
+
+    .info-box h3 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--slate-900);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-box ul, .info-box ol {
+      padding-left: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13.5px;
+      color: var(--slate-700);
+      line-height: 1.45;
+    }
+
+    /* TOOL BADGES BAR */
+    .tools-strip {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 12.5px;
+    }
+
+    .tools-strip strong {
+      color: var(--slate-900);
+      margin-right: 4px;
+    }
+
+    .tool-pill {
+      background: #FFFFFF;
+      border: 1px solid #94A3B8;
+      color: #0F172A;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    /* SPEAKER SCRIPT CALLOUT */
+    .speaker-note {
+      background: #FFFBEB;
+      border: 1.5px dashed #D97706;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 13.5px;
+      color: #78350F;
+      line-height: 1.52;
+    }
+
+    .speaker-note strong.label {
+      color: #92400E;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.6px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    /* PROMPT COPY BOX */
+    .prompt-container {
+      background: #0F172A;
+      color: #F8FAFC;
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid #334155;
+      position: relative;
+    }
+
+    .prompt-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #1E293B;
+    }
+
+    .prompt-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #38BDF8;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .btn-copy {
+      background: #22C55E;
+      color: #052E16;
+      border: none;
+      padding: 4px 11px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .btn-copy:hover {
+      background: #4ADE80;
+    }
+
+    .prompt-text {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 12.2px;
+      line-height: 1.48;
+      white-space: pre-wrap;
+      color: #E2E8F0;
+    }
+
+    /* TABLE FOR TOOLS */
+    .tools-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .tools-table th {
+      background: var(--green-main);
+      color: #fff;
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 800;
+    }
+
+    .tools-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #E2E8F0;
+      color: var(--slate-700);
+      vertical-align: top;
+    }
+
+    .tools-table tr:nth-child(even) td {
+      background: #F8FAFC;
+    }
+
+    /* SLIDE FOOTER */
+    .slide-footer {
+      background: #F1F5F9;
+      padding: 11px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--slate-500);
+      border-top: 1px solid #E2E8F0;
+    }
+
+    body.hide-notes .speaker-note {
+      display: none !important;
+    }
+
+    /* PRINT / PDF RULES */
+    @media print {
+      body {
+        background: #fff;
+      }
+      .presenter-bar, .btn-copy {
+        display: none !important;
+      }
+      .deck-wrapper {
+        padding: 0;
+        gap: 0;
+        max-width: 100%;
+      }
+      .slide {
+        box-shadow: none;
+        border: 1px solid #CBD5E1;
+        border-radius: 0;
+        page-break-after: always;
+        min-height: 100vh;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-3, .cover-pillars {
+        grid-template-columns: 1fr;
+      }
+      .cover-headline {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRESENTER CONTROLLER BAR -->
+  <div class="presenter-bar">
+    <div class="presenter-brand">
+      <span class="presenter-badge">Pegangan Narasumber</span>
+      <span>CV Agroteknologi Nusantara — Selasa, 17 November 2026</span>
+    </div>
+    <div class="presenter-controls">
+      <button class="btn-ctrl" onclick="prevSlide()">◀ Prev</button>
+      <span class="slide-counter" id="slideIndicator">Semua Slide (10)</span>
+      <button class="btn-ctrl" onclick="nextSlide()">Next ▶</button>
+      <button class="btn-ctrl gold" id="toggleModeBtn" onclick="togglePresentationMode()">🖥️ Mode Presentasi</button>
+      <button class="btn-ctrl" id="toggleNotesBtn" onclick="toggleNotes()">🎙️ Sembunyikan Narasi</button>
+      <a class="btn-ctrl" href="Data_Produktivitas_Kebun_2026.csv" download>📊 CSV Latihan</a>
+      <button class="btn-ctrl" onclick="window.print()">🖨️ Cetak / PDF</button>
+    </div>
+  </div>
+
+  <div class="deck-wrapper" id="deckWrapper">
+
+    <!-- SLIDE 1: COVER -->
+    <section class="slide cover-slide active">
+      <div class="cover-top">
+        <div class="cover-org">🌱 CV AGROTEKNOLOGI NUSANTARA</div>
+        <div class="cover-date-pill">🗓️ Selasa, 17 November 2026 | 08.30 – 15.30 WIB</div>
+      </div>
+
+      <div class="cover-main">
+        <div class="cover-kicker">Naskah Presentasi, Alat Praktik &amp; Panduan Live Demo Narasumber</div>
+        <h1 class="cover-headline">
+          PELATIHAN AI:<br />
+          <span>Tingkatkan Efisiensi Operasional &amp; Pangkas Biaya Tenaga Kerja</span>
+        </h1>
+        <p class="cover-sub">
+          Dokumen ini berisi slide presentasi sekaligus <strong>narasi kata-per-kata (script bicara)</strong>, <strong>daftar alat/aplikasi yang digunakan</strong>, serta <strong>langkah-langkah praktik langsung</strong> dari pukul 08.00 hingga 15.30 WIB.
+        </p>
+      </div>
+
+      <div class="cover-pillars">
+        <div class="cover-card">
+          <h4>🟨 PILAR 01 (08.30 – 12.00 WIB)</h4>
+          <p><strong>Aplikasi Bisnis dengan AI (No-Code):</strong><br/>• 1A: Aplikasi Kas Keuangan &amp; Laba-Rugi<br/>• 1B: Absensi Pekerja &amp; Timbangan HP<br/>• 1C: Scan Nota Fisik (OCR) ke Excel</p>
+        </div>
+        <div class="cover-card">
+          <h4>🟦 PILAR 02 (13.00 – 15.30 WIB)</h4>
+          <p><strong>Penggunaan AI untuk Operasional:</strong><br/>• 2A: Analisis Data Produktivitas Kebun<br/>• 2B: Pembuatan Laporan Otomatis AI<br/>• 2C: Deteksi Dini Masalah &amp; Anomali Kebun</p>
+        </div>
+        <div class="cover-card">
+          <h4>🛠️ ALAT UTAMA KELAS</h4>
+          <p><strong>100% Gratis &amp; Tanpa Koding:</strong><br/>• Claude AI (Artifacts) / ChatGPT / Gemini<br/>• Google Sheets / Microsoft Excel<br/>• Kamera HP &amp; Browser Chrome/Safari</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: ALAT, PERANGKAT & PERSIAPAN PRAKTIK -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">Persiapan Teknis Kelas (08.00 – 08.15 WIB)</div>
+          <h2 class="slide-title">Daftar Alat, Aplikasi &amp; Bahan Praktik yang Digunakan</h2>
+        </div>
+        <div class="slide-time">🛠️ Checklist Alat</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="speaker-note">
+          <strong class="label">🎙️ Narasi Pemateri Saat Membuka Kelas:</strong>
+          "Selamat pagi Bapak/Ibu semua! Sebelum kita mulai pukul 08.30, pastikan di laptop dan HP Bapak/Ibu sudah terbuka 3 halaman utama kita hari ini: pertama <b>Claude.ai</b> atau <b>ChatGPT.com</b>, kedua <b>Google Sheets / Microsoft Excel</b>, dan ketiga siapkan 2 atau 3 lembar nota/struk belanja di meja masing-masing untuk praktik scan otomatis."
+        </div>
+
+        <table class="tools-table">
+          <thead>
+            <tr>
+              <th style="width: 22%;">Kategori Alat</th>
+              <th style="width: 28%;">Nama Aplikasi / Perangkat</th>
+              <th style="width: 50%;">Fungsi dalam Praktik Pelatihan (Modul 1A – 2C)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. AI Pembuat Aplikasi (No-Code Builder)</strong></td>
+              <td><strong>Claude AI (claude.ai)</strong> — <em>Fitur Artifacts</em><br/>atau <strong>ChatGPT</strong> — <em>Fitur Canvas</em></td>
+              <td>Digunakan pada <strong>Modul 1A &amp; 1B</strong> untuk mengubah perintah Bahasa Indonesia menjadi aplikasi Web/HP interaktif (Kas Laba-Rugi &amp; Absensi GPS + Timbangan) tanpa koding.</td>
+            </tr>
+            <tr>
+              <td><strong>2. AI Vision &amp; OCR (Pembaca Foto)</strong></td>
+              <td><strong>ChatGPT / Claude / Google Gemini</strong> (via Aplikasi HP atau Web)</td>
+              <td>Digunakan pada <strong>Modul 1C</strong> (membaca foto struk BBM/nota pupuk menjadi tabel Excel) dan <strong>Modul 2C</strong> (mendiagnosis foto daun sawit/tanaman yang menguning).</td>
+            </tr>
+            <tr>
+              <td><strong>3. Pengolah Tabel &amp; Database</strong></td>
+              <td><strong>Microsoft Excel</strong> atau <strong>Google Sheets</strong></td>
+              <td>Tempat menempelkan (<em>paste</em>) hasil scan nota OCR (Modul 1C) dan membuka file rekap CSV dari aplikasi kas &amp; timbangan.</td>
+            </tr>
+            <tr>
+              <td><strong>4. Bahan Fisik &amp; File Latihan</strong></td>
+              <td>• 3–5 Struk BBM / Nota Pupuk Fisik<br/>• File <code>Data_Produktivitas_Kebun_2026.csv</code><br/>• 2 Foto Daun Kuning/Defisiensi Hara</td>
+              <td>Bahan praktik nyata agar peserta langsung merasakan kecepatan otomatisasi dari barang fisik di meja kerja mereka ke laporan digital.</td>
+            </tr>
+            <tr>
+              <td><strong>5. Perangkat Keras Peserta &amp; Pemateri</strong></td>
+              <td>• Laptop + Browser Chrome/Edge<br/>• Smartphone (Android/iPhone) ber-GPS<br/>• Proyektor HDMI &amp; Koneksi Wi-Fi/Hotspot</td>
+              <td>Laptop digunakan untuk merakit aplikasi &amp; analisis data; HP digunakan untuk simulasi Mandor di kebun (uji GPS Absensi &amp; Foto Nota).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="slide-footer">
+        <span>CV Agroteknologi Nusantara • Checklist Alat &amp; Bahan Praktik</span>
+        <span>Slide 2 / 10</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: MINDSET & KENAPA WAJIB IKUT -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">Pengantar Materi Inti (08.15 – 08.30 WIB)</div>
+          <h2 class="slide-title">Transformasi Operasional: Dari Cara Manual ke Otomasi AI</h2>
+        </div>
+        <div class="slide-time">⏰ 08.15 – 08.30 WIB</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="speaker-note">
+          <strong class="label">🎙️ Narasi Penjelasan Presentasi (Kata-per-Kata):</strong>
+          "Bapak/Ibu sekalian, mari kita jujur melihat operasional harian kita. Mengapa biaya tenaga kerja admin dan operasional sering membengkak? Karena <b>1 pekerjaan dikerjakan 3 kali</b>. Di kebun, mandor mencatat timbangan dan absensi di buku saku. Sore hari, buku itu difoto atau dibawa ke kantor. Besoknya, admin mengetik ulang satu per satu ke Excel. Akhir bulan, kepala admin merekap lagi untuk laporan Laba-Rugi ke Owner. Selain lambat 3 sampai 5 hari, di situlah celah terjadinya salah ketik, nota terselip, hingga kebocoran solar.<br/><br/>
+          Hari ini kita potong rantai itu: <b>Sekali input di HP atau sekali foto nota, laporan Laba-Rugi dan analisis blok langsung jadi otomatis!</b>"
+        </div>
+
+        <div class="grid-3">
+          <div class="info-box gold">
+            <h3>⏱️ 1. Pangkas Jam Admin 70%</h3>
+            <ul>
+              <li><strong>Sebelum AI:</strong> Rekap nota, kas, &amp; upah panen memakan waktu 3–4 jam/hari (atau lembur akhir bulan).</li>
+              <li><strong>Sesudah AI:</strong> Otomasi kas, absensi &amp; scan nota selesai dalam <strong>10–15 menit/hari</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="info-box blue">
+            <h3>💻 2. Konsep "Kita Mandornya, AI Tukang Kodingnya"</h3>
+            <ul>
+              <li>Peserta tidak perlu belajar rumus IT.</li>
+              <li>Tugas kita hanya mendeskripsikan <strong>kolom apa yang dibutuhkan</strong> dan <strong>aturan hitungannya</strong> dalam Bahasa Indonesia.</li>
+            </ul>
+          </div>
+
+          <div class="info-box green">
+            <h3>🚀 3. Hasil Siap Pakai (Bawa Pulang)</h3>
+            <ul>
+              <li>Setiap peserta pulang membawa <strong>file aplikasi `.html`</strong> yang bisa dibuka tanpa kuota internet (offline-ready) di HP/Laptop.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>CV Agroteknologi Nusantara • Mindset Efisiensi Operasional</span>
+        <span>Slide 3 / 10</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: MODUL 1A -->
+    <section class="slide">
+      <div class="slide-header pilar-1">
+        <div>
+          <div class="slide-tag">🟨 PILAR 01 — Aplikasi Bisnis dengan AI (No-Code)</div>
+          <h2 class="slide-title">Modul 1A: Aplikasi Kas Keuangan &amp; Laba-Rugi Kebun</h2>
+        </div>
+        <div class="slide-time">⏰ 08.30 – 10.00 WIB</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="tools-strip">
+          <strong>🛠️ Alat Praktik Modul 1A:</strong>
+          <span class="tool-pill">Claude.ai (Aktifkan fitur Artifacts) / ChatGPT Canvas</span>
+          <span class="tool-pill">Browser Chrome / Edge</span>
+          <span class="tool-pill">Microsoft Excel (untuk tes hasil Export CSV)</span>
+        </div>
+
+        <div class="speaker-note">
+          <strong class="label">🎙️ Narasi Penjelasan Pemateri:</strong>
+          "Sekarang kita masuk ke praktik pertama: <b>Membangun Aplikasi Kas Keuangan &amp; Laba-Rugi</b>. Biasanya kalau kita pesan aplikasi kas ke programmer, biayanya Rp 3 juta sampai Rp 10 juta dan menunggu 1 bulan. Hari ini kita buat sendiri dalam 2 menit.<br/>
+          Perhatikan layar saya: Saya buka Claude.ai, saya tempelkan perintah (prompt) di bawah ini. Lihat di sisi kanan layar—AI langsung merakit tampilan aplikasi lengkap dengan kartu Total Pemasukan, Total Pengeluaran, Laba Bersih, grafik, dan tombol Download Excel."
+        </div>
+
+        <div class="grid-2">
+          <div class="info-box gold">
+            <h3>🧪 Langkah Praktik Peserta (Step-by-Step):</h3>
+            <ol>
+              <li>Buka <strong>claude.ai</strong> atau <strong>chatgpt.com</strong> di laptop.</li>
+              <li>Klik tombol <strong>"Salin Prompt"</strong> di bawah lalu tempelkan ke kolom chat AI.</li>
+              <li>Setelah aplikasi muncul di layar kanan, lakukan <strong>Uji Input 3 Transaksi</strong>:
+                <br/>• Pemasukan: <em>Penjualan Panen TBS Blok A2 = Rp 86.580.000</em>
+                <br/>• Pengeluaran 1: <em>Beli Pupuk NPK 1,2 Ton = Rp 8.125.000</em>
+                <br/>• Pengeluaran 2: <em>Solar Alat Berat 45 Liter = Rp 675.000</em>
+              </li>
+              <li>Klik tombol <strong>"Download Rekap CSV/Excel"</strong> di dalam aplikasi buatan Anda, lalu buka di Excel untuk membuktikan datanya masuk!</li>
+            </ol>
+          </div>
+
+          <div class="prompt-container">
+            <div class="prompt-header">
+              <span class="prompt-title">📋 Prompt Praktik Modul 1A</span>
+              <button class="btn-copy" onclick="copyPrompt('prompt1a', this)">Salin Prompt</button>
+            </div>
+            <div class="prompt-text" id="prompt1a">Buatkan saya aplikasi web satu halaman (HTML/CSS/JS lengkap dengan grafik Chart.js) yang rapi, modern, dan responsif di layar HP untuk "Sistem Kas Keuangan & Laba-Rugi Kebun CV Agroteknologi Nusantara".
+
+Fitur wajib:
+1. Form Input Transaksi: Tanggal, Jenis (Pemasukan / Pengeluaran), Kategori (Penjualan Panen, Beli Pupuk, Solar/BBM, Upah Pekerja, Perawatan Alat, Lainnya), Deskripsi/Blok Kebun, dan Nominal (Rp).
+2. Dashboard Ringkasan di bagian atas: Total Pemasukan, Total Pengeluaran, Saldo Kas Bersih (Laba/Rugi), dan Margin Laba (%).
+3. Tabel Riwayat Transaksi dengan fitur filter per kategori & tombol Hapus.
+4. Tombol "Download Rekap CSV/Excel" dan penyimpanan otomatis di browser (localStorage) agar data tidak hilang saat di-refresh.
+Gunakan tema warna Hijau Agrotech (#0D3B22) dan Kuning Emas.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>10.00 – 10.15 WIB: Coffee Break &amp; Cek Aplikasi Peserta</span>
+        <span>Slide 4 / 10</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: MODUL 1B -->
+    <section class="slide">
+      <div class="slide-header pilar-1">
+        <div>
+          <div class="slide-tag">🟨 PILAR 01 — Aplikasi Bisnis dengan AI (No-Code)</div>
+          <h2 class="slide-title">Modul 1B: Aplikasi Absensi Pekerja &amp; Timbangan HP</h2>
+        </div>
+        <div class="slide-time">⏰ 10.15 – 11.15 WIB</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="tools-strip">
+          <strong>🛠️ Alat Praktik Modul 1B:</strong>
+          <span class="tool-pill">Claude.ai / ChatGPT</span>
+          <span class="tool-pill">Smartphone Peserta (Aktifkan Izin Lokasi / GPS)</span>
+          <span class="tool-pill">WhatsApp Web (untuk kirim file aplikasi ke HP)</span>
+        </div>
+
+        <div class="speaker-note">
+          <strong class="label">🎙️ Narasi Penjelasan Pemateri:</strong>
+          "Masalah kedua di kebun adalah <b>absensi pekerja harian lepas (BHL)</b> dan <b>catatan timbangan panen</b> di lapangan. Sering kali mandor baru menyetor catatan sore hari dalam kondisi kertas basah atau tulisannya sulit dibaca, sehingga admin lembur menghitung premi/upah pemanen.<br/>
+          Sekarang kita buat aplikasi khusus layar HP yang memiliki 2 Tab: <b>Tab Absensi ber-GPS otomatis</b> (agar tidak bisa absen dari rumah) dan <b>Tab Kalkulator Timbangan Panen</b> yang otomatis mengalikan kilogram panen dengan tarif upah per kg!"
+        </div>
+
+        <div class="grid-2">
+          <div class="info-box gold">
+            <h3>🧪 Langkah Praktik Peserta (Step-by-Step):</h3>
+            <ol>
+              <li>Jalankan Prompt Modul 1B di samping pada Claude / ChatGPT.</li>
+              <li><strong>Simulasi Tab 1 (Absensi):</strong> Ketik nama pekerja <em>"Slamet - Pemanen - Blok A1"</em>, lalu klik tombol <strong>"Ambil Lokasi GPS &amp; Jam Otomatis"</strong> (klik <em>Allow/Izinkan</em> saat browser meminta akses lokasi).</li>
+              <li><strong>Simulasi Tab 2 (Timbangan):</strong> Masukkan hasil panen <em>"145 Janjang | Berat: 2.320 Kg | Tarif Upah: Rp 300/kg"</em>. Perhatikan upah <strong>Rp 696.000</strong> langsung terhitung otomatis.</li>
+              <li>Unduh file HTML aplikasi tersebut lalu kirim ke WhatsApp agar bisa langsung dibuka dari HP masing-masing.</li>
+            </ol>
+          </div>
+
+          <div class="prompt-container">
+            <div class="prompt-header">
+              <span class="prompt-title">📋 Prompt Praktik Modul 1B</span>
+              <button class="btn-copy" onclick="copyPrompt('prompt1b', this)">Salin Prompt</button>
+            </div>
+            <div class="prompt-text" id="prompt1b">Buatkan aplikasi web mobile-first (khusus tampilan layar HP) untuk "Absensi Pekerja Lapangan & Input Timbangan Panen Harian".
+
+Buat menjadi 2 Tab:
+TAB 1 - ABSENSI PEKERJA:
+- Input Nama Pekerja, Jabatan (Pemanen / Pemupuk / Semprot / Mandor), Blok Kebun (Blok A1 - C2), Status Kehadiran (Hadir / Izin / Lembur).
+- Tombol "Ambil Lokasi GPS & Jam Otomatis" yang membaca waktu real-time dan koordinat GPS perangkat (navigator.geolocation).
+
+TAB 2 - TIMBANGAN PANEN & HITUNG PREMI:
+- Input Tanggal, Nama Pemanen, Blok Kebun, Jumlah Janjang/Karung, Berat Total (Kg), dan Harga Upah per Kg (default Rp 300/kg).
+- Hitung otomatis Total Upah Harian Pemanen tersebut.
+- Tampilkan Tabel Rekap Harian di bawahnya lengkap dengan tombol "Export ke Excel (CSV)" dan ringkasan Total Tonase Hari Ini.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Pilar 01: Aplikasi Bisnis dengan AI (No-Code)</span>
+        <span>Slide 5 / 10</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: MODUL 1C -->
+    <section class="slide">
+      <div class="slide-header pilar-1">
+        <div>
+          <div class="slide-tag">🟨 PILAR 01 — Aplikasi Bisnis dengan AI (No-Code)</div>
+          <h2 class="slide-title">Modul 1C: Scan Nota Fisik (OCR) Otomatis ke Excel</h2>
+        </div>
+        <div class="slide-time">⏰ 11.15 – 12.00 WIB</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="tools-strip">
+          <strong>🛠️ Alat Praktik Modul 1C:</strong>
+          <span class="tool-pill">Kamera HP Peserta</span>
+          <span class="tool-pill">3–5 Nota Fisik (Struk BBM / Nota Pupuk / Kwitansi Tulis Tangan)</span>
+          <span class="tool-pill">ChatGPT / Gemini / Claude</span>
+          <span class="tool-pill">Excel / Google Sheets</span>
+        </div>
+
+        <div class="speaker-note">
+          <strong class="label">🎙️ Narasi Penjelasan Pemateri:</strong>
+          "Bapak/Ibu, bayangkan setiap akhir minggu meja admin penuh dengan tumpukan bon solar, nota toko pupuk, dan kwitansi bengkel yang tulisannya kadang miring atau pudar. Kalau diketik manual 50 nota ke Excel, butuh 2 jam dan mata lelah.<br/>
+          Sekarang, silakan keluarkan 3 sampai 5 struk atau nota apa saja dari dompet Bapak/Ibu. Jajarkan semuanya di atas meja, lalu <b>ambil 1 foto saja dari atas menggunakan HP</b>. Kita akan suruh AI membaca semuanya sekaligus dan mengubahnya menjadi tabel Excel siap pakai!"
+        </div>
+
+        <div class="grid-2">
+          <div class="info-box gold">
+            <h3>🧪 Langkah Praktik Peserta (Step-by-Step):</h3>
+            <ol>
+              <li>Letakkan <strong>3–5 nota fisik</strong> berdampingan di atas meja yang terang, lalu foto menggunakan kamera HP.</li>
+              <li>Buka aplikasi ChatGPT / Claude / Gemini, klik ikon <strong>Tambah Foto (+)</strong> dan unggah foto nota tersebut.</li>
+              <li>Tempelkan <strong>Prompt OCR Modul 1C</strong> di samping.</li>
+              <li>Setelah tabel muncul, klik tombol <strong>"Copy Table" (Salin Tabel)</strong> di pojok kanan atas tabel AI, lalu tekan <code>Ctrl + V</code> (Paste) di Microsoft Excel atau Google Sheets.</li>
+              <li>Cek kolom <em>Status Validasi</em>: AI akan memberi tahu jika ada tulisan tangan di bon yang buram dan perlu dicek ulang.</li>
+            </ol>
+          </div>
+
+          <div class="prompt-container">
+            <div class="prompt-header">
+              <span class="prompt-title">📋 Prompt Praktik Modul 1C</span>
+              <button class="btn-copy" onclick="copyPrompt('prompt1c', this)">Salin Prompt</button>
+            </div>
+            <div class="prompt-text" id="prompt1c">Saya melampirkan foto beberapa nota/struk pengeluaran operasional. Tolong baca seluruh isi nota tersebut menggunakan kemampuan OCR Anda, lalu ekstrak datanya ke dalam satu Tabel rapi dengan kolom berikut:
+
+1. No
+2. Tanggal Nota (Format DD/MM/YYYY)
+3. Nama Toko / Vendor
+4. Rincian Barang / Item yang Dibeli
+5. Kuantitas (Qty)
+6. Harga Satuan (Rp - tulis angka murni tanpa titik agar siap dijumlah di Excel)
+7. Total Harga (Rp - angka murni)
+8. Kategori Biaya (Otomatis klasifikasikan ke: BBM & Transport / Pupuk & Pestisida / Peralatan / Konsumsi / Lainnya)
+9. Status Validasi (Tulis "Jelas" jika angka terbaca 100%, atau "Perlu Cek Manual" jika ada tulisan tangan yang buram).
+
+Di bawah tabel, tampilkan Grand Total seluruh pengeluaran dari nota-nota tersebut.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>12.00 – 13.00 WIB: ISHOMA (Istirahat, Sholat, Makan Siang)</span>
+        <span>Slide 6 / 10</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: MODUL 2A -->
+    <section class="slide">
+      <div class="slide-header pilar-2">
+        <div>
+          <div class="slide-tag">🟦 PILAR 02 — Penggunaan AI untuk Operasional</div>
+          <h2 class="slide-title">Modul 2A: Analisis Data Produktivitas Kebun</h2>
+        </div>
+        <div class="slide-time">⏰ 13.00 – 13.50 WIB</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="tools-strip">
+          <strong>🛠️ Alat Praktik Modul 2A:</strong>
+          <span class="tool-pill">File: Data_Produktivitas_Kebun_2026.csv</span>
+          <span class="tool-pill">ChatGPT Data Analysis / Claude AI</span>
+          <span class="tool-pill">Microsoft Excel</span>
+        </div>
+
+        <div class="speaker-note">
+          <strong class="label">🎙️ Narasi Penjelasan Pemateri (Sesi Siang):</strong>
+          "Selamat siang Bapak/Ibu, setelah pagi tadi kita membuat alat pengumpul datanya, siang ini kita belajar <b>mengubah data menjadi uang dan keputusan</b>. Banyak perusahaan perkebunan punya data Excel bertahun-tahun, tapi hanya disimpan di laptop admin. Padahal di dalam tabel itu ada blok yang diam-diam merugi.<br/>
+          Silakan unduh file latihan kita: <code>Data_Produktivitas_Kebun_2026.csv</code>. Di dalamnya ada data 6 Blok Kebun (Blok A1 sampai C2). Mari kita unggah ke AI dan lihat siapa mandor terbaik dan blok mana yang sedang bocor biayanya!"
+        </div>
+
+        <div class="grid-2">
+          <div class="info-box blue">
+            <h3>🧪 Langkah Praktik &amp; Kunci Jawaban Demo:</h3>
+            <ol>
+              <li>Klik tombol <strong>"📊 CSV Latihan"</strong> di bar atas layar ini untuk mengunduh file <code>Data_Produktivitas_Kebun_2026.csv</code>.</li>
+              <li>Unggah file tersebut ke ChatGPT / Claude, lalu jalankan Prompt Modul 2A.</li>
+              <li><strong>Tunjukkan ke Peserta Hasil Temuan AI:</strong>
+                <br/>• 🏆 <strong>Blok Terbaik:</strong> <code>Blok A2 (Bpk. Suryadi)</code> — Panen tertinggi (47,1 Ton) &amp; HPP paling efisien (~Rp 522/kg).
+                <br/>• ⚠️ <strong>Blok Bermasalah:</strong> <code>Blok B1 (Lahan Gambut)</code> — Biaya pupuk paling mahal (Rp 12,35 Juta), tapi hasil panen anjlok dari 22,7 Ton ke 17,4 Ton (HPP bengkak jadi Rp 1.183/kg).
+              </li>
+            </ol>
+          </div>
+
+          <div class="prompt-container">
+            <div class="prompt-header">
+              <span class="prompt-title">📋 Prompt Praktik Modul 2A</span>
+              <button class="btn-copy" onclick="copyPrompt('prompt2a', this)">Salin Prompt</button>
+            </div>
+            <div class="prompt-text" id="prompt2a">Saya melampirkan file data operasional kebun (Data_Produktivitas_Kebun_2026.csv). Bertindaklah sebagai Konsultan Agronomi & Analis Keuangan Perkebunan Senior.
+
+Lakukan analisis mendalam berikut:
+1. Ranking Produktivitas: Urutkan blok kebun dari yield tertinggi (Ton/Ha) dan Laba Bersih tertinggi hingga terendah.
+2. Analisis Efisiensi Biaya (HPP/Kg): Hitung rata-rata biaya operasional per Kg hasil panen di setiap blok. Blok mana yang paling hemat dan paling boros?
+3. Temukan Anomali: Apakah ada blok yang pemakaian pupuk atau solarnya tinggi namun hasil panennya justru turun? Sebutkan angkanya!
+4. Rekomendasi Tindakan: Berikan 3 langkah konkret yang harus dilakukan Manajer Kebun bulan depan untuk menaikkan profitabilitas minimal 15%.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Pilar 02: Penggunaan AI untuk Operasional</span>
+        <span>Slide 7 / 10</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: MODUL 2B -->
+    <section class="slide">
+      <div class="slide-header pilar-2">
+        <div>
+          <div class="slide-tag">🟦 PILAR 02 — Penggunaan AI untuk Operasional</div>
+          <h2 class="slide-title">Modul 2B: Pembuatan Laporan Otomatis dengan AI</h2>
+        </div>
+        <div class="slide-time">⏰ 13.50 – 14.40 WIB</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="tools-strip">
+          <strong>🛠️ Alat Praktik Modul 2B:</strong>
+          <span class="tool-pill">ChatGPT / Claude (Melanjutkan Chat Modul 2A)</span>
+          <span class="tool-pill">Microsoft Word / Google Docs (untuk Cetak PDF)</span>
+          <span class="tool-pill">WhatsApp (untuk uji kirim laporan Owner)</span>
+        </div>
+
+        <div class="speaker-note">
+          <strong class="label">🎙️ Narasi Penjelasan Pemateri:</strong>
+          "Setelah analisis selesai, tantangan berikutnya bagi Manajer Kebun atau Kepala Admin adalah <b>menyusun laporan untuk Direksi atau Owner</b>. Owner biasanya sibuk dan tidak mau hanya dikirimi file Excel mentah berisi ribuan angka; mereka butuh ringkasan eksekutif: <em>Berapa laba bersih kita? Blok mana yang bermasalah? Apa tindakan minggu depan?</em><br/>
+          Tanpa perlu mengetik 1 kalimat pun dari nol, kita lanjutkan percakapan AI tadi dengan Prompt Modul 2B ini. Dalam 30 detik, kita dapatkan 2 laporan sekaligus: <b>Laporan Formal PDF</b> dan <b>Laporan Singkat WhatsApp</b>."
+        </div>
+
+        <div class="grid-2">
+          <div class="info-box blue">
+            <h3>🧪 Langkah Praktik Peserta (Step-by-Step):</h3>
+            <ol>
+              <li>Masih di ruang chat yang sama dengan Modul 2A, tempelkan <strong>Prompt Modul 2B</strong> di samping.</li>
+              <li>Salin <strong>Format 1 (Laporan Eksekutif Formal)</strong> ke Microsoft Word / Google Docs untuk melihat kerapian struktur dokumennya.</li>
+              <li>Salin <strong>Format 2 (Laporan Cepat WhatsApp)</strong> lalu coba kirimkan ke grup/nomor WhatsApp rekan sebelah Anda sebagai simulasi laporan Senin pagi ke Owner.</li>
+            </ol>
+          </div>
+
+          <div class="prompt-container">
+            <div class="prompt-header">
+              <span class="prompt-title">📋 Prompt Praktik Modul 2B</span>
+              <button class="btn-copy" onclick="copyPrompt('prompt2b', this)">Salin Prompt</button>
+            </div>
+            <div class="prompt-text" id="prompt2b">Berdasarkan data dan hasil analisis operasional kebun di atas, buatkan 2 format laporan manajemen otomatis:
+
+FORMAT 1 - LAPORAN EKSEKUTIF FORMAL (Siap Cetak PDF untuk Direksi/Owner):
+- Ringkasan Eksekutif (Executive Summary) dalam 1 paragraf padat.
+- Tabel Perbandingan Performa Antar Blok (Tonase Panen, Total Biaya, HPP/Kg, dan Laba Bersih).
+- Evaluasi Masalah Utama Lapangan (khususnya temuan di Blok B1 dan B2) beserta Solusi Korektif.
+- Rencana Kerja Prioritas Minggu Depan untuk Mandor & Asisten Kebun.
+
+FORMAT 2 - LAPORAN CEPAT WHATSAPP OWNER (Maksimal 15 baris, gunakan bullet points rapi & angka kunci) agar mudah dibaca Owner lewat HP di pagi hari.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Pilar 02: Penggunaan AI untuk Operasional</span>
+        <span>Slide 8 / 10</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: MODUL 2C -->
+    <section class="slide">
+      <div class="slide-header pilar-2">
+        <div>
+          <div class="slide-tag">🟦 PILAR 02 — Penggunaan AI untuk Operasional</div>
+          <h2 class="slide-title">Modul 2C: Pengenalan Pola &amp; Deteksi Dini Masalah Kebun</h2>
+        </div>
+        <div class="slide-time">⏰ 14.40 – 15.30 WIB</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="tools-strip">
+          <strong>🛠️ Alat Praktik Modul 2C:</strong>
+          <span class="tool-pill">File CSV Latihan (Audit Kebocoran Solar Blok B2)</span>
+          <span class="tool-pill">Kamera HP / Foto Daun Tanaman Bermasalah</span>
+          <span class="tool-pill">ChatGPT Vision / Google Gemini / Claude</span>
+        </div>
+
+        <div class="speaker-note">
+          <strong class="label">🎙️ Narasi Penjelasan Pemateri:</strong>
+          "Pada modul pamungkas ini, kita menjadikan AI sebagai <b>Auditor Internal</b> dan <b>Asisten Agronomi Lapangan</b>.<br/>
+          Pertama, kita suruh AI memindai tabel kita untuk mencari tanda-tanda kecurangan atau kebocoran biaya—lihat bagaimana AI langsung menangkap bahwa di <b>Blok B2</b>, konsumsi solar traktor melonjak tidak wajar sampai 115 liter padahal luas lahannya hanya 22 hektar!<br/>
+          Kedua, saat mandor keliling kebun dan melihat pelepah daun sawit menguning atau bercak oranye, mandor cukup memfotonya dan mengirim ke AI untuk mendeteksi dini apakah itu kekurangan Magnesium, Kalium, Boron, atau serangan jamur."
+        </div>
+
+        <div class="grid-2">
+          <div class="info-box blue">
+            <h3>🧪 Langkah Praktik Peserta (2 Eksperimen):</h3>
+            <ol>
+              <li><strong>Eksperimen A (Deteksi Kebocoran &amp; Fraud):</strong> Jalankan <em>Prompt Bagian 1</em> pada data CSV kita. Perhatikan tabel <strong>"Peringatan Dini (Early Warning)"</strong> yang menandai risiko tinggi kebocoran BBM di Blok B2 dan krisis drainase di Blok B1.</li>
+              <li><strong>Eksperimen B (Deteksi Visual Tanaman):</strong> Unggah 1 foto daun tanaman/sawit yang menguning atau bercak dari HP ke AI, lalu jalankan <em>Prompt Bagian 2</em> untuk mendapatkan diagnosis agronomi beserta rekomendasi dosis pemupukan korektif.</li>
+            </ol>
+          </div>
+
+          <div class="prompt-container">
+            <div class="prompt-header">
+              <span class="prompt-title">📋 Prompt Praktik Modul 2C (Audit &amp; Vision)</span>
+              <button class="btn-copy" onclick="copyPrompt('prompt2c', this)">Salin Prompt</button>
+            </div>
+            <div class="prompt-text" id="prompt2c">[BAGIAN 1 - DETEKSI DINI ANOMALI DATA & AUDIT KEBOCORAN]
+Periksa tabel operasional kebun ini sebagai Auditor Internal Perkebunan. Deteksi pola tidak wajar (anomali) seperti:
+1. Lonjakan pemakaian BBM/Solar atau pupuk yang tidak sebanding dengan luas hektar & hasil panen.
+2. Penurunan produktivitas panen berturut-turut atau indikasi lembur fiktif.
+Tampilkan temuan dalam Tabel "Peringatan Dini (Early Warning)" beserta Tingkat Risiko (Tinggi/Sedang/Rendah) & tindakan audit besok pagi.
+
+[BAGIAN 2 - DIAGNOSIS VISUAL FOTO DAUN / TANAMAN]
+Saya mengunggah foto kondisi daun/pelepah tanaman dari lapangan. Bertindaklah sebagai Ahli Agronomi:
+1. Identifikasi gejala visual pada foto (pola klorosis/menguning, nekrosis, atau bercak).
+2. Sebutkan kemungkinan penyebabnya (defisiensi unsur hara N/K/Mg/Boron atau serangan patogen/hama).
+3. Berikan langkah verifikasi lapangan dan rekomendasi penanganan korektif.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Pilar 02: Penggunaan AI untuk Operasional</span>
+        <span>Slide 9 / 10</span>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: PENUTUP & RENCANA AKSI 7 HARI -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-tag">Penutupan &amp; Tindak Lanjut Pasca-Pelatihan</div>
+          <h2 class="slide-title">Rencana Implementasi 7 Hari &amp; Penyerahan Fasilitas</h2>
+        </div>
+        <div class="slide-time">⏰ 15.15 – 15.30 WIB</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="speaker-note">
+          <strong class="label">🎙️ Narasi Penutup Pemateri (Closing Statement):</strong>
+          "Bapak/Ibu sekalian, hari ini kita telah membuktikan bahwa teknologi AI bukan lagi milik perusahaan raksasa semata. Dalam satu hari ini, Bapak/Ibu sudah berhasil membangun sendiri <b>Aplikasi Kas Laba-Rugi</b>, <b>Aplikasi Absensi GPS &amp; Timbangan HP</b>, <b>Sistem Scan Nota ke Excel</b>, hingga <b>Sistem Audit &amp; Laporan Otomatis</b>.<br/>
+          Kunci keberhasilan pelatihan ini adalah diterapkan mulai besok pagi. Gunakan panduan 7 Hari Pertama di bawah ini, dan jika ada kendala saat menerapkan di kebun masing-masing, silakan langsung bertanya di Grup WhatsApp Pendampingan kita. Terima kasih dan semoga bisnis Bapak/Ibu semakin efisien dan berkembang pesat!"
+        </div>
+
+        <div class="grid-3">
+          <div class="info-box gold">
+            <h3>📅 Hari 1 – 3: Otomasi Admin</h3>
+            <ul>
+              <li>Mulai catat seluruh kas harian di <strong>Aplikasi Kas (Modul 1A)</strong>.</li>
+              <li>Foto seluruh struk solar &amp; nota pupuk minggu ini dengan <strong>OCR Nota (Modul 1C)</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="info-box blue">
+            <h3>📅 Hari 4 – 5: Uji Lapangan</h3>
+            <ul>
+              <li>Berikan <strong>Aplikasi Absensi GPS &amp; Timbangan HP (Modul 1B)</strong> kepada minimal 1 mandor blok.</li>
+              <li>Bandingkan kecepatan rekap upahnya di sore hari.</li>
+            </ul>
+          </div>
+
+          <div class="info-box green">
+            <h3>📅 Hari 6 – 7: Laporan AI</h3>
+            <ul>
+              <li>Jalankan <strong>Analisis Blok &amp; Laporan Otomatis (Modul 2A–2C)</strong> di akhir minggu.</li>
+              <li>Bagikan hasil penghematan waktu Anda di Grup WA Alumni.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <h3>🎁 Fasilitas Peserta &amp; Kontak Pendampingan CV Agroteknologi Nusantara</h3>
+          <ul>
+            <li>✅ <strong>E-Sertifikat Resmi</strong>, <strong>Modul PDF</strong>, <strong>Source Code 3 Aplikasi AI</strong>, <strong>Dataset CSV</strong>, &amp; <strong>Video Rekaman Kelas</strong>.</li>
+            <li>📞 <strong>WA Amanda:</strong> 0857-1385-0615 &nbsp;|&nbsp; <strong>WA Hardadi:</strong> 0813-1307-8216 &nbsp;|&nbsp; 🌐 <strong>www.cvagrotechnology.com</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>Terima Kasih — Sukses Selalu Bersama CV Agroteknologi Nusantara!</span>
+        <span>Slide 10 / 10</span>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    let singleMode = false;
+    let notesHidden = false;
+    const slides = document.querySelectorAll('.slide');
+    const indicator = document.getElementById('slideIndicator');
+    const toggleBtn = document.getElementById('toggleModeBtn');
+    const toggleNotesBtn = document.getElementById('toggleNotesBtn');
+
+    function updateSlideView() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+      if (singleMode) {
+        indicator.textContent = `Slide ${currentSlide + 1} / ${slides.length}`;
+      } else {
+        indicator.textContent = `Semua Slide (${slides.length})`;
+        slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function togglePresentationMode() {
+      singleMode = !singleMode;
+      document.body.classList.toggle('single-slide-mode', singleMode);
+      toggleBtn.textContent = singleMode ? '📜 Semua Slide' : '🖥️ Mode Presentasi';
+      if (singleMode && document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else if (!singleMode && document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+      updateSlideView();
+    }
+
+    function toggleNotes() {
+      notesHidden = !notesHidden;
+      document.body.classList.toggle('hide-notes', notesHidden);
+      toggleNotesBtn.textContent = notesHidden ? '🎙️ Tampilkan Narasi' : '🎙️ Sembunyikan Narasi';
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlideView();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlideView();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      }
+    });
+
+    function copyPrompt(elementId, btn) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.textContent;
+        btn.textContent = '✅ Tersalin!';
+        setTimeout(() => { btn.textContent = original; }, 1800);
+      });
+    }
+  </script>
+</body>
+</html>
