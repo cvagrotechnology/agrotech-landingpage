@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Peta Master Kebun Sawit — CV Agroteknologi Nusantara (Simulasi 13 Nov 2026)</name>
+    <description>Template Peta Poligon Blok A1 &amp; A2, Titik TPH, Infrastruktur, dan Laporan Masalah Real-Time untuk Pelatihan Google Maps CV Agroteknologi Nusantara.</description>
+
+    <!-- STYLES -->
+    <Style id="polyBlokA1">
+      <LineStyle>
+        <color>ff22c55e</color>
+        <width>3</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>5922c55e</color>
+      </PolyStyle>
+    </Style>
+    <Style id="polyBlokA2">
+      <LineStyle>
+        <color>ff08b3ea</color>
+        <width>3</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>5908b3ea</color>
+      </PolyStyle>
+    </Style>
+
+    <!-- LAYER 1: POLIGON BLOK KEBUN -->
+    <Folder>
+      <name>Layer 1 - Poligon Blok Kebun</name>
+      <Placemark>
+        <name>Blok A1 (Tahun Tanam 2019 - 14,8 Ha)</name>
+        <description>Luas Total: 14,8 Ha | Luas Efektif: 13,9 Ha | Populasi (9x9m): ~1.988 Pokok | Dosis NPK: 2,5 Kg/Pokok (4,97 Ton)</description>
+        <styleUrl>#polyBlokA1</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+                101.43820,-0.52110,0
+                101.44180,-0.52115,0
+                101.44175,-0.52450,0
+                101.43815,-0.52445,0
+                101.43820,-0.52110,0
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+
+      <Placemark>
+        <name>Blok A2 (Tahun Tanam 2020 - 13,9 Ha)</name>
+        <description>Luas Total: 13,9 Ha | Luas Efektif: 13,1 Ha | Populasi (9x9m): ~1.873 Pokok | Dosis NPK: 2,5 Kg/Pokok (4,68 Ton)</description>
+        <styleUrl>#polyBlokA2</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+                101.44180,-0.52115,0
+                101.44520,-0.52120,0
+                101.44515,-0.52455,0
+                101.44175,-0.52450,0
+                101.44180,-0.52115,0
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+    </Folder>
+
+    <!-- LAYER 2: PATOK BATAS, TPH & INFRASTRUKTUR -->
+    <Folder>
+      <name>Layer 2 - Patok Batas, TPH &amp; Infrastruktur</name>
+      <Placemark>
+        <name>PTK-01 (Patok Barat Laut Blok A1)</name>
+        <description>Patok Sudut Barat Laut Blok A1 (Dekat Parit Utama)</description>
+        <Point><coordinates>101.43820,-0.52110,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>PTK-02 (Patok Timur Laut Blok A1)</name>
+        <description>Patok Sudut Timur Laut Blok A1 (Batas Jalan Produksi)</description>
+        <Point><coordinates>101.44180,-0.52115,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>PTK-03 (Patok Tenggara Blok A1)</name>
+        <description>Patok Sudut Tenggara Blok A1 (Simpang Jembatan Besi)</description>
+        <Point><coordinates>101.44175,-0.52450,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>PTK-04 (Patok Barat Daya Blok A1)</name>
+        <description>Patok Sudut Barat Daya Blok A1</description>
+        <Point><coordinates>101.43815,-0.52445,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>PTK-05 (Patok Timur Laut Blok A2)</name>
+        <description>Patok Sudut Timur Laut Blok A2</description>
+        <Point><coordinates>101.44520,-0.52120,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>PTK-06 (Patok Tenggara Blok A2)</name>
+        <description>Patok Sudut Tenggara Blok A2</description>
+        <Point><coordinates>101.44515,-0.52455,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>TPH-01 (Blok A1)</name>
+        <description>Tempat Pengumpulan Hasil (TPH) 01 - Kapasitas 5 Ton TBS</description>
+        <Point><coordinates>101.44178,-0.52280,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>TPH-02 (Blok A1)</name>
+        <description>Tempat Pengumpulan Hasil (TPH) 02 - Akses Truk Utama</description>
+        <Point><coordinates>101.44000,-0.52448,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>TPH-03 (Blok A2)</name>
+        <description>Tempat Pengumpulan Hasil (TPH) 03 - Blok A2</description>
+        <Point><coordinates>101.44518,-0.52290,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>INF-01 (Jembatan Utama Akses Panen)</name>
+        <description>Jembatan Utama Akses Panen Blok A1 (Kondisi Baik)</description>
+        <Point><coordinates>101.44176,-0.52452,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>INF-02 (Pintu Air Parit Utara)</name>
+        <description>Pintu Air / Klep Parit Drainase Utara Blok A1</description>
+        <Point><coordinates>101.43990,-0.52112,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+
+    <!-- LAYER 3: LAPORAN MASALAH REAL-TIME -->
+    <Folder>
+      <name>Layer 3 - Laporan Masalah Real-Time (Mandor)</name>
+      <Placemark>
+        <name>LAP-01 [MERAH - BELUM DITANGANI] Parit Tersumbat 40m</name>
+        <description>Blok A1: Genangan Air / Parit Tersumbat sepanjang 40m (Perlu Cuci Parit Segera)</description>
+        <Point><coordinates>101.43950,-0.52310,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>LAP-02 [KUNING - PROSES PERBAIKAN] Jalan Panen Berlubang</name>
+        <description>Blok A2: Jalan Panen Berlubang (Rawan Amblas Saat Hujan - Sedang Ditimbun Sirtu)</description>
+        <Point><coordinates>101.44350,-0.52200,0</coordinates></Point>
+      </Placemark>
+      <Placemark>
+        <name>LAP-03 [MERAH - BELUM DITANGANI] Blank Spot 18 Pokok Mati</name>
+        <description>Blok A2: Area Blank Spot / 18 Pokok Sawit Mati (Perlu Sisipan Bibit)</description>
+        <Point><coordinates>101.44410,-0.52380,0</coordinates></Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
+

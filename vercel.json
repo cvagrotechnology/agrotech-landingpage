@@ -7,6 +7,8 @@
     { "source": "/ig-manager", "destination": "/ig-manager.html" },
     { "source": "/preview", "destination": "/ig-preview.html" },
     { "source": "/slide-17nov", "destination": "/slide-pemateri-17nov.html" },
+    { "source": "/slide-13nov", "destination": "/slide-pemateri-googlemaps-13nov.html" },
+    { "source": "/slide-googlemaps", "destination": "/slide-pemateri-googlemaps-13nov.html" },
     { "source": "/silabus", "destination": "/silabus-pelatihan.html" }
   ]
 }

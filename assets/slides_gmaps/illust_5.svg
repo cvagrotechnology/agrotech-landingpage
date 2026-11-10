@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 680 520" width="680" height="520">
+  <defs>
+    <clipPath id="cardClip"><rect x="0" y="0" width="680" height="520" rx="26"/></clipPath>
+    <clipPath id="phoneClip"><rect x="195" y="28" width="290" height="464" rx="34"/></clipPath>
+  </defs>
+  <g clip-path="url(#cardClip)">
+
+    <rect x="0" y="0" width="680" height="520" fill="#0F172A"/>
+    <!-- Excel CSV Visual Table -->
+    <rect x="24" y="22" width="632" height="225" rx="18" fill="#FFFFFF" stroke="#10B981" stroke-width="3.5"/>
+    <rect x="24" y="22" width="632" height="48" rx="15" fill="#059669"/>
+    <text x="46" y="52" fill="#FFFFFF" font-family="Arial" font-size="15.5" font-weight="bold">📊 Struktur File Excel / CSV: Koordinat_Blok_Sawit_Latihan.csv</text>
+
+    <text x="42" y="96" fill="#0F172A" font-family="Courier New, monospace" font-size="13.5" font-weight="bold">ID_Titik | Latitude  | Longitude  | Kategori    | Blok    | Keterangan</text>
+    <line x1="36" y1="106" x2="640" y2="106" stroke="#CBD5E1" stroke-width="2"/>
+    <text x="42" y="130" fill="#059669" font-family="Courier New, monospace" font-size="13" font-weight="bold">PTK-01   | -0.52110  | 101.43820  | Patok Batas | Blok A1 | Sudut Barat Laut</text>
+    <text x="42" y="156" fill="#059669" font-family="Courier New, monospace" font-size="13" font-weight="bold">PTK-02   | -0.52115  | 101.44180  | Patok Batas | Blok A1 | Sudut Timur Laut</text>
+    <text x="42" y="182" fill="#2563EB" font-family="Courier New, monospace" font-size="13" font-weight="bold">TPH-01   | -0.52280  | 101.44178  | TPH Panen   | Blok A1 | Kapasitas 5 Ton</text>
+    <text x="42" y="208" fill="#E11D48" font-family="Courier New, monospace" font-size="13" font-weight="bold">LAP-01   | -0.52310  | 101.43950  | Temuan      | Blok A1 | Parit Tersumbat</text>
+    <text x="42" y="232" fill="#D97706" font-family="Courier New, monospace" font-size="13" font-weight="bold">INF-01   | -0.52090  | 101.44185  | Jembatan    | Poros   | Jembatan Utama</text>
+
+    <!-- Decimal Rule Comparison -->
+    <rect x="24" y="264" width="306" height="98" rx="16" fill="#E11D48" stroke="#FDA4AF" stroke-width="2.5"/>
+    <text x="177" y="298" text-anchor="middle" fill="#FEF08A" font-family="Arial" font-size="15" font-weight="bold">❌ SALAH (KOMA DESIMAL)</text>
+    <text x="177" y="334" text-anchor="middle" fill="#FFFFFF" font-family="Courier New, monospace" font-size="19" font-weight="bold">-0,52110 | 101,43820</text>
+
+    <rect x="350" y="264" width="306" height="98" rx="16" fill="#059669" stroke="#6EE7B7" stroke-width="2.5"/>
+    <text x="503" y="298" text-anchor="middle" fill="#FEF08A" font-family="Arial" font-size="15" font-weight="bold">✅ BENAR (TITIK DESIMAL)</text>
+    <text x="503" y="334" text-anchor="middle" fill="#FFFFFF" font-family="Courier New, monospace" font-size="19" font-weight="bold">-0.52110 | 101.43820</text>
+
+    <!-- Result Banner -->
+    <rect x="24" y="380" width="632" height="118" rx="18" fill="#2563EB" stroke="#93C5FD" stroke-width="2.5"/>
+    <text x="340" y="414" text-anchor="middle" fill="#FEF08A" font-family="Arial" font-size="16" font-weight="bold">🚀 HASIL 1-KLIK IMPORT DI GOOGLE MY MAPS:</text>
+    <text x="340" y="446" text-anchor="middle" fill="#FFFFFF" font-family="Arial" font-size="14.5" font-weight="bold">📍 6 Patok Batas   •   🚜 3 TPH Panen   •   🌉 2 Infrastruktur   •   ⚠️ 3 Masalah</text>
+    <text x="340" y="478" text-anchor="middle" fill="#BAE6FD" font-family="Arial" font-size="13.5" font-weight="bold">Total 14 Titik Koordinat Langsung Tertancap Otomatis di Peta Satelit!</text>
+  </g>
+</svg>

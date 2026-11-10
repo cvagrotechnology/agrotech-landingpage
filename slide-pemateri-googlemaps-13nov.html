@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slide Presentasi Multi-Warna — Pelatihan Google Maps Poligon (13 Nov 2026)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #09101D;
+      color: #1E293B;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .topbar {
+      height: 54px;
+      background: #091E12;
+      border-bottom: 1px solid rgba(234,179,8,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      color: #F8FAFC;
+      flex-shrink: 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+    }
+    .brand-badge {
+      background: linear-gradient(135deg, #F59E0B, #EAB308);
+      color: #091E12;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 800;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      background: rgba(255,255,255,0.1);
+      color: #F8FAFC;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12.5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.15s ease;
+    }
+    .btn:hover { background: rgba(255,255,255,0.2); }
+    .btn-gold {
+      background: #EAB308;
+      color: #091E12;
+      border-color: #EAB308;
+    }
+    .btn-gold:hover { background: #FACC15; }
+    .stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 28px;
+      overflow: hidden;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1320px;
+      height: 100%;
+      max-height: 740px;
+      border-radius: 22px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.65);
+      padding: 26px 30px 22px;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide.active { display: flex; }
+    .ribbon {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 8px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .slide-banner {
+      border-radius: 18px;
+      padding: 16px 24px;
+      border: 3px solid;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .slide-kicker {
+      color: #FDE047;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .slide-title {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .header-pill {
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .slide-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 45% 53%;
+      gap: 2%;
+      align-items: stretch;
+      margin-top: 16px;
+      min-height: 0;
+    }
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .v-card {
+      border: 2.5px solid;
+      border-radius: 16px;
+      padding: 12px 16px 12px 24px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .v-stripe {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 12px;
+    }
+    .v-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      color: #FFFFFF;
+    }
+    .v-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .v-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .v-card-title {
+      font-size: 17px;
+      font-weight: 800;
+    }
+    .v-tag {
+      color: #FFFFFF;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .v-card-sub {
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    .kpi-card {
+      border: 2.5px solid;
+      border-radius: 16px;
+      padding: 14px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .kpi-title {
+      color: #FDE047;
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .kpi-sub {
+      color: #FFFFFF;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    .right-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 18px;
+    }
+    .slide-illust {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 18px;
+    }
+    .speaker-drawer {
+      display: none;
+      margin-top: 12px;
+      background: #FEFCE8;
+      border: 2px solid #EAB308;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 13px;
+      color: #1E293B;
+      line-height: 1.45;
+      flex-shrink: 0;
+    }
+    body.show-notes .speaker-drawer { display: block; }
+    .speaker-label {
+      font-weight: 800;
+      color: #854D0E;
+      font-size: 11.5px;
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-badge">13 NOV 2026</span>
+      <span>CV AGROTEKNOLOGI NUSANTARA • PELATIHAN GOOGLE MAPS POLIGON</span>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="toggleNotes()">🎙️ Catatan Pemateri (N)</button>
+      <a class="btn" href="Template_Poligon_Kebun_Agrotech.kml" download>🌍 Unduh KML</a>
+      <a class="btn" href="Koordinat_Blok_Sawit_Latihan.csv" download>📊 Unduh CSV</a>
+      <a class="btn btn-gold" href="Slide_Presentasi_Pemateri_GoogleMaps_13Nov2026_Agrotech.pptx" download>⬇️ Unduh PPTX Multi-Warna</a>
+      <button class="btn" onclick="prevSlide()">◀ Prev</button>
+      <span id="counter" style="font-weight:800; font-size:13px; min-width:55px; text-align:center;">1 / 10</span>
+      <button class="btn" onclick="nextSlide()">Next ▶</button>
+    </div>
+  </header>
+  <main class="stage">
+    
+    <section class="slide active" data-index="0" style="background:#071C15;">
+      <div class="ribbon">
+        <span style="background:#10B981;"></span>
+        <span style="background:#3B82F6;"></span>
+        <span style="background:#F59E0B;"></span>
+        <span style="background:#E11D48;"></span>
+      </div>
+      <div class="slide-banner" style="background:#064E3B; border-color:#34D399;">
+        <div>
+          <div class="slide-kicker">CV AGROTEKNOLOGI NUSANTARA • INVESTASI Rp 250.000,-</div>
+          <h1 class="slide-title">PELATIHAN GOOGLE MAPS: PETA POLIGON &amp; PENGAWASAN REAL-TIME</h1>
+        </div>
+        <div class="header-pill" style="background:#F59E0B; color:#091E12;">13 NOV 2026 • FULL PRAKTEK</div>
+      </div>
+      <div class="slide-body">
+        <div class="left-col">
+          
+        <div class="v-card" style="background:#064E3B; border-color:#34D399;">
+          <div class="v-stripe" style="background:#10B981;"></div>
+          <div class="v-icon" style="background:#10B981;">📍</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#6EE7B7;">Titik Koordinat &amp; GPS HP</div>
+              <span class="v-tag" style="background:#10B981;">MODUL 01</span>
+            </div>
+            <div class="v-card-sub" style="color:#E2E8F0;">Ambil patok batas kebun &amp; peta offline tanpa sinyal</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#1E3A8A; border-color:#60A5FA;">
+          <div class="v-stripe" style="background:#3B82F6;"></div>
+          <div class="v-icon" style="background:#3B82F6;">📐</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#93C5FD;">Peta Poligon Blok Kebun</div>
+              <span class="v-tag" style="background:#3B82F6;">MODUL 02</span>
+            </div>
+            <div class="v-card-sub" style="color:#E2E8F0;">Gambar poligon satelit, hitung Ha &amp; populasi sawit</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#78350F; border-color:#FBBF24;">
+          <div class="v-stripe" style="background:#F59E0B;"></div>
+          <div class="v-icon" style="background:#F59E0B;">🛰️</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#FDE047;">Pengawasan Real-Time</div>
+              <span class="v-tag" style="background:#F59E0B;">MODUL 03</span>
+            </div>
+            <div class="v-card-sub" style="color:#E2E8F0;">Sharing peta mandor, lapor foto banjir/parit &amp; live GPS</div>
+          </div>
+        </div>
+          <div class="kpi-card" style="background:#E11D48; border-color:#FFE4E6;">
+            <div class="kpi-title">⭐ 100% PRAKTEK LANGSUNG</div>
+            <div class="kpi-sub">Bawa pulang peta digital kebun sendiri di HP &amp; Laptop</div>
+          </div>
+        </div>
+        <div class="right-col">
+          <img src="assets/slides_gmaps/illust_1.png" alt="Ilustrasi Slide 1" class="slide-illust" />
+        </div>
+      </div>
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ NASKAH PEMATERI (SPEAKER NOTES — TEKAN TOMBOL 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">NASKAH PEMBUKA PEMATERI (08.30 WIB):<br/>Selamat pagi Bapak/Ibu peserta Pelatihan Google Maps: Peta Poligon &amp; Pengawasan Kebun Real-Time bersama CV Agroteknologi Nusantara.<br/>Hari ini kita 100% praktek langsung menggunakan HP dan Laptop masing-masing. Di akhir sesi nanti, Bapak/Ibu langsung membawa pulang peta digital blok kebun sendiri beserta file KML-nya.</div>
+      </div>
+    </section>
+    <section class="slide" data-index="1" style="background:#F8FAFC;">
+      <div class="ribbon">
+        <span style="background:#10B981;"></span>
+        <span style="background:#3B82F6;"></span>
+        <span style="background:#F59E0B;"></span>
+        <span style="background:#E11D48;"></span>
+      </div>
+      <div class="slide-banner" style="background:#1E1B4B; border-color:#818CF8;">
+        <div>
+          <div class="slide-kicker">REGISTRASI &amp; CHECKLIST PERANGKAT PESERTA</div>
+          <h1 class="slide-title">3 Aplikasi Gratis &amp; Dataset Simulasi Kita Hari Ini</h1>
+        </div>
+        <div class="header-pill" style="background:#38BDF8; color:#0F172A;">PERSIAPAN • 08.00 – 08.30 WIB</div>
+      </div>
+      <div class="slide-body">
+        <div class="left-col">
+          
+        <div class="v-card" style="background:#EFF6FF; border-color:#60A5FA;">
+          <div class="v-stripe" style="background:#2563EB;"></div>
+          <div class="v-icon" style="background:#2563EB;">💻</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#1E3A8A;">Google My Maps (Browser)</div>
+              <span class="v-tag" style="background:#2563EB;">LAPTOP</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Buka mymaps.google.com menggunakan akun Gmail</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#ECFDF5; border-color:#34D399;">
+          <div class="v-stripe" style="background:#10B981;"></div>
+          <div class="v-icon" style="background:#10B981;">📱</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#065F46;">Google Maps &amp; Earth (HP)</div>
+              <span class="v-tag" style="background:#10B981;">SMARTPHONE</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Aktifkan GPS HP &amp; fitur Offline Maps sebelum ke kebun</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#FFFBEB; border-color:#FBBF24;">
+          <div class="v-stripe" style="background:#D97706;"></div>
+          <div class="v-icon" style="background:#D97706;">📂</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#78350F;">File CSV &amp; KML Latihan</div>
+              <span class="v-tag" style="background:#D97706;">DATASET</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">14 titik patok, TPH &amp; masalah siap impor (1-Klik)</div>
+          </div>
+        </div>
+          <div class="kpi-card" style="background:#4C1D95; border-color:#E9D5FF;">
+            <div class="kpi-title">⭐ Rp 0 / GRATIS SELAMANYA</div>
+            <div class="kpi-sub">Tanpa sewa lisensi software GIS &amp; tanpa alat ukur mahal</div>
+          </div>
+        </div>
+        <div class="right-col">
+          <img src="assets/slides_gmaps/illust_2.png" alt="Ilustrasi Slide 2" class="slide-illust" />
+        </div>
+      </div>
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ NASKAH PEMATERI (SPEAKER NOTES — TEKAN TOMBOL 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">INSTRUKSI TEKNIS PEMATERI:<br/>1. Pastikan seluruh peserta sudah membuka Google Chrome di laptop dan login ke mymaps.google.com.<br/>2. Pastikan file Koordinat_Blok_Sawit_Latihan.csv dan Template_Poligon_Kebun_Agrotech.kml sudah diunduh dari grup WhatsApp kelas.</div>
+      </div>
+    </section>
+    <section class="slide" data-index="2" style="background:#FFF7ED;">
+      <div class="ribbon">
+        <span style="background:#10B981;"></span>
+        <span style="background:#3B82F6;"></span>
+        <span style="background:#F59E0B;"></span>
+        <span style="background:#E11D48;"></span>
+      </div>
+      <div class="slide-banner" style="background:#7F1D1D; border-color:#F87171;">
+        <div>
+          <div class="slide-kicker">MINDSET EFISIENSI OPERASIONAL KEBUN</div>
+          <h1 class="slide-title">Bahaya Luas Blok “Kira-Kira” bagi Biaya Operasional</h1>
+        </div>
+        <div class="header-pill" style="background:#FACC15; color:#450A0A;">ICE BREAKING • 08.30 – 08.45 WIB</div>
+      </div>
+      <div class="slide-body">
+        <div class="left-col">
+          
+        <div class="v-card" style="background:#FFF1F2; border-color:#FDA4AF;">
+          <div class="v-stripe" style="background:#E11D48;"></div>
+          <div class="v-icon" style="background:#E11D48;">❌</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#881337;">Klaim Luas Lama: 25,0 Ha</div>
+              <span class="v-tag" style="background:#E11D48;">DI KERTAS</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Berdasarkan perkiraan lama tanpa ukur batas satelit</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#ECFDF5; border-color:#34D399;">
+          <div class="v-stripe" style="background:#10B981;"></div>
+          <div class="v-icon" style="background:#10B981;">✅</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#065F46;">Luas Poligon Aktual: 21,8 Ha</div>
+              <span class="v-tag" style="background:#10B981;">SATELIT</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Hasil tarik garis poligon 5 menit di Google My Maps</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#FFFBEB; border-color:#FBBF24;">
+          <div class="v-stripe" style="background:#D97706;"></div>
+          <div class="v-icon" style="background:#D97706;">💸</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#78350F;">Selisih 3,2 Ha “Lahan Hantu”</div>
+              <span class="v-tag" style="background:#D97706;">BOCOR</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Pupuk NPK &amp; borongan tebas terbayar lebih tiap tahun</div>
+          </div>
+        </div>
+          <div class="kpi-card" style="background:#065F46; border-color:#A7F3D0;">
+            <div class="kpi-title">⭐ HEMAT 50% BIAYA SURVEI</div>
+            <div class="kpi-sub">Kontrol dosis pupuk &amp; kontrak borongan secara presisi</div>
+          </div>
+        </div>
+        <div class="right-col">
+          <img src="assets/slides_gmaps/illust_3.png" alt="Ilustrasi Slide 3" class="slide-illust" />
+        </div>
+      </div>
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ NASKAH PEMATERI (SPEAKER NOTES — TEKAN TOMBOL 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">PERTANYAAN PEMANTIK KE PESERTA:<br/>&#x27;Bapak/Ibu, apakah luas blok 25 Ha di laporan kebun saat ini murni luas tanam efektif, atau masih termasuk rawa, sungai, dan jalan?&#x27;<br/>Tunjukkan ilustrasi di kanan: selisih 3,2 Ha &#x27;lahan hantu&#x27; membuat pembelian pupuk NPK dan upah borongan babat gawangan membengkak setiap rotasi.</div>
+      </div>
+    </section>
+    <section class="slide" data-index="3" style="background:#F0F9FF;">
+      <div class="ribbon">
+        <span style="background:#10B981;"></span>
+        <span style="background:#3B82F6;"></span>
+        <span style="background:#F59E0B;"></span>
+        <span style="background:#E11D48;"></span>
+      </div>
+      <div class="slide-banner" style="background:#0C4A6E; border-color:#38BDF8;">
+        <div>
+          <div class="slide-kicker">PRAKTEK SMARTPHONE DI LAPANGAN</div>
+          <h1 class="slide-title">Ambil Titik GPS di HP &amp; Survei Kebun Tanpa Sinyal</h1>
+        </div>
+        <div class="header-pill" style="background:#34D399; color:#064E3B;">MODUL 01 (SESI 1A) • 08.45 – 09.35</div>
+      </div>
+      <div class="slide-body">
+        <div class="left-col">
+          
+        <div class="v-card" style="background:#F0F9FF; border-color:#7DD3FC;">
+          <div class="v-stripe" style="background:#0284C7;"></div>
+          <div class="v-icon" style="background:#0284C7;">🛰️</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#0C4A6E;">Ubah Layer ke Satelit</div>
+              <span class="v-tag" style="background:#0284C7;">LANGKAH 1</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Agar tajuk pohon sawit, jalan &amp; parit terlihat jelas</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#FFF1F2; border-color:#FDA4AF;">
+          <div class="v-stripe" style="background:#E11D48;"></div>
+          <div class="v-icon" style="background:#E11D48;">📍</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#881337;">Tekan Tahan 2 Detik di Peta</div>
+              <span class="v-tag" style="background:#E11D48;">LANGKAH 2</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Muncul Pin Merah -&gt; ketuk angka Lat, Long untuk salin</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#ECFDF5; border-color:#34D399;">
+          <div class="v-stripe" style="background:#10B981;"></div>
+          <div class="v-icon" style="background:#10B981;">📴</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#065F46;">Unduh Peta Offline Kebun</div>
+              <span class="v-tag" style="background:#10B981;">LANGKAH 3</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">GPS HP bekerja via satelit meski tanpa sinyal seluler</div>
+          </div>
+        </div>
+          <div class="kpi-card" style="background:#1E3A8A; border-color:#BFDBFE;">
+            <div class="kpi-title">⭐ UJI MODE PESAWAT DI KELAS</div>
+            <div class="kpi-sub">Buktikan titik koordinat GPS tetap akurat tanpa kuota</div>
+          </div>
+        </div>
+        <div class="right-col">
+          <img src="assets/slides_gmaps/illust_4.png" alt="Ilustrasi Slide 4" class="slide-illust" />
+        </div>
+      </div>
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ NASKAH PEMATERI (SPEAKER NOTES — TEKAN TOMBOL 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">PANDUAN PRAKTEK LANGSUNG DI HP PESERTA:<br/>1. Minta peserta membuka Google Maps di HP -&gt; ubah jenis peta menjadi Satelit.<br/>2. Minta peserta menyalakan Mode Pesawat (Airplane Mode) selama 1 menit untuk membuktikan bahwa chip GPS HP tetap akurat menunjuk titik biru.</div>
+      </div>
+    </section>
+    <section class="slide" data-index="4" style="background:#F0FDFA;">
+      <div class="ribbon">
+        <span style="background:#10B981;"></span>
+        <span style="background:#3B82F6;"></span>
+        <span style="background:#F59E0B;"></span>
+        <span style="background:#E11D48;"></span>
+      </div>
+      <div class="slide-banner" style="background:#115E59; border-color:#2DD4BF;">
+        <div>
+          <div class="slide-kicker">OTOMATISASI DATA LAPANGAN KE LAPTOP</div>
+          <h1 class="slide-title">Impor Massal Tabel Excel / CSV ke Google My Maps</h1>
+        </div>
+        <div class="header-pill" style="background:#FBBF24; color:#451A03;">MODUL 01 (SESI 1B) • 09.35 – 10.00</div>
+      </div>
+      <div class="slide-body">
+        <div class="left-col">
+          
+        <div class="v-card" style="background:#F0FDFA; border-color:#5EEAD4;">
+          <div class="v-stripe" style="background:#0D9488;"></div>
+          <div class="v-icon" style="background:#0D9488;">📊</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#115E59;">Siapkan 6 Kolom Tabel CSV</div>
+              <span class="v-tag" style="background:#0D9488;">STRUKTUR</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">ID_Titik, Latitude, Longitude, Kategori, Blok, Info</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#FFF1F2; border-color:#FDA4AF;">
+          <div class="v-stripe" style="background:#E11D48;"></div>
+          <div class="v-icon" style="background:#E11D48;">⚠️</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#881337;">Wajib Pakai Titik Desimal (.)</div>
+              <span class="v-tag" style="background:#E11D48;">PENTING</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Contoh: -0.52110 (jangan pakai koma -0,52110)</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#EFF6FF; border-color:#60A5FA;">
+          <div class="v-stripe" style="background:#2563EB;"></div>
+          <div class="v-icon" style="background:#2563EB;">🚀</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#1E3A8A;">Klik Import -&gt; Pilih File CSV</div>
+              <span class="v-tag" style="background:#2563EB;">1-KLIK</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">14 titik patok, TPH &amp; infrastruktur langsung muncul!</div>
+          </div>
+        </div>
+          <div class="kpi-card" style="background:#064E3B; border-color:#6EE7B7;">
+            <div class="kpi-title">⭐ TARGET SESI 1 TERCAPAI</div>
+            <div class="kpi-sub">14 Pin Koordinat tampil rapi di layar laptop peserta</div>
+          </div>
+        </div>
+        <div class="right-col">
+          <img src="assets/slides_gmaps/illust_5.png" alt="Ilustrasi Slide 5" class="slide-illust" />
+        </div>
+      </div>
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ NASKAH PEMATERI (SPEAKER NOTES — TEKAN TOMBOL 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">PANDUAN PRAKTEK IMPOR CSV DI LAPTOP:<br/>1. Klik &#x27;Create a New Map&#x27; di Google My Maps -&gt; Klik &#x27;Import&#x27; pada layer pertama.<br/>2. Pilih file Koordinat_Blok_Sawit_Latihan.csv -&gt; Centang Latitude &amp; Longitude -&gt; Pilih ID_Titik sebagai judul penanda.<br/>3. Ingatkan peserta: kesalahan paling umum adalah memakai koma desimal dari setting Excel Indonesia.</div>
+      </div>
+    </section>
+    <section class="slide" data-index="5" style="background:#FEFCE8;">
+      <div class="ribbon">
+        <span style="background:#10B981;"></span>
+        <span style="background:#3B82F6;"></span>
+        <span style="background:#F59E0B;"></span>
+        <span style="background:#E11D48;"></span>
+      </div>
+      <div class="slide-banner" style="background:#78350F; border-color:#FBBF24;">
+        <div>
+          <div class="slide-kicker">PEMETAAN BATAS LAHAN DIGITAL</div>
+          <h1 class="slide-title">Digitasi Poligon Blok Kebun di Atas Citra Satelit</h1>
+        </div>
+        <div class="header-pill" style="background:#34D399; color:#052E16;">MODUL 02 (SESI 2A) • 10.15 – 11.05</div>
+      </div>
+      <div class="slide-body">
+        <div class="left-col">
+          
+        <div class="v-card" style="background:#EFF6FF; border-color:#60A5FA;">
+          <div class="v-stripe" style="background:#2563EB;"></div>
+          <div class="v-icon" style="background:#2563EB;">✏️</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#1E3A8A;">Klik Ikon Draw a Line</div>
+              <span class="v-tag" style="background:#2563EB;">TOOL</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Pilih &#x27;Add line or shape&#x27; di bawah kotak pencarian</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#ECFDF5; border-color:#34D399;">
+          <div class="v-stripe" style="background:#10B981;"></div>
+          <div class="v-icon" style="background:#10B981;">🔄</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#065F46;">Klik Memutar Patok Batas</div>
+              <span class="v-tag" style="background:#10B981;">URUTAN</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">PTK-01 -&gt; 02 -&gt; 03 -&gt; 04 -&gt; kembali klik PTK-01</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#F5F3FF; border-color:#C4B5FD;">
+          <div class="v-stripe" style="background:#7C3AED;"></div>
+          <div class="v-icon" style="background:#7C3AED;">🎨</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#4C1D95;">Beri Warna &amp; Transparansi</div>
+              <span class="v-tag" style="background:#7C3AED;">VISUAL</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Blok A1 Hijau, Blok A2 Kuning, Transparansi 35%</div>
+          </div>
+        </div>
+          <div class="kpi-card" style="background:#0F172A; border-color:#FDE047;">
+            <div class="kpi-title">⭐ LUAS &amp; KELILING OTOMATIS</div>
+            <div class="kpi-sub">Blok A1 = 14,8 Ha (1,52 km)  |  Blok A2 = 13,9 Ha</div>
+          </div>
+        </div>
+        <div class="right-col">
+          <img src="assets/slides_gmaps/illust_6.png" alt="Ilustrasi Slide 6" class="slide-illust" />
+        </div>
+      </div>
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ NASKAH PEMATERI (SPEAKER NOTES — TEKAN TOMBOL 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">PANDUAN PRAKTEK MENGGAMBAR POLIGON:<br/>1. Buat Layer baru bernama &#x27;Layer Poligon Blok Kebun&#x27;.<br/>2. Klik ikon &#x27;Draw a line&#x27; -&gt; &#x27;Add line or shape&#x27;.<br/>3. Klik berurutan memutar searah jarum jam: PTK-01 -&gt; PTK-02 -&gt; PTK-03 -&gt; PTK-04 -&gt; kembali klik PTK-01 hingga poligon tertutup.<br/>4. Cảnh báo penting: Jangan klik menyilang (zig-zag) karena poligon akan membentuk pita kupu-kupu dan luas hektar menjadi salah.</div>
+      </div>
+    </section>
+    <section class="slide" data-index="6" style="background:#F5F3FF;">
+      <div class="ribbon">
+        <span style="background:#10B981;"></span>
+        <span style="background:#3B82F6;"></span>
+        <span style="background:#F59E0B;"></span>
+        <span style="background:#E11D48;"></span>
+      </div>
+      <div class="slide-banner" style="background:#4C1D95; border-color:#C084FC;">
+        <div>
+          <div class="slide-kicker">KALKULASI AGRONOMI &amp; EKSPOR FILE GIS</div>
+          <h1 class="slide-title">Rumus Luas Efektif, Populasi Sawit &amp; Dosis Pupuk</h1>
+        </div>
+        <div class="header-pill" style="background:#FACC15; color:#3B0764;">MODUL 02 (SESI 2B) • 11.05 – 12.00</div>
+      </div>
+      <div class="slide-body">
+        <div class="left-col">
+          
+        <div class="v-card" style="background:#F0F9FF; border-color:#7DD3FC;">
+          <div class="v-stripe" style="background:#0284C7;"></div>
+          <div class="v-icon" style="background:#0284C7;">📐</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#0C4A6E;">Luas Efektif = Poligon × 94%</div>
+              <span class="v-tag" style="background:#0284C7;">RUMUS 1</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Potong 5%–8% untuk alokasi jalan panen, parit &amp; TPH</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#ECFDF5; border-color:#34D399;">
+          <div class="v-stripe" style="background:#10B981;"></div>
+          <div class="v-icon" style="background:#10B981;">🌴</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#065F46;">Populasi = Luas Efektif × 143</div>
+              <span class="v-tag" style="background:#10B981;">RUMUS 2</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Jarak 9×9m = 143/Ha | 9,2m = 136/Ha | 9,5m = 128/Ha</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#FFFBEB; border-color:#FBBF24;">
+          <div class="v-stripe" style="background:#D97706;"></div>
+          <div class="v-icon" style="background:#D97706;">🧪</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#78350F;">Kebutuhan Pupuk Blok A1</div>
+              <span class="v-tag" style="background:#D97706;">RUMUS 3</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">1.988 Pokok × 2,5 Kg NPK = 4,97 Ton per aplikasi</div>
+          </div>
+        </div>
+          <div class="kpi-card" style="background:#881337; border-color:#FDA4AF;">
+            <div class="kpi-title">⭐ EXPORT KE .KML / .KMZ</div>
+            <div class="kpi-sub">Kirim file poligon ke WhatsApp &amp; buka di HP lapangan</div>
+          </div>
+        </div>
+        <div class="right-col">
+          <img src="assets/slides_gmaps/illust_7.png" alt="Ilustrasi Slide 7" class="slide-illust" />
+        </div>
+      </div>
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ NASKAH PEMATERI (SPEAKER NOTES — TEKAN TOMBOL 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">PENJELASAN RUMUS AGRONOMI &amp; EKSPOR KML:<br/>1. Luas Poligon Blok A1 (14,8 Ha) masih kotor karena mencakup jalan produksi dan parit. Kalikan 94% -&gt; dapat Luas Efektif 13,91 Ha.<br/>2. Kalikan 13,91 Ha dengan 143 pokok/Ha (segitiga sama sisi 9x9m) = 1.988 pokok sawit.<br/>3. Untuk ekspor: klik menu tiga titik di samping judul peta -&gt; Export to KML/KMZ -&gt; Centang &#x27;Export as KML instead of KMZ&#x27; -&gt; Download.</div>
+      </div>
+    </section>
+    <section class="slide" data-index="7" style="background:#FFF7ED;">
+      <div class="ribbon">
+        <span style="background:#10B981;"></span>
+        <span style="background:#3B82F6;"></span>
+        <span style="background:#F59E0B;"></span>
+        <span style="background:#E11D48;"></span>
+      </div>
+      <div class="slide-banner" style="background:#9A3412; border-color:#FB923C;">
+        <div>
+          <div class="slide-kicker">KOLABORASI MANDOR, ASISTEN &amp; DIREKSI</div>
+          <h1 class="slide-title">Sistem Pengawasan Kebun Real-Time &amp; Roleplay Tim</h1>
+        </div>
+        <div class="header-pill" style="background:#FEF08A; color:#431407;">MODUL 03 • 13.00 – 14.30 WIB</div>
+      </div>
+      <div class="slide-body">
+        <div class="left-col">
+          
+        <div class="v-card" style="background:#F5F3FF; border-color:#C4B5FD;">
+          <div class="v-stripe" style="background:#7C3AED;"></div>
+          <div class="v-icon" style="background:#7C3AED;">🗂️</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#4C1D95;">Arsitektur Peta Operasional</div>
+              <span class="v-tag" style="background:#7C3AED;">3 LAYER</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Layer 1 Poligon | Layer 2 TPH | Layer 3 Laporan Masalah</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#F0FDFA; border-color:#5EEAD4;">
+          <div class="v-stripe" style="background:#0D9488;"></div>
+          <div class="v-icon" style="background:#0D9488;">🔐</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#115E59;">Pembagian Hak Akses Tim</div>
+              <span class="v-tag" style="background:#0D9488;">AKSES</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Mandor = Editor (Input Foto) | Owner = Viewer (Pantau)</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#FFF1F2; border-color:#FDA4AF;">
+          <div class="v-stripe" style="background:#E11D48;"></div>
+          <div class="v-icon" style="background:#E11D48;">🚦</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#881337;">Kode Warna Pin Masalah</div>
+              <span class="v-tag" style="background:#E11D48;">STATUS</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">🔴 Masalah Baru  -&gt;  🟡 Proses  -&gt;  🟢 Selesai Diperbaiki</div>
+          </div>
+        </div>
+          <div class="kpi-card" style="background:#1E3A8A; border-color:#93C5FD;">
+            <div class="kpi-title">⭐ SIMULASI ROLEPLAY LIVE</div>
+            <div class="kpi-sub">Peserta input pin + foto di HP -&gt; muncul di proyektor!</div>
+          </div>
+        </div>
+        <div class="right-col">
+          <img src="assets/slides_gmaps/illust_8.png" alt="Ilustrasi Slide 8" class="slide-illust" />
+        </div>
+      </div>
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ NASKAH PEMATERI (SPEAKER NOTES — TEKAN TOMBOL 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">PANDUAN SIMULASI ROLEPLAY DI KELAS (35 MENIT):<br/>1. Bagi peserta berpasangan: Peserta A sebagai Mandor Lapangan, Peserta B sebagai Manajer/Owner.<br/>2. Mandor menambahkan pin temuan masalah (misal: Pokok Tumbang / Parit Tersumbat) lengkap dengan foto dari HP.<br/>3. Tampilkan peta di layar proyektor kelas: begitu Mandor klik Save, pin merah langsung muncul real-time di depan kelas!</div>
+      </div>
+    </section>
+    <section class="slide" data-index="8" style="background:#FDF4FF;">
+      <div class="ribbon">
+        <span style="background:#10B981;"></span>
+        <span style="background:#3B82F6;"></span>
+        <span style="background:#F59E0B;"></span>
+        <span style="background:#E11D48;"></span>
+      </div>
+      <div class="slide-banner" style="background:#701A75; border-color:#E879F9;">
+        <div>
+          <div class="slide-kicker">INSPEKSI LANJUTAN DARI MEJA KERJA</div>
+          <h1 class="slide-title">Audit Satelit 3D, Time-Lapse &amp; Deteksi Blank Spot</h1>
+        </div>
+        <div class="header-pill" style="background:#38BDF8; color:#0F172A;">MODUL 04 • 14.30 – 15.15 WIB</div>
+      </div>
+      <div class="slide-body">
+        <div class="left-col">
+          
+        <div class="v-card" style="background:#F0F9FF; border-color:#7DD3FC;">
+          <div class="v-stripe" style="background:#0284C7;"></div>
+          <div class="v-icon" style="background:#0284C7;">⛰️</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#0C4A6E;">Kontur 3D di Google Earth</div>
+              <span class="v-tag" style="background:#0284C7;">3D VIEW</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Impor file KML untuk cek kemiringan bukit &amp; drainase</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#F5F3FF; border-color:#C4B5FD;">
+          <div class="v-stripe" style="background:#7C3AED;"></div>
+          <div class="v-icon" style="background:#7C3AED;">⏳</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#4C1D95;">Audit Historical Imagery</div>
+              <span class="v-tag" style="background:#7C3AED;">HISTORI</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Geser tahun satelit (2018–2026) cek bukaan &amp; tajuk</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#FFF1F2; border-color:#FDA4AF;">
+          <div class="v-stripe" style="background:#E11D48;"></div>
+          <div class="v-icon" style="background:#E11D48;">🔍</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#881337;">Deteksi Blank Spot Sawit</div>
+              <span class="v-tag" style="background:#E11D48;">SISIPAN</span>
+            </div>
+            <div class="v-card-sub" style="color:#334155;">Hitung titik tajuk kosong (18 pokok mati) untuk sisipan</div>
+          </div>
+        </div>
+          <div class="kpi-card" style="background:#3B0764; border-color:#F0ABFC;">
+            <div class="kpi-title">⭐ KLINIK BEDAH PETA PESERTA</div>
+            <div class="kpi-sub">Bedah langsung 2–3 peta kebun riil milik peserta</div>
+          </div>
+        </div>
+        <div class="right-col">
+          <img src="assets/slides_gmaps/illust_9.png" alt="Ilustrasi Slide 9" class="slide-illust" />
+        </div>
+      </div>
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ NASKAH PEMATERI (SPEAKER NOTES — TEKAN TOMBOL 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">PANDUAN DEMO GOOGLE EARTH &amp; KLINIK PETA:<br/>1. Buka earth.google.com -&gt; Projects -&gt; Import KML file from computer -&gt; Pilih file KML yang baru diekspor peserta.<br/>2. Tahan tombol Shift + geser mouse untuk memiringkan tampilan menjadi 3D (melihat lereng bukit dan arah aliran air).<br/>3. Undang 2-3 peserta menampilkan lokasi kebun asli mereka di proyektor untuk dibedah bersama.</div>
+      </div>
+    </section>
+    <section class="slide" data-index="9" style="background:#0F172A;">
+      <div class="ribbon">
+        <span style="background:#10B981;"></span>
+        <span style="background:#3B82F6;"></span>
+        <span style="background:#F59E0B;"></span>
+        <span style="background:#E11D48;"></span>
+      </div>
+      <div class="slide-banner" style="background:#1E1B4B; border-color:#FBBF24;">
+        <div>
+          <div class="slide-kicker">IMPLEMENTASI NYATA DI KEBUN PESERTA</div>
+          <h1 class="slide-title">Rencana Aksi 7 Hari &amp; Fasilitas Lengkap Peserta</h1>
+        </div>
+        <div class="header-pill" style="background:#10B981; color:#052E16;">PENUTUP • 15.15 – 15.30 WIB</div>
+      </div>
+      <div class="slide-body">
+        <div class="left-col">
+          
+        <div class="v-card" style="background:#1E3A8A; border-color:#60A5FA;">
+          <div class="v-stripe" style="background:#3B82F6;"></div>
+          <div class="v-icon" style="background:#3B82F6;">📅</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#93C5FD;">Rekam Titik Patok &amp; TPH</div>
+              <span class="v-tag" style="background:#3B82F6;">HARI 1–2</span>
+            </div>
+            <div class="v-card-sub" style="color:#E2E8F0;">Tugaskan mandor ambil koordinat batas via GPS HP</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#78350F; border-color:#FBBF24;">
+          <div class="v-stripe" style="background:#F59E0B;"></div>
+          <div class="v-icon" style="background:#F59E0B;">📅</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#FDE047;">Gambar Poligon &amp; Audit</div>
+              <span class="v-tag" style="background:#F59E0B;">HARI 3–4</span>
+            </div>
+            <div class="v-card-sub" style="color:#E2E8F0;">Impor CSV ke My Maps &amp; hitung ulang dosis pupuk blok</div>
+          </div>
+        </div>
+        <div class="v-card" style="background:#064E3B; border-color:#34D399;">
+          <div class="v-stripe" style="background:#10B981;"></div>
+          <div class="v-icon" style="background:#10B981;">📅</div>
+          <div class="v-content">
+            <div class="v-top-row">
+              <div class="v-card-title" style="color:#6EE7B7;">Aktifkan Patroli Live</div>
+              <span class="v-tag" style="background:#10B981;">HARI 5–7</span>
+            </div>
+            <div class="v-card-sub" style="color:#E2E8F0;">Bagikan Layer 3 ke HP mandor untuk laporan harian</div>
+          </div>
+        </div>
+          <div class="kpi-card" style="background:#7C3AED; border-color:#E9D5FF;">
+            <div class="kpi-title">⭐ PENDAMPINGAN GRUP WA ALUMNI</div>
+            <div class="kpi-sub">E-Sertifikat, Modul PDF, File KML/CSV &amp; Rekaman Kelas</div>
+          </div>
+        </div>
+        <div class="right-col">
+          <img src="assets/slides_gmaps/illust_10.png" alt="Ilustrasi Slide 10" class="slide-illust" />
+        </div>
+      </div>
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ NASKAH PEMATERI (SPEAKER NOTES — TEKAN TOMBOL 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">RINGKASAN 4 JAWABAN FAQ &amp; PENUTUP:<br/>- Akurasi: 97%-99% terhadap GPS Geodetik untuk pemupukan dan borongan (bukan pengganti patok BPN).<br/>- Tanpa Sinyal: Unduh Offline Maps + gunakan GPS HP/Avenza Maps.<br/>- Citra Berawan: Gunakan Historical Imagery di Google Earth Pro.<br/>- Keamanan Data: Beri akses Viewer untuk pantau, atau pisahkan Layer 3 khusus laporan mandor.</div>
+      </div>
+    </section>
+  </main>
+  <script>
+    let cur = 0;
+    const slides = document.querySelectorAll('.slide');
+    const counter = document.getElementById('counter');
+    function show(i) {
+      cur = (i + slides.length) % slides.length;
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === cur));
+      counter.textContent = (cur + 1) + ' / ' + slides.length;
+    }
+    function nextSlide() { show(cur + 1); }
+    function prevSlide() { show(cur - 1); }
+    function toggleNotes() { document.body.classList.toggle('show-notes'); }
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key.toLowerCase() === 'n') toggleNotes();
+    });
+  </script>
+</body>
+</html>
