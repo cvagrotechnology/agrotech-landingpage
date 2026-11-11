@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naskah Narasi Pemateri (Slide 1–11) — Pelatihan Google Maps Poligon (13 Nov 2026)</title>
+  <style>
+    :root {
+      --bg: #0b1512;
+      --card: #12241e;
+      --card-border: #1f3d33;
+      --accent: #10b981;
+      --accent-soft: rgba(16, 185, 129, 0.14);
+      --gold: #f59e0b;
+      --gold-soft: rgba(245, 158, 11, 0.14);
+      --blue: #3b82f6;
+      --blue-soft: rgba(59, 130, 246, 0.14);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding-bottom: 80px;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 21, 18, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 12px 20px;
+    }
+    .header-top {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 16px;
+      color: #6ee7b7;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .btn {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 13px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      background: #1e293b;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary {
+      background: #059669;
+      border-color: #34d399;
+    }
+    .btn-gold {
+      background: #d97706;
+      border-color: #fbbf24;
+    }
+    .nav-pills {
+      max-width: 1080px;
+      margin: 10px auto 0;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .nav-pills a {
+      text-decoration: none;
+      color: #cbd5e1;
+      background: #162a23;
+      border: 1px solid #26473b;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .nav-pills a:hover {
+      background: var(--accent);
+      color: #062118;
+    }
+    .container {
+      max-width: 1080px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+    .hero-banner {
+      background: linear-gradient(135deg, #064e3b, #0f172a);
+      border: 1px solid #10b981;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+    .hero-banner h1 {
+      font-size: 24px;
+      margin-bottom: 6px;
+      color: #ecfdf5;
+    }
+    .hero-banner p {
+      color: #a7f3d0;
+      font-size: 14.5px;
+    }
+    .slide-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 26px;
+      scroll-margin-top: 120px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+    .slide-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+    .slide-badge {
+      background: var(--accent);
+      color: #042f2e;
+      font-weight: 900;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
+    .slide-time {
+      background: var(--gold-soft);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+    .slide-title {
+      width: 100%;
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-top: 4px;
+    }
+    .slide-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .slide-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .slide-thumb-box {
+      background: #091310;
+      border: 1px solid #26473b;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .slide-thumb-box img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+    .cue-box {
+      padding: 12px 14px;
+      font-size: 13.5px;
+      background: rgba(59, 130, 246, 0.12);
+      border-top: 1px solid rgba(59, 130, 246, 0.3);
+      color: #bfdbfe;
+    }
+    .cue-box strong {
+      color: #60a5fa;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .script-box {
+      background: rgba(16, 185, 129, 0.07);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+    .script-label {
+      font-size: 12.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #34d399;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .script-box p {
+      font-size: 16.5px;
+      color: #f8fafc;
+      margin-bottom: 14px;
+    }
+    .script-box p:last-child {
+      margin-bottom: 0;
+    }
+    .pointer-cue {
+      display: inline-block;
+      background: var(--gold-soft);
+      color: #fde68a;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      font-size: 13.5px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin: 4px 0;
+    }
+    .practice-box {
+      margin-top: 14px;
+      background: var(--gold-soft);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14.5px;
+      color: #fef3c7;
+    }
+    .faq-card {
+      background: #172554;
+      border: 1px solid #3b82f6;
+      border-radius: 16px;
+      padding: 22px;
+      margin-top: 30px;
+      scroll-margin-top: 120px;
+    }
+    .faq-item {
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 12px;
+    }
+    .faq-q {
+      font-weight: 800;
+      color: #93c5fd;
+      margin-bottom: 6px;
+    }
+    @media print {
+      header { position: static; background: #fff; color: #000; }
+      body { background: #fff; color: #000; padding: 0; }
+      .slide-card, .faq-card, .hero-banner { background: #fff; color: #000; border: 1px solid #ccc; box-shadow: none; page-break-inside: avoid; }
+      .script-box p, .slide-title, .faq-q, .cue-box, .practice-box { color: #000 !important; }
+      .nav-pills, .header-actions { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-top">
+      <div class="brand">🎙️ Naskah Bicara Pemateri • Pelatihan Google Maps Poligon (13 Nov 2026)</div>
+      <div class="header-actions">
+        <a class="btn btn-primary" href="/slide-13nov">🖥️ Buka Slide Presentasi</a>
+        <a class="btn btn-gold" href="Slide_Presentasi_Pemateri_GoogleMaps_13Nov2026_Agrotech.pptx" download>⬇️ Unduh .PPTX</a>
+        <button class="btn" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+      </div>
+    </div>
+    <nav class="nav-pills">
+      <a href="#slide-1">Slide 1: Sampul</a>
+      <a href="#slide-2">Slide 2: 3 Aplikasi</a>
+      <a href="#slide-3">Slide 3: Studi Kasus</a>
+      <a href="#slide-4">Slide 4: Manfaat Jawa</a>
+      <a href="#slide-5">Slide 5: GPS HP</a>
+      <a href="#slide-6">Slide 6: Impor CSV</a>
+      <a href="#slide-7">Slide 7: Gambar Poligon</a>
+      <a href="#slide-8">Slide 8: Rumus Pupuk</a>
+      <a href="#slide-9">Slide 9: Pantau Real-Time</a>
+      <a href="#slide-10">Slide 10: Audit 3D</a>
+      <a href="#slide-11">Slide 11: Rencana 7 Hari</a>
+      <a href="#faq">💡 Jawaban FAQ</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="hero-banner">
+      <h1>Buku Panduan & Naskah Narasi Pemateri (Slide 1 – 11)</h1>
+      <p>Gunakan halaman ini di HP atau tablet Anda saat berdiri mengajar. Karena tampilan slide di proyektor sudah dibuat sangat visual & minim teks, cukup tunjuk gambar sesuai petunjuk <strong>👆 Aksi Tunjuk Layar</strong> lalu bacakan <strong>🎙️ Narasi Bicara</strong>.</p>
+    </div>
+
+    <!-- SLIDE 1 -->
+    <section class="slide-card" id="slide-1">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 1 / 11</span>
+        <span class="slide-time">⏰ 08.30 – 08.35 WIB (5 Menit)</span>
+        <h2 class="slide-title">Sampul Utama: Pemetaan Poligon & Pengawasan Kebun Real-Time</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_1.png" alt="Slide 1" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk kotak hijau <code>BLOK A1 • 14,8 Ha</code> di kiri layar, lalu tunjuk berurutan 3 kotak warna di sebelah kanan (<code>1. Ambil Titik GPS</code>, <code>2. Gambar Poligon</code>, <code>3. Pantau Masalah Real-Time</code>).
+          </div>
+        </div>
+        <div class="script-box">
+          <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+          <p>"Selamat pagi Bapak dan Ibu semuanya! Selamat datang di Workshop Praktek Langsung <strong>CV Agroteknologi Nusantara</strong>."</p>
+          <p>"Hari ini kita tidak sedang kuliah teori pemetaan yang rumit. Hari ini kita langsung praktek membuat <strong>sistem kendali kebun dan lahan</strong> yang biasa dipakai perusahaan perkebunan besar, tapi kita buat menggunakan aplikasi gratis yang sudah ada di HP dan laptop Bapak/Ibu sekalian."</p>
+          <p><span class="pointer-cue">👉 Tunjuk gambar poligon hijau BLOK A1 di kiri layar</span><br>
+          "Di akhir sesi sore nanti, setiap peserta akan membawa pulang peta poligon digital seperti di layar ini—lengkap dengan luas hektar otomatis, hitungan jumlah pohon dan pupuk, serta sistem laporan mandor <em>real-time</em>."</p>
+          <p><span class="pointer-cue">👉 Tunjuk 3 kotak warna di kanan layar</span><br>
+          "Hanya ada <strong>3 langkah utama</strong> yang kita kuasai hari ini:<br>
+          <strong>Pertama</strong>, cara mengambil titik GPS di HP—bahkan saat di tengah kebun tidak ada sinyal internet.<br>
+          <strong>Kedua</strong>, cara menggambar poligon blok kebun untuk menghitung hektar, populasi pohon, dan pupuk secara otomatis.<br>
+          <strong>Ketiga</strong>, cara memantau masalah lapangan <em>real-time</em> memakai pin warna Merah, Kuning, dan Hijau lengkap dengan foto bukti dari mandor."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2 -->
+    <section class="slide-card" id="slide-2">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 2 / 11</span>
+        <span class="slide-time">⏰ 08.35 – 08.40 WIB (5 Menit)</span>
+        <h2 class="slide-title">3 Aplikasi Gratis yang Kita Gunakan Hari Ini</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_2.png" alt="Slide 2" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk Kolom 1 (Hijau - Google Maps HP), Kolom 2 (Biru - Google My Maps), dan Kolom 3 (Oranye - Google Earth 3D).
+          </div>
+        </div>
+        <div>
+          <div class="script-box">
+            <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+            <p>"Bapak/Ibu sering bertanya kepada kami: <em>'Pak, apakah untuk membuat peta blok kebun seperti tadi harus langganan software GIS puluhan juta rupiah atau harus beli drone mahal?'</em> Jawabannya: <strong>Tidak perlu.</strong> Hari ini kita menggunakan 3 aplikasi resmi dari Google yang <strong>100% gratis selamanya</strong>."</p>
+            <p><span class="pointer-cue">👉 Tunjuk Kartu 1 — Google Maps HP</span><br>
+            "Aplikasi pertama adalah <strong>Google Maps biasa di HP Android atau iPhone</strong>. Ini adalah 'senjata lapangan' mandor dan surveyor untuk merekam titik patok batas dan mengunduh peta offline."</p>
+            <p><span class="pointer-cue">👉 Tunjuk Kartu 2 — Google My Maps</span><br>
+            "Aplikasi kedua adalah <strong>Google My Maps</strong> di alamat <code>mymaps.google.com</code>. Ini adalah 'meja gambar digital' kita di laptop untuk mengimpor titik dari Excel, menggambar poligon blok, dan menghitung luas hektar secara otomatis."</p>
+            <p><span class="pointer-cue">👉 Tunjuk Kartu 3 — Google Earth 3D</span><br>
+            "Aplikasi ketiga adalah <strong>Google Earth 3D</strong> di <code>earth.google.com</code>. Ini kita pakai siang nanti untuk memiringkan tampilan bukit secara 3 dimensi, melihat kemiringan lereng, dan memutar kembali foto satelit dari tahun 2018 hingga 2026."</p>
+          </div>
+          <div class="practice-box">
+            <strong>🛠️ Instruksi ke Peserta:</strong> "Silakan pastikan HP sudah di meja, dan di browser laptop masing-masing sudah membuka tab <code>mymaps.google.com</code>."
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3 -->
+    <section class="slide-card" id="slide-3">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 3 / 11</span>
+        <span class="slide-time">⏰ 08.40 – 08.45 WIB (5 Menit)</span>
+        <h2 class="slide-title">Studi Kasus: Klaim Kertas (25 Ha) vs Bukti Poligon Satelit (21,8 Ha)</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_3.png" alt="Slide 3" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk kotak merah <code>25,0 Ha</code> di kiri, kotak hijau <code>21,8 Ha</code> di kanan, lalu lingkaran kuning <code>SELISIH 3,2 Ha</code> di tengah.
+          </div>
+        </div>
+        <div class="script-box">
+          <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+          <p>"Sebelum kita masuk ke Modul 1, mari kita lihat <strong>kenapa kita wajib mengukur ulang kebun dengan poligon satelit</strong>. Ini adalah kasus nyata dari audit kebun yang kami tangani."</p>
+          <p><span class="pointer-cue">👉 Tunjuk kotak merah 25,0 Ha di kiri</span><br>
+          "Di atas kertas laporan lama, luas Blok A tertulis <strong>25,0 Hektar</strong>. Selama bertahun-tahun, pemilik kebun membeli pupuk NPK dan membayar upah borongan babat rumput selalu dikalikan 25 Hektar."</p>
+          <p><span class="pointer-cue">👉 Tunjuk kotak hijau 21,8 Ha di kanan</span><br>
+          "Begitu kita ambil titik patoknya dan kita gambar poligonnya di atas citra satelit, lalu kita keluarkan alur sungai, jalan produksi, dan semak belukar di pinggir tebing—ternyata luas tanam murninya hanya <strong>21,8 Hektar</strong>!"</p>
+          <p><span class="pointer-cue">👉 Tunjuk lingkaran tengah SELISIH 3,2 Ha</span><br>
+          "Artinya apa Bapak/Ibu? Ada <strong>3,2 Hektar 'Lahan Hantu'</strong>. Selama bertahun-tahun, kebun ini membuang pupuk dan membayar upah perawatan untuk 3,2 hektar lahan yang sebenarnya berisi sungai dan jalan batu. Dengan poligon satelit hari ini, kebocoran anggaran seperti ini langsung tertutup rapat."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4 -->
+    <section class="slide-card" id="slide-4">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 4 / 11</span>
+        <span class="slide-time">⏰ 08.45 – 08.55 WIB (10 Menit)</span>
+        <h2 class="slide-title">4 Manfaat Utama bagi Ekosistem & Lahan di Pulau Jawa</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_4.png" alt="Slide 4" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk keempat kartu Bento Grid berurutan (1: Kiri Atas, 2: Kanan Atas, 3: Kiri Bawah, 4: Kanan Bawah).
+          </div>
+        </div>
+        <div class="script-box">
+          <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+          <p>"Khusus untuk kondisi wilayah kita di <strong>Pulau Jawa</strong>—di mana lahan sangat padat, topografi berbukit-bukit, dan berdekatan dengan pemukiman warga—pemetaan poligon ini punya <strong>4 manfaat lingkungan dan sosial yang sangat vital</strong>:"</p>
+          <p><span class="pointer-cue">👉 Tunjuk Kartu 1 — Cegah Longsor Lereng Gunung</span><br>
+          "<strong>Pertama, Mencegah Longsor di Lereng Pegunungan Jawa.</strong> Perkebunan teh, kopi, cengkeh, dan hortikultura di kawasan <strong>Priangan (Jawa Barat), Dieng & lereng Merapi (Jawa Tengah), hingga lereng Bromo, Arjuno, dan Ijen (Jawa Timur)</strong> berada di kemiringan curam. Dengan memetakan poligon zona miring di atas 15 derajat, kita tahu persis titik mana yang wajib dipasang terasering dan tanaman penguat tebing agar tanah pucuk (<em>topsoil</em>) tidak hanyut saat musim hujan."</p>
+          <p><span class="pointer-cue">👉 Tunjuk Kartu 2 — Stop Limbah Pupuk ke Sungai</span><br>
+          "<strong>Kedua, Menghentikan Limbah Pupuk Kimia ke Sungai.</strong> Kalau kita salah hitung luas lahan—misalnya kelebihan hitung 3 hektar seperti tadi—maka berton-ton pupuk Urea dan NPK berlebih akan tercuci air hujan masuk ke saluran irigasi dan mencemari <strong>DAS Citarum, Citanduy, Serayu, Bengawan Solo, hingga Sungai Brantas</strong>. Dengan poligon presisi, dosis pupuk pas sesuai jumlah pohon, sehingga air sungai dan sawah di hilir tetap bersih."</p>
+          <p><span class="pointer-cue">👉 Tunjuk Kartu 3 — Perhutanan Sosial & Tebu Rakyat</span><br>
+          "<strong>Ketiga, Penataan Perhutanan Sosial (LMDH) dan Kemitraan Tebu/Kopi Rakyat.</strong> Di Jawa, ribuan petani hutan mengelola petak garapan kecil ukuran <strong>0,2 sampai 2 Hektar</strong> di bawah naungan Perhutani atau kemitraan Pabrik Gula. Dengan poligon digital, batas petak antar-petani tercatat rapi, dan zona lindung sabuk hijau di sekitar mata air desa tidak boleh ikut dibuka."</p>
+          <p><span class="pointer-cue">👉 Tunjuk Kartu 4 — Tertib Batas Tanah Kas Desa</span><br>
+          "<strong>Keempat, Menertibkan Batas Tanah Kas Desa (Tanah Bengkok).</strong> Di desa-desa agribisnis Jawa Barat, Jawa Tengah, dan Jawa Timur, patok bambu atau batu sering bergeser saat pengolahan tanah. Dengan diarsipkan menjadi file poligon <code>.KML</code>, pemerintah desa dan koperasi punya bukti batas digital yang transparan."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5 -->
+    <section class="slide-card" id="slide-5">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 5 / 11</span>
+        <span class="slide-time">⏰ 08.55 – 09.35 WIB (40 Menit)</span>
+        <h2 class="slide-title">Modul 1A: Cara Ambil Titik GPS di HP (Bisa Tanpa Sinyal)</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_5.png" alt="Slide 5" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk Layar HP ① (Biru), Layar HP ② (Merah), dan Layar HP ③ (Hijau).
+          </div>
+        </div>
+        <div>
+          <div class="script-box">
+            <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+            <p>"Sekarang silakan angkat HP Bapak/Ibu masing-masing, kita masuk ke <strong>Praktek Modul 1A</strong>. Buka aplikasi <strong>Google Maps</strong> bawaan di HP. Ikuti 3 layar di depan ini:"</p>
+            <p><span class="pointer-cue">👉 Tunjuk Layar HP ① — Ubah ke Satelit</span><br>
+            "<strong>Langkah Pertama: Ubah tampilan peta ke mode Satelit.</strong> Kalau kita baru membuka Google Maps, tampilannya masih berupa peta jalan warna putih-kuning. Ketuk <strong>ikon tumpukan kertas (Layer)</strong> di pojok kanan atas layar HP, lalu pilih <strong>'Satelit'</strong>. Sekarang tajuk pohon, parit, dan jalan kebun langsung terlihat jelas."</p>
+            <p><span class="pointer-cue">👉 Tunjuk Layar HP ② — Tekan 2 Detik</span><br>
+            "<strong>Langkah Kedua: Tekan dan tahan jari selama 2 detik.</strong> Perbesar layar HP Bapak/Ibu ke titik patok yang ingin diambil koordinatnya. Tempelkan dan tahan jari selama <strong>2 detik</strong> sampai muncul <strong>Pin Merah</strong>. Lihat angka desimal yang muncul, misalnya <code>-0.52110, 101.43820</code>. Cukup <strong>ketuk sekali pada angka tersebut</strong>, maka koordinatnya otomatis tersalin ke memori HP!"</p>
+            <p><span class="pointer-cue">👉 Tunjuk Layar HP ③ — Peta Offline Tanpa Sinyal</span><br>
+            "<strong>Langkah Ketiga: Bagaimana kalau di tengah kebun tidak ada sinyal internet?</strong> Chip GPS di dalam HP menangkap sinyal langsung dari satelit di langit, bukan dari menara BTS seluler. Syaratnya hanya satu: sebelum berangkat ke kebun, ketuk foto profil di pojok kanan atas Google Maps, pilih menu <strong>'Peta Offline'</strong>, lalu unduh kotak area kebun kita. Begitu sampai di tengah kebun yang <em>blank spot</em> sinyal sekalipun, titik biru GPS tetap berjalan akurat!"</p>
+          </div>
+          <div class="practice-box">
+            <strong>🛠️ Praktek Kelas (15 Menit):</strong> "Sekarang coba ambil 1 titik koordinat lokasi gedung tempat kita berada saat ini menggunakan HP masing-masing, salin angkanya, dan tempelkan ke catatan WhatsApp."
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6 -->
+    <section class="slide-card" id="slide-6">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 6 / 11</span>
+        <span class="slide-time">⏰ 09.35 – 10.00 WIB (25 Menit)</span>
+        <h2 class="slide-title">Modul 1B: Alur Impor Massal Koordinat Excel / CSV (1-Klik)</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_6.png" alt="Slide 6" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk tabel 3 kolom di kiri, kotak peringatan <code>❌ JANGAN KOMA</code> vs <code>✅ WAJIB TITIK (.)</code>, tombol biru <code>KLIK IMPORT</code>, lalu peta 14 pin di kanan.
+          </div>
+        </div>
+        <div class="script-box">
+          <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+          <p>"Setelah mandor atau tim survei mengumpulkan 14 atau bahkan 100 titik koordinat dari lapangan, apakah kita harus mengetiknya satu per satu di laptop? Tentu tidak. Kita gunakan <strong>Impor Massal 1-Klik</strong>."</p>
+          <p><span class="pointer-cue">👉 Tunjuk Kotak 1 di kiri — Tabel Excel 3 Kolom</span><br>
+          "Di laptop masing-masing, silakan unduh file latihan yang sudah kami sediakan: <code>Koordinat_Blok_Sawit_Latihan.csv</code>. Kalau Bapak/Ibu membuat tabel sendiri di Excel, pastikan minimal ada <strong>3 kolom inti</strong>: kolom nama titik (<code>ID_Titik</code>), kolom Lintang (<code>Latitude</code>), dan kolom Bujur (<code>Longitude</code>)."</p>
+          <p><span class="pointer-cue">👉 Tunjuk kotak merah ❌ JANGAN KOMA & hijau ✅ WAJIB TITIK</span><br>
+          "<strong>Perhatikan aturan emas ini Bapak/Ibu!</strong> Sembilan puluh persen kegagalan saat impor peta terjadi karena komputer Indonesia memakai <strong>koma (,)</strong> untuk angka desimal. Google Maps hanya mengenali <strong>TITIK (.)</strong> sebagai pemisah desimal. Jadi pastikan angkanya tertulis <code>-0.52110</code> pakai titik, bukan <code>-0,52110</code> pakai koma."</p>
+          <p><span class="pointer-cue">👉 Tunjuk tombol KLIK IMPORT dan Peta 14 Pin di kanan</span><br>
+          "Sekarang buka <strong>Google My Maps</strong> di laptop, klik <strong>'Create a New Map'</strong>, lalu klik tombol <strong>'Import'</strong> dan masukkan file <code>Koordinat_Blok_Sawit_Latihan.csv</code>. Dalam 2 detik, ke-14 titik langsung berbaris rapi di atas peta satelit: <strong>6 Pin Patok Batas (Hijau)</strong>, <strong>5 Pin TPH & Jembatan (Biru)</strong>, dan <strong>3 Pin Masalah (Merah)</strong>."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7 -->
+    <section class="slide-card" id="slide-7">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 7 / 11</span>
+        <span class="slide-time">⏰ 10.15 – 11.05 WIB (50 Menit)</span>
+        <h2 class="slide-title">Modul 2A: 3 Langkah Menggambar Poligon & Hitung Hektar Otomatis</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_7.png" alt="Slide 7" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk kotak biru <code>① KLIK IKON GARIS</code>, lalu kotak hijau <code>② KLIK MEMUTAR</code> beserta titik <code>1 ➔ 2 ➔ 3 ➔ 4</code>, dan kotak ungu <code>③ LUAS MUNCUL</code>.
+          </div>
+        </div>
+        <div>
+          <div class="script-box">
+            <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+            <p>"Setelah titik-titik patok batas muncul di peta, sekarang kita masuk ke inti pelatihan hari ini: <strong>Menggambar Poligon Blok Kebun dan Menghitung Hektar Otomatis</strong>. Cukup ikuti 3 langkah berurutan di layar:"</p>
+            <p><span class="pointer-cue">👉 Tunjuk Nomor ① — Klik Ikon Garis</span><br>
+            "<strong>Langkah Pertama:</strong> Lihat tepat di bawah kolom pencarian Google My Maps di bagian atas layar. Klik <strong>ikon titik-dan-garis</strong>, lalu pilih <strong>'Add line or shape'</strong> (Tambahkan garis atau bentuk)."</p>
+            <p><span class="pointer-cue">👉 Tunjuk Nomor ② — Klik Memutar Patok 1 ➔ 2 ➔ 3 ➔ 4</span><br>
+            "<strong>Langkah Kedua:</strong> Klik satu kali tepat di atas pin <strong>Patok 1</strong>, tarik garisnya ke <strong>Patok 2</strong>, lanjut ke <strong>Patok 3</strong>, lanjut ke <strong>Patok 4</strong> mengikuti batas kebun searah jarum jam. <strong>Kunci utamanya:</strong> Setelah sampai di patok terakhir, <strong>klik kembali tepat di titik Patok 1 (titik awal)</strong> untuk menutup kurva!"</p>
+            <p><span class="pointer-cue">👉 Tunjuk Nomor ③ — Luas Muncul</span><br>
+            "<strong>Langkah Ketiga:</strong> Begitu titik awal diklik kembali, garis tersebut langsung berubah menjadi bidang warna (Poligon) seperti <code>BLOK A1</code> dan <code>BLOK A2</code>. Lihat di pojok kanan bawah kotak informasi poligon: <strong>angka Luas dalam satuan Hektar (Ha) dan Keliling dalam Kilometer (km) langsung dihitung otomatis oleh Google My Maps!</strong>"</p>
+          </div>
+          <div class="practice-box">
+            <strong>🛠️ Praktek Kelas:</strong> "Silakan hubungkan ke-6 titik patok batas pada peta latihan Bapak/Ibu sekarang sampai membentuk poligon tertutup, lalu beri warna Hijau dengan transparansi 35%."
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8 -->
+    <section class="slide-card" id="slide-8">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 8 / 11</span>
+        <span class="slide-time">⏰ 11.05 – 12.00 WIB (55 Menit)</span>
+        <h2 class="slide-title">Modul 2B: Alur Hitung Luas Bersih, Populasi Pohon & Pupuk</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_8.png" alt="Slide 8" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk berurutan dari kiri ke kanan: Kartu 1 (<code>14,8 Ha</code>), Kartu 2 (<code>13,91 Ha</code>), Kartu 3 (<code>1.988 Pohon</code>), Kartu 4 (<code>4,97 Ton</code>), lalu bilah bawah (<code>Ekspor ke File .KML</code>).
+          </div>
+        </div>
+        <div class="script-box">
+          <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+          <p>"Bapak/Ibu sekalian, angka luas poligon yang muncul di Google My Maps tadi—misalnya <strong>14,8 Hektar</strong>—jangan langsung dikalikan jumlah pohon! Karena di dalam blok 14,8 Hektar itu masih ada jalan produksi, parit drainase, dan TPH. Mari kita lihat <strong>4 langkah rumus praktis</strong> di layar ini:"</p>
+          <p><span class="pointer-cue">👉 Tunjuk Kartu 1 (Biru) & Kartu 2 (Hijau)</span><br>
+          "<strong>Tahap 1 & 2: Dari Luas Poligon Kotor 14,8 Ha ke Luas Efektif 13,91 Ha.</strong> Rata-rata sekitar 6% lahan terpakai untuk jalan kebun dan parit. Maka <code>14,8 Ha dikali 94%</code> menghasilkan <strong>13,91 Hektar Luas Tanam Murni</strong>."</p>
+          <p><span class="pointer-cue">👉 Tunjuk Kartu 3 (Oranye: 1.988 Pohon)</span><br>
+          "<strong>Tahap 3: Hitung Populasi Pohon Produktif.</strong> Untuk kelapa sawit jarak segitiga 9 meter, standarnya <strong>143 pohon per hektar</strong>. Maka <code>13,91 Ha dikali 143</code> sama dengan <strong>1.988 pohon</strong>. <em>(Untuk kebun di Jawa: Kopi jarak 2,5×2,5m kalikan <strong>1.600 pohon/Ha</strong>, dan Jati/Sengon jarak 3×3m kalikan <strong>1.100 pohon/Ha</strong>).</em>"</p>
+          <p><span class="pointer-cue">👉 Tunjuk Kartu 4 (Merah: 4,97 Ton) & Bilah Bawah</span><br>
+          "<strong>Tahap 4: Hitung Dosis Pupuk Presisi.</strong> Jika dosis pemupukan adalah <strong>2,5 Kg NPK per pohon</strong>, maka <code>1.988 pohon dikali 2,5 Kg</code> hasilnya tepat <strong>4,97 Ton pupuk</strong>. Terakhir, klik <strong>ikon titik tiga (⋮) ➔ Export to KML/KMZ</strong> untuk mengunduh file <code>.KML</code> dan kirimkan ke WhatsApp mandor!"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 9 -->
+    <section class="slide-card" id="slide-9">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 9 / 11</span>
+        <span class="slide-time">⏰ 13.00 – 14.30 WIB (90 Menit)</span>
+        <h2 class="slide-title">Modul 3: Sistem Pengawasan Kebun Real-Time (3 Warna Pin)</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_9.png" alt="Slide 9" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk alur di kotak kiri (<code>Mandor Editor</code> ⬇ <code>Manajer Viewer</code>), lalu tunjuk 3 bilah warna di kanan (<code>Pin Merah</code>, <code>Pin Kuning</code>, <code>Pin Hijau</code>).
+          </div>
+        </div>
+        <div>
+          <div class="script-box">
+            <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+            <p>"Selamat siang Bapak/Ibu, sekarang kita masuk ke sesi yang paling seru: <strong>Bagaimana memantau masalah kebun secara real-time tanpa harus tenggelam di ratusan chat grup WhatsApp!</strong>"</p>
+            <p><span class="pointer-cue">👉 Tunjuk Kotak Kiri — Alur Laporan Lapangan</span><br>
+            "Caranya: klik tombol <strong>'Share' (Bagikan)</strong> di Google My Maps. Berikan akses <strong>Editor</strong> kepada akun Google <strong>Mandor Lapangan</strong> agar mandor bisa menambah pin dan foto dari HP-nya. Sedangkan untuk <strong>Manajer atau Direksi</strong>, berikan akses <strong>Viewer</strong> agar mereka bisa memantau dari kantor."</p>
+            <p><span class="pointer-cue">👉 Tunjuk 3 Bilah Warna di Kanan</span><br>
+            "Kita terapkan <strong>SOP 3 Warna Pin seperti lampu lalu lintas</strong>:<br>
+            • <strong>🔴 PIN MERAH = MASALAH BARU:</strong> Parit tersumbat / tebing longsor (+ foto bukti mandor).<br>
+            • <strong>🟡 PIN KUNING = SEDANG DIKERJAKAN:</strong> Jalan panen amblas sedang ditimbun sirtu.<br>
+            • <strong>🟢 PIN HIJAU = SELESAI DIPERBAIKI:</strong> Jembatan & saluran air sudah normal kembali."</p>
+          </div>
+          <div class="practice-box">
+            <strong>🛠️ Praktek Roleplay Kelas:</strong> "Bagi meja berpasangan: Peserta kiri sebagai Mandor (input 1 Pin Merah + foto dari HP), dan Peserta kanan sebagai Manajer (me-refresh laptop hingga pin muncul di layar)!"
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10 -->
+    <section class="slide-card" id="slide-10">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 10 / 11</span>
+        <span class="slide-time">⏰ 14.30 – 15.15 WIB (45 Menit)</span>
+        <h2 class="slide-title">Modul 4: 3 Teknik Audit Satelit: Kontur 3D, Time-Lapse & Blank Spot</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_10.png" alt="Slide 10" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk Panel 1 (Biru - Kontur Lereng 3D), Panel 2 (Ungu - Mesin Waktu Satelit), dan Panel 3 (Merah - Deteksi Blank Spot).
+          </div>
+        </div>
+        <div class="script-box">
+          <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+          <p>"File <code>.KML</code> yang sudah kita buat tadi sekarang kita buka di <strong>Google Earth (<code>earth.google.com</code>)</strong>. Di sini ada <strong>3 teknik audit satelit</strong> dari meja kerja:"</p>
+          <p><span class="pointer-cue">👉 Tunjuk Panel 1 — Kontur Lereng 3D</span><br>
+          "<strong>Teknik Pertama: Cek Kontur Lereng 3D.</strong> Setelah file KML dibuka, <strong>tahan tombol <code>Shift</code> di keyboard sambil menggeser mouse</strong>. Peta akan miring secara 3 dimensi sehingga kita langsung melihat kemiringan bukit dan arah aliran air hujan."</p>
+          <p><span class="pointer-cue">👉 Tunjuk Panel 2 — Mesin Waktu Satelit 2018–2026</span><br>
+          "<strong>Teknik Kedua: Mesin Waktu Satelit (Historical Imagery).</strong> Klik ikon jam di bilah atas, lalu geser tahun dari <strong>2018, 2022, hingga 2026</strong> untuk mengaudit riwayat bukaan lahan dan pertumbuhan tajuk pohon dari tahun ke tahun."</p>
+          <p><span class="pointer-cue">👉 Tunjuk Panel 3 — Deteksi Blank Spot</span><br>
+          "<strong>Teknik Ketiga: Deteksi Blank Spot (Pohon Mati/Kosong).</strong> Dari citra satelit resolusi tinggi, area tajuk pohon yang mati terlihat sebagai celah tanah terbuka (misalnya <strong>18 titik kosong</strong>), sehingga kita tahu persis jumlah bibit sisipan yang harus dikirim."</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11 -->
+    <section class="slide-card" id="slide-11">
+      <div class="slide-header">
+        <span class="slide-badge">SLIDE 11 / 11</span>
+        <span class="slide-time">⏰ 15.15 – 15.30 WIB (15 Menit)</span>
+        <h2 class="slide-title">Penutup: 3 Langkah Rencana Aksi 7 Hari & Fasilitas Peserta</h2>
+      </div>
+      <div class="slide-grid">
+        <div class="slide-thumb-box">
+          <img src="assets/slides_gmaps/slide_canvas_11.png" alt="Slide 11" />
+          <div class="cue-box">
+            <strong>👆 Aksi Tunjuk Layar:</strong>
+            Tunjuk 3 kartu rencana aksi (<code>Hari 1–2</code>, <code>Hari 3–4</code>, <code>Hari 5–7</code>) lalu tunjuk banner ungu fasilitas di bagian bawah.
+          </div>
+        </div>
+        <div class="script-box">
+          <span class="script-label">🎙️ Narasi Bicara (Kata demi Kata)</span>
+          <p>"Bapak dan Ibu sekalian, agar ilmu dan file yang Bapak/Ibu buat hari ini langsung berdampak nyata di kebun maupun desa masing-masing, mari jalankan <strong>Rencana Aksi 7 Hari Pertama</strong> ini:"</p>
+          <p><span class="pointer-cue">👉 Tunjuk Kartu Hari 1–2, Hari 3–4, dan Hari 5–7</span><br>
+          "• <strong>Hari ke-1 & 2:</strong> Pilih 1 blok prioritas, minta mandor rekam titik GPS patok batas dan saluran air memakai HP.<br>
+          • <strong>Hari ke-3 & 4:</strong> Gambar poligon bloknya di Google My Maps, lalu hitung ulang luas efektif hektar dan dosis pupuknya.<br>
+          • <strong>Hari ke-5 s/d 7:</strong> Bagikan peta ke HP mandor dan aktifkan laporan rutin Pin Merah, Kuning, dan Hijau."</p>
+          <p><span class="pointer-cue">👉 Tunjuk Kotak Ungu Fasilitas di Bawah</span><br>
+          "Seluruh fasilitas—<strong>E-Sertifikat Resmi, Modul PDF, serta File Template <code>.KML</code> & <code>.CSV</code></strong>—sudah siap diunduh. Jika minggu depan ada kendala saat praktek di kebun, silakan berdiskusi di <strong>Grup WhatsApp Alumni</strong> atau hubungi tim kami (Amanda & Hardadi). Terima kasih atas semangat luar biasa Bapak/Ibu hari ini, dan selamat sore!"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-card" id="faq">
+      <h2>💡 Contekan Jawaban Tanya-Jawab (FAQ) untuk Pemateri</h2>
+      <div class="faq-item">
+        <div class="faq-q">1. "Pak, seberapa akurat ukuran Hektar di Google My Maps dibandingkan alat GPS Geodetik/RTK?"</div>
+        <div><strong>Jawaban Pemateri:</strong> "Untuk manajemen operasional kebun (hitung pupuk, bibit, upah borongan, dan patroli mandor), akurasi GPS HP + koreksi visual citra satelit Google My Maps mencapai <strong>95%–98%</strong> (selisih titik sekitar 3–5 meter). Namun untuk keperluan hukum sertifikat HGU/SHM di BPN, tetap wajib menggunakan pengukuran kadaster BPN/Geodetik."</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">2. "Pak, saat impor file CSV kok muncul 'Server Error' atau titiknya nyasar ke laut?"</div>
+        <div><strong>Jawaban Pemateri:</strong> "Itu 100% karena salah satu dari dua hal: (1) Angka koordinat di Excel masih memakai <strong>koma (,)</strong> bukan <strong>titik (.)</strong>, atau (2) Kolom <code>Latitude</code> (Lintang: angka kecil antara <code>-11</code> s/d <code>+6</code> untuk Indonesia) tertukar dengan kolom <code>Longitude</code> (Bujur: angka besar antara <code>95</code> s/d <code>141</code> untuk Indonesia)."</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">3. "Pak, apakah Google My Maps gratis ini ada batas jumlah titiknya?"</div>
+        <div><strong>Jawaban Pemateri:</strong> "Satu peta gratis di Google My Maps bisa menampung hingga <strong>10 Layer</strong>, dan setiap layer menampung hingga <strong>2.000 baris/titik</strong> (total 20.000 titik per peta)—sangat lebih dari cukup untuk memetakan puluhan blok kebun."</div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>

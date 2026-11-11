@@ -9,6 +9,8 @@
     { "source": "/slide-17nov", "destination": "/slide-pemateri-17nov.html" },
     { "source": "/slide-13nov", "destination": "/slide-pemateri-googlemaps-13nov.html" },
     { "source": "/slide-googlemaps", "destination": "/slide-pemateri-googlemaps-13nov.html" },
+    { "source": "/narasi-13nov", "destination": "/naskah-narasi-pemateri-13nov.html" },
+    { "source": "/narasi-googlemaps", "destination": "/naskah-narasi-pemateri-13nov.html" },
     { "source": "/silabus", "destination": "/silabus-pelatihan.html" }
   ]
 }
