@@ -25,15 +25,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 20px;
       flex-shrink: 0;
     }
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13.5px;
     }
     .brand-badge {
       background: #EAB308;
@@ -46,16 +46,16 @@
     .controls {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
     .btn {
       background: rgba(255,255,255,0.1);
       color: #F8FAFC;
       border: 1px solid rgba(255,255,255,0.2);
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 8px;
       font-weight: 700;
-      font-size: 12.5px;
+      font-size: 12px;
       cursor: pointer;
       text-decoration: none;
     }
@@ -64,6 +64,11 @@
       background: #EAB308;
       color: #091E12;
       border-color: #EAB308;
+    }
+    .btn-green {
+      background: #059669;
+      color: #FFFFFF;
+      border-color: #34D399;
     }
     .stage {
       flex: 1;
@@ -125,93 +130,101 @@
       <span>CV AGROTEKNOLOGI NUSANTARA • PELATIHAN GOOGLE MAPS POLIGON</span>
     </div>
     <div class="controls">
+      <a class="btn btn-green" href="/silabus-googlemaps-13nov" target="_blank">📘 Silabus Resmi</a>
       <a class="btn" href="/naskah-narasi-pemateri-13nov" target="_blank">📖 Buku Narasi</a>
       <button class="btn" onclick="toggleNotes()">🎙️ Catatan Pemateri (N)</button>
       <a class="btn" href="Template_Poligon_Kebun_Agrotech.kml" download>🌍 Unduh KML</a>
       <a class="btn" href="Koordinat_Blok_Sawit_Latihan.csv" download>📊 Unduh CSV</a>
       <a class="btn btn-gold" href="Slide_Presentasi_Pemateri_GoogleMaps_13Nov2026_Agrotech.pptx" download>⬇️ Unduh PPTX</a>
       <button class="btn" onclick="prevSlide()">◀ Prev</button>
-      <span id="counter" style="font-weight:800; font-size:13px; min-width:55px; text-align:center;">1 / 11</span>
+      <span id="counter" style="font-weight:800; font-size:13px; min-width:55px; text-align:center;">1 / 12</span>
       <button class="btn" onclick="nextSlide()">Next ▶</button>
     </div>
   </header>
   <main class="stage">
     
     <section class="slide active" data-index="0">
-      <img src="assets/slides_gmaps/slide_canvas_1.png" alt="Slide 1 - Pemetaan Poligon &amp; Pengawasan Kebun Real-Time" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_1.png" alt="Slide 1 - Pelatihan Google Maps: Peta Poligon &amp; Pengawasan Kebun" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">NASKAH PEMBUKA PEMATERI (08.30 WIB):<br/>Selamat pagi Bapak/Ibu peserta! Hari ini kita tidak belajar teori rumit, melainkan 100% praktek langsung dengan 3 target jelas:<br/>1. Ambil titik koordinat batas lahan via GPS HP (bisa tanpa sinyal).<br/>2. Gambar poligon blok di laptop untuk hitung otomatis luas Hektar, populasi pohon, dan dosis pupuk.<br/>3. Pantau masalah lapangan (parit, jalan, lereng) secara real-time bersama mandor.</div>
+        <div class="speaker-text">NASKAH PEMBUKA PEMATERI (08.30 WIB):<br/>Selamat pagi Bapak/Ibu peserta! Hari ini kita belajar berurutan dari konsep dasar hingga praktek lapangan:<br/>1. Apa itu Ekosistem Google Maps (Maps HP, My Maps, Google Earth) sebagai GIS Perkebunan Gratis.<br/>2. Fungsi utama di pertanian &amp; perkebunan (Batas Blok, Aset/Infrastruktur, Hitung Hektar/Pupuk, Patroli).<br/>3. Benefit nyata di lapangan (Tutup kebocoran &#x27;Lahan Hantu&#x27;, hemat 50% biaya survei, &amp; manfaat ekologis Pulau Jawa).<br/>4. Implementasi Teknis Modul 1 s/d Modul 4 sampai setiap peserta membawa pulang peta kebun digital sendiri.</div>
       </div>
     </section>
     <section class="slide" data-index="1">
-      <img src="assets/slides_gmaps/slide_canvas_2.png" alt="Slide 2 - 3 Aplikasi Gratis yang Kita Gunakan Hari Ini" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_2.png" alt="Slide 2 - Apa Itu Ekosistem Google Maps untuk Perkebunan?" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">PENJELASAN ALAT PRAKTEK (JELAS &amp; SINGKAT):<br/>- Alat 1 (Di HP): Google Maps biasa untuk rekam titik koordinat patok di kebun &amp; fitur Peta Offline.<br/>- Alat 2 (Di Laptop): Google My Maps (buka mymaps.google.com) untuk menggambar poligon blok dan menghitung luas hektar otomatis.<br/>- Alat 3 (3D): Google Earth (earth.google.com) untuk melihat kemiringan lereng gunung 3D dan riwayat satelit tahunan.</div>
+        <div class="speaker-text">APA ITU EKOSISTEM GOOGLE MAPS UNTUK PERKEBUNAN?<br/>Transformasi dari peta jalan biasa menjadi Sistem Informasi Geografis (GIS) Perkebunan 100% Gratis:<br/>1. Google Maps (HP): Alat rekam titik GPS lapangan (Waypoints), Live Location mandor, &amp; Peta Offline tanpa sinyal.<br/>2. Google My Maps (Laptop/Web): Meja gambar digital untuk membuat poligon blok, hitung otomatis hektar, &amp; database kebun.<br/>3. Google Earth (3D): Inspeksi topografi/kemiringan lereng 3D &amp; audit riwayat bukaan lahan (Time-Lapse satelit).</div>
       </div>
     </section>
     <section class="slide" data-index="2">
-      <img src="assets/slides_gmaps/slide_canvas_3.png" alt="Slide 3 - Data Kira-Kira (25 Ha) vs Bukti Poligon Satelit (21,8 Ha)" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_3.png" alt="Slide 3 - 4 Fungsi Utama Google Maps di Pertanian &amp; Perkebunan" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">CARA MENJELASKAN SLIDE INI:<br/>Tunjuk gambar kiri (Merah): Di laporan kertas tertulis luas blok 25 Ha karena diukur kasar termasuk sungai, jalan, dan semak.<br/>Tunjuk gambar kanan (Hijau): Setelah ditarik poligon 5 menit di Google My Maps, luas tanam sebenarnya hanya 21,8 Ha.<br/>Tunjuk lingkaran tengah: Artinya ada 3,2 Ha &#x27;Lahan Hantu&#x27; yang membuat kita kelebihan beli pupuk dan kelebihan bayar upah borongan tiap tahun!</div>
+        <div class="speaker-text">4 FUNGSI UTAMA DI PERTANIAN &amp; PERKEBUNAN:<br/>1. Pemetaan Batas &amp; Blok (Afdeling): Digitasi batas kebun, pembagian blok tahun tanam, &amp; petak petani mitra.<br/>2. Inventarisasi Infrastruktur: Pemetaan titik TPH, jalan produksi, jembatan, parit drainase, &amp; sumber air.<br/>3. Kalkulasi Agronomi Presisi: Hitung luas Ha otomatis untuk estimasi populasi pohon, dosis pupuk, &amp; kontrak borongan.<br/>4. Pengawasan Operasional Real-Time: Pelaporan insiden lapangan (banjir, hama, jalan amblas) berfoto &amp; tracking patroli.</div>
       </div>
     </section>
     <section class="slide" data-index="3">
-      <img src="assets/slides_gmaps/slide_canvas_4.png" alt="Slide 4 - 4 Manfaat Utama bagi Ekosistem &amp; Lahan di Pulau Jawa" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_4.png" alt="Slide 4 - Benefit di Lapangan: Studi Kasus &amp; Penghematan Biaya" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">PENJELASAN 4 MANFAAT LINGKUNGAN PULAU JAWA:<br/>1. Lereng Gunung (Priangan, Dieng, Merapi, Batu): Peta kontur 3D mendeteksi lereng curam (&gt;15 derajat) untuk terasering &amp; cegah longsor.<br/>2. Sungai &amp; Irigasi DAS (Citarum, Solo, Brantas): Dosis pupuk tepat luas efektif mengurangi 20% limbah kimia yang mencemari sungai &amp; waduk.<br/>3. Perhutanan Sosial &amp; Tebu: Memetakan ribuan petak kecil petani mitra (0,2 - 2 Ha) dan menjaga batas Hutan Lindung / mata air desa.<br/>4. Tanah Kas Desa: Arsip digital batas tanah bengkok/desa dan sawah produktif agar bebas sengketa.</div>
+        <div class="speaker-text">BENEFIT NYATA DI LAPANGAN (STUDI KASUS EFISIENSI):<br/>- Kasus Lahan Hantu: Klaim kertas 25,0 Ha vs Bukti Poligon Satelit 21,8 Ha -&gt; Selisih 3,2 Ha lahan non-produktif (sungai/jalan).<br/>- Benefit 1 (Akurasi Tinggi Tanpa Biaya Lisensi): Akurasi 97-99% untuk operasional kebun dengan biaya software Rp 0.<br/>- Benefit 2 (Efisiensi Anggaran 12-20%): Dosis pupuk &amp; kontrak borongan tebas/panen dihitung tepat sesuai luas bersih.<br/>- Benefit 3 (Kecepatan Kontrol Lapangan): Pangkas 50% waktu survei &amp; rapat koordinasi antara mandor dan manajer.</div>
       </div>
     </section>
     <section class="slide" data-index="4">
-      <img src="assets/slides_gmaps/slide_canvas_5.png" alt="Slide 5 - Cara Ambil Titik GPS di HP (Bisa Tanpa Sinyal)" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_5.png" alt="Slide 5 - Benefit bagi Lingkungan, Perkebunan &amp; Desa di Pulau Jawa" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">PANDUAN PRAKTEK 3 LANGKAH DI HP:<br/>Langkah 1: Buka Google Maps di HP -&gt; Ketuk ikon Kotak Tumpuk (Layer) di kanan atas -&gt; Pilih &#x27;Satelit&#x27; agar pohon terlihat jelas.<br/>Langkah 2: Tekan &amp; tahan jari selama 2 detik tepat di posisi patok batas -&gt; Muncul Pin Merah -&gt; Ketuk angka koordinat (-7.xxxx, 107.xxxx) untuk menyalin.<br/>Langkah 3: Sebelum ke kebun yang susah sinyal, ketuk foto profil -&gt; &#x27;Peta Offline&#x27; -&gt; Unduh area kebun. Chip GPS HP tetap jalan via satelit meski Mode Pesawat!</div>
+        <div class="speaker-text">4 BENEFIT LINGKUNGAN &amp; SOSIAL LOKAL DI PULAU JAWA:<br/>1. Mitigasi Longsor Lereng Gunung (&gt;15 derajat): Zonasi terasering kebun teh, kopi &amp; sayur di Priangan, Dieng, Merapi, Batu.<br/>2. Perlindungan Sungai &amp; Irigasi DAS (Citarum, Solo, Brantas): Cegah kelebihan pupuk kimia mencemari sungai &amp; waduk.<br/>3. Tata Kelola Perhutanan Sosial (LMDH) &amp; Kemitraan Tebu: Peta ribuan petak petani (0,2-2 Ha) &amp; lindungi mata air desa.<br/>4. Digitalisasi Tanah Kas Desa (Bengkok): Arsip batas lahan desa dalam format .KML agar transparan &amp; bebas sengketa.</div>
       </div>
     </section>
     <section class="slide" data-index="5">
-      <img src="assets/slides_gmaps/slide_canvas_6.png" alt="Slide 6 - Alur Impor Massal Koordinat Excel / CSV (1-Klik)" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_6.png" alt="Slide 6 - Implementasi Ambil Titik GPS di HP &amp; Mode Offline" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">PANDUAN PRAKTEK IMPOR CSV DI LAPTOP:<br/>1. Siapkan tabel Excel/CSV dengan minimal 3 kolom utama: ID_Titik, Latitude, Longitude (wajib pakai TITIK desimal seperti -0.52110, bukan koma).<br/>2. Buka mymaps.google.com -&gt; Klik &#x27;Create a New Map&#x27; -&gt; Klik tombol biru &#x27;Import&#x27;.<br/>3. Pilih file Koordinat_Blok_Sawit_Latihan.csv -&gt; Seketika 14 titik patok, TPH, dan masalah langsung tertancap di peta satelit!</div>
+        <div class="speaker-text">IMPLEMENTASI MODUL 1A — TEKNIK AMBIL TITIK GPS (WAYPOINTS) DI HP:<br/>1. Ubah Basemap ke Citra Satelit: Ketuk ikon Layer -&gt; Pilih &#x27;Satelit&#x27; agar tajuk pohon &amp; parit terlihat jelas.<br/>2. Long Press (Tekan Tahan 2 Detik): Muncul Pin Merah -&gt; Ketuk angka koordinat (-0.52110, 101.43820) untuk menyalin.<br/>3. Implementasi Area Blank Spot Sinyal: Unduh &#x27;Peta Offline&#x27; sebelum ke lapangan; chip GPS HP bekerja langsung via satelit.</div>
       </div>
     </section>
     <section class="slide" data-index="6">
-      <img src="assets/slides_gmaps/slide_canvas_7.png" alt="Slide 7 - 3 Langkah Menggambar Poligon &amp; Hitung Hektar Otomatis" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_7.png" alt="Slide 7 - Standarisasi Tabel Excel &amp; Impor Massal CSV ke Peta" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">PANDUAN PRAKTEK MENGGAMBAR POLIGON:<br/>1. Tunjuk nomor 1 di layar: Klik ikon &#x27;Draw a line&#x27; (titik-garis) di bawah kotak pencarian -&gt; pilih &#x27;Add line or shape&#x27;.<br/>2. Tunjuk nomor 2: Klik berurutan memutar searah jarum jam dari Patok 1 -&gt; Patok 2 -&gt; Patok 3 -&gt; Patok 4 -&gt; kembali klik titik awal (Patok 1) sampai poligon tertutup.<br/>3. Tunjuk nomor 3: Klik ikon Kaleng Cat untuk beri warna (Blok A1 Hijau, Blok A2 Kuning). Angka Luas (14,8 Ha) &amp; Keliling (1,52 km) langsung muncul otomatis!</div>
+        <div class="speaker-text">IMPLEMENTASI MODUL 1B — STANDARISASI &amp; IMPOR MASSAL CSV KE MY MAPS:<br/>- Standar 4 Kolom Tabel: [ID_Titik], [Latitude], [Longitude], [Kategori/Keterangan Lokasi].<br/>- Troubleshooting Utama: Wajib gunakan TITIK (.) sebagai pemisah desimal koordinat, bukan koma (,).<br/>- Output Praktek 1: Peserta berhasil menampilkan 14 pin patok batas, TPH, jembatan, &amp; titik masalah di Google My Maps.</div>
       </div>
     </section>
     <section class="slide" data-index="7">
-      <img src="assets/slides_gmaps/slide_canvas_8.png" alt="Slide 8 - Alur Hitung Luas Bersih, Populasi Pohon &amp; Pupuk" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_8.png" alt="Slide 8 - Digitasi Poligon Batas Blok &amp; Hitung Hektar Otomatis" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">PENJELASAN ALUR HITUNGAN 4 TAHAP:<br/>Tahap 1: Luas kotor poligon Blok A1 dari satelit adalah 14,8 Ha (masih termasuk jalan kebun, parit, dan terasering sekitar 6%).<br/>Tahap 2: Kalikan 94% -&gt; didapat Luas Bersih Efektif 13,91 Ha yang benar-benar ditanami.<br/>Tahap 3: Kalikan standar populasi per Ha (Sawit = 143 pohon/Ha; Kopi = 1.600 pohon/Ha; Jati = 1.100 pohon/Ha). Untuk Blok A1 = 1.988 pohon.<br/>Tahap 4: Kalikan dosis pupuk per pohon (2,5 Kg NPK) = 4,97 Ton. Lalu ekspor peta ke file .KML untuk dibuka di HP!</div>
+        <div class="speaker-text">IMPLEMENTASI MODUL 2A — DIGITASI POLIGON BLOK &amp; PEWARNAAN LAYER:<br/>1. Ubah Base Map di panel kiri bawah Google My Maps menjadi &#x27;Satellite&#x27;.<br/>2. Klik ikon &#x27;Draw a line&#x27; -&gt; &#x27;Add line or shape&#x27; -&gt; Klik memutar searah jarum jam dari Patok 1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; kembali ke Patok 1.<br/>3. Atur warna blok &amp; transparansi 35% -&gt; Baca angka Luas (Ha) dan Keliling (km) yang dihitung otomatis oleh sistem.</div>
       </div>
     </section>
     <section class="slide" data-index="8">
-      <img src="assets/slides_gmaps/slide_canvas_9.png" alt="Slide 9 - Sistem Pengawasan Kebun Real-Time (3 Warna Pin)" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_9.png" alt="Slide 9 - Kalkulasi Luas Efektif, Populasi Pohon, Pupuk &amp; File KML" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">PENJELASAN SISTEM MONITORING 3 WARNA PIN:<br/>- Mandor diberi akses &#x27;Editor&#x27; di HP untuk menancapkan pin masalah beserta foto bukti langsung dari lokasi.<br/>- Manajer/Owner diberi akses &#x27;Viewer&#x27; untuk memantau perubahan warna pin secara langsung:<br/>  * Pin Merah = Masalah Baru Ditemukan (Parit Tersumbat / Tebing Longsor).<br/>  * Pin Kuning = Sedang Dikerjakan Tim di Lapangan.<br/>  * Pin Hijau = Selesai Diperbaiki &amp; Terverifikasi.</div>
+        <div class="speaker-text">IMPLEMENTASI MODUL 2B — RUMUS AGRONOMI &amp; EKSPOR FILE KML/KMZ:<br/>- Rumus 1 (Luas Bersih Efektif): Luas Total Poligon (14,8 Ha) dikurangi 5%-8% jalan/parit (x 94%) = 13,91 Ha.<br/>- Rumus 2 (Populasi Pohon): Sawit 9x9m segitiga = 143 pokok/Ha (1.988 pokok) | 9,2x9,2m = 136/Ha | Kopi = 1.600/Ha.<br/>- Rumus 3 (Kebutuhan Pupuk): 1.988 pokok x 2,5 Kg NPK = 4.970 Kg (4,97 Ton).<br/>- Ekspor KML/KMZ: Klik menu (⋮) -&gt; Export to KML/KMZ -&gt; Kompatibel dengan Google Earth HP, Avenza Maps, Garmin, &amp; QGIS.</div>
       </div>
     </section>
     <section class="slide" data-index="9">
-      <img src="assets/slides_gmaps/slide_canvas_10.png" alt="Slide 10 - 3 Teknik Audit Satelit: Kontur 3D, Time-Lapse &amp; Blank Spot" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_10.png" alt="Slide 10 - Arsitektur 3 Layer, Hak Akses &amp; Laporan Pin Real-Time" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">DEMO 3 FITUR AUDIT GOOGLE EARTH:<br/>1. Kontur Lereng 3D: Buka file .KML di Google Earth -&gt; tahan Shift + geser mouse untuk melihat kemiringan bukit dan arah aliran air.<br/>2. Mesin Waktu Satelit (Historical Imagery): Geser tahun citra satelit (2018 -&gt; 2022 -&gt; 2026) untuk mengecek progres tanam dan batas lahan.<br/>3. Deteksi Blank Spot: Lingkari titik tajuk pohon yang kosong/mati dari atas satelit untuk menghitung kebutuhan bibit sisipan.</div>
+        <div class="speaker-text">IMPLEMENTASI MODUL 03 — PENGAWASAN KEBUN REAL-TIME (90 MENIT):<br/>1. Arsitektur 3 Layer: (1) Layer Poligon Blok, (2) Layer Infrastruktur/TPH, (3) Layer Laporan Masalah Real-Time.<br/>2. Kontrol Hak Akses: Mandor = Editor (input laporan &amp; foto dari HP) | Direksi/Owner = Viewer (pantau aman dari kantor).<br/>3. Tracking Patroli Live: Aktifkan &#x27;Location Sharing&#x27; di Google Maps HP mandor saat keliling blok.<br/>4. Simulasi Roleplay 3 Warna Pin: Merah (Masalah Baru + Foto) -&gt; Kuning (Sedang Dikerjakan) -&gt; Hijau (Selesai Diperbaiki).</div>
       </div>
     </section>
     <section class="slide" data-index="10">
-      <img src="assets/slides_gmaps/slide_canvas_11.png" alt="Slide 11 - 3 Langkah Rencana Aksi 7 Hari &amp; Fasilitas Peserta" class="slide-canvas-img" />
+      <img src="assets/slides_gmaps/slide_canvas_11.png" alt="Slide 11 - Audit Kontur 3D, Riwayat Lahan (Time-Lapse) &amp; Blank Spot" class="slide-canvas-img" />
       <div class="speaker-drawer">
         <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
-        <div class="speaker-text">PENUTUP &amp; RENCANA AKSI 7 HARI:<br/>- Hari 1-2: Rekam titik koordinat batas blok dan saluran air menggunakan GPS HP.<br/>- Hari 3-4: Impor ke Google My Maps, gambar poligon blok, dan hitung ulang kebutuhan pupuk secara presisi.<br/>- Hari 5-7: Bagikan akses peta ke HP mandor/tim lapangan untuk laporan rutin.<br/>- Seluruh peserta mendapatkan E-Sertifikat, Modul PDF, File KML/CSV siap pakai, dan pendampingan di Grup WA Alumni.</div>
+        <div class="speaker-text">IMPLEMENTASI MODUL 04 — AUDIT CITRA SATELIT &amp; KLINIK BEDAH PETA (60 MENIT):<br/>1. Kontur 3D &amp; Elevation Profile: Impor file KML ke Google Earth -&gt; Miringkan 3D untuk evaluasi lereng &amp; jaringan drainase.<br/>2. Evaluasi Riwayat Lahan (Time-Lapse): Gunakan &#x27;Historical Imagery&#x27; (2018-2026) untuk cek histori bukaan lahan &amp; vegetasi.<br/>3. Deteksi Blank Spot &amp; Bedah Peta Peserta: Hitung titik tajuk kosong/mati untuk perencanaan sisipan bibit &amp; ukur jalan/parit.</div>
+      </div>
+    </section>
+    <section class="slide" data-index="11">
+      <img src="assets/slides_gmaps/slide_canvas_12.png" alt="Slide 12 - Rencana Implementasi 7 Hari, FAQ &amp; Fasilitas Peserta" class="slide-canvas-img" />
+      <div class="speaker-drawer">
+        <div class="speaker-label">🎙️ PANDUAN BICARA PEMATERI (TEKAN 'N' UNTUK SEMBUNYIKAN/TAMPILKAN):</div>
+        <div class="speaker-text">PENUTUP — RENCANA IMPLEMENTASI 7 HARI &amp; PENYERAHAN FASILITAS:<br/>- Hari 1-2: Akuisisi titik GPS patok batas &amp; infrastruktur 1 blok prioritas dengan HP (Mode Satelit &amp; Offline).<br/>- Hari 3-4: Digitasi poligon blok di Google My Maps, audit selisih luas hektar, &amp; hitung dosis pupuk efektif.<br/>- Hari 5-7: Terapkan sistem pengawasan 3 Layer &amp; pelaporan Pin Merah/Kuning/Hijau bersama mandor lapangan.<br/>- Fasilitas: E-Sertifikat Resmi, Modul PDF, File Template .KML &amp; .CSV, Video Rekaman, &amp; Grup WA Konsultasi.</div>
       </div>
     </section>
   </main>

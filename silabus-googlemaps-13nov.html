@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silabus Resmi Pelatihan Google Maps Poligon (13 Nov 2026) — CV Agroteknologi Nusantara</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0B2545;
+      --forest: #064E3B;
+      --gold: #F59E0B;
+      --sky: #0284C7;
+      --emerald: #059669;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      background: #06182C;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px;
+      color: #0F172A;
+    }
+    .toolbar {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+    }
+    .btn-gold { background: #FACC15; color: #0B2545; }
+    .btn-green { background: #10B981; color: #042F2E; }
+    .btn-outline { background: transparent; color: #FFFFFF; border: 1px solid rgba(255, 255, 255, 0.3); }
+    .sheet {
+      width: 100%;
+      max-width: 900px;
+      background: #F8FAFC;
+      border-radius: 16px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #0B2545 0%, #064E3B 100%);
+      color: #FFFFFF;
+      padding: 26px 24px;
+      text-align: center;
+    }
+    .header .tag {
+      display: inline-block;
+      color: #FDE047;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+    }
+    .header h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .header .sub {
+      color: #6EE7B7;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    .header .meta {
+      font-size: 0.86rem;
+      color: #FEF08A;
+      font-weight: 700;
+    }
+    .content { padding: 20px 24px; display: flex; flex-direction: column; gap: 16px; }
+    .pilar-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1.5px solid #CBD5E1;
+      background: #FFFFFF;
+    }
+    .pilar-header {
+      padding: 11px 16px;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 0.92rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pilar-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: #334155;
+    }
+    .pilar-body ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .pilar-output {
+      background: #F1F5F9;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border-left: 4px solid #0284C7;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 680px) { .grid-2 { grid-template-columns: 1fr; } }
+    .info-box {
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .info-box h4 { font-size: 0.88rem; color: var(--navy); margin-bottom: 8px; font-weight: 800; }
+    .info-box ul { list-style: none; display: flex; flex-direction: column; gap: 5px; font-size: 0.82rem; color: #334155; }
+    .footer {
+      background: var(--navy);
+      color: #FFFFFF;
+      padding: 18px 24px;
+      text-align: center;
+    }
+    .footer h3 { font-size: 0.95rem; color: #FDE047; margin-bottom: 6px; }
+    .footer p { font-size: 0.86rem; color: #FFFFFF; font-weight: 600; }
+    @media print {
+      body { background: transparent; padding: 0; }
+      .toolbar { display: none !important; }
+      .sheet { max-width: 100%; box-shadow: none; border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div>
+      <strong>📘 Silabus &amp; Kurikulum Pelatihan Google Maps Poligon (13 Nov 2026)</strong>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a href="/slide-pemateri-googlemaps-13nov" class="btn btn-green">🖥️ Buka Slide Visual (12 Slide)</a>
+      <a href="/naskah-narasi-pemateri-13nov" class="btn btn-outline">📖 Buku Narasi Pemateri</a>
+      <a href="Silabus_Pelatihan_GoogleMaps_Poligon_Agrotech.pdf" download class="btn btn-gold">⬇️ Unduh PDF Silabus</a>
+      <button onclick="window.print()" class="btn btn-outline">🖨️ Cetak</button>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <div class="header">
+      <div class="tag">SILABUS &amp; KURIKULUM PELATIHAN PRAKTIKAL — CV AGROTEKNOLOGI NUSANTARA</div>
+      <h1>PEMANFAATAN GOOGLE MAPS UNTUK PEMBUATAN PETA POLIGON</h1>
+      <div class="sub">&amp; SISTEM PENGAWASAN KEBUN SECARA REAL-TIME</div>
+      <div class="meta">🗓️ Waktu Pelaksanaan: Jumat, 13 November 2026 (08.30 – 15.30 WIB) &nbsp;&bull;&nbsp; 💰 Biaya Investasi: Rp 250.000,- &nbsp;&bull;&nbsp; Metode: 100% Praktek Langsung</div>
+    </div>
+
+    <div class="content">
+      <!-- BAGIAN PENDAHULUAN: APA ITU, FUNGSI, & BENEFIT -->
+      <div class="pilar-card" style="border-color:#10B981; background:#ECFDF5;">
+        <div class="pilar-header" style="background:#065F46;">
+          <span>PENGANTAR FUNDAMENTAL (08.30 – 09.05 WIB): APA ITU GOOGLE MAPS GIS, FUNGSI &amp; BENEFIT DI LAPANGAN</span>
+          <span>Slide 1 – 5</span>
+        </div>
+        <div class="pilar-body">
+          <ul>
+            <li>• <b>1. Apa Itu Ekosistem Google Maps Perkebunan?</b> Arsitektur pemetaan spasial gratis menggunakan kombinasi <b>Google Maps HP</b> (akuisisi GPS &amp; Peta Offline), <b>Google My Maps</b> (digitasi poligon blok &amp; database), dan <b>Google Earth 3D</b> (audit topografi lereng &amp; riwayat satelit) tanpa sewa lisensi software GIS mahal.</li>
+            <li>• <b>2. Empat Fungsi Utama di Pertanian &amp; Perkebunan:</b> (a) Pemetaan batas lahan &amp; pembagian blok/afdeling, (b) Inventarisasi titik infrastruktur (TPH, jalan panen, jembatan, parit drainase), (c) Kalkulasi otomatis luas Hektar (Ha), populasi pohon &amp; dosis pupuk, serta (d) Kontrol patroli lapangan real-time.</li>
+            <li>• <b>3. Benefit Operasional &amp; Finansial di Lapangan:</b> Studi kasus menutup kebocoran anggaran akibat <i>"Lahan Hantu"</i> (Klaim kertas 25,0 Ha vs Poligon Satelit 21,8 Ha), hemat 12–20% biaya pupuk &amp; upah borongan, serta pangkas 50% waktu survei lapangan.</li>
+            <li>• <b>4. Benefit Lingkungan &amp; Lahan Lokal (Pulau Jawa &amp; Nusantara):</b> Deteksi kemiringan lereng gunung &gt;15° untuk cegah longsor (Priangan, Dieng, Merapi, Batu), cegah pencemaran pupuk kimia ke sungai DAS (Citarum, Solo, Brantas), pemetaan petak Perhutanan Sosial/LMDH &amp; Tebu Rakyat (0,2–2 Ha), serta digitalisasi batas Tanah Kas Desa (bengkok).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MODUL 01 -->
+      <div class="pilar-card">
+        <div class="pilar-header" style="background:#0284C7;">
+          <span>MODUL 01 (09.05 – 10.00 WIB): IMPLEMENTASI TITIK KOORDINAT SPASIAL &amp; GPS LAPANGAN</span>
+          <span>Slide 6 – 7</span>
+        </div>
+        <div class="pilar-body">
+          <ul>
+            <li>• <b>Teknik Pengambilan Titik GPS (Waypoints) di HP:</b> Mengubah layer ke Citra Satelit, teknik <i>Long Press</i> 2 detik untuk mengambil titik patok batas, jalan panen, jembatan &amp; TPH.</li>
+            <li>• <b>Operasional Tanpa Sinyal (Peta Offline):</b> Cara mengunduh Peta Offline area kebun sebelum ke lapangan agar sensor GPS HP tetap bekerja akurat via satelit di area <i>blank spot</i>.</li>
+            <li>• <b>Standarisasi &amp; Impor Massal Koordinat (CSV/Excel):</b> Struktur 4 kolom wajib (<code>ID_Titik, Latitude, Longitude, Kategori</code>), aturan pemisah titik desimal (<code>-0.52110</code>), dan impor 1-klik ke Google My Maps.</li>
+          </ul>
+          <div class="pilar-output">📌 Output Praktek 1: Peserta berhasil memetakan 14 titik patok batas, TPH, jembatan &amp; titik masalah di Google My Maps.</div>
+        </div>
+      </div>
+
+      <!-- MODUL 02 -->
+      <div class="pilar-card">
+        <div class="pilar-header" style="background:#059669;">
+          <span>MODUL 02 (10.15 – 12.00 WIB): IMPLEMENTASI PETA POLIGON BLOK &amp; KALKULASI LUAS / PUPUK</span>
+          <span>Slide 8 – 9</span>
+        </div>
+        <div class="pilar-body">
+          <ul>
+            <li>• <b>Digitasi Poligon Batas Lahan &amp; Blok:</b> Menggambar kurva poligon tertutup (<code>Add line or shape</code>) mengikuti titik patok batas di atas citra satelit &amp; mengatur warna/transparansi 35% berdasarkan tahun tanam.</li>
+            <li>• <b>Kalkulasi Otomatis Luas &amp; Keliling:</b> Membaca luas Hektar (Ha) &amp; panjang parit/keliling (km) otomatis serta mengisi tabel atribut (<code>Open Data Table</code>).</li>
+            <li>• <b>Rumus Praktis Agronomi:</b> Menghitung Luas Tanam Efektif (dikurangi 5–8% jalan/parit), estimasi kapasitas populasi pohon (Sawit 143/Ha, Kopi 1.600/Ha, Jati 1.100/Ha), dan tonase dosis pupuk NPK per blok.</li>
+            <li>• <b>Ekspor &amp; Impor File KML/KMZ:</b> Mengekspor peta poligon ke format standar <code>.KML / .KMZ</code> agar bisa dibuka di HP mandor, Google Earth, Avenza Maps, Garmin, &amp; QGIS.</li>
+          </ul>
+          <div class="pilar-output" style="border-left-color:#059669;">📌 Output Praktek 2: Peta poligon kebun multi-blok lengkap dengan tabel data luas hektar, estimasi populasi pohon &amp; file .KML.</div>
+        </div>
+      </div>
+
+      <!-- MODUL 03 -->
+      <div class="pilar-card">
+        <div class="pilar-header" style="background:#D97706;">
+          <span>MODUL 03 (13.00 – 14.30 WIB): IMPLEMENTASI SISTEM PENGAWASAN KEBUN REAL-TIME</span>
+          <span>Slide 10</span>
+        </div>
+        <div class="pilar-body">
+          <ul>
+            <li>• <b>Arsitektur 3 Layer Peta Kebun:</b> Memisahkan (1) Layer Poligon Blok, (2) Layer Infrastruktur/TPH, dan (3) Layer Laporan Masalah Real-Time.</li>
+            <li>• <b>Sharing Peta &amp; Kontrol Hak Akses:</b> Pengaturan izin akses <b>Editor</b> untuk HP Mandor (input laporan lapangan) vs <b>Viewer</b> untuk Manajer/Direksi (pantau aman dari kantor).</li>
+            <li>• <b>Pelaporan Kondisi Lapangan Real-Time (SOP 3 Warna Pin):</b> Roleplay input titik temuan + upload foto bukti dari HP dengan kode warna <b>Pin Merah</b> (Masalah Baru: banjir/jalan rusak/hama), <b>Pin Kuning</b> (Proses Perbaikan), dan <b>Pin Hijau</b> (Selesai Diperbaiki) + <i>Live Location</i> patroli mandor.</li>
+          </ul>
+          <div class="pilar-output" style="border-left-color:#D97706;">📌 Output Praktek 3: Sistem peta pengawasan kebun real-time yang aktif dan terhubung langsung antara HP mandor &amp; laptop manajer.</div>
+        </div>
+      </div>
+
+      <!-- MODUL 04 -->
+      <div class="pilar-card">
+        <div class="pilar-header" style="background:#4F46E5;">
+          <span>MODUL 04 (14.30 – 15.30 WIB): IMPLEMENTASI AUDIT CITRA SATELIT 3D &amp; KLINIK BEDAH PETA</span>
+          <span>Slide 11 – 12</span>
+        </div>
+        <div class="pilar-body">
+          <ul>
+            <li>• <b>Audit Kontur 3D &amp; Infrastruktur (Google Earth):</b> Membuka file <code>.KML</code> di Google Earth untuk mengevaluasi kemiringan lereng 3D (<i>Elevation Profile</i>), jaringan drainase, dan akses jalan panen.</li>
+            <li>• <b>Evaluasi Riwayat Lahan (Time-Lapse / Historical Imagery):</b> Memutar waktu citra satelit (2018–2026) untuk memeriksa histori pembukaan lahan &amp; perkembangan tajuk vegetasi.</li>
+            <li>• <b>Deteksi Blank Spot &amp; Rencana Implementasi 7 Hari:</b> Menghitung titik tajuk kosong/pohon mati dari satelit untuk perencanaan bibit sisipan (<i>replanting</i>), bedah peta peserta, &amp; panduan implementasi 7 hari pertama.</li>
+          </ul>
+          <div class="pilar-output" style="border-left-color:#4F46E5;">📌 Output Praktek 4: Peta final siap operasional + pembagian Template KML, CSV Latihan, Modul PDF &amp; E-Sertifikat Resmi.</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="info-box" style="background:#ECFDF5; border-color:#34D399;">
+          <h4>🎁 FASILITAS PESERTA (INVESTASI Rp 250.000)</h4>
+          <ul>
+            <li>• <b>E-Sertifikat Resmi</b> CV Agroteknologi Nusantara.</li>
+            <li>• <b>Modul Panduan Langkah-demi-Langkah (PDF)</b> &amp; Rekaman.</li>
+            <li>• <b>File Template Peta Poligon (.KML) &amp; Dataset (.CSV)</b>.</li>
+            <li>• <b>Grup WhatsApp Konsultasi</b> &amp; pendampingan alumni.</li>
+          </ul>
+        </div>
+        <div class="info-box">
+          <h4>💻 PERSIAPAN PERANGKAT PESERTA</h4>
+          <ul>
+            <li>• <b>Laptop (Windows/Mac)</b> + Browser Google Chrome.</li>
+            <li>• <b>Smartphone (Android/iOS)</b> dengan Akun Google aktif.</li>
+            <li>• <b>Aplikasi Google Maps &amp; Google Earth</b> terpasang di HP.</li>
+            <li>• <b>Titik koordinat / lokasi kebun</b> yang ingin dipetakan.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <h3>PENDAFTARAN &amp; KONSULTASI SILABUS — CV AGROTEKNOLOGI NUSANTARA</h3>
+      <p>📞 WA Amanda: 0857-1385-0615 &nbsp;|&nbsp; 💬 WA Hardadi: 0813-1307-8216 &nbsp;|&nbsp; 🌐 agrotech-landingpage.vercel.app</p>
+    </div>
+  </div>
+</body>
+</html>

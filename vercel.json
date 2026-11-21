@@ -14,6 +14,8 @@
     { "source": "/slide-googlemaps", "destination": "/slide-pemateri-googlemaps-13nov" },
     { "source": "/narasi-13nov", "destination": "/naskah-narasi-pemateri-13nov" },
     { "source": "/narasi-googlemaps", "destination": "/naskah-narasi-pemateri-13nov" },
+    { "source": "/silabus-13nov", "destination": "/silabus-googlemaps-13nov" },
+    { "source": "/silabus-googlemaps", "destination": "/silabus-googlemaps-13nov" },
     { "source": "/silabus", "destination": "/silabus-pelatihan" }
   ]
 }
